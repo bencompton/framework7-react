@@ -1,6 +1,6 @@
 ﻿import * as React from 'react';
 
-interface IToolbarProps extends React.Props<any> {
+export interface IToolbarProps extends React.Props<any> {
     className?: string;
 }
 
@@ -14,7 +14,7 @@ export const Toolbar = (props: IToolbarProps) => {
     );
 };
 
-interface IToolbarChildProps extends React.Props<any> {
+export interface IToolbarChildProps extends React.Props<any> {
     className?: string;
 }
 

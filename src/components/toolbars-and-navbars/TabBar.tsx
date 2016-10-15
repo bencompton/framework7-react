@@ -1,6 +1,6 @@
 ﻿import * as React from 'react';
 
-interface ITab {
+export interface ITab {
     id: string;
     badgeText?: string;
     label: string;
@@ -9,7 +9,7 @@ interface ITab {
     isActive?: boolean;
 }
 
-interface ITabBarProps {
+export interface ITabBarProps {
     tabs: ITab[];
     activeTabId: string;
     onTabSelected: (tabId: string) => void;

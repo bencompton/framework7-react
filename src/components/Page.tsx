@@ -4,13 +4,13 @@ import * as $ from 'jquery';
 import {AnimationWrapper, AnimationDirectionEnum} from './AnimationWrapper';
 import {ViewInner, IViewContext} from './View';
 
-interface IPageProps extends React.Props<any> {
+export interface IPageProps extends React.Props<any> {
     name: string;
     animationDirection?: AnimationDirectionEnum;
     className?: string;
 }
 
-interface IPageBodyProps extends React.Props<any> {
+export interface IPageBodyProps extends React.Props<any> {
     className?: string;
 }
 
@@ -18,7 +18,7 @@ interface IPageInnerProps extends React.Props<any> {
     className: string;
 }
 
-interface IPageContentProps extends React.Props<any> {
+export interface IPageContentProps extends React.Props<any> {
     className?: string;
 }
 

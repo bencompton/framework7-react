@@ -9,19 +9,19 @@ export enum AnimationDirectionEnum {
     Back
 }
 
-interface IAnimationClasses {
+export interface IAnimationClasses {
     initialClass: string;
     animatingClass: string;
     afterAnimationClass?: string;
 }
 
-interface IItemAnimationClasses {
+export interface IItemAnimationClasses {
     back: IAnimationClasses;
     forward: IAnimationClasses;
     none: string;
 }
 
-interface IPageAnimationWrapper extends React.Props<any> {
+export interface IPageAnimationWrapper extends React.Props<any> {
     currentItemAnimationClasses: IItemAnimationClasses;
     previousItemAnimationClasses: IItemAnimationClasses;
     animationDirection: AnimationDirectionEnum;
@@ -53,7 +53,7 @@ export class AnimationParent extends React.Component<any, any> {
         animationContext: React.PropTypes.object
     }
     
-    getChildContext() {
+    private getChildContext() {
         return {
             animationContext: this.animationContext
         };

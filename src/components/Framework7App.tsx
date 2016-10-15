@@ -7,7 +7,7 @@ export enum ThemeTypeEnum {
     Material
 }
 
-interface IFramework7AppContext {
+export interface IFramework7AppContext {
     themeType: ThemeTypeEnum;
     rtl?: boolean;
 }

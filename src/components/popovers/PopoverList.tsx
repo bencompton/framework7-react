@@ -1,6 +1,6 @@
 ﻿import * as React from 'react';
 
-interface IPopoverList {
+export interface IPopoverList {
     listToDisplayWithValues: IPopoverItems[];
     onClick: Function;
     listClassName: string;

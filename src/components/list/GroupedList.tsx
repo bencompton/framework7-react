@@ -1,6 +1,6 @@
 ﻿import * as React from 'react';
 
-interface IGroupedListProps {
+export interface IGroupedListProps {
     items: any[];
     innerListItemComponent: __React.ComponentClass<any> | __React.StatelessComponent<any>;
     groupBy: string;

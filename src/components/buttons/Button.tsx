@@ -12,7 +12,7 @@ export enum ButtonSizeEnum {
     Big
 }
 
-interface IButtonProps {
+export interface IButtonProps {
     text: string;
     onClick: Function;
     additionalClassNames?: string;

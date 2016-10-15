@@ -4,7 +4,7 @@ import {AnimationDirectionEnum} from './AnimationWrapper';
 import {Navbar} from './toolbars-and-navbars/Navbar';
 import {Page} from './Page';
 
-interface IViewProps {
+export interface IViewProps {
     dockLeft?: boolean;
 }
 
@@ -15,7 +15,7 @@ export class View extends React.Component<IViewProps, any> {
         viewContext: React.PropTypes.object
     }
 
-    getChildContext() {
+    private getChildContext() {
         return {
             viewContext: {
                 dockLeft: this.props.dockLeft

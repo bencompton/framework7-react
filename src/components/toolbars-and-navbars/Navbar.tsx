@@ -5,7 +5,7 @@ import {AnimationWrapper, AnimationDirectionEnum} from '../AnimationWrapper';
 import {prepareNavbar, sizeNavbars, animateNavbars} from '../../utilities/NavbarAnimationLogic';
 import {IPageContext} from '../Page';
 
-interface INavbarProps extends React.Props<any> {
+export interface INavbarProps extends React.Props<any> {
     className?: string;
 }
 

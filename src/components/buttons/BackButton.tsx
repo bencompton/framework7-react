@@ -1,6 +1,6 @@
 ﻿import * as React from 'react';
 
-interface IBackButtonProps {
+export interface IBackButtonProps {
     onClick: Function;
     text: string;
 }

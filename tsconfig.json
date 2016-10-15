@@ -9,7 +9,8 @@
         "experimentalDecorators": true,
         "outDir": "dist",
         "noImplicitAny": false,
-        "rootDir": "."
+        "rootDir": ".",
+        "jsx": "react"
     },
     "exclude": [
         "node_modules",

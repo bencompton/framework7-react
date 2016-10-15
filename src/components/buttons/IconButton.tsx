@@ -1,6 +1,6 @@
 ﻿import * as React from 'react';
 
-interface IIconButtonProps {
+export interface IIconButtonProps {
     onClick: Function;
     iconCls: string;
     additionalClassNames?: string;

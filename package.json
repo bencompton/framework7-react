@@ -1,0 +1,43 @@
+{
+  "name": "framework7-react",
+  "version": "0.0.1",
+  "description": "A library of React components that leverages Framework7 HTML + CSS",
+  "main": "dist/src/index.js",
+  "typings": "dist/src/index.d.ts",
+  "directories": {
+    "example": "examples"
+  },
+  "scripts": {
+    "test": "gulp test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bencompton/framework7-react.git"
+  },
+  "keywords": [
+    "framework7",
+    "react",
+    "typescript"
+  ],
+  "author": "Ben Compton",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bencompton/framework7-react/issues"
+  },
+  "homepage": "https://github.com/bencompton/framework7-react#readme",
+  "devDependencies": {
+    "del": "2.2.2",
+    "gulp": "3.9.1",
+    "gulp-jasmine": "2.4.2",
+    "gulp-sourcemaps": "1.6.0",
+    "gulp-typescript": "2.13.6",
+    "merge2": "1.0.2",
+    "typescript": "1.8.10"
+  },
+  "dependencies": {
+    "react": "15.3.2",
+    "framework7": "1.4.2",
+    "jquery": "3.1.1",
+    "invariant": "2.2.1"
+  }
+}
