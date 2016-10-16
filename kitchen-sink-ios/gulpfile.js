@@ -29,10 +29,10 @@ gulp.task('compile-ts', ['clean-ts'], function () {
     ]);
 });
 
-gulp.task('copy-f7-css', function () {
-    gulp
-        .src('./node_modules/framework7/dist/css/*.css')
-        .pipe(gulp.dest('./dist/css/'))
-});
+// gulp.task('webpack', ['compile-ts'], function () {
+//     gulp
+//         .src('./node_modules/framework7/dist/css/*.css')
+//         .pipe(gulp.dest('./dist/css/'))
+// });
 
-gulp.task('default', ['clean-ts', 'compile-ts', 'copy-f7-css']);
+gulp.task('default', ['clean-ts', 'compile-ts']);

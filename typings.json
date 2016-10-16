@@ -2,6 +2,7 @@
   "globalDependencies": {
     "invariant": "registry:dt/invariant#2.2.0+20160317120654",
     "jquery": "registry:dt/jquery#1.10.0+20160929162922",
-    "react": "registry:dt/react#0.14.0+20161008064207"
+    "react": "registry:dt/react#0.14.0+20161008064207",
+    "react-router": "registry:dt/react-router#2.0.0+20160928130202"
   }
 }
