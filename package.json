@@ -35,9 +35,11 @@
     "typescript": "1.8.10"
   },
   "dependencies": {
-    "react": "15.3.2",
+    "bluebird": "^3.4.6",
     "framework7": "1.4.2",
+    "invariant": "2.2.1",
     "jquery": "3.1.1",
-    "invariant": "2.2.1"
+    "react": "15.3.2",
+    "react-portal": "^2.2.1"
   }
 }

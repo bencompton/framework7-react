@@ -1,8 +1,7 @@
 ﻿import * as React from 'react';
 import * as $ from 'jquery';
 
-declare const require: any;
-const animationEnd: any = require('animationend');
+import {animationEnd} from '../utilities/AnimationEnd';
 
 export enum AnimationDirectionEnum {
     Forward,

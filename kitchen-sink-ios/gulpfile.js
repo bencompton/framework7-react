@@ -1,38 +1,24 @@
 var gulp = require('gulp'),
-    tsc = require('gulp-typescript'),
-    sourcemaps = require('gulp-sourcemaps'),
-    tsProject = tsc.createProject('tsconfig.json'),
-    path = require('path');
+    browserify = require('browserify'),
+    tsify = require('tsify'),
+    source = require('vinyl-source-stream'),
+    buffer = require('vinyl-buffer');
 
-var merge = require('merge2'),
-    del = require('del');
-
-gulp.task('clean-ts', function (callback) {
-  var typeScriptGenFiles = ['./dist/**/*.*'];
-  return del(typeScriptGenFiles, callback);
-});    
-
-gulp.task('compile-ts', ['clean-ts'], function () {
-    var tsResult = tsProject.src()
-    .pipe(sourcemaps.init())
-    .pipe(tsc(tsProject));
-
-    return merge([
-        tsResult.dts.pipe(gulp.dest('dist')),
-        tsResult.js.pipe(sourcemaps.write('.', {
-            includeContent: false,
-            sourceRoot: function (file) {
-                var sourceFile = path.join(file.cwd, file.sourceMap.file);
-                return "../" + path.relative(path.dirname(sourceFile), __dirname);
-            }
-        })).pipe(gulp.dest('dist'))
-    ]);
+gulp.task('browserify', function () {
+    browserify()
+        .add('./app.ts')
+        .plugin(tsify, { noImplicitAny: true })
+        .bundle()
+        .on('error', function (error) { console.error(error.toString()); })
+        .pipe(source('./app.js'))
+        .pipe(buffer())
+        .pipe(gulp.dest('./dist/'))
 });
 
-// gulp.task('webpack', ['compile-ts'], function () {
-//     gulp
-//         .src('./node_modules/framework7/dist/css/*.css')
-//         .pipe(gulp.dest('./dist/css/'))
-// });
+gulp.task('copy-f7-assets', function () {
+    gulp
+        .src('./node_modules/framework7/dist/**/*')
+        .pipe(gulp.dest('./dist/'))
+});
 
-gulp.task('default', ['clean-ts', 'compile-ts']);
+gulp.task('default', ['browserify', 'copy-f7-assets']);

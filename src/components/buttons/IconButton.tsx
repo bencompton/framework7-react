@@ -1,5 +1,7 @@
 ﻿import * as React from 'react';
 
+import {Icon} from '../Icon';
+
 export interface IIconButtonProps {
     onClick: Function;
     iconCls: string;
@@ -9,7 +11,7 @@ export interface IIconButtonProps {
 export const IconButton = (props: IIconButtonProps) => {
     return (
         <a className={`button ${props.additionalClassNames || ''}`} onClick={props.onClick}>
-            <i className={`icon ${props.iconCls}`}></i>
+            <Icon iconClass={props.iconCls} />
         </a>         
     );
 }

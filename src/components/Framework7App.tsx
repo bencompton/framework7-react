@@ -1,6 +1,7 @@
 ﻿import * as React from 'react';
 
 import {applyOverscrollFix} from '../utilities/OverscrollFix';
+import {AnimationDirectionEnum} from './AnimationWrapper';
 
 export enum ThemeTypeEnum {
     iOS,
@@ -10,6 +11,7 @@ export enum ThemeTypeEnum {
 export interface IFramework7AppContext {
     themeType: ThemeTypeEnum;
     rtl?: boolean;
+    pageAnimationDirection: AnimationDirectionEnum;
 }
 
 export interface IFramework7AppProps extends IFramework7AppContext, React.Props<any> {
@@ -25,7 +27,8 @@ export class Framework7App extends React.Component<IFramework7AppProps, any> {
         return {
             framework7AppContext: {
                 themeType: this.props.themeType,
-                applyOverscrollFix: this.props.applyOverscrollFix                
+                applyOverscrollFix: this.props.applyOverscrollFix,
+                pageAnimationDirection: this.props.pageAnimationDirection               
             }
         };
     }

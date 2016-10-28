@@ -1,6 +1,7 @@
 ﻿import * as React from 'react';
 import * as $ from 'jquery';
 
+import {IFramework7AppContext} from './Framework7App';
 import {AnimationWrapper, AnimationDirectionEnum} from './AnimationWrapper';
 import {ViewInner, IViewContext} from './View';
 
@@ -90,6 +91,9 @@ export class Page extends React.Component<IPageProps, any> {
 
 export const PageBody = (props: IPageBodyProps, context: IPageContext) => {
     const pageContext = (context as any).pageContext as IPageContext;
+    const appContext = (context as any).framework7AppContext as IFramework7AppContext;
+
+    let animationDirection = pageContext.pageAnimationDirection || appContext.pageAnimationDirection;
 
     return (
         <AnimationWrapper
@@ -97,7 +101,7 @@ export const PageBody = (props: IPageBodyProps, context: IPageContext) => {
             className="pages"
             currentItemAnimationClasses={currentItemAnimationClasses}
             previousItemAnimationClasses={previousItemAnimationClasses}
-            animationDirection={pageContext.pageAnimationDirection}
+            animationDirection={animationDirection}
         >
             <PageInner className={props.className} key={pageContext.pageName}>
                 {props.children}
@@ -108,7 +112,8 @@ export const PageBody = (props: IPageBodyProps, context: IPageContext) => {
 
 (PageBody as any).contextTypes = {
     pageContext: React.PropTypes.object,
-    viewContext: React.PropTypes.object
+    viewContext: React.PropTypes.object,
+    framework7AppContext: React.PropTypes.object
 };
 
 export const PageContent = (props: IPageContentProps) => <div className={`page-content ${props.className || ''}`}>{props.children}</div>;

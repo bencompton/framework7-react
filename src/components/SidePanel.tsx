@@ -1,9 +1,10 @@
 ﻿import * as React from 'react';
 import * as $ from 'jquery';
 
+import {transitionEnd} from '../utilities/AnimationEnd';
+
 declare const require: any;
 const Portal = require('react-portal');
-const animationEnd: any = require('animationend');
 
 export enum PanelSideEnum {
     Left,
@@ -110,7 +111,7 @@ export class SidePanel extends React.Component<ISidePanelProps, any> {
     }
 
     private closePanel() {
-        animationEnd(this.element).then(() => {
+        transitionEnd(this.element).then(() => {
             $(this.element).css({ display: '' });
             $(document.body).removeClass('panel-closing');            
         });

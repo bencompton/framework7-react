@@ -1,14 +1,17 @@
 {
-  "name": "kitchen-sink-ios",
+  "name": "kitchen-sink",
   "version": "0.0.1",
   "devDependencies": {
     "gulp-sourcemaps": "1.6.0",
     "gulp-typescript": "2.13.6",
-    "typescript": "1.8.10"
+    "typescript": "1.8.10",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0"
   },
   "dependencies": {
+    "framework7-react": "file:../",
     "react": "15.3.2",
-    "react-router": "2.8.1",
-    "framework7-react": "file:../"
+    "react-dom": "^15.3.2",
+    "react-router": "2.8.1"
   }
 }

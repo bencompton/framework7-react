@@ -1,8 +1,10 @@
 {
   "globalDependencies": {
+    "bluebird": "registry:dt/bluebird#3.0.0+20160928162057",
     "invariant": "registry:dt/invariant#2.2.0+20160317120654",
     "jquery": "registry:dt/jquery#1.10.0+20160929162922",
     "react": "registry:dt/react#0.14.0+20161008064207",
+    "react-dom": "registry:dt/react-dom#0.14.0+20160412154040",
     "react-router": "registry:dt/react-router#2.0.0+20160928130202"
   }
 }

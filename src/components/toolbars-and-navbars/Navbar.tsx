@@ -1,6 +1,7 @@
 ﻿import * as React from 'react';
 import * as $ from 'jquery';
 
+import {IFramework7AppContext} from '../Framework7App';
 import {AnimationWrapper, AnimationDirectionEnum} from '../AnimationWrapper';
 import {prepareNavbar, sizeNavbars, animateNavbars} from '../../utilities/NavbarAnimationLogic';
 import {IPageContext} from '../Page';
@@ -49,11 +50,16 @@ const previousItemAnimationClasses = {
 
 export class Navbar extends React.Component<INavbarProps, any> {
     static contextTypes = {
-        pageContext: React.PropTypes.object
+        pageContext: React.PropTypes.object,
+        framework7AppContext: React.PropTypes.object
     };
 
     private get pageContext() {
         return (this.context as any).pageContext as IPageContext;
+    }
+
+    private get f7AppContext() {
+        return (this.context as any).framework7AppContext as IFramework7AppContext;
     }
 
     private get pageName() {
@@ -61,7 +67,7 @@ export class Navbar extends React.Component<INavbarProps, any> {
     }
 
     private get animationDirection() {
-        return this.pageContext.pageAnimationDirection;
+        return this.pageContext.pageAnimationDirection || this.f7AppContext.pageAnimationDirection;
     }
 
     render() {
