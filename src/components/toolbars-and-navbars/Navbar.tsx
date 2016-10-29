@@ -3,7 +3,7 @@ import * as $ from 'jquery';
 
 import {IFramework7AppContext} from '../Framework7App';
 import {AnimationWrapper, AnimationDirectionEnum} from '../AnimationWrapper';
-import {prepareNavbar, sizeNavbars, animateNavbars} from '../../utilities/NavbarAnimationLogic';
+import {prepareNavbar, sizeNavbars, animateNavbars} from '../../utils/NavbarAnimationLogic';
 import {IPageContext} from '../Page';
 
 export interface INavbarProps extends React.Props<any> {
@@ -58,7 +58,7 @@ export class Navbar extends React.Component<INavbarProps, any> {
         return (this.context as any).pageContext as IPageContext;
     }
 
-    private get f7AppContext() {
+    private get framework7AppContext() {
         return (this.context as any).framework7AppContext as IFramework7AppContext;
     }
 
@@ -67,7 +67,7 @@ export class Navbar extends React.Component<INavbarProps, any> {
     }
 
     private get animationDirection() {
-        return this.pageContext.pageAnimationDirection || this.f7AppContext.pageAnimationDirection;
+        return this.pageContext.pageAnimationDirection || this.framework7AppContext.pageAnimationDirection;
     }
 
     render() {
@@ -77,7 +77,7 @@ export class Navbar extends React.Component<INavbarProps, any> {
                 className={`navbar ${this.props.className || ''}`}
                 currentItemAnimationClasses={currentItemAnimationClasses}
                 previousItemAnimationClasses={previousItemAnimationClasses}
-                animationDirection={this.pageContext.pageAnimationDirection}
+                animationDirection={this.animationDirection}
                 onBeforeAnimation={this.onBeforeAnimation}
                 onAfterAnimation={this.onAfterAnimation}
             >

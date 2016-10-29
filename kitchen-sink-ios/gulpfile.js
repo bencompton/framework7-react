@@ -6,11 +6,11 @@ var gulp = require('gulp'),
 
 gulp.task('browserify', function () {
     browserify()
-        .add('./app.ts')
+        .add('./index.ts')
         .plugin(tsify, { noImplicitAny: true })
         .bundle()
         .on('error', function (error) { console.error(error.toString()); })
-        .pipe(source('./app.js'))
+        .pipe(source('./index.js'))
         .pipe(buffer())
         .pipe(gulp.dest('./dist/'))
 });

@@ -1,6 +1,6 @@
 ﻿import * as React from 'react';
 
-import {ColorsEnum, getColorCls} from '../../utilities/Colors';
+import {ColorsEnum, getColorCls} from '../../utils/Colors';
 
 export enum ButtonTypeEnum {
     Standard,

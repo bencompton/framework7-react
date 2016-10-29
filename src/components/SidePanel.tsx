@@ -1,7 +1,7 @@
 ﻿import * as React from 'react';
 import * as $ from 'jquery';
 
-import {transitionEnd} from '../utilities/AnimationEnd';
+import {transitionEnd} from '../utils/AnimationEnd';
 
 declare const require: any;
 const Portal = require('react-portal');
@@ -45,7 +45,7 @@ export class SidePanel extends React.Component<ISidePanelProps, any> {
     }
 
     componentWillUnmount() {
-        this.reconcilePanelOpenState();
+        $(document.body).removeClass('with-panel-left-cover');
     }
 
     render() {

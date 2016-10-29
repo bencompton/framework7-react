@@ -1,6 +1,6 @@
 ﻿import * as React from 'react';
 
-import {BlockMarginTypeEnum} from '../utilities/BlockMarginType';
+import {BlockMarginTypeEnum} from '../utils/BlockMarginType';
 
 export interface IContentBlockProps extends React.Props<any> {
     title?: string;
@@ -20,15 +20,25 @@ const ContentBlockInner = (props: React.Props<any>) => {
     return <div className="content-block-inner">{props.children}</div>;
 };
 
+const ContentBlockOuter = (props: React.Props<any>) => {
+    return <div className="content-block">{props.children}</div>;
+}
+
 export const ContentBlock = (props: IContentBlockProps) => {
-    if (props.title) {
+    if (props.title || !props.background) {
         return (
             <span>
                 {props.title ? <ContentBlockTitle title={props.title} /> : null}
-                {props.background ? <ContentBlockInner>{props.children}</ContentBlockInner> : props.children}
+                {!props.background ? <ContentBlockOuter>{props.children}</ContentBlockOuter> : null}
             </span>
         );
     } else {
-        return props.background ? <ContentBlockInner>{props.children}</ContentBlockInner> : props.children;
+        return (
+            <ContentBlockOuter>
+                <ContentBlockInner> 
+                    {props.children}
+                </ContentBlockInner>
+            </ContentBlockOuter>
+        )
     }
 };

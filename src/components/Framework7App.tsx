@@ -1,6 +1,6 @@
 ﻿import * as React from 'react';
 
-import {applyOverscrollFix} from '../utilities/OverscrollFix';
+import {applyOverscrollFix} from '../utils/OverscrollFix';
 import {AnimationDirectionEnum} from './AnimationWrapper';
 
 export enum ThemeTypeEnum {

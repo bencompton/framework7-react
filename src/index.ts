@@ -14,7 +14,7 @@ import {SidePanel, PanelSideEnum, PanelSlideInType} from './components/SidePanel
 import {PopoverList, IPopoverItems} from './components/popovers/PopoverList';
 import {GroupedList} from './components/list/GroupedList';
 import {ContentBlock, ContentBlockTitle} from './components/ContentBlock';
-import {BlockMarginTypeEnum} from './utilities/BlockMarginType';
+import {BlockMarginTypeEnum} from './utils/BlockMarginType';
 import {ListBlock} from './components/list/ListBlock';
 import {ListItem} from './components/list/ListItem';
 

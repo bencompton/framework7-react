@@ -1,22 +1,21 @@
 import * as React from 'react';
-import {Page, PageBody, PageContent, Navbar, Left, Center, Right, ListBlock, ListItem, BackButton, AnimationDirectionEnum} from 'framework7-react';
-import {hashHistory} from 'react-router';
+import {Page, PageBody, PageContent, Navbar, Left, Center, Right, BackButton, ContentBlock} from 'framework7-react';
 
-const goBack = () => {
-    hashHistory.replace('/');
-};
+import {routeState} from '../../utils/RouteState';
 
 export const NavbarAndToolbarPage = () => {
     return (
         <Page name="navbar-and-toolbar">
             <Navbar>
-                <Left><BackButton onClick={goBack} /></Left>
+                <Left><BackButton onClick={() => routeState.navigate('/', true)} /></Left>
                 <Center>Navbars and Toolbars</Center>
                 <Right></Right>
             </Navbar>
             <PageBody>
                 <PageContent>
-                    Navbar + Toolbar
+                    <ContentBlock>
+                        WIP
+                    </ContentBlock>
                 </PageContent>
             </PageBody>
         </Page>

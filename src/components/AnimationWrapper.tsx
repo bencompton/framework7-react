@@ -1,7 +1,7 @@
 ﻿import * as React from 'react';
 import * as $ from 'jquery';
 
-import {animationEnd} from '../utilities/AnimationEnd';
+import {animationEnd} from '../utils/AnimationEnd';
 
 export enum AnimationDirectionEnum {
     Forward,

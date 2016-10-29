@@ -1,6 +1,6 @@
 ﻿import * as React from 'react';
 
-import {BlockMarginTypeEnum, getMarginTypeClass} from '../../utilities/BlockMarginType';
+import {BlockMarginTypeEnum, getMarginTypeClass} from '../../utils/BlockMarginType';
 import {IListItemProps} from './ListItem';
 
 export interface IListBlockProps extends React.Props<any> {
