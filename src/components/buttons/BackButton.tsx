@@ -1,7 +1,7 @@
 ﻿import * as React from 'react';
 
 export interface IBackButtonProps {
-    onClick: Function;
+    onClick: () => void;
     text?: string;
 }
 

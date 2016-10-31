@@ -37,7 +37,7 @@ export class IndexPage extends React.Component<any, IIndexPageState> {
                     additionalClassName="layout-dark"
                 >
                     <ContentBlock title="Left Panel">
-                        <p>This is a side panel. You can close it by clicking outsite or on this link: <a onClick={this.toggleLeftPanel.bind(this)} class="close-panel">close me</a>.</p>
+                        <p>This is a side panel. You can close it by clicking outsite or on this link: <a onClick={this.toggleLeftPanel.bind(this)} className="close-panel">close me</a>.</p>
                     </ContentBlock>
                     <PageList />
                 </SidePanel>

@@ -2,9 +2,10 @@
   "name": "kitchen-sink",
   "version": "0.0.1",
   "devDependencies": {
+    "browserify": "^13.1.1",
     "gulp-sourcemaps": "1.6.0",
     "gulp-typescript": "2.13.6",
-    "typescript": "1.8.10",
+    "typescript": "2.0.6",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0"
   },

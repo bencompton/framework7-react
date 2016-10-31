@@ -28,12 +28,22 @@ export interface IPageContext {
     pageAnimationDirection: AnimationDirectionEnum;
 }
 
-const PageInner = (props: IPageInnerProps) => {
-    return (
-        <div className={`page ${props.className || ''}`}>
-            {props.children}
-        </div>
-    );
+class PageInner extends React.Component<IPageInnerProps, any> {
+    componendDidMount() {
+        console.log('Page mounted');
+    }
+
+    componentWillUnmount() {
+        console.log('Page unmounted');
+    }
+
+    render() {
+        return (
+            <div className={`page ${this.props.className || ''}`}>
+                {this.props.children}
+            </div>
+        );
+    }
 };
 
 const currentItemAnimationClasses = {

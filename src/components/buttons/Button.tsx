@@ -14,7 +14,7 @@ export enum ButtonSizeEnum {
 
 export interface IButtonProps {
     text: string;
-    onClick: Function;
+    onClick: () => void;
     additionalClassNames?: string;
     type?: ButtonTypeEnum;
     size?: ButtonSizeEnum;

@@ -3,7 +3,7 @@
 import {Icon} from '../Icon';
 
 export interface IIconButtonProps {
-    onClick: Function;
+    onClick: () => void;
     iconCls: string;
     additionalClassNames?: string;
 }
