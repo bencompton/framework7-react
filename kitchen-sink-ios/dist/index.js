@@ -728,12 +728,6 @@ var PageInner = (function (_super) {
     function PageInner() {
         _super.apply(this, arguments);
     }
-    PageInner.prototype.componendDidMount = function () {
-        console.log('Page mounted');
-    };
-    PageInner.prototype.componentWillUnmount = function () {
-        console.log('Page unmounted');
-    };
     PageInner.prototype.render = function () {
         return (React.createElement("div", {className: "page " + (this.props.className || '')}, this.props.children));
     };

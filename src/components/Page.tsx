@@ -29,14 +29,6 @@ export interface IPageContext {
 }
 
 class PageInner extends React.Component<IPageInnerProps, any> {
-    componendDidMount() {
-        console.log('Page mounted');
-    }
-
-    componentWillUnmount() {
-        console.log('Page unmounted');
-    }
-
     render() {
         return (
             <div className={`page ${this.props.className || ''}`}>
