@@ -1,5 +1,6 @@
 ﻿import {Framework7App, ThemeTypeEnum} from './components/Framework7App';
 import {AnimationDirectionEnum} from './components/AnimationWrapper';
+import {Alert} from './components/Alert';
 import {View} from './components/View';
 import {Views} from './components/Views';
 import {Page, PageBody, PageContent} from './components/Page';
@@ -17,8 +18,10 @@ import {ContentBlock, ContentBlockTitle} from './components/ContentBlock';
 import {BlockMarginTypeEnum} from './utils/BlockMarginType';
 import {ListBlock} from './components/list/ListBlock';
 import {ListItem} from './components/list/ListItem';
+import {Checkbox} from './components/forms/Checkbox'
 
 export {
+	Alert,
     AnimationDirectionEnum,
     View, Views,
     Page, PageBody, PageContent,
@@ -28,5 +31,6 @@ export {
     Framework7App, ThemeTypeEnum,
     PopoverList, IPopoverItems,
     ContentBlock, ContentBlockTitle, BlockMarginTypeEnum,
-    GroupedList, ListBlock, ListItem
+    GroupedList, ListBlock, ListItem,
+    Checkbox	
 }
