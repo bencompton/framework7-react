@@ -1,5 +1,7 @@
 ﻿import * as React from 'react';
 
+import '../less/lists.less';
+
 import {Icon} from '../Icon';
 
 export interface IListItemProps extends React.Props<any> {

@@ -6,10 +6,10 @@
         "sourceMap": true,
         "moduleResolution": "node",
         "emitDecoratorMetadata": true,
-        "experimentalDecorators": true,
-        "outDir": "dist",
-        "noImplicitAny": false,
-        "rootDir": ".",
-        "jsx": "react"
-    }
+        "experimentalDecorators": true,        
+        "noImplicitAny": false,        
+        "jsx": "react"        
+    }, 
+
+    "exclude": ["kitchen-sink", "node_modules", "src"]    
 }

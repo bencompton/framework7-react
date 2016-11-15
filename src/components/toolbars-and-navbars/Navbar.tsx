@@ -1,6 +1,8 @@
 ﻿import * as React from 'react';
 import * as $ from 'jquery';
 
+import '../less/toolbars.less';
+
 import {IFramework7AppContext} from '../Framework7App';
 import {AnimationWrapper, AnimationDirectionEnum} from '../AnimationWrapper';
 import {prepareNavbar, sizeNavbars, animateNavbars} from '../../utils/NavbarAnimationLogic';

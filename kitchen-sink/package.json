@@ -1,0 +1,27 @@
+{
+  "name": "kitchen-sink",
+  "version": "0.0.1",
+  "devDependencies": {
+    "browserify": "^13.1.1",
+    "css-loader": "^0.25.0",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "gulp-sourcemaps": "1.6.0",
+    "gulp-typescript": "2.13.6",
+    "less": "^2.7.1",
+    "less-loader": "^2.2.3",
+    "style-loader": "^0.13.1",
+    "ts-loader": "^1.0.0",
+    "typescript": "2.0.6",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0",
+    "webpack": "^1.13.3",
+    "webpack-node-externals": "^1.5.4",
+    "webpack-stream": "^3.2.0"
+  },
+  "dependencies": {
+    "framework7-react": "file:../",
+    "react": "15.3.2",
+    "react-dom": "^15.3.2",
+    "react-router": "2.8.1"
+  }
+}

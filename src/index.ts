@@ -20,6 +20,9 @@ import {ListBlock} from './components/list/ListBlock';
 import {ListItem} from './components/list/ListItem';
 import {Checkbox} from './components/forms/Checkbox'
 
+import '../less/intro.less';
+import '../less/framework7.ios.colors.less';
+
 export {
 	Alert,
     AnimationDirectionEnum,

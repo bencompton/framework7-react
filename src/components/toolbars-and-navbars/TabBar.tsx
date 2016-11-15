@@ -1,5 +1,7 @@
 ﻿import * as React from 'react';
 
+import '../less/tabs.less';
+
 export interface ITab {
     id: string;
     badgeText?: string;

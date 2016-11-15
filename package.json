@@ -8,7 +8,8 @@
     "example": "examples"
   },
   "scripts": {
-    "test": "gulp test"
+    "test": "gulp test",
+    "build": "gulp && cd kitchen-sink && rm -rf node_modules/framework7-react && npm install && gulp"
   },
   "repository": {
     "type": "git",
@@ -26,13 +27,24 @@
   },
   "homepage": "https://github.com/bencompton/framework7-react#readme",
   "devDependencies": {
+    "css-loader": "^0.25.0",
     "del": "2.2.2",
+    "file-loader": "^0.9.0",
+    "glob": "^7.1.1",
     "gulp": "3.9.1",
     "gulp-jasmine": "2.4.2",
+    "gulp-shell": "^0.5.2",
     "gulp-sourcemaps": "1.6.0",
     "gulp-typescript": "2.13.6",
+    "less": "^2.7.1",
+    "less-loader": "^2.2.3",
     "merge2": "1.0.2",
-    "typescript": "1.8.2"
+    "style-loader": "^0.13.1",
+    "ts-loader": "^1.0.0",
+    "typescript": "1.8.2",
+    "url-loader": "^0.5.7",
+    "webpack-node-externals": "^1.5.4",
+    "webpack-stream": "^3.2.0"
   },
   "dependencies": {
     "bluebird": "^3.4.6",

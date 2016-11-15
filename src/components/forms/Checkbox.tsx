@@ -1,5 +1,7 @@
 ﻿import * as React from 'react';
 
+import '../less/forms.less';
+
 export interface ICheckboxProps extends React.Props<any> {
     id: string | number;
     text: string;

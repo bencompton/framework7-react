@@ -1,5 +1,7 @@
 ﻿import * as React from 'react';
 
+import '../less/forms.less';
+
 export interface IBackButtonProps {
     onClick: () => void;
     text?: string;

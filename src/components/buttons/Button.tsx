@@ -1,5 +1,7 @@
 ﻿import * as React from 'react';
 
+import '../less/forms.less';
+
 import {ColorsEnum, getColorCls} from '../../utils/Colors';
 import {BlockMarginTypeEnum} from '../../utils/BlockMarginType'
 import {ListBlock} from '../list/ListBlock';
