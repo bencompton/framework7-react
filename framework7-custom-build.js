@@ -1,4 +1,7 @@
-var fw7BasePath = 'node_modules/framework7/';
+var gulp = require('gulp'),
+    concat = require('gulp-concat');
+
+var fw7BasePath = './node_modules/framework7/';
 var fw7ModulesConfig = require('framework7/modules.json');
 
 //Include any component you wish to use in the app from Framework7.
@@ -55,49 +58,6 @@ function getCustomFw7ScriptsFor(modulesBeingUsed) {
     return uniqueCustomScripts;
 }
 
-//All core less, module dependencies, etc. are listed in the Framework7 modules.json found here: node_modules/framework7/modules.json
-function getFw7Less() {
-    var fw7CoreIntroLess = fw7ModulesConfig.core_intro.less.ios.map(prefixBasePath);
-    var fw7CustomLess = getCustomFw7Less();
-    var fw7CoreOutroLess = fw7ModulesConfig.core_outro.less.ios.map(prefixBasePath);
-
-    return fw7CoreIntroLess.concat(fw7CustomLess, fw7CoreOutroLess);
-}
-
-function getCustomFw7Less() {
-    var fw7CustomModulesLess = [];
-    var fw7CustomModules = [];
-
-    fw7CustomModules = getAllFw7ModulesAndDependenciesBeingUsed();
-    fw7CustomModulesLess = getCustomFw7LessFor(fw7CustomModules);
-
-    return fw7CustomModulesLess;
-}
-
-function getCustomFw7LessFor(modulesBeingUsed) {
-    var allCustomLess = [];
-    var uniqueCustomLess = [];
-
-    //get all script names for all modules being used (this includes the dependency modules)
-    for (var i = 0; i < modulesBeingUsed.length; i++) {
-        var module = fw7ModulesConfig[modulesBeingUsed[i]];
-
-        if (module.less.ios && module.less.ios.length > 0) {
-            allCustomLess.push.apply(allCustomLess, module.less.ios);
-        }
-    }
-
-    //now, get rid of duplicate script names since dependencies could have been duplicated across modules.
-    for (var a = 0; a < allCustomLess.length; a++) {
-        var fw7Less = fw7BasePath + allCustomLess[a];
-        if (uniqueCustomLess.indexOf(fw7Less) < 0) {
-            uniqueCustomLess.push(fw7Less);
-        }
-    }
-
-    return uniqueCustomLess;
-}
-
 function getAllFw7ModulesAndDependenciesBeingUsed() {
     var allFw7ModulesAndDependencies = [];
 
@@ -119,12 +79,6 @@ function getFw7CustomDependencies() {
     return fw7CustomDependencies;
 }
 
-module.exports.getFw7JavaScript = function () {
-    console.log('Compiling framework7 javascript...');
-
-    var scriptsAr = getFw7Scripts();
-    
-    return gulp.src(scriptsAr)
-        .pipe(sourcemaps.init({ loadMaps: true }))
-        .pipe(concat('framework7.custom.js'));
+module.exports = function () {
+    return getFw7Scripts();
 }

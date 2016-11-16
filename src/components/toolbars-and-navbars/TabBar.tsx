@@ -1,10 +1,14 @@
 ﻿import * as React from 'react';
 
+import {Badge} from '../Badge';
+import {ColorsEnum} from '../../utils/Colors';
+
 import '../less/tabs.less';
 
 export interface ITab {
     id: string;
     badgeText?: string;
+    badgeColor?: ColorsEnum; 
     label: string;
     icon: string;
     onTabSelected?: (tabId: string) => void;
@@ -24,7 +28,7 @@ const Tab = (tab: ITab) => {
         <a className={`tab-link ${(tab.isActive) ? 'active' : ''}`} key={tab.id} onClick={() => tab.onTabSelected(tab.id) }>
             <i className={`icon ${tab.icon}`}>
                 {
-                    (tab.badgeText) ? <span className="badge bg-red">{tab.badgeText}</span> : null
+                    (tab.badgeText) ? <Badge text={tab.badgeText} color={tab.badgeColor} /> : null
                 }
             </i>
             <span className="tabbar-label">{tab.label}</span>
