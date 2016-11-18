@@ -26,7 +26,7 @@ const getCheckboxInner = (props: ICheckboxProps) => {
 
 export const Checkbox = (props: ICheckboxProps) => {
     return (
-        <li key={props.id} onClick={(e: MouseEvent) => {
+        <li key={props.id} onClick={(e: any) => {
             e.preventDefault();
 
             if (props.onTap) {

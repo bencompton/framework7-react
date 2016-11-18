@@ -1,12 +1,9 @@
-var gulp = require('gulp'),
-    concat = require('gulp-concat');
-
 var fw7BasePath = './node_modules/framework7/';
 var fw7ModulesConfig = require('framework7/modules.json');
 
 //Include any component you wish to use in the app from Framework7.
 //Listing of components can be found here...http://framework7.io/docs/custom-build.html.
-var fw7ModulesBeingUsed = ['fast-clicks'];
+var fw7ModulesBeingUsed = ['fast-clicks', 'modals'];
 
 //Prefix framework7 file paths with base path because their files are listed as paths relative to the node module.
 //For example: 'src/js/f7-intro.js'...needs to be node_modules/framework7/src/js/f7-intro.js instead so our build process will know where to find the files.

@@ -1,8 +1,8 @@
 import * as React from 'react';
-import * as $ from 'jquery';
 
-declare const require: any;
-const Portal = require('react-portal');
+import '../less/modals.less';
+
+declare var Framework7: any;
 
 export interface IAlertProps {
     visible: boolean;
@@ -15,41 +15,42 @@ export interface IAlertModalState {
     modal: any;
 }
 
-export class Alert extends React.Component<IAlertProps, any> {
-    private element: HTMLElement;
+export class Alert extends React.Component<IAlertProps, IAlertModalState> {
+    private fw7 = new Framework7();
 
-    componentDidUpdate() {
-        if (this.props.visible) {
-            $(this.element).find('.modal').css({ display: 'block' });
-            let dummy = this.element.clientLeft;
-            $(this.element).find('.modal').removeClass('modal-out');
-            $(this.element).find('.modal').addClass('modal-in');            
-        } else {
-            $(this.element).find('.modal').removeClass('modal-in');
-            $(this.element).find('.modal').addClass('modal-out');            
-        }
-    }    
-
-    render() {
-        return (
-            <Portal isOpened={true}>    
-                <span ref={(element: HTMLElement) => this.element = element}>
-                    <div className={`modal`}>        
-                        <div className="modal-inner">
-                            <div className="modal-title">
-                                {this.props.title}
-                            </div>
-                            <div className="modal-text">
-                                {this.props.text}
-                            </div>
-                        </div>
-                        <div className="modal-buttons">
-                            <span className="modal-button modal-button-bold" onClick={this.props.onClick}>OK</span>
-                        </div>
-                    </div>
-                    <div className={`modal-overlay ${this.props.visible ? 'modal-overlay-visible' : ''}`}></div>
-                </span>                       
-            </Portal>
-        );
+    constructor(props: IAlertProps)  {
+        super(props);
+        this.state = {
+            modal: null
+        };
     }
-};
+
+    render(): any {
+        if (this.props.visible && !this.state.modal) {
+            this.showAlert();
+        } else if (!this.props.visible && this.state.modal) {
+            this.hideAlert();
+        }
+
+        return null;
+    }
+
+    componentWillUnmount() {
+        try {
+            this.hideAlert();
+        } catch (err) {}
+    }
+
+    private showAlert() {
+        this.state.modal = this.fw7.modal({
+            text: this.props.text,
+            title: this.props.title,
+            buttons: [{ text: this.fw7.params.modalButtonOk, bold: true, onClick: this.props.onClick }]
+        });
+    }
+
+    private hideAlert() {
+        this.fw7.closeModal(this.state.modal);
+        this.state.modal = null;
+    }
+}

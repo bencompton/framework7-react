@@ -1,8 +1,7 @@
 var gulp = require('gulp'),
     path = require('path'),
     del = require('del'),
-    concat = require('gulp-concat'),
-    merge = require('merge2'),
+    concat = require('gulp-concat'),    
     getF7FileList = require('./framework7-custom-build');
 
 var webpack = require('webpack-stream');
@@ -12,15 +11,17 @@ gulp.task('clean', function (callback) {
   return del(distFiles, callback);
 });   
 
-gulp.task('webpack', ['clean'], function () {
-    var webpackConfig = require('./webpack.config.js');
+gulp.task('build-framework7-core', function () {
+    return gulp.src(getF7FileList())
+        .pipe(concat('framework7.custom.js'))
+        .pipe(gulp.dest('dist/temp/'));
+});
 
-    return merge(
-        gulp.src(getF7FileList()),        
-        webpack(webpackConfig)
-    )
-    .pipe(concat('index.js'))
-    .pipe(gulp.dest('dist/'));
+gulp.task('webpack', ['clean', 'build-framework7-core'], function () {
+    var webpackConfig = require('./webpack.config.js');   
+             
+    return webpack(webpackConfig, require('webpack'))
+        .pipe(gulp.dest('dist/'));    
 });
 
 gulp.task('copy-less', ['clean'], function () {
@@ -29,4 +30,4 @@ gulp.task('copy-less', ['clean'], function () {
         .pipe(gulp.dest('./dist/less'))
 });
 
-gulp.task('default', ['webpack', 'copy-less']);
+gulp.task('default', ['build-framework7-core', 'webpack', 'copy-less']);

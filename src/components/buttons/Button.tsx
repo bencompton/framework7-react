@@ -42,7 +42,7 @@ const getButtonRoundnessCls = (props: IButtonProps) => {
 const ButtonInner = (props: IButtonProps) => {
     return <a
         className={`button ${getButtonTypeCls(props)} ${getButtonSizeCls(props)} ${getButtonRoundnessCls(props)} ${getColorCls(props.color)} ${props.additionalClassNames || ''}`}
-        onClick={(e: MouseEvent) => {
+        onClick={(e: any) => {
             e.preventDefault();
             if (props.onClick) props.onClick();
         }}>

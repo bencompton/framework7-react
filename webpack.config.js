@@ -4,24 +4,22 @@ var nodeExternals = require('webpack-node-externals');
 
 module.exports = {    
     entry: {
-        framework7: "./node_modules/framework7/dist/js/framework7.js",
-        main: "./src/index.ts"  
+        main: ['./dist/temp/framework7.custom.js','./src/index.ts']
     },
     resolve: {
-        extensions: ["", ".ts", ".tsx", ".js"]             
+        extensions: [".ts", ".tsx", ".js"]                 
     },
     output: {
-        filename: 'src/index.js',        
-        libraryTarget: 'commonjs'
+        filename: 'src/index.js',
+        libraryTarget: 'commonjs2'
     },    
-    externals: [nodeExternals({
-        importType: 'commonjs'
-    }), 
+    externals: [
+        nodeExternals(), 
         /.*\.less/
     ],
     module: {
         loaders: [
-            { test: /\.tsx?$/, loader: "ts-loader" }            
+            { test: /\.tsx?$/, loader: "ts-loader" },   
         ]
     },
     devtool: 'source-map'

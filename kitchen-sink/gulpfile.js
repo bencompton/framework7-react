@@ -11,7 +11,7 @@ gulp.task('clean', function() {
 gulp.task('webpack', ['clean'], function () {
     var webpackConfig = require('./webpack.config.js');
 
-    return webpack(webpackConfig)
+    return webpack(webpackConfig, require('webpack'))    
         .pipe(gulp.dest('dist/'));
 });
 

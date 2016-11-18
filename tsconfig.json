@@ -1,15 +1,14 @@
 {
     "compilerOptions": {
         "target": "es5",
-        "declaration": true,
-        "module": "commonjs",
+        "module": "es2015",
+        "declaration": true,        
         "sourceMap": true,
         "moduleResolution": "node",
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,        
         "noImplicitAny": false,        
         "jsx": "react"        
-    }, 
-
+    },
     "exclude": ["kitchen-sink", "node_modules", "src"]    
 }

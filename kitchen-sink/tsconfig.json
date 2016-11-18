@@ -1,15 +1,13 @@
 {
     "compilerOptions": {
         "target": "es5",
-        "declaration": false,
-        "module": "commonjs",
+        "module": "es2015",
+        "declaration": false,        
         "sourceMap": true,
         "moduleResolution": "node",
         "emitDecoratorMetadata": true,
-        "experimentalDecorators": true,
-        "outDir": "dist",
-        "noImplicitAny": false,
-        "rootDir": ".",
+        "experimentalDecorators": true,        
+        "noImplicitAny": false,        
         "jsx": "react"
     }
 }
