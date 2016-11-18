@@ -1,6 +1,7 @@
 var path = require('path');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var webpack = require('webpack');
+var typescript = require('rollup-plugin-typescript');
 
 module.exports = {
     entry: "./index.ts",
@@ -18,7 +19,7 @@ module.exports = {
         ]
     },
     devtool: 'source-map',
-    plugins: [
+    plugins: [        
         new webpack.LoaderOptionsPlugin({
             minimize: true,
             debug: false

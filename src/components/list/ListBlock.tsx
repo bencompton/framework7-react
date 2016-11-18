@@ -1,6 +1,6 @@
 ﻿import * as React from 'react';
 
-import '../less/lists.less';
+import '../../less/lists.less';
 
 import {BlockMarginTypeEnum, getMarginTypeClass} from '../../utils/BlockMarginType';
 import {IListItemProps} from './ListItem';

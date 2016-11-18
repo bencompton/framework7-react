@@ -24,8 +24,8 @@ import {Checkbox} from './components/forms/Checkbox';
 import {GridRow} from './components/grid/GridRow';
 import {GridCol} from './components/grid/GridCol';
 
-import '../less/intro.less';
-import '../less/framework7.ios.colors.less';
+import './less/intro.less';
+import './less/framework7.ios.colors.less';
 
 export {
 	Alert, Badge, ColorsEnum,

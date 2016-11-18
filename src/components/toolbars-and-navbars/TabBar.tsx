@@ -3,7 +3,7 @@
 import {Badge} from '../Badge';
 import {ColorsEnum} from '../../utils/Colors';
 
-import '../less/tabs.less';
+import '../../less/tabs.less';
 
 export interface ITab {
     id: string;

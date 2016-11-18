@@ -2,7 +2,7 @@
 
 import {Icon} from '../Icon';
 
-import '../less/forms.less';
+import '../../less/forms.less';
 
 export interface IIconButtonProps {
     onClick: () => void;
