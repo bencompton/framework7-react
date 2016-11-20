@@ -32,6 +32,7 @@
     "gulp": "3.9.1",
     "gulp-clean": "^0.3.2",
     "gulp-concat": "^2.6.1",
+    "gulp-replace": "^0.5.4",
     "gulp-sourcemaps": "^2.2.0",
     "gulp-typescript": "2.13.6",
     "merge2": "^1.0.2",
@@ -44,7 +45,8 @@
   },
   "dependencies": {
     "bluebird": "^3.4.6",
-    "framework7": "1.4.2",
+    "classnames": "^2.2.5",
+    "framework7": "^1.5.0",
     "invariant": "2.2.1",
     "jquery": "3.1.1",
     "react": "15.3.2",

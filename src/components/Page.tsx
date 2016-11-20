@@ -3,7 +3,7 @@ import * as $ from 'jquery';
 
 import {IFramework7AppContext} from './Framework7App';
 import {AnimationWrapper, AnimationDirectionEnum} from './AnimationWrapper';
-import {ViewInner, IViewContext} from './View';
+import {IViewContext} from './View';
 
 import '../less/pages.less';
 
@@ -30,15 +30,15 @@ export interface IPageContext {
     pageAnimationDirection: AnimationDirectionEnum;
 }
 
-class PageInner extends React.Component<IPageInnerProps, any> {
-    render() {
-        return (
-            <div className={`page ${this.props.className || ''}`}>
-                {this.props.children}
-            </div>
-        );
-    }
-};
+// class PageInner extends React.Component<IPageInnerProps, any> {
+//     render() {
+//         return (
+//             <div className={`page ${this.props.className || ''}`}>
+//                 {this.props.children}
+//             </div>
+//         );
+//     }
+// };
 
 const currentItemAnimationClasses = {
     back: {
@@ -86,9 +86,7 @@ export class Page extends React.Component<IPageProps, any> {
 
     render() {
         return (
-            <ViewInner>
-                {this.props.children}
-            </ViewInner>
+            null
         );
     }
 };
@@ -100,17 +98,7 @@ export const PageBody = (props: IPageBodyProps, context: IPageContext) => {
     let animationDirection = pageContext.pageAnimationDirection || appContext.pageAnimationDirection;
 
     return (
-        <AnimationWrapper
-            component="div"
-            className="pages"
-            currentItemAnimationClasses={currentItemAnimationClasses}
-            previousItemAnimationClasses={previousItemAnimationClasses}
-            animationDirection={animationDirection}
-        >
-            <PageInner className={props.className} key={pageContext.pageName}>
-                {props.children}
-            </PageInner>
-        </AnimationWrapper>
+        null
     );
 };
 
@@ -120,4 +108,4 @@ export const PageBody = (props: IPageBodyProps, context: IPageContext) => {
     framework7AppContext: React.PropTypes.object
 };
 
-export const PageContent = (props: IPageContentProps) => <div className={`page-content ${props.className || ''}`}>{props.children}</div>;
+export const PageContent = (props: IPageContentProps) => null;

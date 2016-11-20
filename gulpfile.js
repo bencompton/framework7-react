@@ -5,7 +5,8 @@ var gulp = require('gulp'),
     getF7FileList = require('./framework7-custom-build'),
     sourcemaps = require('gulp-sourcemaps'),
     tsc = require('gulp-typescript'),
-    merge = require('merge2');
+    merge = require('merge2'),
+    replace = require('gulp-replace');
 
 var webpack = require('webpack-stream');
 
@@ -14,10 +15,15 @@ gulp.task('clean', function () {
         .pipe(clean());
 });   
 
-gulp.task('build-framework7-core', function () {
-    return gulp.src(getF7FileList())
-        .pipe(concat('framework7.custom.js'))
-        .pipe(gulp.dest('dist/src/'));
+gulp.task('build-framework7-core', ['clean'], function () {
+    return merge(
+        gulp.src(getF7FileList())
+            .pipe(concat('Framework7.js'))
+            .pipe(replace('window.Framework7 = ', 'window.Framework7 = module.exports.Framework7 = '))
+            .pipe(gulp.dest('dist/src/')),
+        gulp.src('./src/Framework7.d.ts')
+            .pipe(gulp.dest('./dist/src/'))
+    ); 
 });
 
 gulp.task('copy-less', ['clean'], function () {

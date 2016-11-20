@@ -27,27 +27,25 @@ export const pages: IKitchenSinkPage[] = [{
     component: NavbarAndToolbarPage
 }];
 
-const App = (props: React.Props<any>) => {
+export const App = (props: React.Props<any>) => {
     return (
-        <Framework7App themeType={ThemeTypeEnum.iOS} pageAnimationDirection={routeState.lastNavigationDirection}>
-
+        <Framework7App themeType={ThemeTypeEnum.iOS} pageAnimationDirection={routeState.lastNavigationDirection} routes={[]}>
             <Views>
-                <View>
-                    {props.children}
+                <View dynamicNavbar={true} url="/" main={true}>
+                    <div className="pages">
+                        <div className="page">
+                            <div className="page-content ">
+                                <div className="list-block tablet-inset">
+                                    <ul>
+                                        <li><a href="/list-view/" className="item-link item-content"><div className="item-media"><i className="icon icon-f7"></i></div><div className="item-inner"><div className="item-title">List View</div></div></a></li>
+                                        <li><a href="/navbars-and-toolbars/" className="item-link item-content"><div className="item-media"><i className="icon icon-f7"></i></div><div className="item-inner"><div className="item-title">Navbars and Toolbars</div></div></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </View>
             </Views>
         </Framework7App>
     );
 }
-
-export const Routes = () => {
-    return (
-        <Router history={hashHistory}>
-            <Route component={App}>
-                {pages.map(pageRoute => {
-                    return <Route key={pageRoute.path} path={pageRoute.path} component={pageRoute.component} />
-                })}
-            </Route>
-        </Router>
-    );
-};
