@@ -1,5 +1,7 @@
 ﻿import * as React from 'react';
 
+import '../../less/lists.less';
+
 export interface IGroupedListProps {
     items: any[];
     innerListItemComponent: __React.ComponentClass<any> | __React.StatelessComponent<any>;

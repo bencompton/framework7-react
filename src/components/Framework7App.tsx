@@ -1,5 +1,6 @@
 ﻿import * as React from 'react';
 
+import {Framework7} from '../Framework7';
 import {applyOverscrollFix} from '../utils/OverscrollFix';
 import {AnimationDirectionEnum} from './AnimationWrapper';
 
@@ -12,13 +13,19 @@ export interface IFramework7AppContext {
     themeType: ThemeTypeEnum;
     rtl?: boolean;
     pageAnimationDirection: AnimationDirectionEnum;
+    framework7: Framework7;
 }
 
-export interface IFramework7AppProps extends IFramework7AppContext, React.Props<any> {
+export interface IFramework7AppProps extends React.Props<any> {
     applyOverscrollFix?: boolean;
+    themeType: ThemeTypeEnum;
+    rtl?: boolean;
+    pageAnimationDirection: AnimationDirectionEnum;       
 }
 
 export class Framework7App extends React.Component<IFramework7AppProps, any> {
+    private framework7: Framework7;
+    
     static childContextTypes = {
         framework7AppContext: React.PropTypes.object
     }
@@ -28,7 +35,8 @@ export class Framework7App extends React.Component<IFramework7AppProps, any> {
             framework7AppContext: {
                 themeType: this.props.themeType,
                 applyOverscrollFix: this.props.applyOverscrollFix,
-                pageAnimationDirection: this.props.pageAnimationDirection               
+                pageAnimationDirection: this.props.pageAnimationDirection,                
+                framework7: this.framework7         
             }
         };
     }
@@ -38,7 +46,8 @@ export class Framework7App extends React.Component<IFramework7AppProps, any> {
     }
 
     componentDidMount() {
-        this.handleOverscrollFix();
+        this.handleOverscrollFix();        
+        this.framework7 = new Framework7();
     }
 
     private handleOverscrollFix() {

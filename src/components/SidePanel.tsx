@@ -1,6 +1,8 @@
 ﻿import * as React from 'react';
 import * as $ from 'jquery';
 
+import '../less/panels.less';
+
 import {transitionEnd} from '../utils/AnimationEnd';
 
 declare const require: any;

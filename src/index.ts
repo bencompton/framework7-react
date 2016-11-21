@@ -1,5 +1,8 @@
 ﻿import {Framework7App, ThemeTypeEnum} from './components/Framework7App';
 import {AnimationDirectionEnum} from './components/AnimationWrapper';
+import {ColorsEnum} from './utils/Colors';
+import {Alert} from './components/Alert';
+import {Badge} from './components/Badge';
 import {View} from './components/View';
 import {Views} from './components/Views';
 import {Page, PageBody, PageContent} from './components/Page';
@@ -17,8 +20,15 @@ import {ContentBlock, ContentBlockTitle} from './components/ContentBlock';
 import {BlockMarginTypeEnum} from './utils/BlockMarginType';
 import {ListBlock} from './components/list/ListBlock';
 import {ListItem} from './components/list/ListItem';
+import {Checkbox} from './components/forms/Checkbox';
+import {GridRow} from './components/grid/GridRow';
+import {GridCol} from './components/grid/GridCol';
+
+import './less/intro.less';
+import './less/framework7.ios.colors.less';
 
 export {
+	Alert, Badge, ColorsEnum,
     AnimationDirectionEnum,
     View, Views,
     Page, PageBody, PageContent,
@@ -28,5 +38,7 @@ export {
     Framework7App, ThemeTypeEnum,
     PopoverList, IPopoverItems,
     ContentBlock, ContentBlockTitle, BlockMarginTypeEnum,
-    GroupedList, ListBlock, ListItem
+    GroupedList, ListBlock, ListItem,
+    Checkbox,
+    GridRow, GridCol	
 }

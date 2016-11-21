@@ -1,6 +1,10 @@
 ﻿import * as React from 'react';
 
+import '../../less/forms.less';
+
 import {ColorsEnum, getColorCls} from '../../utils/Colors';
+import {BlockMarginTypeEnum} from '../../utils/BlockMarginType'
+import {ListBlock} from '../list/ListBlock';
 
 export enum ButtonTypeEnum {
     Standard,
@@ -14,12 +18,13 @@ export enum ButtonSizeEnum {
 
 export interface IButtonProps {
     text: string;
-    onClick: () => void;
+    onClick: Function;
     additionalClassNames?: string;
     type?: ButtonTypeEnum;
     size?: ButtonSizeEnum;
     round?: boolean;
     color?: ColorsEnum;
+    inset?: boolean;
 }
 
 const getButtonSizeCls = (props: IButtonProps) => {
@@ -34,6 +39,27 @@ const getButtonRoundnessCls = (props: IButtonProps) => {
     return props.round ? 'button-round' : '';
 };
 
+const ButtonInner = (props: IButtonProps) => {
+    return <a
+        className={`button ${getButtonTypeCls(props)} ${getButtonSizeCls(props)} ${getButtonRoundnessCls(props)} ${getColorCls(props.color)} ${props.additionalClassNames || ''}`}
+        onClick={(e: any) => {
+            e.preventDefault();
+            if (props.onClick) props.onClick();
+        }}>
+            {props.text}
+        </a>;
+};
+
 export const Button = (props: IButtonProps) => {
-    return <a className={`button ${getButtonTypeCls(props)} ${getButtonSizeCls(props)} ${getButtonRoundnessCls(props)} ${getColorCls(props.color)} ${props.additionalClassNames || ''}`} onClick={props.onClick}>{props.text}</a>;    
+    if (props.inset) {
+        return (
+            <ListBlock marginType={BlockMarginTypeEnum.Inset}>
+                <li>
+                    {React.createElement(ButtonInner, props)}
+                </li>
+            </ListBlock>
+        );
+    } else {
+        return React.createElement(ButtonInner, props);
+    }
 };

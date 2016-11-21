@@ -1,5 +1,7 @@
 ﻿import * as React from 'react';
 
+import '../../less/toolbars.less';
+
 export interface IToolbarProps extends React.Props<any> {
     className?: string;
 }

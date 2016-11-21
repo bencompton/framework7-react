@@ -1,5 +1,7 @@
 ﻿import * as React from 'react';
 
+import '../less/content-block.less';
+
 import {BlockMarginTypeEnum} from '../utils/BlockMarginType';
 
 export interface IContentBlockProps extends React.Props<any> {

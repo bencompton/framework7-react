@@ -5,6 +5,8 @@ import {IFramework7AppContext} from './Framework7App';
 import {AnimationWrapper, AnimationDirectionEnum} from './AnimationWrapper';
 import {ViewInner, IViewContext} from './View';
 
+import '../less/pages.less';
+
 export interface IPageProps extends React.Props<any> {
     name: string;
     animationDirection?: AnimationDirectionEnum;

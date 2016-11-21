@@ -4,6 +4,8 @@ import {AnimationDirectionEnum} from './AnimationWrapper';
 import {Navbar} from './toolbars-and-navbars/Navbar';
 import {Page} from './Page';
 
+import '../less/views.less';
+
 export interface IViewProps {
     dockLeft?: boolean;
 }
