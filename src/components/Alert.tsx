@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import '../less/modals.less';
 
-declare var Framework7: any;
+import {IFramework7AppContext} from './Framework7App';
 
 export interface IAlertProps {
     visible: boolean;
@@ -16,7 +16,9 @@ export interface IAlertModalState {
 }
 
 export class Alert extends React.Component<IAlertProps, IAlertModalState> {
-    private fw7 = new Framework7();
+    static contextTypes = {
+        framework7AppContext: React.PropTypes.object
+    };
 
     constructor(props: IAlertProps)  {
         super(props);
@@ -41,16 +43,20 @@ export class Alert extends React.Component<IAlertProps, IAlertModalState> {
         } catch (err) {}
     }
 
+    private get framework7() {
+        return ((this.context as any).framework7AppContext as IFramework7AppContext).framework7;
+    }
+
     private showAlert() {
-        this.state.modal = this.fw7.modal({
-            text: this.props.text,
+        this.state.modal = this.framework7.modal({
             title: this.props.title,
-            buttons: [{ text: this.fw7.params.modalButtonOk, bold: true, onClick: this.props.onClick }]
+            text: this.props.text,           
+            buttons: [{ text: this.framework7.params.modalButtonOk, bold: true, onClick: this.props.onClick }]
         });
     }
 
     private hideAlert() {
-        this.fw7.closeModal(this.state.modal);
+        this.framework7.closeModal(this.state.modal);
         this.state.modal = null;
     }
 }
