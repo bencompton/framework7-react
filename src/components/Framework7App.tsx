@@ -23,21 +23,25 @@ export interface IFramework7AppProps extends React.Props<any> {
     pageAnimationDirection: AnimationDirectionEnum;       
 }
 
-export class Framework7App extends React.Component<IFramework7AppProps, any> {
-    private framework7: Framework7;
-    
+export class Framework7App extends React.Component<IFramework7AppProps, IFramework7AppContext> {
     static childContextTypes = {
         framework7AppContext: React.PropTypes.object
     }
 
+    constructor(props: IFramework7AppProps) {
+        super(props);
+        
+        this.state = {
+            themeType: this.props.themeType,
+            rtl: this.props.rtl,
+            pageAnimationDirection: this.props.pageAnimationDirection,
+            framework7: null
+        }
+    }
+
     getChildContext() {
         return {
-            framework7AppContext: {
-                themeType: this.props.themeType,
-                applyOverscrollFix: this.props.applyOverscrollFix,
-                pageAnimationDirection: this.props.pageAnimationDirection,                
-                framework7: this.framework7         
-            }
+            framework7AppContext: this.state
         };
     }
 
@@ -46,8 +50,12 @@ export class Framework7App extends React.Component<IFramework7AppProps, any> {
     }
 
     componentDidMount() {
-        this.handleOverscrollFix();        
-        this.framework7 = new Framework7();
+        this.handleOverscrollFix();     
+
+        //TODO: Update to TS 2.1 and use property spread instead of the hack below
+        let newState = this.state;
+        newState.framework7 = new Framework7();        
+        this.setState(newState);
     }
 
     private handleOverscrollFix() {
