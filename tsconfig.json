@@ -4,12 +4,10 @@
         "module": "commonjs",
         "declaration": true,        
         "sourceMap": true,
-        "moduleResolution": "node",
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,        
         "noImplicitAny": false,        
         "jsx": "react"        
     },
-    "include": ["typings"],
-    "exclude": ["kitchen-sink", "node_modules", "src"]    
+    "exclude": ["kitchen-sink"]    
 }
