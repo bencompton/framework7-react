@@ -32,25 +32,23 @@ export const GroupedList = (props: IGroupedListProps) => {
     let groupedItems: { [groupName: string]: any[] } = buildGroupedItems(props.items, props.groupBy);
 
     return (
-        <div className={`page-content ${props.additionalClassName}`}>
-            <div className={`list-block ${props.additionalClassName} ${props.searchable ? 'list-block-search' : ''}`}>
-                {Object.keys(groupedItems).map((value) => 
-                    <div className="list-group" key={value}>
-                        <ul>
-                            <li className="list-group-title">{value}</li>
-                            {groupedItems[value].map((item: any) =>
-                                <li key={item.id} className={`${(props.selectedItemId === item.id) ? props.selectedClass : ''}`}>
-                                    <div className="item-content" key={item.id} onClick={ () => props.onItemSelected(item.id) }>
-                                        <div className="item-inner">
-                                            {React.createElement(props.innerListItemComponent, item)}
-                                        </div>
+        <div className={`list-block ${props.additionalClassName} ${props.searchable ? 'list-block-search' : ''}`}>
+            {Object.keys(groupedItems).map((value) => 
+                <div className="list-group" key={value}>
+                    <ul>
+                        <li className="list-group-title">{value}</li>
+                        {groupedItems[value].map((item: any) =>
+                            <li key={item.id} className={`${(props.selectedItemId === item.id) ? props.selectedClass : ''}`}>
+                                <div className="item-content" key={item.id} onClick={ () => props.onItemSelected(item.id) }>
+                                    <div className="item-inner">
+                                        {React.createElement(props.innerListItemComponent, item)}
                                     </div>
-                                </li>
-                            )}
-                        </ul>
-                    </div>
-                )}
-            </div>
+                                </div>
+                            </li>
+                        )}
+                    </ul>
+                </div>
+            )}
         </div>
     );
 }
