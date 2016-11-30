@@ -6,6 +6,7 @@ import {routeState} from '../utils/RouteState';
 import {IndexPage} from './pages/IndexPage';
 import {NavbarAndToolbarPage} from './pages/NavbarAndToolbarPage';
 import {ListViewPage} from './pages/ListViewPage';
+import {ProgressBarPage} from './pages/ProgressBarPage';
 
 export interface IKitchenSinkPage {
     path: string;
@@ -25,6 +26,10 @@ export const pages: IKitchenSinkPage[] = [{
     path: 'navbars-and-toolbars',
     pageTitle: 'Navbars and Toolbars',
     component: NavbarAndToolbarPage
+}, {
+    path: 'progress-bar',
+    pageTitle: 'Progress Bar',
+    component: ProgressBarPage
 }];
 
 const App = (props: React.Props<any>) => {

@@ -26,7 +26,13 @@ const ListItemTitle = (props: IListItemProps) => {
 };
 
 const ListItemInner = (props: IListItemProps) => {
-    if (props.text || props.subTitle) {
+    if (props.children) {
+        return (
+            <div className="item-inner">
+                {props.children}
+            </div>
+        )
+    } else if (props.text || props.subTitle) {
         return (
             <div className="item-inner">
                 {(props.title || props.afterTitleText) ? ListItemTitle(props) : null}
