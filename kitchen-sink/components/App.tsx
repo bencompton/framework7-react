@@ -27,9 +27,14 @@ export const pages: IKitchenSinkPage[] = [{
     component: NavbarAndToolbarPage
 }];
 
+const routes = [{
+    path: '/list-view',
+    component: ListViewPage
+}];
+
 export const App = (props: React.Props<any>) => {
     return (
-        <Framework7App themeType={ThemeTypeEnum.iOS} pageAnimationDirection={routeState.lastNavigationDirection} routes={[]}>
+        <Framework7App themeType={ThemeTypeEnum.iOS} pageAnimationDirection={routeState.lastNavigationDirection} routes={routes}>
             <Views>
                 <View dynamicNavbar={true} url="/" main={true}>
                     <div className="pages">

@@ -3,3 +3,5 @@ gulpfile.js
 tsconfig.json
 src/
 kitchen-sink/
+.vscode/
+framework7-custom-build.js

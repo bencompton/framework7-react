@@ -1,74 +1,34 @@
 import * as React from 'react';
+import {View} from '../Framework7';
 
 export interface IFramework7Route {
     path: string;
     component: React.ComponentClass<any> | React.StatelessComponent<any> | string;
 }
 
-export const getPrerouteHandler = (routes: IFramework7Route[]) => {
+export const getPrerouteHandler = (routes: IFramework7Route[], routeChangeCallback: (component: React.ComponentClass<any> | React.StatelessComponent<any>) => {
     return (view, params) => {
-        return preroute(view, params, routes);
+        return preroute(view: View, params, routes, routeChangeCallback);
     };
 };
 
-const preroute = (view, params, routes) => {
-    function preroute(view, params, routes) {
-      var url = params.url;
-      var pageElement = params.pageElement;
+const preroute = (view, params, routes, routeChangeCallback) => {    
+    var url = params.url,
+        pageElement = params.pageElement;
 
-      if (url && pageElement || !url || url === '#') {
+    if (url && pageElement || !url || url === '#') {
         return true;
-      }
+    }
 
-      var matchingRoute = findMatchingRoute(url, routes);
-      if (!matchingRoute) return true;
-      var pagesVue = view.pagesContainer.__vue__;
-      if (!pagesVue) return true;
-
-      var id = new Date().getTime();
-      
-    //   Vue.set(pagesVue.pages, id, {component: matchingRoute.route.component});
-      
-    //   view.container.__vue__.$route = {
-    //     route: matchingRoute.route.path,
-    //     query: matchingRoute.query,
-    //     hash: matchingRoute.hash,
-    //     params: matchingRoute.params,
-    //     url: matchingRoute.url,
-    //     path: matchingRoute.path
-    //   };
-
-    //   Vue.nextTick(function () {
-    //       var newPage = view.pagesContainer.querySelector('.page:last-child');
-    //       pagesVue.pages[id].pageElement = newPage;
-    //       params.pageElement = newPage;
-          
-    //       if (params.isBack) {
-    //         view.router.back(params);
-    //       }
-    //       else {
-    //         view.router.load(params);
-    //       }
-    //   });
-
-      return false;
+    var matchingRoute = findMatchingRoute(url, routes);
+    
+    if (!matchingRoute) {
+        routeChangeCallback(matchingRoute.route.component)
+        return true;
+    } else {
+        return false;
     }
 };
-
-const parseRoute = (str: string) => {
-    let parts = [];
-
-    str.split('/').forEach(function (part) {
-        if (part !== '') {
-            if (part.indexOf(':') === 0) {
-                parts.push({name: part.replace(':', '')});
-            }
-            else parts.push(part);
-        }
-    });
-
-    return parts;
-}
 
 const findMatchingRoute = (url, routes) => {
     let matchingRoute;
@@ -116,4 +76,19 @@ const findMatchingRoute = (url, routes) => {
     }
 
     return matchingRoute;
+}
+
+const parseRoute = (str: string) => {
+    let parts = [];
+
+    str.split('/').forEach(function (part) {
+        if (part !== '') {
+            if (part.indexOf(':') === 0) {
+                parts.push({name: part.replace(':', '')});
+            }
+            else parts.push(part);
+        }
+    });
+
+    return parts;
 }

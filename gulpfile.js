@@ -8,8 +8,6 @@ var gulp = require('gulp'),
     merge = require('merge2'),
     replace = require('gulp-replace');
 
-var webpack = require('webpack-stream');
-
 gulp.task('clean', function () {
     return gulp.src('./dist', { read: false })
         .pipe(clean());

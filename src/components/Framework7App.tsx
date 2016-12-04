@@ -16,6 +16,7 @@ export interface IFramework7AppContext {
     pageAnimationDirection: AnimationDirectionEnum;
     routes: IFramework7Route[];
     onF7Init: Function;
+    framework7: Framework7;
 }
 
 export interface IFramework7AppProps extends React.Props<any> {
@@ -26,8 +27,7 @@ export interface IFramework7AppProps extends React.Props<any> {
     routes: IFramework7Route[];    
 }
 
-export class Framework7App extends React.Component<IFramework7AppProps, any> {
-    private framework7: Framework7;
+export class Framework7App extends React.Component<IFramework7AppProps, Framework7> {
     private f7InitEventHandlers: [Function];
 
     static childContextTypes = {
@@ -38,9 +38,10 @@ export class Framework7App extends React.Component<IFramework7AppProps, any> {
         return {
             framework7AppContext: {
                 themeType: this.props.themeType,
-                applyOverscrollFix: this.props.applyOverscrollFix,
+                rtl: this.props.rtl,
                 pageAnimationDirection: this.props.pageAnimationDirection,
-                onF7Init: this.addF7InitEventHandler.bind(this)           
+                framework7: this.state,
+                onF7Init: this.addF7InitEventHandler.bind(this)
             }
         };
     }
@@ -51,13 +52,15 @@ export class Framework7App extends React.Component<IFramework7AppProps, any> {
 
     componentDidMount() {
         this.handleOverscrollFix();
-        
-        this.framework7 = new Framework7({
-            preroute: getPrerouteHandler(this.props.routes)
-        });
 
-        this.f7InitEventHandlers.forEach((handler: Function) => {
-            handler(this.framework7);
+        const routeChangeCallback;
+
+        this.setState(new Framework7({
+            preroute: getPrerouteHandler(this.props.routes, routeChangeCallback)
+        }), () => {
+            this.f7InitEventHandlers.forEach((handler: Function) => {
+                handler(this.state, routeChangeCallback);
+            });
         });
     }
 

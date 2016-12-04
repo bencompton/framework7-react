@@ -1,6 +1,6 @@
 {
   "name": "framework7-react",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A library of React components that leverages Framework7 HTML + CSS",
   "main": "dist/src/index.js",
   "typings": "dist/src/index.d.ts",
@@ -36,12 +36,7 @@
     "gulp-sourcemaps": "^2.2.0",
     "gulp-typescript": "2.13.6",
     "merge2": "^1.0.2",
-    "rollup-plugin-typescript": "^0.8.1",
-    "ts-loader": "^1.2.1",
-    "typescript": "2.0.6",
-    "webpack": "2.1.0-beta.25",
-    "webpack-node-externals": "^1.5.4",
-    "webpack-stream": "^3.2.0"
+    "typescript": "2.0.6"
   },
   "dependencies": {
     "bluebird": "^3.4.6",
@@ -49,7 +44,7 @@
     "framework7": "^1.5.0",
     "invariant": "2.2.1",
     "jquery": "3.1.1",
-    "react": "15.3.2",
-    "react-portal": "^2.2.1"
+    "react": "^15.4.0",
+    "react-portal": "^3.0.0"    
   }
 }

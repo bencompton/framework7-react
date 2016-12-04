@@ -57,6 +57,7 @@ export class View extends React.Component<IViewProps, any> {
 
         this.f7View = f7.addView(this.element, params);
 
+        
         // if (this.f7View && this.f7View.pagesContainer.querySelectorAll('.page').length === 0) {
         //   this.f7View.router.load({ url: this.props.url, reload: true });
         // }

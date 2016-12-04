@@ -1,7 +1,6 @@
 var path = require('path');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var webpack = require('webpack');
-var typescript = require('rollup-plugin-typescript');
 
 module.exports = {
     watch: true,
