@@ -13,7 +13,7 @@ export interface IFramework7AppContext {
     themeType: ThemeTypeEnum;
     rtl?: boolean;
     pageAnimationDirection: AnimationDirectionEnum;
-    framework7: Framework7;
+    getFramework7: () => Framework7;
 }
 
 export interface IFramework7AppProps extends React.Props<any> {
@@ -28,15 +28,13 @@ export class Framework7App extends React.Component<IFramework7AppProps, Framewor
         framework7AppContext: React.PropTypes.object
     }
 
-    componentWillRe
-
     getChildContext() {
         return {
             framework7AppContext: {
                 themeType: this.props.themeType,
                 rtl: this.props.rtl,
                 pageAnimationDirection: this.props.pageAnimationDirection,
-                framework7: this.state                
+                getFramework7: () => this.state       
             }
         };
     }
