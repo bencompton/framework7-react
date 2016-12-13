@@ -1,7 +1,7 @@
 {
   "name": "kitchen-sink",
   "version": "0.0.1",
-  "devDependencies": {        
+  "devDependencies": {
     "css-loader": "^0.25.0",
     "del": "^2.2.2",
     "extract-text-webpack-plugin": "^2.0.0-beta.4",
@@ -11,7 +11,7 @@
     "style-loader": "^0.13.1",
     "tslint": "^4.0.2",
     "tslint-loader": "^3.3.0",
-    "tslint-microsoft-contrib": "git+https://github.com/Microsoft/tslint-microsoft-contrib.git#releases",
+    "tslint-microsoft-contrib": "^4.0.0",
     "tslint-react": "^2.0.0",
     "typescript": "2.0.6",
     "url-loader": "^0.5.7",
