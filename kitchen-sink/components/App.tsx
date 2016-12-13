@@ -43,15 +43,19 @@ const App = (props: React.Props<any>) => {
             </Views>
         </Framework7App>
     );
-}
+};
+
+const getPages = () => {
+    return pages.map(pageRoute => {
+        return <Route key={pageRoute.path} path={pageRoute.path} component={pageRoute.component} />
+    });
+};
 
 export const Routes = () => {
     return (
         <Router history={hashHistory}>
             <Route component={App}>
-                {pages.map(pageRoute => {
-                    return <Route key={pageRoute.path} path={pageRoute.path} component={pageRoute.component} />
-                })}
+                {getPages()}
             </Route>
         </Router>
     );

@@ -8,5 +8,5 @@ export interface IGridRowProps extends React.Props<any> {
 }
 
 export const GridRow = (props: IGridRowProps) => {
-    return <div className={`row ${props.noGutter ? 'no-gutter' : ''} ${props.className ? props.className : ''}`}>{props.children}</div>
+    return <div className={`row ${props.noGutter ? 'no-gutter' : ''} ${props.className ? props.className : ''}`}>{props.children}</div>;
 };

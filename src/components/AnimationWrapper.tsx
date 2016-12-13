@@ -30,7 +30,7 @@ export interface IPageAnimationWrapper extends React.Props<any> {
     className?: string;
 }
 
-interface IAnimationContext {
+export interface IAnimationContext {
     getPreviousItem: (elementType: React.ComponentClass<any> | React.StatelessComponent<any> | string) => React.ReactElement<any>;
     setPreviousItem: (elementType: React.ComponentClass<any> | React.StatelessComponent<any> | string, component: React.ReactElement<any>) => void;
 }
@@ -41,32 +41,32 @@ export class AnimationParent extends React.Component<any, any> {
 
     constructor(props: React.Props<any>, context: any) {
         super(props, context);
-        
+
         this.animationContext = {
             getPreviousItem: this.getPreviousItem.bind(this),
             setPreviousItem: this.setPreviousItem.bind(this)
-        }
+        };
     }
 
-    static childContextTypes = {
+    public static childContextTypes = {
         animationContext: React.PropTypes.object
-    }
-    
-    private getChildContext() {
+    };
+
+    public getChildContext() {
         return {
             animationContext: this.animationContext
         };
     }
 
-    render() {
+    public render() {
         return this.props.children;
     }
 
-    getPreviousItem(elementType: React.ComponentClass<any> | React.StatelessComponent<any> | string) {
+    private getPreviousItem(elementType: React.ComponentClass<any> | React.StatelessComponent<any> | string) {
         return this.previousItems[elementType as any] as React.ReactElement<any>;
     }
 
-    setPreviousItem(elementType: React.ComponentClass<any> | React.StatelessComponent<any> | string, item: React.ReactElement<any>) {
+    private setPreviousItem(elementType: React.ComponentClass<any> | React.StatelessComponent<any> | string, item: React.ReactElement<any>) {
         this.previousItems[elementType as any] = item;
     }
 }
@@ -74,11 +74,11 @@ export class AnimationParent extends React.Component<any, any> {
 export class AnimationWrapper extends React.Component<IPageAnimationWrapper, any> {
     private element: HTMLElement;
 
-    static contextTypes = {
+    public static contextTypes = {
         animationContext: React.PropTypes.object
-    }
+    };
 
-    render() {
+    public render() {
         return React.createElement((this.props.component || 'span') as any, {
             ref: (item: HTMLElement) => this.element = item,
             children: this.currentAndPreviousItem,
@@ -86,12 +86,15 @@ export class AnimationWrapper extends React.Component<IPageAnimationWrapper, any
         });
     }
 
-    componentDidMount() {
-        if (this.previousItem) this.animateItems();
+    public componentDidMount() {
+        if (this.previousItem) {
+            this.animateItems();
+        }
+
         this.previousItem = this.currentItem;
     }
 
-    componentDidUpdate() {
+    public componentDidUpdate() {
         if (this.previousAndCurrentComponentDifferent) {
             this.animateItems();
         }
@@ -103,7 +106,7 @@ export class AnimationWrapper extends React.Component<IPageAnimationWrapper, any
         if (!this.previousItem) {
             return true;
         } else {
-            return this.previousItem.key !== this.currentItem.key;    
+            return this.previousItem.key !== this.currentItem.key;
         }
     }
 
@@ -122,8 +125,8 @@ export class AnimationWrapper extends React.Component<IPageAnimationWrapper, any
     }
 
     private get animationContext() {
-        let context = this.context as any,
-            animationContext: IAnimationContext = null;
+        const context = this.context as any;
+        let animationContext: IAnimationContext = null;
 
         if (context && context.animationContext) {
             animationContext = context.animationContext;
@@ -168,7 +171,6 @@ export class AnimationWrapper extends React.Component<IPageAnimationWrapper, any
         }
     }
 
-
     private get currentItemAnimatingClassName() {
         if (this.props.animationDirection === null) {
             return this.props.currentItemAnimationClasses.none;
@@ -208,19 +210,18 @@ export class AnimationWrapper extends React.Component<IPageAnimationWrapper, any
             return this.props.previousItemAnimationClasses.back.afterAnimationClass;
         }
     }
-    
+
     private animateItems() {
-        let allChildren = $(this.element).children(),
-            currentItemElement: HTMLElement = null,
-            previousItemElement: HTMLElement = null;
+        const allChildren = $(this.element).children();
+        let currentItemElement: HTMLElement = null;
+        let previousItemElement: HTMLElement = null;
 
         if (this.props.animationDirection === AnimationDirectionEnum.Forward) {
             previousItemElement = allChildren[0];
             currentItemElement = allChildren[1];
-            
         } else {
             currentItemElement = allChildren[0];
-            previousItemElement = allChildren[1];            
+            previousItemElement = allChildren[1];
         }
 
         if (currentItemElement && previousItemElement) {
@@ -235,13 +236,18 @@ export class AnimationWrapper extends React.Component<IPageAnimationWrapper, any
             $(currentItemElement).css('pointer-events', 'none');
 
             if (this.props.onBeforeAnimation) {
-                if (this.props.onBeforeAnimation(currentItemElement, previousItemElement) === false) return;
+                if (this.props.onBeforeAnimation(currentItemElement, previousItemElement) === false) {
+                    return;
+                }
             }
 
             setTimeout(() => {
                 this.animateCurrentItem(currentItemElement);
                 this.animatePreviousItem(previousItemElement);
-                if (this.props.onAfterAnimation) this.props.onAfterAnimation(currentItemElement, previousItemElement);
+
+                if (this.props.onAfterAnimation) {
+                    this.props.onAfterAnimation(currentItemElement, previousItemElement);
+                }
             }, 0);
         }
     }

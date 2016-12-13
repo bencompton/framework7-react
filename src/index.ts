@@ -29,7 +29,7 @@ import './less/intro.less';
 import './less/framework7.ios.colors.less';
 
 export {
-	Alert, Badge, ColorsEnum,
+    Alert, Badge, ColorsEnum,
     AnimationDirectionEnum,
     View, Views,
     Page, PageBody, PageContent,
@@ -42,5 +42,5 @@ export {
     GroupedList, ListBlock, ListItem,
     Checkbox,
     GridRow, GridCol,
-    ProgressBar	
+    ProgressBar
 }

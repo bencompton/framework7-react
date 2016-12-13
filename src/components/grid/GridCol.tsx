@@ -8,5 +8,5 @@ export interface IGridColProps extends React.Props<any> {
 }
 
 export const GridCol = (props: IGridColProps) => {
-    return <div className={`col-${props.width ? props.width : 'auto'} tablet-${props.tabletWidth ? props.tabletWidth : 'auto'}`}>{props.children}</div>
+    return <div className={`col-${props.width ? props.width : 'auto'} tablet-${props.tabletWidth ? props.tabletWidth : 'auto'}`}>{props.children}</div>;
 };

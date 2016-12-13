@@ -9,7 +9,7 @@ export const NavbarAndToolbarPage = () => {
             <Navbar>
                 <Left><BackButton onClick={() => routeState.navigate('/', true)} /></Left>
                 <Center>Navbars and Toolbars</Center>
-                <Right></Right>
+                <Right />
             </Navbar>
             <PageBody>
                 <PageContent>

@@ -51,7 +51,7 @@ const previousItemAnimationClasses = {
 };
 
 export class Navbar extends React.Component<INavbarProps, any> {
-    static contextTypes = {
+    public static contextTypes = {
         pageContext: React.PropTypes.object,
         framework7AppContext: React.PropTypes.object
     };
@@ -72,9 +72,9 @@ export class Navbar extends React.Component<INavbarProps, any> {
         return this.pageContext.pageAnimationDirection || this.framework7AppContext.pageAnimationDirection;
     }
 
-    render() {
+    public render() {
         return (
-            <AnimationWrapper 
+            <AnimationWrapper
                 component="div"
                 className={`navbar ${this.props.className || ''}`}
                 currentItemAnimationClasses={currentItemAnimationClasses}
@@ -87,7 +87,7 @@ export class Navbar extends React.Component<INavbarProps, any> {
                     {this.props.children}
                 </NavbarInner>
             </AnimationWrapper>
-        );        
+        );
     }
 
     private onBeforeAnimation(currentNavbar: HTMLElement, previousNavbar: HTMLElement) {

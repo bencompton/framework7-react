@@ -1,5 +1,8 @@
 ﻿import * as $ from 'jquery';
 
+//Disable TSLint for this file because this code will soon be discarded once these duties are delegated to Framework7
+/* tslint:disable */
+
 export const animateNavbars = (leftNavbarInner: JQuery, rightNavbarInner: JQuery, direction: string) => {
     if (direction === 'to-left') {
         rightNavbarInner.find('.sliding')
@@ -177,7 +180,7 @@ export const sizeNavbars = (viewContainer: JQuery) => {
     });
 };
 
-export const prepareNavbar = (newNavbarInner: HTMLElement, oldNavbarInner: HTMLElement, newNavbarPosition: string) => {
+export const prepareNavbar = (newNavbarInner: HTMLElement, _oldNavbarInner: HTMLElement, newNavbarPosition: string) => {
     $(newNavbarInner).find('.sliding').each(function () {
         var sliding = $(this);
         var slidingOffset = newNavbarPosition === 'right' ? this.f7NavbarRightOffset : this.f7NavbarLeftOffset;

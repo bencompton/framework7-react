@@ -1,5 +1,5 @@
-export interface IFramework7Params {    
-    root: string;    
+export interface IFramework7Params {
+    root: string;
     cache: boolean;
     cacheIgnore: string[];
     cacheIgnoreGetParameters: boolean;
@@ -117,9 +117,9 @@ export interface IFramework7Params {
 export declare class Framework7 {
     constructor(params?: IFramework7Params);
 
-    addView(viewElement: HTMLElement, viewParams: any): View;
+    public addView(viewElement: HTMLElement, viewParams: any): View;
 
-    modal(parameters?: {
+    public modal(parameters?: {
         title?: string;
         text?: string;
         afterText?: string;
@@ -128,13 +128,13 @@ export declare class Framework7 {
         onClick?: (modalElement: HTMLElement, index: number) => void;
     }): HTMLElement;
 
-    closeModal(modalElement: HTMLElement | string): void;
+    public closeModal(modalElement: HTMLElement | string): void;
 
-    params: IFramework7Params;
+    public params: IFramework7Params;
 }
 
 export declare class View {
-    
+    public dynamicNavbar: boolean;
 }
 
 export interface IButton {

@@ -9,15 +9,17 @@ export const ListViewPage = () => {
             <Navbar>
                 <Left><BackButton onClick={() => routeState.navigate('/', true)} /></Left>
                 <Center>List View</Center>
-                <Right></Right>
+                <Right />
             </Navbar>
             <PageBody>
                 <PageContent>
                     <ContentBlock>
                         <p>
-                            Framework7 allows you to be flexible with list views (table views). You can make them as navigation menus, you can use their icons, inputs, and any elements inside of the list, and even make them nested:
+                            Framework7 allows you to be flexible with list views (table views).
+                            You can make them as navigation menus, you can use their icons,
+                            inputs, and any elements inside of the list, and even make them nested:
                         </p>
-                    </ContentBlock>                        
+                    </ContentBlock>
                     <ListBlock title="Data List, With Icons">
                         <ListItem title="Ivan Petrov" iconClass="icon-f7" afterTitleText="CEO" />
                         <ListItem title="John Doe" iconClass="icon-f7" />
@@ -36,4 +38,4 @@ export const ListViewPage = () => {
             </PageBody>
         </Page>
     );
-}
+};

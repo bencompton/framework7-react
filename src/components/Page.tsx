@@ -1,9 +1,8 @@
 ﻿import * as React from 'react';
-import * as $ from 'jquery';
 
 import {IFramework7AppContext} from './Framework7App';
 import {AnimationWrapper, AnimationDirectionEnum} from './AnimationWrapper';
-import {ViewInner, IViewContext} from './View';
+import {ViewInner} from './View';
 
 import '../less/pages.less';
 
@@ -31,14 +30,14 @@ export interface IPageContext {
 }
 
 class PageInner extends React.Component<IPageInnerProps, any> {
-    render() {
+    public render() {
         return (
             <div className={`page ${this.props.className || ''}`}>
                 {this.props.children}
             </div>
         );
     }
-};
+}
 
 const currentItemAnimationClasses = {
     back: {
@@ -67,37 +66,37 @@ const previousItemAnimationClasses = {
 };
 
 export class Page extends React.Component<IPageProps, any> {
-    static childContextTypes = {
+    public static childContextTypes = {
         pageContext: React.PropTypes.object
-    }
+    };
 
-    static contextTypes = {
+    public static contextTypes = {
         viewContext: React.PropTypes.object
-    }
+    };
 
-    getChildContext() {
+    public getChildContext() {
         return {
             pageContext: {
                 pageAnimationDirection: this.props.animationDirection,
                 pageName: this.props.name
             }
-        }
+        };
     }
 
-    render() {
+    public render() {
         return (
             <ViewInner>
                 {this.props.children}
             </ViewInner>
         );
     }
-};
+}
 
 export const PageBody = (props: IPageBodyProps, context: IPageContext) => {
     const pageContext = (context as any).pageContext as IPageContext;
     const appContext = (context as any).framework7AppContext as IFramework7AppContext;
 
-    let animationDirection = pageContext.pageAnimationDirection || appContext.pageAnimationDirection;
+    const animationDirection = pageContext.pageAnimationDirection || appContext.pageAnimationDirection;
 
     return (
         <AnimationWrapper
