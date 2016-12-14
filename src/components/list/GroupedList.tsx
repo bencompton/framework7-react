@@ -31,7 +31,7 @@ const buildGroupedItems = (items: any[], groupBy: string) => {
 };
 
 const getGroupItems = (groupedItems: { [groupName: string]: any[] }, value: string, props: IGroupedListProps) => {
-    groupedItems[value].map((item: any) =>
+    return groupedItems[value].map((item: any) =>
         <li key={item.id} className={`${(props.selectedItemId === item.id) ? props.selectedClass : ''}`}>
             <div className="item-content" key={item.id} onClick={() => props.onItemSelected(item.id)}>
                 <div className="item-inner">
