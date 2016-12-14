@@ -1,6 +1,0 @@
-.gitignore
-gulpfile.js
-src/
-kitchen-sink/
-.vscode/
-framework7-custom-build.js
