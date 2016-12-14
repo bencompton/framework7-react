@@ -16,7 +16,7 @@ export interface IAlertModalState {
 }
 
 export class Alert extends React.Component<IAlertProps, IAlertModalState> {
-    static contextTypes = {
+    public static contextTypes = {
         framework7AppContext: React.PropTypes.object
     };
 
@@ -27,7 +27,7 @@ export class Alert extends React.Component<IAlertProps, IAlertModalState> {
         };
     }
 
-    render(): any {
+    public render(): any {
         if (this.props.visible && !this.state.modal) {
             this.showAlert();
         } else if (!this.props.visible && this.state.modal) {
@@ -37,10 +37,12 @@ export class Alert extends React.Component<IAlertProps, IAlertModalState> {
         return null;
     }
 
-    componentWillUnmount() {
+    public componentWillUnmount() {
         try {
             this.hideAlert();
-        } catch (err) {}
+        } catch (err) {
+            //Eat it
+        }
     }
 
     private get framework7() {
@@ -52,7 +54,7 @@ export class Alert extends React.Component<IAlertProps, IAlertModalState> {
             if (this.framework7) {
                 this.state.modal = this.framework7.modal({
                     title: this.props.title,
-                    text: this.props.text,           
+                    text: this.props.text,
                     buttons: [{ text: this.framework7.params.modalButtonOk, bold: true, onClick: this.props.onClick }]
                 });
             } else {

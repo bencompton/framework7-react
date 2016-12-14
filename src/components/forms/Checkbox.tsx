@@ -15,7 +15,7 @@ const getCheckboxInner = (props: ICheckboxProps) => {
         <label className="label-checkbox item-content">
             <input type="checkbox" value={props.text} checked={props.checked} readOnly={true} />
             <div className="item-media">
-                <i className="icon icon-form-checkbox"></i>
+                <i className="icon icon-form-checkbox" />
             </div>
             <div className="item-inner">
                 <div className="item-title">{props.text}</div>
@@ -24,15 +24,17 @@ const getCheckboxInner = (props: ICheckboxProps) => {
     );
 };
 
+const checkboxClicked = (e: React.MouseEvent, props: ICheckboxProps) => {
+    e.preventDefault();
+
+    if (props.onTap) {
+        props.onTap(props.id);
+    }
+};
+
 export const Checkbox = (props: ICheckboxProps) => {
     return (
-        <li key={props.id} onClick={(e: any) => {
-            e.preventDefault();
-
-            if (props.onTap) {
-                props.onTap(props.id);
-            }
-        }}>
+        <li key={props.id} onClick={(e) => checkboxClicked(e, props)}>
             {props.showAsLink ? <a className="item-link">{getCheckboxInner(props)}</a> : getCheckboxInner(props)}
         </li>
     );

@@ -24,7 +24,7 @@ const ContentBlockInner = (props: React.Props<any>) => {
 
 const ContentBlockOuter = (props: React.Props<any>) => {
     return <div className="content-block">{props.children}</div>;
-}
+};
 
 export const ContentBlock = (props: IContentBlockProps) => {
     if (props.title || !props.background) {
@@ -37,10 +37,10 @@ export const ContentBlock = (props: IContentBlockProps) => {
     } else {
         return (
             <ContentBlockOuter>
-                <ContentBlockInner> 
+                <ContentBlockInner>
                     {props.children}
                 </ContentBlockInner>
             </ContentBlockOuter>
-        )
+        );
     }
 };

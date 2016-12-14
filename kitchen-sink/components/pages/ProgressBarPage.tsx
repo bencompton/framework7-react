@@ -1,7 +1,6 @@
 import * as React from 'react';
-import {Page, Navbar, Left, Right, Center, PageBody, PageContent, ContentBlock, ListBlock, ListItem, Icon, BackButton, ProgressBar} from 'framework7-react';
+import {Page, Navbar, Left, Right, Center, ColorsEnum, PageBody, PageContent, ContentBlock, ListBlock, ListItem, Icon, BackButton, ProgressBar} from 'framework7-react';
 
-import {ColorsEnum} from '../../../src/utils/Colors';
 import {routeState} from '../../utils/RouteState';
 
 export const ProgressBarPage = () => {
@@ -10,15 +9,17 @@ export const ProgressBarPage = () => {
             <Navbar>
                 <Left><BackButton onClick={() => routeState.navigate('/', true)} /></Left>
                 <Center>Progress Bar</Center>
-                <Right></Right>
+                <Right />
             </Navbar>
             <PageBody>
                 <PageContent>
                     <ContentBlock>
                         <p>
-                            Framework7 has two different styles of progress bars...determinate (accepts a progress percentage number to update itself) and indeterminate/infinite (when no progress number can be calculated) to indicate activity:
+                            Framework7 has two different styles of progress bars...determinate
+                            (accepts a progress percentage number to update itself) and indeterminate/infinite
+                            (when no progress number can be calculated) to indicate activity:
                         </p>
-                    </ContentBlock>                        
+                    </ContentBlock>
                     <ListBlock title="Determinate progress bars:">
                         <ListItem>
                             <ProgressBar infinite={false} progress={25} color={ColorsEnum.Blue} />
@@ -42,4 +43,4 @@ export const ProgressBarPage = () => {
             </PageBody>
         </Page>
     );
-}
+};

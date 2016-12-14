@@ -6,7 +6,8 @@ var gulp = require('gulp'),
     sourcemaps = require('gulp-sourcemaps'),
     tsc = require('gulp-typescript'),
     merge = require('merge2'),
-    replace = require('gulp-replace');
+    replace = require('gulp-replace'),
+    tslint = require('gulp-tslint');
 
 gulp.task('clean', function () {
     return gulp.src('./dist', { read: false })
@@ -30,12 +31,20 @@ gulp.task('copy-less', ['clean'], function () {
         .pipe(gulp.dest('./dist/src/less'))
 });
 
-gulp.task('compile-ts', ['clean'], function () {
+gulp.task("tslint", () =>
+    gulp.src(["./src/**/*.ts", "./src/**/*.tsx"])
+        .pipe(tslint({
+            formatter: "verbose"
+        }))
+        .pipe(tslint.report())
+);
+
+gulp.task('compile-ts', ['tslint', 'clean'], function () {
     var tsProject = tsc.createProject('tsconfig.json');
 
     var tsResult = gulp.src(['./src/**/*.ts', './src/**/*.tsx', './typings/**/*.ts'])
         .pipe(sourcemaps.init())
-        .pipe(tsc(tsProject));
+        .pipe(tsProject());
 
     return merge([
         tsResult.dts.pipe(gulp.dest('dist/src/')),
@@ -50,4 +59,4 @@ gulp.task('compile-ts', ['clean'], function () {
     ]);
 });
 
-gulp.task('default', ['build-framework7-core', 'compile-ts', 'copy-less']);
+gulp.task('default', ['build-framework7-core', 'tslint', 'compile-ts', 'copy-less']);

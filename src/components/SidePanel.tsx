@@ -1,12 +1,10 @@
 ﻿import * as React from 'react';
 import * as $ from 'jquery';
+import * as Portal from 'react-portal';
 
 import '../less/panels.less';
 
 import {transitionEnd} from '../utils/AnimationEnd';
-
-declare const require: any;
-const Portal = require('react-portal');
 
 export enum PanelSideEnum {
     Left,
@@ -42,19 +40,19 @@ export class SidePanel extends React.Component<ISidePanelProps, any> {
         }
     }
 
-    componentDidMount() {
+    public componentDidMount() {
         this.reconcilePanelOpenState();
     }
 
-    componentWillUnmount() {
+    public componentWillUnmount() {
         $(document.body).removeClass('with-panel-left-cover');
     }
 
-    render() {
+    public render() {
         return (
             <Portal isOpened={true}>
                 <span>
-                    <div className={`panel-overlay ${this.props.additionalClassName}`} onClick={this.props.overlayClickHandler}></div>
+                    <div className={`panel-overlay ${this.props.additionalClassName}`} onClick={this.props.overlayClickHandler} role="presentation" />
                     <div className={`panel ${this.panelSideClass} ${this.panelSlideInTypeClass} ${this.props.additionalClassName} ${this.elementId}`}>
                         {this.props.children}
                     </div>
@@ -63,12 +61,14 @@ export class SidePanel extends React.Component<ISidePanelProps, any> {
         );
     }
 
-    componentDidUpdate() {
+    public componentDidUpdate() {
         this.reconcilePanelOpenState();
     }
 
     private reconcilePanelOpenState() {
-        if (!this.element) return;
+        if (!this.element) {
+            return;
+        }
 
         if (this.props.isOpen && !this.isPanelOpen) {
             this.openPanel();
@@ -78,7 +78,7 @@ export class SidePanel extends React.Component<ISidePanelProps, any> {
     }
 
     private get element(): HTMLElement {
-        let elements = document.getElementsByClassName(this.elementId);
+        const elements = document.getElementsByClassName(this.elementId);
 
         if (elements.length) {
             return elements[0] as HTMLElement;
@@ -107,7 +107,9 @@ export class SidePanel extends React.Component<ISidePanelProps, any> {
         $(this.element).css({ display: 'block' });
 
         //Trigger re-layout
-        let dummy = this.element.clientLeft;
+        const dummy = this.element.clientLeft;
+        // tslint:disable-next-line:no-unused-expression
+        dummy;
 
         $(document.body).addClass('with-panel-left-cover');
     }
@@ -115,9 +117,9 @@ export class SidePanel extends React.Component<ISidePanelProps, any> {
     private closePanel() {
         transitionEnd(this.element).then(() => {
             $(this.element).css({ display: '' });
-            $(document.body).removeClass('panel-closing');            
+            $(document.body).removeClass('panel-closing');
         });
-        
+
         $(document.body).removeClass('with-panel-left-cover');
         $(document.body).addClass('panel-closing');
     }

@@ -7,13 +7,13 @@ export interface IIconProps {
 }
 
 const IconInner = (props: IIconProps) => {
-    return <i className={`icon ${props.iconClass}`} onClick={props.onClick} />;
+    return <i className={`icon ${props.iconClass}`} onClick={props.onClick} role="img" />;
 };
 
 export const Icon = (props: IIconProps) => {
     if (props.showAsLink) {
-        return <a className="link icon-only" onClick={props.onClick}><IconInner iconClass={props.iconClass} /></a>;
+        return <a className="link icon-only" onClick={props.onClick} role="button"><IconInner iconClass={props.iconClass} /></a>;
     } else {
         return React.createElement(IconInner, props);
-    }  
+    }
 };

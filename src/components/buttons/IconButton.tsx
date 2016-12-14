@@ -14,6 +14,6 @@ export const IconButton = (props: IIconButtonProps) => {
     return (
         <a className={`button ${props.additionalClassNames || ''}`} onClick={props.onClick}>
             <Icon iconClass={props.iconCls} />
-        </a>         
+        </a>
     );
-}
+};

@@ -3,7 +3,7 @@
 import '../../less/forms.less';
 
 import {ColorsEnum, getColorCls} from '../../utils/Colors';
-import {BlockMarginTypeEnum} from '../../utils/BlockMarginType'
+import {BlockMarginTypeEnum} from '../../utils/BlockMarginType';
 import {ListBlock} from '../list/ListBlock';
 
 export enum ButtonTypeEnum {
@@ -20,7 +20,7 @@ export interface IButtonProps {
     text: string;
     onClick: Function;
     additionalClassNames?: string;
-    type?: ButtonTypeEnum;
+    buttonType?: ButtonTypeEnum;
     size?: ButtonSizeEnum;
     round?: boolean;
     color?: ColorsEnum;
@@ -32,22 +32,29 @@ const getButtonSizeCls = (props: IButtonProps) => {
 };
 
 const getButtonTypeCls = (props: IButtonProps) => {
-    return props.type === ButtonTypeEnum.Filled ? 'button-fill' : '';
+    return props.buttonType === ButtonTypeEnum.Filled ? 'button-fill' : '';
 };
 
 const getButtonRoundnessCls = (props: IButtonProps) => {
     return props.round ? 'button-round' : '';
 };
 
+const buttonClicked = (e: React.MouseEvent, props: IButtonProps) => {
+    e.preventDefault();
+
+    if (props.onClick) {
+        props.onClick();
+    }
+};
+
 const ButtonInner = (props: IButtonProps) => {
     return <a
         className={`button ${getButtonTypeCls(props)} ${getButtonSizeCls(props)} ${getButtonRoundnessCls(props)} ${getColorCls(props.color)} ${props.additionalClassNames || ''}`}
-        onClick={(e: any) => {
-            e.preventDefault();
-            if (props.onClick) props.onClick();
-        }}>
-            {props.text}
-        </a>;
+        onClick={(e) => buttonClicked(e, props)}
+        role="button"
+    >
+        {props.text}
+    </a>;
 };
 
 export const Button = (props: IButtonProps) => {

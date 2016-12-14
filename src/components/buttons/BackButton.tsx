@@ -9,9 +9,9 @@ export interface IBackButtonProps {
 
 export const BackButton = (props: IBackButtonProps) => {
     return (
-        <a className="back link" onClick={props.onClick}>
-            <i className="icon icon-back"></i>
+        <a className="back link" onClick={props.onClick} role="button">
+            <i className="icon icon-back" />
             <span>{props.text || 'Back'}</span>
-        </a>    
+        </a>
     );
-}
+};

@@ -34,8 +34,12 @@
     "gulp-concat": "^2.6.1",
     "gulp-replace": "^0.5.4",
     "gulp-sourcemaps": "^2.2.0",
-    "gulp-typescript": "2.13.6",
+    "gulp-tslint": "^7.0.1",
+    "gulp-typescript": "^3.1.3",
     "merge2": "^1.0.2",
+    "tslint": "^4.0.2",
+    "tslint-microsoft-contrib": "^4.0.0",
+    "tslint-react": "^2.0.0",
     "typescript": "2.0.6"
   },
   "dependencies": {
@@ -44,6 +48,6 @@
     "invariant": "2.2.1",
     "jquery": "3.1.1",
     "react": "^15.4.0",
-    "react-portal": "^3.0.0"    
+    "react-portal": "git+https://github.com/bencompton/react-portal.git#release"
   }
 }

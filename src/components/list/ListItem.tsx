@@ -9,7 +9,7 @@ export interface IListItemProps extends React.Props<any> {
     afterTitleText?: string;
     subTitle?: string;
     text?: string;
-    showAsLink?: boolean;   
+    showAsLink?: boolean;
     onClick?: () => void;
     mediaElement?: React.ReactElement<any>;
     iconClass?: string;
@@ -31,12 +31,12 @@ const ListItemInner = (props: IListItemProps) => {
             <div className="item-inner">
                 {props.children}
             </div>
-        )
+        );
     } else if (props.text || props.subTitle) {
         return (
             <div className="item-inner">
                 {(props.title || props.afterTitleText) ? ListItemTitle(props) : null}
-                {props.subTitle ? <div className="item-subtitle">{props.subTitle}</div>: null}
+                {props.subTitle ? <div className="item-subtitle">{props.subTitle}</div> : null}
                 {props.text ? <div className="item-text">{props.text}</div> : null}
             </div>
         );
@@ -46,7 +46,7 @@ const ListItemInner = (props: IListItemProps) => {
                 {props.title ? <div className="item-title">{props.title}</div> : null}
                 {props.afterTitleText ? <div className="item-after">{props.afterTitleText}</div> : null}
             </div>
-        )
+        );
     }
 };
 
