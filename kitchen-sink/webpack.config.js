@@ -18,7 +18,7 @@ module.exports = {
             { test: /\.(png|svg)$/, loader: 'url-loader?limit=100000' }                                 
         ]
     },
-    devtool: 'source-maps',
+    devtool: 'source-map',
     plugins: [        
         // new webpack.LoaderOptionsPlugin({
         //     minimize: true,

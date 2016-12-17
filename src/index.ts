@@ -23,6 +23,7 @@ import {ListItem} from './components/list/ListItem';
 import {Checkbox} from './components/forms/Checkbox';
 import {GridRow} from './components/grid/GridRow';
 import {GridCol} from './components/grid/GridCol';
+import {ProgressBar} from './components/ProgressBar';
 
 import './less/intro.less';
 import './less/framework7.ios.colors.less';
@@ -40,5 +41,6 @@ export {
     ContentBlock, ContentBlockTitle, BlockMarginTypeEnum,
     GroupedList, ListBlock, ListItem,
     Checkbox,
-    GridRow, GridCol	
+    GridRow, GridCol,
+    ProgressBar	
 }

@@ -1,9 +1,10 @@
 ﻿import * as React from 'react';
 
 import {Framework7} from '../Framework7';
+import {View} from './View';
 import {applyOverscrollFix} from '../utils/OverscrollFix';
 import {AnimationDirectionEnum} from './AnimationWrapper';
-import {IFramework7Route, getPrerouteHandler} from '../utils/Router';
+import {IFramework7Route, Framework7Router} from '../utils/Router';
 
 export enum ThemeTypeEnum {
     iOS,
@@ -15,7 +16,7 @@ export interface IFramework7AppContext {
     rtl?: boolean;
     pageAnimationDirection: AnimationDirectionEnum;
     routes: IFramework7Route[];
-    onF7Init: Function;
+    registerView: (view: View) => void;
     framework7: Framework7;
 }
 
@@ -28,7 +29,9 @@ export interface IFramework7AppProps extends React.Props<any> {
 }
 
 export class Framework7App extends React.Component<IFramework7AppProps, Framework7> {
-    private f7InitEventHandlers: [Function];
+    private router: Framework7Router;
+    private registeredViews: View[];
+    private pageAnimationDirection: AnimationDirectionEnum;       
 
     static childContextTypes = {
         framework7AppContext: React.PropTypes.object
@@ -41,7 +44,7 @@ export class Framework7App extends React.Component<IFramework7AppProps, Framewor
                 rtl: this.props.rtl,
                 pageAnimationDirection: this.props.pageAnimationDirection,
                 framework7: this.state,
-                onF7Init: this.addF7InitEventHandler.bind(this)
+                registerView: this.addRegisteredView.bind(this)
             }
         };
     }
@@ -52,16 +55,7 @@ export class Framework7App extends React.Component<IFramework7AppProps, Framewor
 
     componentDidMount() {
         this.handleOverscrollFix();
-
-        const routeChangeCallback;
-
-        this.setState(new Framework7({
-            preroute: getPrerouteHandler(this.props.routes, routeChangeCallback)
-        }), () => {
-            this.f7InitEventHandlers.forEach((handler: Function) => {
-                handler(this.state, routeChangeCallback);
-            });
-        });
+        this.initFramework7();
     }
 
     private handleOverscrollFix() {
@@ -70,8 +64,20 @@ export class Framework7App extends React.Component<IFramework7AppProps, Framewor
         }
     }
 
-    private addF7InitEventHandler(eventHandler: Function) {
-        this.f7InitEventHandlers = this.f7InitEventHandlers as any || [];
-        this.f7InitEventHandlers.push(eventHandler);
+    private initFramework7() {
+        this.router = new Framework7Router(this.props.routes, this.registeredViews);
+
+        this.setState(new Framework7({
+            preroute: this.router.preroute.bind(this.router)
+        }), () => {
+            this.registeredViews.forEach((view) => {
+                view.initializeFramework7View(this.state);
+            });
+        });
     }
+
+    private addRegisteredView(view: View) {
+        this.registeredViews = this.registeredViews || [];
+        this.registeredViews.push(view);
+    }    
 };

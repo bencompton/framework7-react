@@ -1,4 +1,7 @@
-export interface IFramework7Params {    
+export interface IFramework7Params {
+    // Auto init
+    init?: boolean;
+    preroute?: (view: View, params: any) => boolean;
     root?: string;    
     cache?: boolean;
     cacheIgnore?: string[];
@@ -109,9 +112,6 @@ export interface IFramework7Params {
     materialPreloaderHtml?: string;
     materialRipple?: boolean;
     materialRippleElements?: string;
-    // Auto init
-    init?: boolean;
-    preroute?: Function;
 }
 
 export declare class Framework7 {
