@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {Route, IndexRoute, Router, hashHistory} from 'react-router';
-import {Framework7App, ThemeTypeEnum, Views, View, AnimationDirectionEnum} from 'framework7-react';
+import {Framework7App, ThemeTypeEnum, Views, View, Pages, Page, AnimationDirectionEnum} from 'framework7-react';
 
 import {routeState} from '../utils/RouteState';
 import {IndexPage} from './pages/IndexPage';
@@ -40,10 +40,10 @@ const routes = [{
 export const App = (props: React.Props<any>) => {
     return (
         <Framework7App themeType={ThemeTypeEnum.iOS} pageAnimationDirection={routeState.lastNavigationDirection} routes={routes}>
-            <Views>
+            <Views navbarThrough>
                 <View dynamicNavbar={true} url="/" main={true}>
-                    <div className="pages">
-                        <div className="page">
+                    <Pages>
+                        <Page>
                             <div className="page-content ">
                                 <div className="list-block tablet-inset">
                                     <ul>
@@ -52,8 +52,8 @@ export const App = (props: React.Props<any>) => {
                                     </ul>
                                 </div>
                             </div>
-                        </div>
-                    </div>
+                        </Page>
+                    </Pages>
                 </View>
             </Views>
         </Framework7App>

@@ -1,14 +1,16 @@
 import * as React from 'react';
 
 import {Page} from './Page';
-import {IViewContext} from './View';
+import {IViewContext} from '../view/View';
+
+import '../../less/pages.less';
 
 export interface IPagesProps extends React.Props<any> {
-
+    className?: string;
 }
 
 export interface IPagesState {
-    pages: Page[];
+    pages: any[];
 }
 
 export class Pages extends React.Component<IPagesProps, any> {
@@ -17,7 +19,11 @@ export class Pages extends React.Component<IPagesProps, any> {
     };
 
     private get viewContext() {
-        return (this.context as any).pageContext as IViewContext;
+        return (this.context as any).viewContext as IViewContext;
+    }
+
+    private get pagesFromState() {
+        return (this.state && this.state.pages) || [this.props.children];
     }
 
     constructor(props: IPagesProps, context: any) {
@@ -28,7 +34,7 @@ export class Pages extends React.Component<IPagesProps, any> {
     render() {
         return (
             <div className="pages">
-                {this.state.pages || this.props.children}
+                {this.pagesFromState}
             </div>
         );
     }
@@ -39,7 +45,9 @@ export class Pages extends React.Component<IPagesProps, any> {
 
     public changeRoute(pageComponent: React.ComponentClass<any> | React.StatelessComponent<any>) {
         this.setState({
-            pages: [...this.state.pages, pageComponent]
+            pages: [...this.pagesFromState, React.createElement(pageComponent, {
+                key: new Date().getTime()
+            })]
         })
     }
 }

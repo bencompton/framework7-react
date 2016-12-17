@@ -1,7 +1,7 @@
 ﻿import * as React from 'react';
 
 import {Framework7} from '../Framework7';
-import {View} from './View';
+import {View} from './view/View';
 import {applyOverscrollFix} from '../utils/OverscrollFix';
 import {AnimationDirectionEnum} from './AnimationWrapper';
 import {IFramework7Route, Framework7Router} from '../utils/Router';

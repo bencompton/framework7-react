@@ -1,8 +1,7 @@
 import * as React from 'react';
 import {hashHistory} from 'react-router';
 import {
-    Page, PageBody, PageContent, 
-    Navbar, Left, Center, Right, 
+    Page, PageContent, Navbar, Left, Center, Right, 
     ContentBlock,
     ListBlock, ListItem, 
     Icon, 
@@ -27,7 +26,7 @@ export class IndexPage extends React.Component<any, IIndexPageState> {
 
     render() {
         return (
-            <Page name="index">
+            <Page>
                 <SidePanel 
                     isOpen={this.state.leftPanelOpen} 
                     side={PanelSideEnum.Left} 
@@ -46,11 +45,9 @@ export class IndexPage extends React.Component<any, IIndexPageState> {
                     <Center>Framework7 React</Center>
                     <Right><Icon iconClass="icon-bars" showAsLink={true} onClick={this.toggleLeftPanel.bind(this)} /></Right>
                 </Navbar>
-                <PageBody>
-                    <PageContent>
-                        <PageList />
-                    </PageContent>
-                </PageBody>
+                <PageContent>
+                    <PageList />
+                </PageContent>
             </Page>
         );
     }

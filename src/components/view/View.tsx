@@ -1,11 +1,11 @@
 ﻿import * as React from 'react';
 import * as classNames from 'classnames';
 
-import {Framework7, View as F7View} from '../Framework7';
-import {IFramework7AppContext} from './framework7App';
-import {Pages} from './Pages';
+import {Framework7, View as F7View} from '../../Framework7';
+import {IFramework7AppContext} from '../framework7App';
+import {Pages} from '../page/Pages';
 
-import '../less/views.less';
+import '../../less/views.less';
 
 export interface IViewProps {
     main: boolean;
@@ -40,7 +40,9 @@ export class View extends React.Component<IViewProps, any> {
 
     private getChildContext() {
         return {
-            viewContext: this.props
+            viewContext: {
+                registerPages: this.registerPages.bind(this)
+            }
         }
     }
 
@@ -65,12 +67,25 @@ export class View extends React.Component<IViewProps, any> {
 
         this.f7View = f7.addView(this.element, params);
 
-        // if (this.f7View && this.f7View.pagesContainer.querySelectorAll('.page').length === 0) {
-        //   this.f7View.router.load({ url: this.props.url, reload: true });
-        // }
+        const view: any = this.f7View;
+
+        if (view && view.pagesContainer.querySelectorAll('.page').length === 0) {
+            view.router.load({ url: this.props.url, reload: true });
+        }
     }
 
     public changeRoute(pageComponent: React.ComponentClass<any> | React.StatelessComponent<any>) {
         this.pages.changeRoute(pageComponent);
+        const view = this.f7View as any;
+
+        const newPage = view.pagesContainer.querySelector('.page:last-child');
+        
+        view.router.load({
+            pageElement: newPage
+        });
+    }
+
+    private registerPages(pages: Pages) {
+        this.pages = pages;
     }
 }

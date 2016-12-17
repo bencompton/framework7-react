@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import {View as F7View} from '../Framework7';
-import {View} from '../components/View';
+import {View} from '../components/view/View';
 
 export interface IFramework7Route {
     path: string;

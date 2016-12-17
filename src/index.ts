@@ -3,9 +3,11 @@ import {AnimationDirectionEnum} from './components/AnimationWrapper';
 import {ColorsEnum} from './utils/Colors';
 import {Alert} from './components/Alert';
 import {Badge} from './components/Badge';
-import {View} from './components/View';
-import {Views} from './components/Views';
-import {Page, PageBody, PageContent} from './components/Page';
+import {View} from './components/view/View';
+import {Views} from './components/view/Views';
+import {Page} from './components/page/Page';
+import {PageContent} from './components/page/PageContent';
+import {Pages} from './components/page/Pages';
 import {Navbar} from './components/toolbars-and-navbars/Navbar';
 import {Toolbar, Left, Center, Right} from './components/toolbars-and-navbars/Toolbar';
 import {TabBar} from './components/toolbars-and-navbars/TabBar';
@@ -31,8 +33,8 @@ import './less/framework7.ios.colors.less';
 export {
 	Alert, Badge, ColorsEnum,
     AnimationDirectionEnum,
-    View, Views,
-    Page, PageBody, PageContent,
+    View, Views, 
+    Pages, Page, PageContent,
     Navbar, Toolbar, TabBar, Left, Center, Right,
     Icon, Button, ButtonTypeEnum, ButtonSizeEnum, BackButton, IconButton,
     SidePanel, PanelSideEnum, PanelSlideInType,
