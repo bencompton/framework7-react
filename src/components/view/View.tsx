@@ -76,6 +76,7 @@ export class View extends React.Component<IViewProps, any> {
     constructor(props: any, context: any) {
         super(props, context);
         this.framework7AppContext.registerView(this);
+        this.framework7AppContext.getFramework7(f7 => this.initializeFramework7View(f7));
     }
 
     public componentWillUnmount() {
@@ -105,7 +106,7 @@ export class View extends React.Component<IViewProps, any> {
         );
     }
 
-    public initializeFramework7View(f7: Framework7) {
+    private initializeFramework7View(f7: Framework7) {
         const propsData = this.props;
 
         const params = {

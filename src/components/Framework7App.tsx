@@ -24,7 +24,7 @@ export interface IFramework7AppContext {
     pageAnimationDirection: AnimationDirectionEnum;
     routes: IFramework7Route[];
     registerView: (view: View) => void;
-    getFramework7: () => Framework7;
+    getFramework7: (callback: (f7: Framework7) => void) => void;
 }
 
 export interface IFramework7AppProps extends React.Props<any> {
@@ -38,7 +38,8 @@ export class Framework7App extends React.Component<IFramework7AppProps, Framewor
     private router: Framework7Router;
     private registeredViews: View[];
     private pageAnimationDirection: AnimationDirectionEnum; 
-    private framework7: Framework7;      
+    private framework7: Framework7 = null;
+    private framework7InitCallbacks: ((framework7: Framework7) => void)[] = [];
 
     public static childContextTypes = {
         framework7AppContext: React.PropTypes.object
@@ -49,7 +50,7 @@ export class Framework7App extends React.Component<IFramework7AppProps, Framewor
             framework7AppContext: {
                 themeType: this.props.themeType,
                 pageAnimationDirection: this.props.pageAnimationDirection,
-                getFramework7: () => this.state,
+                getFramework7: this.getFramework7.bind(this),
                 registerView: this.addRegisteredView.bind(this)
             }
         };
@@ -73,17 +74,25 @@ export class Framework7App extends React.Component<IFramework7AppProps, Framewor
     private initFramework7() {
         this.router = new Framework7Router(this.props.routes, this.registeredViews);
 
-        this.setState(new Framework7({
+        this.framework7 = new Framework7({
             preroute: this.router.preroute.bind(this.router)
-        }), () => {
-            this.registeredViews.forEach((view) => {
-                view.initializeFramework7View(this.state);
-            });
+        });
+
+        this.framework7InitCallbacks.forEach(callback => {
+            callback(this.framework7);
         });
     }
 
     private addRegisteredView(view: View) {
         this.registeredViews = this.registeredViews || [];
         this.registeredViews.push(view);
-    }    
+    }
+
+    private getFramework7(callback: (framework7: Framework7) => void) {
+        if (this.framework7) {
+            callback(this.framework7);
+        } else {
+            this.framework7InitCallbacks.push(callback);
+        }
+    } 
 };

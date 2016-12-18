@@ -43,20 +43,24 @@ export class Alert extends React.Component<IAlertProps, IAlertModalState> {
         } catch (err) {}
     }
 
-    private get framework7() {
-        return ((this.context as any).framework7AppContext as IFramework7AppContext).getFramework7();
+    private get framework7AppContext() {
+        return (this.context as any).framework7AppContext as IFramework7AppContext;
     }
 
     private showAlert() {
-        this.state.modal = this.framework7.modal({
-            title: this.props.title,
-            text: this.props.text,           
-            buttons: [{ text: this.framework7.params.modalButtonOk, bold: true, onClick: this.props.onClick }]
+        this.framework7AppContext.getFramework7(f7 => {
+            this.state.modal = f7.modal({
+                title: this.props.title,
+                text: this.props.text,           
+                buttons: [{ text: f7.params.modalButtonOk, bold: true, onClick: this.props.onClick }]
+            });
         });
     }
 
     private hideAlert() {
-        this.framework7.closeModal(this.state.modal);
-        this.state.modal = null;
+        this.framework7AppContext.getFramework7(f7 => {
+            f7.closeModal(this.state.modal);
+            this.state.modal = null;
+        });
     }
 }

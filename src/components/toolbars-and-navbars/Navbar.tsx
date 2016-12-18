@@ -26,11 +26,15 @@ export class Navbar extends React.Component<INavbarProps, any> {
     }    
 
     public componentDidMount() {
-        //this.framework7AppContext.getFramework7().sizeNavbars();
+        this.framework7AppContext.getFramework7(f7 => {
+            f7.sizeNavbars();
+        });
     }
 
     public componentWillUpdate() {
-        //this.framework7AppContext.getFramework7().sizeNavbars();
+        this.framework7AppContext.getFramework7(f7 => {
+            f7.sizeNavbars();
+        });
     }
 
     public render() {

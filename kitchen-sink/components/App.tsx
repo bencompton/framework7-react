@@ -42,7 +42,7 @@ export const App = (props: React.Props<any>) => {
         <Framework7App themeType={ThemeTypeEnum.iOS} pageAnimationDirection={routeState.lastNavigationDirection} routes={routes}>
             <Views navbarThrough>
                 <View dynamicNavbar={true} url="/" main={true}>
-                    <Navbar title="Framework7 React" />
+                    <Navbar title="Framework7 React" sliding />
                     <Pages>
                         <Page>
                             <PageContent>

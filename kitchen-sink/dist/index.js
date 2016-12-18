@@ -5892,14 +5892,15 @@ var Framework7App = (function (_super) {
     __extends(Framework7App, _super);
     function Framework7App() {
         _super.apply(this, arguments);
+        this.framework7 = null;
+        this.framework7InitCallbacks = [];
     }
     Framework7App.prototype.getChildContext = function () {
-        var _this = this;
         return {
             framework7AppContext: {
                 themeType: this.props.themeType,
                 pageAnimationDirection: this.props.pageAnimationDirection,
-                getFramework7: function () { return _this.state; },
+                getFramework7: this.getFramework7.bind(this),
                 registerView: this.addRegisteredView.bind(this)
             }
         };
@@ -5919,17 +5920,24 @@ var Framework7App = (function (_super) {
     Framework7App.prototype.initFramework7 = function () {
         var _this = this;
         this.router = new Router_1.Framework7Router(this.props.routes, this.registeredViews);
-        this.setState(new Framework7_1.Framework7({
+        this.framework7 = new Framework7_1.Framework7({
             preroute: this.router.preroute.bind(this.router)
-        }), function () {
-            _this.registeredViews.forEach(function (view) {
-                view.initializeFramework7View(_this.state);
-            });
+        });
+        this.framework7InitCallbacks.forEach(function (callback) {
+            callback(_this.framework7);
         });
     };
     Framework7App.prototype.addRegisteredView = function (view) {
         this.registeredViews = this.registeredViews || [];
         this.registeredViews.push(view);
+    };
+    Framework7App.prototype.getFramework7 = function (callback) {
+        if (this.framework7) {
+            callback(this.framework7);
+        }
+        else {
+            this.framework7InitCallbacks.push(callback);
+        }
     };
     Framework7App.childContextTypes = {
         framework7AppContext: React.PropTypes.object
@@ -19080,7 +19088,7 @@ var App = function (props) {
     return (__WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["Framework7App"], {themeType: __WEBPACK_IMPORTED_MODULE_1_framework7_react__["ThemeTypeEnum"].iOS, pageAnimationDirection: __WEBPACK_IMPORTED_MODULE_2__utils_RouteState__["a" /* routeState */].lastNavigationDirection, routes: routes}, 
         __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["Views"], {navbarThrough: true}, 
             __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["View"], {dynamicNavbar: true, url: "/", main: true}, 
-                __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["Navbar"], {title: "Framework7 React"}), 
+                __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["Navbar"], {title: "Framework7 React", sliding: true}), 
                 __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["Pages"], null, 
                     __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["Page"], null, 
                         __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["PageContent"], null, 
@@ -37668,23 +37676,29 @@ var Alert = (function (_super) {
         }
         catch (err) { }
     };
-    Object.defineProperty(Alert.prototype, "framework7", {
+    Object.defineProperty(Alert.prototype, "framework7AppContext", {
         get: function () {
-            return this.context.framework7AppContext.getFramework7();
+            return this.context.framework7AppContext;
         },
         enumerable: true,
         configurable: true
     });
     Alert.prototype.showAlert = function () {
-        this.state.modal = this.framework7.modal({
-            title: this.props.title,
-            text: this.props.text,
-            buttons: [{ text: this.framework7.params.modalButtonOk, bold: true, onClick: this.props.onClick }]
+        var _this = this;
+        this.framework7AppContext.getFramework7(function (f7) {
+            _this.state.modal = f7.modal({
+                title: _this.props.title,
+                text: _this.props.text,
+                buttons: [{ text: f7.params.modalButtonOk, bold: true, onClick: _this.props.onClick }]
+            });
         });
     };
     Alert.prototype.hideAlert = function () {
-        this.framework7.closeModal(this.state.modal);
-        this.state.modal = null;
+        var _this = this;
+        this.framework7AppContext.getFramework7(function (f7) {
+            f7.closeModal(_this.state.modal);
+            _this.state.modal = null;
+        });
     };
     Alert.contextTypes = {
         framework7AppContext: React.PropTypes.object
@@ -38305,14 +38319,15 @@ var Framework7App = (function (_super) {
     __extends(Framework7App, _super);
     function Framework7App() {
         _super.apply(this, arguments);
+        this.framework7 = null;
+        this.framework7InitCallbacks = [];
     }
     Framework7App.prototype.getChildContext = function () {
-        var _this = this;
         return {
             framework7AppContext: {
                 themeType: this.props.themeType,
                 pageAnimationDirection: this.props.pageAnimationDirection,
-                getFramework7: function () { return _this.state; },
+                getFramework7: this.getFramework7.bind(this),
                 registerView: this.addRegisteredView.bind(this)
             }
         };
@@ -38332,17 +38347,24 @@ var Framework7App = (function (_super) {
     Framework7App.prototype.initFramework7 = function () {
         var _this = this;
         this.router = new Router_1.Framework7Router(this.props.routes, this.registeredViews);
-        this.setState(new Framework7_1.Framework7({
+        this.framework7 = new Framework7_1.Framework7({
             preroute: this.router.preroute.bind(this.router)
-        }), function () {
-            _this.registeredViews.forEach(function (view) {
-                view.initializeFramework7View(_this.state);
-            });
+        });
+        this.framework7InitCallbacks.forEach(function (callback) {
+            callback(_this.framework7);
         });
     };
     Framework7App.prototype.addRegisteredView = function (view) {
         this.registeredViews = this.registeredViews || [];
         this.registeredViews.push(view);
+    };
+    Framework7App.prototype.getFramework7 = function (callback) {
+        if (this.framework7) {
+            callback(this.framework7);
+        }
+        else {
+            this.framework7InitCallbacks.push(callback);
+        }
     };
     Framework7App.childContextTypes = {
         framework7AppContext: React.PropTypes.object
@@ -38639,10 +38661,14 @@ var Navbar = (function (_super) {
         configurable: true
     });
     Navbar.prototype.componentDidMount = function () {
-        //this.framework7AppContext.getFramework7().sizeNavbars();
+        this.framework7AppContext.getFramework7(function (f7) {
+            f7.sizeNavbars();
+        });
     };
     Navbar.prototype.componentWillUpdate = function () {
-        //this.framework7AppContext.getFramework7().sizeNavbars();
+        this.framework7AppContext.getFramework7(function (f7) {
+            f7.sizeNavbars();
+        });
     };
     Navbar.prototype.render = function () {
         return (React.createElement("div", {className: "navbar"}, React.createElement("div", {className: "navbar-inner"}, this.props.backLink ? React.createElement(NavLeft_1.NavLeft, {backLink: this.props.backLink, sliding: this.props.sliding}) : null, this.props.title ? React.createElement(NavCenter_1.NavCenter, {title: this.props.title, sliding: this.props.sliding}) : null, this.props.children)));
@@ -38723,8 +38749,10 @@ __webpack_require__(87);
 var View = (function (_super) {
     __extends(View, _super);
     function View(props, context) {
+        var _this = this;
         _super.call(this, props, context);
         this.framework7AppContext.registerView(this);
+        this.framework7AppContext.getFramework7(function (f7) { return _this.initializeFramework7View(f7); });
     }
     Object.defineProperty(View.prototype, "framework7View", {
         get: function () {
