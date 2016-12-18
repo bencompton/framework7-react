@@ -130,11 +130,15 @@ export declare class Framework7 {
 
     closeModal(modalElement: HTMLElement | string): void;
 
+    sizeNavbars(): void;
+
     params: IFramework7Params;
 }
 
 export declare class View {
-
+    public destroy: () => void;
+    public pagesContainer: HTMLElement;
+    public router: any;
 }
 
 export interface IButton {

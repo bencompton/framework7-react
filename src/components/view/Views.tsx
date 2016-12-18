@@ -1,7 +1,7 @@
 ﻿import * as React from 'react';
 import * as classNames from 'classnames';
 
-import {IFramework7AppContext, ThemeTypeEnum, getThemeClass, getLayoutClass} from '../Framework7App';
+import {IFramework7AppContext, ThemeTypeEnum, getThemeClass} from '../Framework7App';
 
 import '../../less/views.less';
 
@@ -13,13 +13,13 @@ export interface IViewsProps extends React.Props<any> {
     tabbarFixed?: boolean;
     tabbarThrough?: boolean;
     tabbarLabelsFixed?: boolean;
-    tabbarLabelsThrough: boolean;
-    tabs: boolean;
+    tabbarLabelsThrough?: boolean;
+    tabs?: boolean;
     className?: string;
 }
 
 export const Views = (props: IViewsProps, context: any) => {
-    const framework7AppContext = context.framework7App as IFramework7AppContext;
+    const framework7AppContext = context.framework7AppContext as IFramework7AppContext;
 
     const classes = classNames('views', {
         'tabs': props.tabs,
@@ -33,7 +33,6 @@ export const Views = (props: IViewsProps, context: any) => {
         'tabbar-labels-through': props.tabbarLabelsThrough
     }, 
         getThemeClass(framework7AppContext.themeType),
-        getLayoutClass(framework7AppContext.layoutType),
         props.className
     );
             
@@ -45,5 +44,5 @@ export const Views = (props: IViewsProps, context: any) => {
 };
 
 (Views as any).contextTypes = {
-    framework7App: React.PropTypes.object
+    framework7AppContext: React.PropTypes.object
 };

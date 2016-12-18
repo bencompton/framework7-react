@@ -11,19 +11,25 @@ export enum ThemeTypeEnum {
     Material
 }
 
+export const getThemeClass = (themeType: ThemeTypeEnum) => {
+    if (themeType) {
+        return '';
+    } else {
+        return `theme-${themeType.toString().toLowerCase()}`;
+    }
+};
+
 export interface IFramework7AppContext {
     themeType: ThemeTypeEnum;
-    rtl?: boolean;
     pageAnimationDirection: AnimationDirectionEnum;
     routes: IFramework7Route[];
     registerView: (view: View) => void;
-    framework7: Framework7;
+    getFramework7: () => Framework7;
 }
 
 export interface IFramework7AppProps extends React.Props<any> {
     applyOverscrollFix?: boolean;
     themeType: ThemeTypeEnum;
-    rtl?: boolean;
     pageAnimationDirection: AnimationDirectionEnum;
     routes: IFramework7Route[];    
 }
@@ -31,29 +37,29 @@ export interface IFramework7AppProps extends React.Props<any> {
 export class Framework7App extends React.Component<IFramework7AppProps, Framework7> {
     private router: Framework7Router;
     private registeredViews: View[];
-    private pageAnimationDirection: AnimationDirectionEnum;       
+    private pageAnimationDirection: AnimationDirectionEnum; 
+    private framework7: Framework7;      
 
-    static childContextTypes = {
+    public static childContextTypes = {
         framework7AppContext: React.PropTypes.object
     }
 
-    getChildContext() {
+    public getChildContext() {
         return {
             framework7AppContext: {
                 themeType: this.props.themeType,
-                rtl: this.props.rtl,
                 pageAnimationDirection: this.props.pageAnimationDirection,
-                framework7: this.state,
+                getFramework7: () => this.state,
                 registerView: this.addRegisteredView.bind(this)
             }
         };
     }
 
-    render() {
+    public render() {
         return <span>{this.props.children}</span>;
     }
 
-    componentDidMount() {
+    public componentDidMount() {
         this.handleOverscrollFix();
         this.initFramework7();
     }

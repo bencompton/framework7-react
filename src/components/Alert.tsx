@@ -44,7 +44,7 @@ export class Alert extends React.Component<IAlertProps, IAlertModalState> {
     }
 
     private get framework7() {
-        return ((this.context as any).framework7AppContext as IFramework7AppContext).framework7;
+        return ((this.context as any).framework7AppContext as IFramework7AppContext).getFramework7();
     }
 
     private showAlert() {
