@@ -9,7 +9,10 @@ import {Page} from './components/page/Page';
 import {PageContent} from './components/page/PageContent';
 import {Pages} from './components/page/Pages';
 import {Navbar} from './components/toolbars-and-navbars/Navbar';
-import {Toolbar, Left, Center, Right} from './components/toolbars-and-navbars/Toolbar';
+import {NavLeft} from './components/toolbars-and-navbars/NavLeft';
+import {NavCenter} from './components/toolbars-and-navbars/NavCenter';
+import {NavRight} from './components/toolbars-and-navbars/NavRight';
+import {Toolbar} from './components/toolbars-and-navbars/Toolbar';
 import {TabBar} from './components/toolbars-and-navbars/TabBar';
 import {Icon} from './components/Icon';
 import {Button, ButtonTypeEnum, ButtonSizeEnum} from './components/buttons/Button';
@@ -26,6 +29,7 @@ import {Checkbox} from './components/forms/Checkbox';
 import {GridRow} from './components/grid/GridRow';
 import {GridCol} from './components/grid/GridCol';
 import {ProgressBar} from './components/ProgressBar';
+import {Statusbar} from './components/Statusbar';
 
 import './less/intro.less';
 import './less/framework7.ios.colors.less';
@@ -35,7 +39,7 @@ export {
     AnimationDirectionEnum,
     View, Views, 
     Pages, Page, PageContent,
-    Navbar, Toolbar, TabBar, Left, Center, Right,
+    Navbar, NavLeft, NavCenter, NavRight, Toolbar, TabBar,
     Icon, Button, ButtonTypeEnum, ButtonSizeEnum, BackButton, IconButton,
     SidePanel, PanelSideEnum, PanelSlideInType,
     Framework7App, ThemeTypeEnum,
@@ -44,5 +48,5 @@ export {
     GroupedList, ListBlock, ListItem,
     Checkbox,
     GridRow, GridCol,
-    ProgressBar	
+    ProgressBar, Statusbar	
 }

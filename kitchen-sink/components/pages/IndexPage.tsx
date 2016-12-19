@@ -4,12 +4,8 @@ import {
     Page, PageContent, Navbar, Left, Center, Right, 
     ContentBlock,
     ListBlock, ListItem, 
-    Icon, 
-    SidePanel, PanelSlideInType, PanelSideEnum
+    Icon
 } from 'framework7-react';
-
-import {routeState} from '../../utils/RouteState';
-import {pages} from '../App';
 
 export interface IIndexPageState {
     leftPanelOpen: boolean;

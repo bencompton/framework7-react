@@ -1,8 +1,14 @@
 import * as React from 'react';
 import {Route, IndexRoute, Router, hashHistory} from 'react-router';
-import {Framework7App, ThemeTypeEnum, Views, View, Pages, Page, PageContent, Navbar} from 'framework7-react';
+import {
+    Framework7App,
+    ThemeTypeEnum,
+    Views, View, 
+    Pages, Page, PageContent,
+    Navbar, NavLeft, NavCenter, NavRight, Toolbar
+    Panel, Statusbar, Link, List, ListItem
+} from 'framework7-react';
 
-import {routeState} from '../utils/RouteState';
 import {IndexPage} from './pages/IndexPage';
 import {NavbarAndToolbarPage} from './pages/NavbarAndToolbarPage';
 import {ListViewPage} from './pages/ListViewPage';
@@ -14,24 +20,6 @@ export interface IKitchenSinkPage {
     component: React.ComponentClass<any> | React.StatelessComponent<any>;
 }
 
-export const pages: IKitchenSinkPage[] = [{
-    path: '/',
-    pageTitle: '',
-    component: IndexPage
-}, {
-    path: 'list-view',
-    pageTitle: 'List View',
-    component: ListViewPage
-}, {
-    path: 'navbars-and-toolbars',
-    pageTitle: 'Navbars and Toolbars',
-    component: NavbarAndToolbarPage
-}, {
-    path: 'progress-bar',
-    pageTitle: 'Progress Bar',
-    component: ProgressBarPage
-}];
-
 const routes = [{
     path: '/list-view',
     component: ListViewPage
@@ -39,24 +27,78 @@ const routes = [{
 
 export const App = (props: React.Props<any>) => {
     return (
-        <Framework7App themeType={ThemeTypeEnum.iOS} pageAnimationDirection={routeState.lastNavigationDirection} routes={routes}>
-            <Views navbarThrough>
-                <View dynamicNavbar={true} url="/" main={true}>
-                    <Navbar title="Framework7 React" sliding />
+        <Framework7App themeType={ThemeTypeEnum.iOS} routes={routes}>
+            <Statusbar></Statusbar>
+            <Panel left reveal layout="dark" theme="pink">
+                <View navbarFixed>
                     <Pages>
                         <Page>
-                            <PageContent>
-                                <div className="list-block tablet-inset">
-                                    <ul>
-                                        <li><a href="/list-view/" className="item-link item-content"><div className="item-media"><i className="icon icon-f7"></i></div><div className="item-inner"><div className="item-title">List View</div></div></a></li>
-                                        <li><a href="/navbars-and-toolbars/" className="item-link item-content"><div className="item-media"><i className="icon icon-f7"></i></div><div className="item-inner"><div className="item-title">Navbars and Toolbars</div></div></a></li>
-                                    </ul>
-                                </div>
-                            </PageContent>
+                            <Navbar title="Left Panel"></Navbar>
+                            <List>
+                                <ListItem link="/cards/" title="Cards" />
+                                <ListItem link="/lists/" title="Lists" />
+                            </List>
                         </Page>
                     </Pages>
                 </View>
-            </Views>
+            </Panel>
+            <Panel right cover>
+                <p>Panel right content</p>
+            </Panel>
+            <Views navbar-through>
+                <View main url="/" dynamicNavbar>
+                    <Navbar>
+                        <NavLeft>
+                            <Link icon="icon-bars" open-panel="left"></Link>
+                        </NavLeft>
+                        <NavCenter sliding>Hello World</NavCenter>
+                        <NavRight>
+                            <Link icon="icon-bars" open-panel="right"></Link>
+                        </NavRight>
+                    </Navbar>
+                    <Pages>
+                        <Page toolbar-fixed>
+                            <Toolbar>
+                                <Link>Left</Link>
+                                <Link>Right</Link>
+                            </Toolbar>
+                            <List>
+                                <ListItem title="Content Block" link="/content-block/" />
+                                <ListItem title="Cards" link="/cards/" />
+                                <ListItem title="Lists" link="/lists/" />
+                                <ListItem title="Contacts" link="/contacts/" />
+                                <ListItem title="Sortable" link="/sortable/" />
+                                <ListItem title="Swipeout" link="/swipeout/" />
+                                <ListItem title="Accordion" link="/accordion/" />
+                                <ListItem title="Forms" link="/forms/" />
+                                <ListItem title="Smart Select" link="/smart-select/" />
+                                <ListItem title="Chips" link="/chips/" />
+                                <ListItem title="Grid" link="/grid/" />
+                                <ListItem title="Preloader" link="/preloader/" />
+                                <ListItem title="Progress Bar" link="/progressbar/" />
+                                <ListItem title="Pull To Refresh" link="/pull-to-refresh/" />
+                                <ListItem title="Infinite Scroll" link="/infinite/" />ß
+                                <ListItem title="Swiper" link="/swiper/" />
+                                <ListItem title="Messages" link="/messages/" />
+                                <ListItem title="Searchbar" link="/searchbar/" />
+                                <ListItem title="Tabs" link="/tabs/" />
+                                <ListItem title="Tabs Swipeable" link="/tabs-swipeable/" />
+                                <ListItem title="Navbars & Toolbars" link="/bars/" />
+                                <ListItem title="FAB" link="/fab/" />
+                                <ListItem title="FAB Speed Dial" link="/fab-dial/" />
+                                <ListItem title="Login Screen" link="/login-screen/" />
+                                <ListItem title="Virtual List" link="/virtual-list/" />
+                                <ListItem title="Photo Browser" link="/photo-browser/" />
+                                <ListItem title="Modals" link="/modals/" />
+                            </List>
+                            <List>
+                                <ListItem title="Dynamic Route" link="/user/45/posts/28/?sort=first#opened" />
+                                <ListItem title="Data Binding" link="/data-binding/" />
+                            </List>
+                        </Page>
+                    </Pages>
+                </View>
+            </Views>       
         </Framework7App>
     );
 }

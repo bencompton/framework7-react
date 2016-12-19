@@ -3,7 +3,6 @@
 import {Framework7} from '../Framework7';
 import {View} from './view/View';
 import {applyOverscrollFix} from '../utils/OverscrollFix';
-import {AnimationDirectionEnum} from './AnimationWrapper';
 import {IFramework7Route, Framework7Router} from '../utils/Router';
 
 export enum ThemeTypeEnum {
@@ -21,7 +20,6 @@ export const getThemeClass = (themeType: ThemeTypeEnum) => {
 
 export interface IFramework7AppContext {
     themeType: ThemeTypeEnum;
-    pageAnimationDirection: AnimationDirectionEnum;
     routes: IFramework7Route[];
     registerView: (view: View) => void;
     getFramework7: (callback: (f7: Framework7) => void) => void;
@@ -30,14 +28,12 @@ export interface IFramework7AppContext {
 export interface IFramework7AppProps extends React.Props<any> {
     applyOverscrollFix?: boolean;
     themeType: ThemeTypeEnum;
-    pageAnimationDirection: AnimationDirectionEnum;
     routes: IFramework7Route[];    
 }
 
 export class Framework7App extends React.Component<IFramework7AppProps, Framework7> {
     private router: Framework7Router;
     private registeredViews: View[];
-    private pageAnimationDirection: AnimationDirectionEnum; 
     private framework7: Framework7 = null;
     private framework7InitCallbacks: ((framework7: Framework7) => void)[] = [];
 
@@ -49,7 +45,6 @@ export class Framework7App extends React.Component<IFramework7AppProps, Framewor
         return {
             framework7AppContext: {
                 themeType: this.props.themeType,
-                pageAnimationDirection: this.props.pageAnimationDirection,
                 getFramework7: this.getFramework7.bind(this),
                 registerView: this.addRegisteredView.bind(this)
             }

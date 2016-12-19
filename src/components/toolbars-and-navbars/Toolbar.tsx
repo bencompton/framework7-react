@@ -1,25 +1,43 @@
 ﻿import * as React from 'react';
+import * as classNames from 'classnames';
+
+import {IFramework7AppContext, getThemeClass} from '../Framework7App';
 
 import '../../less/toolbars.less';
 
 export interface IToolbarProps extends React.Props<any> {
     className?: string;
+    bottom?: boolean;
+    tabbar?: boolean;
+    labels?: boolean;
+    scrollable?: boolean;
+    beforeInner?: React.ReactElement<any>;
+    afterInner?: React.ReactElement<any>;
 }
 
-export const Toolbar = (props: IToolbarProps) => {
+export const Toolbar = (props: IToolbarProps, context: any) => {
+    const framework7AppContext = context.framework7AppContext as IFramework7AppContext;
+
+    const classes = classNames('toolbar', {
+          'toolbar-bottom': this.bottom,
+          'tabbar': this.tabbar,
+          'tabbar-labels': this.labels,
+          'tabbar-scrollabel': this.scrollable
+    }, 
+        getThemeClass(framework7AppContext.themeType)
+    );
+
     return (
-        <div className={`toolbar ${props.className || ''}`}>
+        <div class={classes}>
+            {props.beforeInner ? props.beforeInner : null}
             <div className="toolbar-inner">
                 {props.children}
             </div>
+            {props.afterInner ? props.afterInner : null}
         </div>
     );
 };
 
-export interface IToolbarChildProps extends React.Props<any> {
-    className?: string;
-}
-
-export const Left = (props: IToolbarChildProps) => <div className={`left sliding ${props.className || ''}`}>{props.children} </div>;
-export const Center = (props: IToolbarChildProps) => <div className={`center sliding ${props.className || ''}`}>{props.children} </div>;
-export const Right = (props: IToolbarChildProps) => <div className={`right ${props.className || ''}`}>{props.children} </div>;
+(Toolbar as any).contextTypes = {
+    framework7AppContext: React.PropTypes.object
+};
