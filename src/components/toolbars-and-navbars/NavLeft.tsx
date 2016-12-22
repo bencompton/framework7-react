@@ -4,8 +4,8 @@ import {IFramework7AppContext, ThemeTypeEnum} from '../Framework7App';
 //import {Link} from '../Link';
 
 export interface INavLeftProps extends React.Props<any> {
-    backLink: boolean | string;
-    sliding: boolean;
+    backLink?: boolean | string;
+    sliding?: boolean;
 }
 
 export const NavLeft = (props: INavLeftProps, context: any) => {

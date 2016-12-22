@@ -19,7 +19,11 @@ export const getThemeClass = (themeType: ThemeTypeEnum) => {
 };
 
 export interface IFramework7AppContext {
-    themeType: ThemeTypeEnum;
+    theme: {
+        material: boolean;
+        ios: boolean;
+    },
+    themeClass: string;
     routes: IFramework7Route[];
     registerView: (view: View) => void;
     getFramework7: (callback: (f7: Framework7) => void) => void;
@@ -46,7 +50,12 @@ export class Framework7App extends React.Component<IFramework7AppProps, Framewor
             framework7AppContext: {
                 themeType: this.props.themeType,
                 getFramework7: this.getFramework7.bind(this),
-                registerView: this.addRegisteredView.bind(this)
+                registerView: this.addRegisteredView.bind(this),
+                theme: {
+                    ios: this.props.themeType === ThemeTypeEnum.iOS,
+                    material: this.props.themeType === ThemeTypeEnum.Material
+                },
+                themeClass: getThemeClass(this.props.themeType)
             }
         };
     }

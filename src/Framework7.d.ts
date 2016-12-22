@@ -132,6 +132,10 @@ export declare class Framework7 {
 
     sizeNavbars(): void;
 
+    openPanel(side: string): void;
+
+    closePanel(side: string): void;
+
     params: IFramework7Params;
 }
 
@@ -146,4 +150,8 @@ export interface IButton {
     bold?: boolean;
     close?: boolean;
     onClick?: () => void;
+}
+
+export declare class VirtualList {
+    destroy: () => void;
 }

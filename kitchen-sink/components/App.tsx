@@ -77,7 +77,7 @@ export const App = (props: React.Props<any>) => {
                                 <ListItem title="Preloader" link="/preloader/" />
                                 <ListItem title="Progress Bar" link="/progressbar/" />
                                 <ListItem title="Pull To Refresh" link="/pull-to-refresh/" />
-                                <ListItem title="Infinite Scroll" link="/infinite/" />ß
+                                <ListItem title="Infinite Scroll" link="/infinite/" />
                                 <ListItem title="Swiper" link="/swiper/" />
                                 <ListItem title="Messages" link="/messages/" />
                                 <ListItem title="Searchbar" link="/searchbar/" />
