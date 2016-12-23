@@ -1,5 +1,4 @@
 ﻿import * as React from 'react';
-import * as $ from 'jquery';
 
 import {ThemeTypeEnum, IFramework7AppContext} from '../Framework7App';
 import {NavLeft} from './NavLeft';

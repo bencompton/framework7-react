@@ -5,36 +5,38 @@ import {ColorsEnum} from '../../utils/Colors';
 import {IFramework7AppContext} from '../Framework7App';
 import {Badge} from '../Badge';
 
-export interface IListItemContentProps {
-    title: string | number;
-    text: string | number;
-    media: string;
-    subtitle: string | number;
-    after: string | number;
-    badge: string | number;
-    badgeColor: ColorsEnum;
-    mediaList: boolean;
+import '../../less/lists.less';
 
-    checkbox: boolean;
-    checked: boolean;
-    radio: boolean;
-    name: string;
-    value: string | number;
-    readonly: boolean;
-    required: boolean;
-    disabled: boolean;
+export interface IListItemContentProps extends React.Props<any> {
+    title?: string | number;
+    text?: string | number;
+    media?: string;
+    subtitle?: string | number;
+    after?: string | number;
+    badge?: string | number;
+    badgeColor?: ColorsEnum;
+    mediaList?: boolean;
 
-    onChange: () => void;
-    onClick: () => void;
+    checkbox?: boolean;
+    checked?: boolean;
+    radio?: boolean;
+    name?: string;
+    value?: string | number;
+    readonly?: boolean;
+    required?: boolean;
+    disabled?: boolean;
 
-    contentStartSlot: React.ReactElement<any>;
-    contentSlot: React.ReactElement<any>;
-    mediaStartSlot: React.ReactElement<any>;
-    mediaSlot: React.ReactElement<any>;
-    innerStartSlot: React.ReactElement<any>;
-    innerSlot: React.ReactElement<any>;
-    afterStartSlot: React.ReactElement<any>;
-    afterSlot: React.ReactElement<any>;
+    onChange?: () => void;
+    onClick?: () => void;
+
+    contentStartSlot?: React.ReactElement<any>;
+    contentSlot?: React.ReactElement<any>;
+    mediaStartSlot?: React.ReactElement<any>;
+    mediaSlot?: React.ReactElement<any>;
+    innerStartSlot?: React.ReactElement<any>;
+    innerSlot?: React.ReactElement<any>;
+    afterStartSlot?: React.ReactElement<any>;
+    afterSlot?: React.ReactElement<any>;
 }
 
 export class ListItemContent extends React.Component<IListItemContentProps, any> {

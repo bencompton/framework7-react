@@ -1,7 +1,7 @@
 ﻿import * as React from 'react';
 import * as classNames from 'classnames';
 
-import {IFramework7AppContext, getThemeClass} from '../Framework7App';
+import {IFramework7AppContext} from '../Framework7App';
 
 import '../../less/toolbars.less';
 
@@ -24,11 +24,11 @@ export const Toolbar = (props: IToolbarProps, context: any) => {
           'tabbar-labels': this.labels,
           'tabbar-scrollabel': this.scrollable
     }, 
-        getThemeClass(framework7AppContext.themeType)
+        framework7AppContext.themeClass
     );
 
     return (
-        <div class={classes}>
+        <div className={classes}>
             {props.beforeInner ? props.beforeInner : null}
             <div className="toolbar-inner">
                 {props.children}

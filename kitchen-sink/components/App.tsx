@@ -5,14 +5,9 @@ import {
     ThemeTypeEnum,
     Views, View, 
     Pages, Page, PageContent,
-    Navbar, NavLeft, NavCenter, NavRight, Toolbar
-    Panel, Statusbar, Link, List, ListItem
+    Navbar, NavLeft, NavCenter, NavRight, Toolbar,
+    Panel, Statusbar, Link, List, ListItem, ColorsEnum, LayoutEnum
 } from 'framework7-react';
-
-import {IndexPage} from './pages/IndexPage';
-import {NavbarAndToolbarPage} from './pages/NavbarAndToolbarPage';
-import {ListViewPage} from './pages/ListViewPage';
-import {ProgressBarPage} from './pages/ProgressBarPage';
 
 export interface IKitchenSinkPage {
     path: string;
@@ -22,14 +17,14 @@ export interface IKitchenSinkPage {
 
 const routes = [{
     path: '/list-view',
-    component: ListViewPage
+    component: null
 }];
 
 export const App = (props: React.Props<any>) => {
     return (
         <Framework7App themeType={ThemeTypeEnum.iOS} routes={routes}>
             <Statusbar></Statusbar>
-            <Panel left reveal layout="dark" theme="pink">
+            <Panel left reveal layout={LayoutEnum.Dark} theme={ColorsEnum.Pink}>
                 <View navbarFixed>
                     <Pages>
                         <Page>
@@ -45,7 +40,7 @@ export const App = (props: React.Props<any>) => {
             <Panel right cover>
                 <p>Panel right content</p>
             </Panel>
-            <Views navbar-through>
+            <Views navbarThrough>
                 <View main url="/" dynamicNavbar>
                     <Navbar>
                         <NavLeft>
@@ -101,4 +96,4 @@ export const App = (props: React.Props<any>) => {
             </Views>       
         </Framework7App>
     );
-}
+};

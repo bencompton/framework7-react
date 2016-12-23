@@ -79,14 +79,15 @@ export interface ILinkBaseProps {
     back?: boolean;
 
     onClick?: () => void;
+
+    className?: string;
 }
 
 export class LinkBase extends React.Component<ILinkBaseProps, any> {
-    constructor(props: ILinkBaseProps, context: any) {
-        super(props, context);
-        props.href = '#';
-    }
-
+    public static defaultProps: ILinkBaseProps = {
+        href: '#'
+    };
+  
     public static contextTypes = {
         framework7AppContext: React.PropTypes.object
     };
@@ -139,6 +140,8 @@ export class LinkBase extends React.Component<ILinkBaseProps, any> {
 
         // Tab
         if (props.tabLink) classesObject['tab-link'] = true;
+
+        if (props.className) classesObject[props.className] = true;
 
         return classesObject;
     }

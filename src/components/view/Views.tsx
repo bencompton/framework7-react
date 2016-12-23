@@ -23,7 +23,7 @@ export const Views = (props: IViewsProps, context: any) => {
 
     const classes = classNames('views', {
         'tabs': props.tabs,
-        'navbar-fixed': props.navbarFixed || props.navbarThrough && framework7AppContext.themeType === ThemeTypeEnum.Material,
+        'navbar-fixed': props.navbarFixed || props.navbarThrough && framework7AppContext.theme.material,
         'navbar-through': props.navbarThrough,
         'toolbar-fixed': props.toolbarFixed,
         'toolbar-through': props.toolbarThrough,
@@ -32,7 +32,7 @@ export const Views = (props: IViewsProps, context: any) => {
         'tabbar-labels-fixed': props.tabbarLabelsFixed,
         'tabbar-labels-through': props.tabbarLabelsThrough
     }, 
-        getThemeClass(framework7AppContext.themeType),
+        framework7AppContext.themeClass,
         props.className
     );
             

@@ -6,6 +6,8 @@ import {LinkBase} from './LinkBase';
 import {Badge} from './Badge';
 import {Icon} from './Icon';
 
+import '../less/forms.less';
+
 export class Link extends LinkBase {
     public render() {
       let iconEl: React.ReactElement<any>;
@@ -46,7 +48,7 @@ export class Link extends LinkBase {
         classesObject['icon-only'] = true;
       }
 
-      this.classesObject['link'] = props.noLinkClass || isTabbarLabel ? false : true;
+      classesObject['link'] = props.noLinkClass || isTabbarLabel ? false : true;
 
       return (
           <a className={classNames(classesObject)} {...this.attributes} onClick={props.onClick}>

@@ -6,7 +6,7 @@ export interface INavRightProps extends React.Props<any> {
 }
 
 export const NavRight = (props: INavRightProps) => {
-    const classes = classNames('center', {
+    const classes = classNames('right', {
         'sliding': props.sliding
     });
 

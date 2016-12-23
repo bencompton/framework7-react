@@ -89,7 +89,7 @@ export class View extends React.Component<IViewProps, any> {
             'view-main': this.props.main,
             'active': this.props.active,
             'tab': this.props.tab,
-            'navbar-fixed': this.props.navbarFixed || this.props.navbarThrough && this.framework7AppContext.themeType === ThemeTypeEnum.Material,
+            'navbar-fixed': this.props.navbarFixed || this.props.navbarThrough && this.framework7AppContext.theme.material,
             'navbar-through': this.props.navbarThrough,
             'toolbar-fixed': this.props.toolbarFixed,
             'toolbar-through': this.props.toolbarThrough,
@@ -98,7 +98,7 @@ export class View extends React.Component<IViewProps, any> {
             'tabbar-labels-fixed': this.props.tabbarLabelsFixed,
             'tabbar-labels-through': this.props.tabbarLabelsThrough
         }, 
-            getThemeClass(this.framework7AppContext.themeType)
+            this.framework7AppContext.themeClass
         );
 
         return (

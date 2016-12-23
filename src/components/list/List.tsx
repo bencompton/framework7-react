@@ -3,7 +3,8 @@ import * as classNames from 'classnames';
 
 import {VirtualList, Framework7} from '../../Framework7';
 import {IFramework7AppContext} from '../Framework7App';
-import {IListItemProps} from './ListItem';
+import {IListItemProps, ListItem} from './ListItem';
+import {ListButton} from './ListButton';
 
 import '../../less/lists.less';
 
@@ -43,14 +44,15 @@ export class List extends React.Component<IListProps, any> {
     private element: HTMLElement;
     private f7VirtualList: VirtualList;
 
+    public static defaultProps: IListProps = {
+        virtualInit: true,
+        virtualCols: 1,
+        virtualCache: true,
+        virtualFilteredOnly: false
+    };
+
     constructor(props: IListProps, context: any) {
         super(props, context);
-
-        if (props.virtualInit === undefined) props.virtualInit = true;
-        if (props.virtualCols === undefined) props.virtualCols = 1;
-        if (props.virtualCache === undefined) props.virtualCache = true;
-        if (props.virtualFilteredOnly === undefined) props.virtualFilteredOnly = false;
-
         this.framework7AppContext.getFramework7((f7) => this.initVirtualList(f7));
     }
 
@@ -75,17 +77,17 @@ export class List extends React.Component<IListProps, any> {
 
         if (children && children.length) {
             children.forEach(child => {
-                const tag = child.toString();
+                const type = (child as React.ReactElement<any>).type;
 
-                if (tag && !(tag == 'li' || tag.indexOf('list-item') >= 0 || tag.indexOf('list-button') >=0)) {
+                if (type && !(type === 'li' || type === ListItem || type === ListButton)) {
                     outOfList.push(child);
-                } else if (tag && tag.indexOf('list-item') > 0) {
+                } else if (type && type === ListItem) {
                     const listItem = child as React.ReactElement<IListItemProps>;
 
                     ulChildren.push(React.cloneElement(child as React.ReactElement<IListItemProps>, {
                         mediaList: listItem.props.mediaList || this.props.mediaList,
                         sortable: listItem.props.sortable || this.props.sortable
-                    }));
+                    } as IListItemProps));
                 } else {
                     ulChildren.push(child);
                 }            

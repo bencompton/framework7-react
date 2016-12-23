@@ -1,10 +1,11 @@
 ﻿import * as React from 'react';
+import * as classNames from 'classnames';
 
 import {Framework7} from '../Framework7';
 import {IFramework7AppContext} from './Framework7App';
 import {ColorsEnum, getColorCls} from '../utils/Colors';
-import {LayoutEnum, getLayoutCls} from '../utils/Layout';
-import {Dom7 as $$} from '../Dom7';
+import {LayoutEnum, getLayoutClass} from '../utils/Layout';
+import {Dom7 as $$} from '../Framework7';
 import '../less/panels.less';
 
 declare const require: any;
@@ -55,14 +56,14 @@ export class Panel extends React.Component<IPanelProps, any> {
 
     private get classesObject() {                
         const props = this.props;
-        const side = props.side.toString() || (props.left ? 'left' : 'right');
-        const effect = props.effect.toString() || (props.reveal ? 'reveal' : 'cover');
+        const side = (props.side && props.side.toString()) || (props.left ? 'left' : 'right');
+        const effect = (props.effect && props.effect.toString()) || (props.reveal ? 'reveal' : 'cover');
         let classesObject = {};
 
         classesObject['panel-' + side] = true;
         classesObject['panel-' + effect] = true;
         
-        if (props.layout) classesObject[getLayoutCls(props.layout)] = true;
+        if (props.layout) classesObject[getLayoutClass(props.layout)] = true;
         if (props.theme) classesObject[getColorCls(props.theme)] = true;
         
         classesObject['active'] = props.opened;
@@ -72,8 +73,8 @@ export class Panel extends React.Component<IPanelProps, any> {
 
     componentDidMount() {
         const props = this.props;
-        const side = props.side.toString() || (props.left ? 'left' : 'right');
-        const effect = props.effect.toString() || (props.reveal ? 'reveal' : 'cover');
+        const side = (props.side && props.side.toString()) || (props.left ? 'left' : 'right');
+        const effect = (props.effect && props.effect.toString()) || (props.reveal ? 'reveal' : 'cover');
 
         if (props.opened) {
             $$('body').addClass('with-panel-' + side + '-' + effect)
@@ -109,7 +110,7 @@ export class Panel extends React.Component<IPanelProps, any> {
         if (!this.framework7) return;
 
         const opened = this.props.opened;
-        const side = this.props.side.toString() || (this.props.left ? 'left' : 'right');
+        const side = (this.props.side && this.props.side.toString()) || (this.props.left ? 'left' : 'right');
 
         if (opened) {
           this.framework7.openPanel(side);

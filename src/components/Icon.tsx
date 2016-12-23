@@ -90,7 +90,7 @@ export class Icon extends React.Component<IIconProps, any> {
 
     render() {
         return (
-            <i class={classNames('icon', this.classesObject)} style={{'font-size': this.size}}>
+            <i className={classNames('icon', this.classesObject)} style={{fontSize: this.size}}>
                 {this.iconText}
                 {this.props.children}
             </i>
