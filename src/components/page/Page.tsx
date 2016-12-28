@@ -1,8 +1,9 @@
 ﻿import * as React from 'react';
+import * as classNames from 'classnames';
 
 import {ComponentWithF7AppContext} from '../../utils/ComponentWithF7AppContext';
 import {LayoutEnum, getLayoutClass} from '../../utils/Layout';
-import {ColorsEnum, getThemeClass} from '../../utils/Colors';
+import {ColorsEnum} from '../../utils/Colors';
 
 import '../../less/pages.less';
 
@@ -74,8 +75,7 @@ export class Page extends ComponentWithF7AppContext<IPageProps, any> {
             'no-tabbar': props.noTabbar,
             'tabs': props.tabs,
             'no-swipeback': props.noSwipeBack,
-            [getLayoutClass(props.layout)]: props.layout !== null,
-            [getThemeClass(props.theme)]: props.theme !== null
+            [getLayoutClass(props.layout)]: props.layout !== null
         }
 
         return classesObject;
@@ -197,3 +197,4 @@ export class Page extends ComponentWithF7AppContext<IPageProps, any> {
         return pageEl;
     }
 };
+

@@ -6,7 +6,16 @@ var gulp = require('gulp'),
     sourcemaps = require('gulp-sourcemaps'),
     tsc = require('gulp-typescript'),
     merge = require('merge2'),
-    replace = require('gulp-replace');
+    replace = require('gulp-replace'),
+    sourcemaps = require('gulp-sourcemaps'),
+    rollup = require('rollup-stream'),
+    buble = require('rollup-plugin-buble'),
+    vue = require('rollup-plugin-vue2'),
+    source = require('vinyl-source-stream'),
+    buffer = require('vinyl-buffer'),
+    rename = require('gulp-rename'),
+    fs = require('fs'),
+    to = require('to-case');
 
 gulp.task('clean', function () {
     return gulp.src('./dist', { read: false })
@@ -31,12 +40,50 @@ gulp.task('copy-less', ['clean'], function () {
         .pipe(gulp.dest('./dist/src/less'))
 });
 
-gulp.task('compile-ts', ['clean'], function () {
+gulp.task('compile-framework7-vue', ['clean'], function(cb) {
+    const path = './node_modules/framework7-vue/src/components/';
+
+    fs.readdir(path, (err, files) => {
+        const components = [];
+        const imports = [];
+
+        files.filter(file => file.indexOf('.vue') != -1).forEach(file => {
+            const componentName = to.pascal('vue-' + file.replace('.vue', ''));
+            imports.push(`import ${componentName} from '${'.' + path + file}'`);
+            components.push(componentName);
+        });
+
+        const index = `${imports.join('\n')}\n\nexport {\n\t${components.join(',\n\t')}\n}`;
+
+        fs.writeFile('./framework7-vue/index.js', index, () => {
+            rollup({
+                entry: './framework7-vue/index.js',
+                plugins: [vue(), buble()],
+                format: 'es',
+                moduleName: 'Framework7Vue',
+                useStrict: false,
+                sourceMap: true
+            })
+            .pipe(source('framework7-vue.js', './framework7-vue'))
+            .pipe(buffer())
+            .pipe(sourcemaps.init({loadMaps: true}))
+            .pipe(sourcemaps.write('./'))
+            .pipe(gulp.dest('./framework7-vue/'))
+            .on('end', function() {
+                gulp.src('./framework7-vue/framework7-vue.js')
+                    .pipe(gulp.dest('./dist/framework7-vue/'))
+                    .on('end', cb);
+            });
+        });
+    });
+});
+
+gulp.task('compile-ts', ['clean', 'compile-framework7-vue'], function () {
     var tsProject = tsc.createProject('tsconfig.json');
 
     var tsResult = gulp.src(['./src/**/*.ts', './src/**/*.tsx', './typings/**/*.ts'])
         .pipe(sourcemaps.init())
-        .pipe(tsc(tsProject));
+        .pipe(tsProject());
 
     return merge([
         tsResult.dts.pipe(gulp.dest('dist/src/')),
@@ -51,4 +98,4 @@ gulp.task('compile-ts', ['clean'], function () {
     ]);
 });
 
-gulp.task('default', ['build-framework7-core', 'compile-ts', 'copy-less']);
+gulp.task('default', ['clean', 'build-framework7-core', 'compile-framework7-vue', 'compile-ts', 'copy-less']);

@@ -7,7 +7,8 @@
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,        
         "noImplicitAny": false,        
-        "jsx": "react"        
+        "jsx": "react",
+        "allowJs": true      
     },
     "exclude": ["kitchen-sink"]    
 }

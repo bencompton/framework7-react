@@ -2,6 +2,8 @@
 import * as classNames from 'classnames';
 
 import {IFramework7AppContext} from '../Framework7App';
+import {VueToolbar} from '../../../framework7-vue/framework7-vue';
+import {reactifyF7Vue} from '../../utils/ReactifyF7Vue';
 
 import '../../less/toolbars.less';
 
@@ -11,33 +13,14 @@ export interface IToolbarProps extends React.Props<any> {
     tabbar?: boolean;
     labels?: boolean;
     scrollable?: boolean;
-    beforeInner?: React.ReactElement<any>;
-    afterInner?: React.ReactElement<any>;
+    beforeInnerSlot?: React.ReactElement<any>;
+    afterInnerSlot?: React.ReactElement<any>;
 }
 
-export const Toolbar = (props: IToolbarProps, context: any) => {
-    const framework7AppContext = context.framework7AppContext as IFramework7AppContext;
-
-    const classes = classNames('toolbar', {
-          'toolbar-bottom': this.bottom,
-          'tabbar': this.tabbar,
-          'tabbar-labels': this.labels,
-          'tabbar-scrollabel': this.scrollable
-    }, 
-        framework7AppContext.themeClass
-    );
-
-    return (
-        <div className={classes}>
-            {props.beforeInner ? props.beforeInner : null}
-            <div className="toolbar-inner">
-                {props.children}
-            </div>
-            {props.afterInner ? props.afterInner : null}
-        </div>
-    );
-};
-
-(Toolbar as any).contextTypes = {
-    framework7AppContext: React.PropTypes.object
-};
+export const Toolbar = reactifyF7Vue<IToolbarProps>({
+    component: VueToolbar,
+    slots: [
+        'before-inner',
+        'after-inner'
+    ]
+});

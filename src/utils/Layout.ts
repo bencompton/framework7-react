@@ -5,5 +5,9 @@ export enum LayoutEnum {
 }
 
 export const getLayoutClass = (layout: LayoutEnum) => {
-    return `layout-${layout.toString()}`;
+    if (layout) {
+        return `layout-${layout.toString()}`;
+    } else {
+        return null;
+    }
 };

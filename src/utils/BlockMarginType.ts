@@ -1,4 +1,4 @@
-﻿export enum BlockMarginTypeEnum {
+export enum BlockMarginTypeEnum {
     None,
     Inset,
     TabletInset

@@ -38,5 +38,6 @@ jspm_packages
 
 typings/
 dist/
+framework7-vue/
 
 .DS_Store
