@@ -57,7 +57,7 @@ const resolveDependencyComponent = (dependencyComponents: (React.ComponentClass<
 };
 
 const removeOuterArrayFromChildren = (children) => {
-    if (children && children.length) {
+    if (children && Array.isArray(children)) {
         return children.reduce((outputArray, nextChildArray) => {
             nextChildArray = nextChildArray || [];
 
@@ -81,13 +81,13 @@ const createReactElement = (componentName: string, args, children, dependencyCom
     children = removeOuterArrayFromChildren(children);
 
     if (!resolvedComponent) resolvedComponent = componentName;
-    if (children) props.children = children;
+    if (children && !(args.domProps && args.domProps.innerHTML)) props.children = children;
     if (args.class || args.staticClass) props.className = getClassName(args.class, args.staticClass);
     if (args.attrs) Object.keys(args.attrs).forEach(attr => props[attr] = args.attrs[attr]);
     if (args.props) Object.keys(args.props).forEach(prop => props[camelCase(prop)] = args.props[prop]);
-    if (args.domProps && args.domProps.innerHTML) props.dangerouslySetInnerHTML = () => { return {__html: args.domProps.innerHTML}};
+    if (args.domProps && args.domProps.innerHTML) props.dangerouslySetInnerHTML = {__html: args.domProps.innerHTML};
 
-    if (children && children.length) {
+    if (children && Array.isArray(children) && children.length) {
         children.forEach(child => {
             if (child && child.props && child.type && typeof child.type !== 'string') {
                 try {
@@ -144,9 +144,13 @@ const copySlotsToVueComponent = (vueComponent: IVueComponent, slotMapping, props
         .forEach(slotName => {
             const slot = slots[slotName];
 
-            slot.forEach((slotChild, index) => {
-                slots[slotName][index] = {...slotChild, tag: getComponentTag(slotChild)};
-            });
+            if (Array.isArray(slot)) {
+                slot.forEach((slotChild, index) => {
+                    if (typeof slotChild !== 'string') {
+                        slots[slotName][index] = {...slotChild, tag: getComponentTag(slotChild)};
+                    }
+                });
+            }
         });
     
     vueComponent.$slots = slots;
@@ -221,7 +225,8 @@ export const reactifyVue = <TProps>(reactifyVueArgs: IReactifyVueArgs) => {
             
             this.vueComponent._self = { _c: this.createElement.bind(this) };
             this.vueComponent._t = (slotName: string) => this.vueComponent.$slots[slotName];
-            this.vueComponent._v = () => null;
+            this.vueComponent._v = (text: string) => text;
+            this.vueComponent._s = (text: string) => text;
             this.vueComponent._e = () => null;
             this.vueComponent.$parent = this.props.parentVueComponent;
             this.vueComponent.$options = {

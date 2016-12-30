@@ -22136,7 +22136,7 @@ var resolveDependencyComponent = function (dependencyComponents, componentToReso
     }
 };
 var removeOuterArrayFromChildren = function (children) {
-    if (children && children.length) {
+    if (children && Array.isArray(children)) {
         return children.reduce(function (outputArray, nextChildArray) {
             nextChildArray = nextChildArray || [];
             if (!Array.isArray(nextChildArray)) {
@@ -22156,7 +22156,7 @@ var createReactElement = function (componentName, args, children, dependencyComp
     children = removeOuterArrayFromChildren(children);
     if (!resolvedComponent)
         resolvedComponent = componentName;
-    if (children)
+    if (children && !(args.domProps && args.domProps.innerHTML))
         props.children = children;
     if (args.class || args.staticClass)
         props.className = getClassName(args.class, args.staticClass);
@@ -22165,8 +22165,8 @@ var createReactElement = function (componentName, args, children, dependencyComp
     if (args.props)
         Object.keys(args.props).forEach(function (prop) { return props[camelCase(prop)] = args.props[prop]; });
     if (args.domProps && args.domProps.innerHTML)
-        props.dangerouslySetInnerHTML = function () { return { __html: args.domProps.innerHTML }; };
-    if (children && children.length) {
+        props.dangerouslySetInnerHTML = { __html: args.domProps.innerHTML };
+    if (children && Array.isArray(children) && children.length) {
         children.forEach(function (child) {
             if (child && child.props && child.type && typeof child.type !== 'string') {
                 try {
@@ -22217,9 +22217,13 @@ var copySlotsToVueComponent = function (vueComponent, slotMapping, props) {
     Object.keys(slots)
         .forEach(function (slotName) {
         var slot = slots[slotName];
-        slot.forEach(function (slotChild, index) {
-            slots[slotName][index] = __assign({}, slotChild, { tag: getComponentTag(slotChild) });
-        });
+        if (Array.isArray(slot)) {
+            slot.forEach(function (slotChild, index) {
+                if (typeof slotChild !== 'string') {
+                    slots[slotName][index] = __assign({}, slotChild, { tag: getComponentTag(slotChild) });
+                }
+            });
+        }
     });
     vueComponent.$slots = slots;
 };
@@ -22285,7 +22289,8 @@ exports.reactifyVue = function (reactifyVueArgs) {
             copySlotsToVueComponent(this.vueComponent, reactifyVueArgs.slots, this.props);
             this.vueComponent._self = { _c: this.createElement.bind(this) };
             this.vueComponent._t = function (slotName) { return _this.vueComponent.$slots[slotName]; };
-            this.vueComponent._v = function () { return null; };
+            this.vueComponent._v = function (text) { return text; };
+            this.vueComponent._s = function (text) { return text; };
             this.vueComponent._e = function () { return null; };
             this.vueComponent.$parent = this.props.parentVueComponent;
             this.vueComponent.$options = {
