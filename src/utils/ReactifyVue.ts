@@ -57,8 +57,14 @@ const resolveDependencyComponent = (dependencyComponents: (React.ComponentClass<
 };
 
 const removeOuterArrayFromChildren = (children) => {
-    if (children && children.length && Array.isArray(children[0])) {
+    if (children && children.length) {
         return children.reduce((outputArray, nextChildArray) => {
+            nextChildArray = nextChildArray || [];
+
+            if (!Array.isArray(nextChildArray)) {
+                nextChildArray = [nextChildArray];
+            }
+            
             return [...outputArray, ...nextChildArray];
         }, []);
     } else {
@@ -79,11 +85,16 @@ const createReactElement = (componentName: string, args, children, dependencyCom
     if (args.class || args.staticClass) props.className = getClassName(args.class, args.staticClass);
     if (args.attrs) Object.keys(args.attrs).forEach(attr => props[attr] = args.attrs[attr]);
     if (args.props) Object.keys(args.props).forEach(prop => props[camelCase(prop)] = args.props[prop]);
+    if (args.domProps && args.domProps.innerHTML) props.dangerouslySetInnerHTML = () => { return {__html: args.domProps.innerHTML}};
 
     if (children && children.length) {
         children.forEach(child => {
             if (child && child.props && child.type && typeof child.type !== 'string') {
-                child.props = {...child.props, parentVueComponent: vueComponent};
+                try {
+                    child.props = {...child.props, parentVueComponent: vueComponent};
+                } catch (err) {
+                    console.error(err);
+                }
             }
         });
     }
@@ -199,6 +210,8 @@ export const reactifyVue = <TProps>(reactifyVueArgs: IReactifyVueArgs) => {
                 }
             }};
 
+            this.nextTickCallbacks = [];
+
             this.createElement = (element, args, children) => {
                 return createReactElement(element, args, children, reactifyVueArgs.dependencyComponents, this.vueComponent)
             };
@@ -214,6 +227,7 @@ export const reactifyVue = <TProps>(reactifyVueArgs: IReactifyVueArgs) => {
             this.vueComponent.$options = {
                 propsData: this.props
             }
+            this.$nextTick = (func) => this.nextTickCallbacks.push(func);
 
             Object.defineProperty(vueComponent, '$el', {
                 get: () => this.element,
@@ -224,6 +238,18 @@ export const reactifyVue = <TProps>(reactifyVueArgs: IReactifyVueArgs) => {
             handleComputedProperties(this.vueComponent);
 
             return null;
+        },
+
+        componentWillUpdate: function() {
+            if (this.vueComponent.updated) this.vueComponent.updated();
+        },
+
+        componentDidUpdate: function() {
+            this.nextTickCallbacks.forEach(callback => callback.apply(this.vueComponent, []));
+        },
+
+        componentDidMount: function() {
+            if (this.vueComponent.mounted) this.vueComponent.mounted();
         },
 
         componentWillUnmount: function() {

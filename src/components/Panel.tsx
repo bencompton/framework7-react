@@ -11,15 +11,13 @@ import '../less/panels.less';
 declare const require: any;
 const Portal = require('react-portal');
 
-export enum PanelSideEnum {
-    Left,
-    Right
-}
+export type PanelSideEnum = 
+    'Left' |
+    'Right';
 
-export enum PanelEffectEnum {
-    Cover,
-    Reveal
-}
+export type PanelEffectEnum =
+    'Cover' |
+    'Reveal';
 
 export interface IPanelProps {
     side?: PanelSideEnum;
@@ -31,9 +29,19 @@ export interface IPanelProps {
     theme?: ColorsEnum;
     layout?: LayoutEnum;
     opened?: boolean;
+    onOpen?: () => void;
+    onOpened?: () => void;
+    onClose?: () => void;
+    onClosed?: () => void;
 }
 
 export const Panel = reactifyF7Vue<IPanelProps>({
     component: VuePanel,
-    tag: 'f7-panel'
+    tag: 'f7-panel',
+    events: [
+        'panel:open',
+        'panel:opened',
+        'panel:close',
+        'panel:closed'
+    ]
 });

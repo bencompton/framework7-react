@@ -5,18 +5,7 @@ import {View} from './View';
 import {applyOverscrollFix} from '../utils/OverscrollFix';
 import {IFramework7Route, Framework7Router} from '../utils/Router';
 
-export enum ThemeTypeEnum {
-    iOS,
-    Material
-}
-
-export const getThemeClass = (themeType: ThemeTypeEnum) => {
-    if (themeType) {
-        return '';
-    } else {
-        return `theme-${themeType.toString().toLowerCase()}`;
-    }
-};
+export type ThemeTypeEnum  = 'ios' | 'material';
 
 export interface IFramework7AppContext {
     theme: {
@@ -52,10 +41,9 @@ export class Framework7App extends React.Component<IFramework7AppProps, Framewor
                 getFramework7: this.getFramework7.bind(this),
                 registerView: this.addRegisteredView.bind(this),
                 theme: {
-                    ios: this.props.themeType === ThemeTypeEnum.iOS,
-                    material: this.props.themeType === ThemeTypeEnum.Material
-                },
-                themeClass: getThemeClass(this.props.themeType)
+                    ios: this.props.themeType === 'ios',
+                    material: this.props.themeType === 'material'
+                }
             }
         };
     }

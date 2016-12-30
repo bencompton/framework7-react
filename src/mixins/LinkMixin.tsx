@@ -84,8 +84,3 @@ export interface ILinkProps {
 
     className?: string;
 }
-
-export const LinkMixin = reactifyF7Vue<ILinkProps>({
-    component: VueLinkMixin,
-    tag: 'f7-link-mixin'
-});

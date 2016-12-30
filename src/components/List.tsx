@@ -42,7 +42,11 @@ export const List = reactifyF7Vue<IListProps>({
     component: VueList,
     tag: 'f7-list',
     events: [
-        'sortable:open'
+        'sortable:open',
+        'sortable:close',
+        'sortable:sort',
+        'tab:show',
+        'tab:hide',
     ],
     dependencyComponents: [
         ListItem

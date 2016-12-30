@@ -2,6 +2,7 @@ import * as React from 'react';
 import * as camelCase from 'camelcase';
 
 import {reactifyVue} from './ReactifyVue';
+import {Dom7} from '../Framework7';
 
 export interface IReactifyF7VueArgs {
     component: any;
@@ -24,7 +25,10 @@ export const reactifyF7Vue = <TProps>(args: IReactifyF7VueArgs) => {
             return { ...eventMap, [currentEventName]: camelCase(currentEventName) };
         }, {}),
         dependencyComponents: args.dependencyComponents,
-        args: args.args,
+        args: {
+            ...args.args,
+            $$: Dom7
+        },
         mixin: args.mixin
     });
 

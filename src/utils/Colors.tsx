@@ -1,13 +1,14 @@
-﻿export enum ColorsEnum {
-    Blue,
-    Red,
-    White,
-    Black,
-    LightBlue,
-    Yellow,
-    Orange,
-    Pink,
-    Green,
-    Gray,
-    Multi
-}
+﻿export type iosColors =     
+    'blue' |
+    'red' |
+    'white' |
+    'black' |
+    'lightblue' |
+    'yellow' |
+    'orange' |
+    'pink' |
+    'green' |
+    'gray' |
+    'multi';
+
+export type ColorsEnum = iosColors;

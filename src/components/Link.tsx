@@ -13,5 +13,12 @@ import '../less/forms.less';
 export const Link = reactifyF7Vue<ILinkProps>({
     component: VueLink,
     tag: 'f7-link',
-    mixin: VueLinkMixin
+    mixin: VueLinkMixin,
+    dependencyComponents: [
+        Badge,
+        Icon
+    ],
+    events: [
+        'click'
+    ]
 });

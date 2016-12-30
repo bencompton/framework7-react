@@ -1,5 +1,4 @@
-export enum LayoutEnum {
-    Light,
-    Dark,
-    Default
-}
+export type LayoutEnum =
+    'light' |
+    'dark' |
+    'default';

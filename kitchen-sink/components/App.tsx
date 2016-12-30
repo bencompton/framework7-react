@@ -22,9 +22,9 @@ const routes = [{
 
 export const App = (props: React.Props<any>) => {
     return (
-        <Framework7App themeType={ThemeTypeEnum.iOS} routes={routes}>
+        <Framework7App themeType="ios" routes={routes}>
             <Statusbar></Statusbar>
-            <Panel left reveal layout={LayoutEnum.Dark} theme={ColorsEnum.Pink}>
+            <Panel left reveal layout="dark" theme="pink">
                 <View navbarFixed>
                     <Pages>
                         <Page>
