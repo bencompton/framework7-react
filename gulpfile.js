@@ -41,41 +41,45 @@ gulp.task('copy-less', ['clean'], function () {
 });
 
 gulp.task('compile-framework7-vue', ['clean'], function(cb) {
-    const path = './node_modules/framework7-vue/src/components/';
+    const paths = [
+        './node_modules/framework7-vue/src/components/',
+        './node_modules/framework7-vue/src/mixins/'
+    ];
+    
+    const components = [];
+    const imports = [];
 
-    fs.readdir(path, (err, files) => {
-        const components = [];
-        const imports = [];
-
+    paths.forEach(path => {
+        files = fs.readdirSync(path);
         files.filter(file => file.indexOf('.vue') != -1).forEach(file => {
-            const componentName = to.pascal('vue-' + file.replace('.vue', ''));
+            const componentName = to.pascal(`vue-${file.replace('.vue', '')}${(path.indexOf('mixins') !== -1) ? '-mixin' : ''}`);
             imports.push(`import ${componentName} from '${'.' + path + file}'`);
-            components.push(componentName);
-        });
-
-        const index = `${imports.join('\n')}\n\nexport {\n\t${components.join(',\n\t')}\n}`;
-
-        fs.writeFile('./framework7-vue/index.js', index, () => {
-            rollup({
-                entry: './framework7-vue/index.js',
-                plugins: [vue(), buble()],
-                format: 'es',
-                moduleName: 'Framework7Vue',
-                useStrict: false,
-                sourceMap: true
-            })
-            .pipe(source('framework7-vue.js', './framework7-vue'))
-            .pipe(buffer())
-            .pipe(sourcemaps.init({loadMaps: true}))
-            .pipe(sourcemaps.write('./'))
-            .pipe(gulp.dest('./framework7-vue/'))
-            .on('end', function() {
-                gulp.src('./framework7-vue/framework7-vue.js')
-                    .pipe(gulp.dest('./dist/framework7-vue/'))
-                    .on('end', cb);
-            });
+            components.push(componentName);            
         });
     });
+
+    const index = `${imports.join('\n')}\n\nexport {\n\t${components.join(',\n\t')}\n}`;
+
+    fs.writeFile('./framework7-vue/index.js', index, () => {
+        rollup({
+            entry: './framework7-vue/index.js',
+            plugins: [vue(), buble()],
+            format: 'es',
+            moduleName: 'Framework7Vue',
+            useStrict: false,
+            sourceMap: true
+        })
+        .pipe(source('framework7-vue.js', './framework7-vue'))
+        .pipe(buffer())
+        .pipe(sourcemaps.init({loadMaps: true}))
+        .pipe(sourcemaps.write('./'))
+        .pipe(gulp.dest('./framework7-vue/'))
+        .on('end', function() {
+            gulp.src('./framework7-vue/framework7-vue.js')
+                .pipe(gulp.dest('./dist/framework7-vue/'))
+                .on('end', cb);
+        });
+    });   
 });
 
 gulp.task('compile-ts', ['clean', 'compile-framework7-vue'], function () {

@@ -1,12 +1,12 @@
 ﻿import * as React from 'react';
 import * as classNames from 'classnames';
 
-import {Framework7, View as F7View} from '../../Framework7';
-import {IFramework7AppContext, ThemeTypeEnum, getThemeClass} from '../framework7App';
-import {Pages} from '../page/Pages';
-import {INavbarProps} from '../toolbars-and-navbars/Navbar';
+import {Framework7, View as F7View} from '../Framework7';
+import {IFramework7AppContext, ThemeTypeEnum} from './Framework7App';
+import {Pages} from './Pages';
+import {INavbarProps} from './Navbar';
 
-import '../../less/views.less';
+import '../less/views.less';
 
 export interface IViewProps {
       main?: boolean;

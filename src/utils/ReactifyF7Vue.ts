@@ -5,20 +5,39 @@ import {reactifyVue} from './ReactifyVue';
 
 export interface IReactifyF7VueArgs {
     component: any;
-    slots: string[];
+    tag: string;
+    slots?: string[];
+    args?: any;
+    dependencyComponents?: (React.ComponentClass<any> | React.StatelessComponent<any>)[];
+    events?: string[];
+    mixin?: any;
 }
 
 export const reactifyF7Vue = <TProps>(args: IReactifyF7VueArgs) => {
     const innerComponent = reactifyVue<TProps>({
         component: args.component,
-        slots: args.slots.reduce((slotMap, currentSlotName) => {
+        tag: args.tag,
+        slots: !args.slots ? null : args.slots.reduce((slotMap, currentSlotName) => {
             return { ...slotMap, [currentSlotName]: camelCase(currentSlotName) + 'Slot' };
-        }, {})
+        }, {}),
+        events: !args.events ? null : args.events.reduce((eventMap, currentEventName) => {
+            return { ...eventMap, [currentEventName]: camelCase(currentEventName) };
+        }, {}),
+        dependencyComponents: args.dependencyComponents,
+        args: args.args,
+        mixin: args.mixin
     });
 
-    return React.createClass({
-        render() {
-            return React.createElement(innerComponent, this.props);
+    const reactClass = React.createClass<TProps, any>({
+        render: function() {
+            return React.createElement(innerComponent, {
+                ...this.props,
+                $theme: { material: false, ios: true }
+            });
         }
     });
+
+    (reactClass as any).tag = args.tag;
+
+    return reactClass;
 }

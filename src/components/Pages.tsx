@@ -1,9 +1,9 @@
 import * as React from 'react';
 
 import {Page} from './Page';
-import {IViewContext} from '../view/View';
+import {IViewContext} from './View';
 
-import '../../less/pages.less';
+import '../less/pages.less';
 
 export interface IPagesProps extends React.Props<any> {
     className?: string;

@@ -1,11 +1,11 @@
 ﻿import * as React from 'react';
 import * as classNames from 'classnames';
 
-import {Framework7} from '../Framework7';
-import {IFramework7AppContext} from './Framework7App';
-import {ColorsEnum, getColorCls} from '../utils/Colors';
-import {LayoutEnum, getLayoutClass} from '../utils/Layout';
-import {Dom7 as $$} from '../Framework7';
+import {ColorsEnum} from '../utils/Colors';
+import {LayoutEnum} from '../utils/Layout';
+import {reactifyF7Vue} from '../utils/ReactifyF7Vue';
+import {VuePanel} from '../../framework7-vue/framework7-vue';
+
 import '../less/panels.less';
 
 declare const require: any;
@@ -33,90 +33,7 @@ export interface IPanelProps {
     opened?: boolean;
 }
 
-export class Panel extends React.Component<IPanelProps, any> {
-    private framework7: Framework7;
-    private element: HTMLElement;
-
-    constructor(props: IPanelProps, context: any) {
-        super(props, context);
-
-        this.framework7AppContext.getFramework7((f7) => {
-            this.onF7Init();
-            this.framework7 = f7;
-        });
-    }
-
-    public static contextTypes = {
-        framework7AppContext: React.PropTypes.object
-    };
-
-    private get framework7AppContext() {
-        return (this.context as any).framework7AppContext as IFramework7AppContext;
-    }
-
-    private get classesObject() {                
-        const props = this.props;
-        const side = (props.side && props.side.toString()) || (props.left ? 'left' : 'right');
-        const effect = (props.effect && props.effect.toString()) || (props.reveal ? 'reveal' : 'cover');
-        let classesObject = {};
-
-        classesObject['panel-' + side] = true;
-        classesObject['panel-' + effect] = true;
-        
-        if (props.layout) classesObject[getLayoutClass(props.layout)] = true;
-        if (props.theme) classesObject[getColorCls(props.theme)] = true;
-        
-        classesObject['active'] = props.opened;
-        
-        return classesObject;
-    }
-
-    componentDidMount() {
-        const props = this.props;
-        const side = (props.side && props.side.toString()) || (props.left ? 'left' : 'right');
-        const effect = (props.effect && props.effect.toString()) || (props.reveal ? 'reveal' : 'cover');
-
-        if (props.opened) {
-            $$('body').addClass('with-panel-' + side + '-' + effect)
-        }
-
-        this.reconcileOpenState();
-    }
-
-    componentDidUpdate() {
-        this.reconcileOpenState();
-    }
-
-    render() {
-        return (
-            <Portal isOpen>
-                <div className={classNames('panel', this.classesObject)} 
-                    style={{display: this.props.opened ? 'block' : ''}}
-                    ref={(e: HTMLElement) => this.element = e}
-                >
-                    {this.props.children}
-                </div>
-            </Portal>
-        );
-    }
-
-    private onF7Init() {
-        if ($$('.panel-overlay').length === 0) {
-          $$('<div class="panel-overlay"></div>').insertBefore(this.element)
-        }
-    }
-
-    private reconcileOpenState() {
-        if (!this.framework7) return;
-
-        const opened = this.props.opened;
-        const side = (this.props.side && this.props.side.toString()) || (this.props.left ? 'left' : 'right');
-
-        if (opened) {
-          this.framework7.openPanel(side);
-        }
-        else {
-          this.framework7.closePanel(side);
-        }
-    }
-}
+export const Panel = reactifyF7Vue<IPanelProps>({
+    component: VuePanel,
+    tag: 'f7-panel'
+});

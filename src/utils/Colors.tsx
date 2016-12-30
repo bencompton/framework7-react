@@ -11,5 +11,3 @@
     Gray,
     Multi
 }
-
-export const getColorCls = (color: ColorsEnum) => (ColorsEnum[color]) ? `color-${ColorsEnum[color].toLowerCase()}` : '';

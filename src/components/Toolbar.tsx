@@ -1,11 +1,10 @@
 ﻿import * as React from 'react';
 import * as classNames from 'classnames';
 
-import {IFramework7AppContext} from '../Framework7App';
-import {VueToolbar} from '../../../framework7-vue/framework7-vue';
-import {reactifyF7Vue} from '../../utils/ReactifyF7Vue';
+import {VueToolbar} from '../../framework7-vue/framework7-vue';
+import {reactifyF7Vue} from '../utils/ReactifyF7Vue';
 
-import '../../less/toolbars.less';
+import '../less/toolbars.less';
 
 export interface IToolbarProps extends React.Props<any> {
     className?: string;
@@ -19,6 +18,7 @@ export interface IToolbarProps extends React.Props<any> {
 
 export const Toolbar = reactifyF7Vue<IToolbarProps>({
     component: VueToolbar,
+    tag: 'f7-toolbar',
     slots: [
         'before-inner',
         'after-inner'

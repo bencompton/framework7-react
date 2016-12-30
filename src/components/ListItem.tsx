@@ -1,13 +1,13 @@
 ﻿import * as React from 'react';
 import * as classNames from 'classnames';
 
-import '../../less/lists.less';
+import '../less/lists.less';
 
 import {ListItemContent} from './ListItemContent';
-import {ColorsEnum} from '../../utils/Colors';
+import {ColorsEnum} from '../utils/Colors';
 
-import {reactifyVue} from '../../utils/ReactifyVue';
-import {VueListItem} from '../../../framework7-vue/framework7-vue';
+import {reactifyF7Vue} from '../utils/ReactifyF7Vue';
+import {VueListItem} from '../../framework7-vue/framework7-vue';
 
 export interface IListItemProps extends React.Props<any> {
     title?: string | number;
@@ -95,25 +95,25 @@ export interface IListItemProps extends React.Props<any> {
     rootStartSlot?: React.ReactElement<any>;
 }
 
-export const ListItem = reactifyVue<IListItemProps>({
+export const ListItem = reactifyF7Vue<IListItemProps>({
     component: VueListItem,
-    events: {
-        'click': 'onClick'
-    },
-    dependencyComponents: [{
-        component: ListItemContent,
-        tagName: 'f7-list-item-content'
-    }],
-    slots: {
-      'content-start': 'contentStartSlot',
-      'content': 'contentSlot',
-      'media-start': 'mediaStartSlot',
-      'media': 'mediaSlot',
-      'inner-start': 'innerStartSlot',
-      'inner': 'innerSlot',
-      'after-start': 'afterStartSlot',
-      'after': 'afterSlot',
-      'root': 'rootSlot',
-      'root-start': 'rootStartSlot'
-    }
+    tag: 'f7-list-item',
+    events: [
+        'click'
+    ],
+    dependencyComponents: [
+        ListItemContent
+    ],
+    slots: [
+      'content-start',
+      'content',
+      'media-start',
+      'media',
+      'inner-start',
+      'inner',
+      'after-start',
+      'after',
+      'root',
+      'root-start'
+    ]
 });

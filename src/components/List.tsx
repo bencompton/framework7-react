@@ -1,10 +1,10 @@
 import * as React from 'react';
 
-import {reactifyVue} from '../../utils/ReactifyVue';
-import {VueList} from '../../../framework7-vue/framework7-vue';
+import {reactifyF7Vue} from '../utils/ReactifyF7Vue';
+import {VueList} from '../../framework7-vue/framework7-vue';
 import {ListItem} from './ListItem';
 
-import '../../less/lists.less';
+import '../less/lists.less';
 
 export interface IListProps {
       inset?: boolean;
@@ -38,13 +38,13 @@ export interface IListProps {
       virtualRenderItem?: Function;
 }
 
-export const List = reactifyVue<IListProps>({
+export const List = reactifyF7Vue<IListProps>({
     component: VueList,
-    events: {
-        'sortable:open': 'onSortableOpen'
-    },
-    dependencyComponents: [{
-        component: ListItem,
-        tagName: 'list-item'
-    }]
+    tag: 'f7-list',
+    events: [
+        'sortable:open'
+    ],
+    dependencyComponents: [
+        ListItem
+    ]
 });

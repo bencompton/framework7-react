@@ -1,13 +1,12 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
 
-import {reactifyVue} from '../../utils/ReactifyVue';
-import {ColorsEnum} from '../../utils/Colors';
-import {IFramework7AppContext} from '../Framework7App';
-import {Badge} from '../Badge';
-import {VueListItemContent} from '../../../framework7-vue/framework7-vue';
+import {reactifyF7Vue} from '../utils/ReactifyF7Vue';
+import {ColorsEnum} from '../utils/Colors';
+import {Badge} from './Badge';
+import {VueListItemContent} from '../../framework7-vue/framework7-vue';
 
-import '../../less/lists.less';
+import '../less/lists.less';
 
 export interface IListItemContentProps extends React.Props<any> {
     title?: string | number;
@@ -41,24 +40,24 @@ export interface IListItemContentProps extends React.Props<any> {
     afterSlot?: React.ReactElement<any>;
 }
 
-export const ListItemContent = reactifyVue<IListItemContentProps>({
+export const ListItemContent = reactifyF7Vue<IListItemContentProps>({
     component: VueListItemContent,
-    events: {
-        'click': 'onClick',
-        'change': 'onChange'
-    },
-    dependencyComponents: [{
-        component: Badge,
-        tagName: 'f7-badge'
-    }], 
-    slots: {
-      'content-start': 'contentStartSlot',
-      'content': 'contentSlot',
-      'media-start': 'mediaStartSlot',
-      'media': 'mediaSlot',
-      'inner-start': 'innerStartSlot',
-      'inner': 'innerSlot',
-      'after-start': 'afterStartSlot',
-      'after': 'afterSlot'
-    }
+    tag: 'f7-list-item-content',
+    events: [
+      'click',
+      'change'
+    ],
+    dependencyComponents: [
+      Badge
+    ], 
+    slots: [
+      'content-start',
+      'content',
+      'media-start',
+      'media',
+      'inner-start',
+      'inner',
+      'after-start',
+      'after'
+    ]
 });

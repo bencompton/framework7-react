@@ -1,7 +1,7 @@
 ﻿import * as React from 'react';
 
 import {Framework7} from '../Framework7';
-import {View} from './view/View';
+import {View} from './View';
 import {applyOverscrollFix} from '../utils/OverscrollFix';
 import {IFramework7Route, Framework7Router} from '../utils/Router';
 

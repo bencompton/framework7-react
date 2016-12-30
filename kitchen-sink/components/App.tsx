@@ -52,7 +52,7 @@ export const App = (props: React.Props<any>) => {
                         </NavRight>
                     </Navbar>
                     <Pages>
-                        <Page toolbar-fixed>
+                        <Page toolbarFixed>
                             <Toolbar>
                                 <Link>Left</Link>
                                 <Link>Right</Link>
