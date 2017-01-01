@@ -14,11 +14,15 @@ import {NavRight} from './components/NavRight';
 import {Toolbar} from './components/Toolbar';
 import {Icon} from './components/Icon';
 import {Panel, PanelSideEnum, PanelEffectEnum} from './components/Panel';
-import {BlockMarginTypeEnum} from './utils/BlockMarginType';
 import {List} from './components/List';
 import {ListItem} from './components/ListItem';
 import {Statusbar} from './components/Statusbar';
 import {Link} from './components/Link';
+import {ContentBlock} from './components/ContentBlock';
+import {Card} from './components/Card';
+import {CardHeader} from './components/CardHeader';
+import {CardContent} from './components/CardContent';
+import {CardFooter} from './components/CardFooter';
 
 import './less/intro.less';
 import './less/framework7.ios.colors.less';
@@ -28,10 +32,11 @@ export {
     View, Views, 
     Pages, Page, PageContent,
     Navbar, NavLeft, NavCenter, NavRight, Toolbar,
-    Icon,
+    ContentBlock, Icon,
     Panel, PanelSideEnum, PanelEffectEnum,
     Framework7App, ThemeTypeEnum,
     List, ListItem,
     Link,
-    Statusbar	
+    Statusbar,
+    Card, CardHeader, CardFooter, CardContent	
 }

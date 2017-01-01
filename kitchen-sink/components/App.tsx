@@ -9,16 +9,13 @@ import {
     Panel, Statusbar, Link, List, ListItem, ColorsEnum, LayoutEnum
 } from 'framework7-react';
 
+import {routes} from '../routes';
+
 export interface IKitchenSinkPage {
     path: string;
     pageTitle: string;
     component: React.ComponentClass<any> | React.StatelessComponent<any>;
 }
-
-const routes = [{
-    path: '/list-view',
-    component: null
-}];
 
 export const App = (props: React.Props<any>) => {
     return (

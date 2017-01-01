@@ -23,6 +23,7 @@ export interface IVueComponent {
     watch?: {[watchedProp: string]: Function};
     computed?: {[computedProp: string]: () => any};
     element?: HTMLElement;
+    props: any;
 }
 
 export interface IReactifyVueArgs {
@@ -83,7 +84,13 @@ const createReactElement = (componentName: string, args, children, dependencyCom
     if (!resolvedComponent) resolvedComponent = componentName;
     if (children && !(args.domProps && args.domProps.innerHTML)) props.children = children;
     if (args.class || args.staticClass) props.className = getClassName(args.class, args.staticClass);
-    if (args.attrs) Object.keys(args.attrs).forEach(attr => props[attr] = args.attrs[attr]);
+    if (args.attrs) Object.keys(args.attrs).forEach(attr => {
+        if (vueComponent && vueComponent.props && vueComponent.props[attr] && vueComponent.props[attr] === Boolean) {
+            props[camelCase(attr)] = true;
+        } else {
+            props[camelCase(attr)] = args.attrs[attr];
+        }
+    });
     if (args.props) Object.keys(args.props).forEach(prop => props[camelCase(prop)] = args.props[prop]);
     if (args.domProps && args.domProps.innerHTML) props.dangerouslySetInnerHTML = {__html: args.domProps.innerHTML};
 
@@ -199,6 +206,27 @@ const applyMixinToVueComponent = (vueComponent: IVueComponent, mixin: any) => {
     }
 };
 
+const getDefaultProps = (vueComponent: IVueComponent) => {
+    if (vueComponent.props) {
+        const defaultProps = Object.keys(vueComponent.props).reduce((defaultProps, propName) => {
+            const propDef = vueComponent.props[propName];
+
+            if (propDef.default) {
+                return {
+                    ...defaultProps,
+                    [propName]: propDef.default
+                };
+            } else {
+                return defaultProps;
+            }
+        }, {});
+
+        return Object.keys(defaultProps).length ? defaultProps : null;
+    } else {
+        return null;
+    }
+};
+
 export const reactifyVue = <TProps>(reactifyVueArgs: IReactifyVueArgs) => {
     const vueComponent = reactifyVueArgs.component;
     
@@ -282,6 +310,10 @@ export const reactifyVue = <TProps>(reactifyVueArgs: IReactifyVueArgs) => {
     });
 
     (reactClass as any).tag = reactifyVueArgs.tag;
+
+    const defaultProps = getDefaultProps(vueComponent);
+
+    if (defaultProps) (reactClass as any).defaultProps = defaultProps;
 
     return reactClass;
 };
