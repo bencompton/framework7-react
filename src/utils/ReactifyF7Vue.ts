@@ -42,6 +42,7 @@ export const reactifyF7Vue = <TProps>(args: IReactifyF7VueArgs) => {
     });
 
     (reactClass as any).tag = args.tag;
+    (reactClass as any).vueComponent = args.component;
 
     return reactClass;
 }
