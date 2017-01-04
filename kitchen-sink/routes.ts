@@ -4,6 +4,7 @@ import {ListsPage} from './components/pages/ListsPage';
 import {ContactsPage} from './components/pages/ContactsPage';
 import {SortablePage} from './components/pages/SortablePage';
 import {SwipeoutPage} from './components/pages/SwipeoutPage';
+import {AccordionPage} from './components/pages/AccordionPage';
 
 export const routes = [{
     path: '/content-block/',
@@ -23,4 +24,7 @@ export const routes = [{
 }, {
     path: '/swipeout/',
     component: SwipeoutPage
+}, {
+    path: '/accordion/',
+    component: AccordionPage
 }];

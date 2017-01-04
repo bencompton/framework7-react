@@ -29,6 +29,9 @@ import {Card} from './components/Card';
 import {CardHeader} from './components/CardHeader';
 import {CardContent} from './components/CardContent';
 import {CardFooter} from './components/CardFooter';
+import {AccordionItem} from './components/AccordionItem';
+import {AccordionContent} from './components/AccordionContent';
+import {AccordionToggle} from './components/AccordionToggle';
 
 import './less/intro.less';
 import './less/framework7.ios.colors.less';
@@ -45,5 +48,6 @@ export {
     List, ListItem, ListGroup, ListLabel, ListButton, ListItemSwipeoutActions, ListItemSwipeoutButton,
     Link,
     Statusbar,
-    Card, CardHeader, CardFooter, CardContent
+    Card, CardHeader, CardFooter, CardContent,
+    AccordionItem, AccordionContent, AccordionToggle
 }

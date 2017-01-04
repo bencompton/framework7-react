@@ -91,19 +91,19 @@ export interface IListItemProps extends React.Props<any> {
     rootSlot?: React.ReactElement<any>;
     rootStartSlot?: React.ReactElement<any>;
 
-    onClick?: () => void;
-    onSwipeoutDeleted?: (event: any) => void;
-    onSwipeoutDelete?: () => void;
-    onSwipeoutClose?: () => void;
-    onSwipeoutClosed?: () => void;
-    onSwipeoutOpen?: () => void;
-    onSwipeoutOpened?: () => void;
-    onSwipeout?: () => void;
-    onAccordionClose?: () => void;
-    onAccordionClosed?: () => void;
-    onAccordionOpen?: () => void;
-    onAccordionOpened?: () => void;
-    onChange?: () => void;
+    onClick?: (event?: any) => void;
+    onSwipeoutDeleted?: (event?: any) => void;
+    onSwipeoutDelete?: (event?: any) => void;
+    onSwipeoutClose?: (event?: any) => void;
+    onSwipeoutClosed?: (event?: any) => void;
+    onSwipeoutOpen?: (event?: any) => void;
+    onSwipeoutOpened?: (event?: any) => void;
+    onSwipeout?: (event?: any) => void;
+    onAccordionClose?: (event?: any) => void;
+    onAccordionClosed?: (event?: any) => void;
+    onAccordionOpen?: (event?: any) => void;
+    onAccordionOpened?: (event?: any) => void;
+    onChange?: (event?: any) => void;
 }
 
 export const ListItem = reactifyF7Vue<IListItemProps>({
