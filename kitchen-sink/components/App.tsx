@@ -1,9 +1,8 @@
 import * as React from 'react';
-import {Route, IndexRoute, Router, hashHistory} from 'react-router';
 import {
     Framework7App,
     ThemeTypeEnum,
-    Views, View, 
+    Views, View,
     Pages, Page, PageContent,
     Navbar, NavLeft, NavCenter, NavRight, Toolbar,
     Panel, Statusbar, Link, List, ListItem, ColorsEnum, LayoutEnum

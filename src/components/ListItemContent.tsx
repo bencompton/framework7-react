@@ -47,9 +47,9 @@ export const ListItemContent = reactifyF7Vue<IListItemContentProps>({
       'click',
       'change'
     ],
-    dependencyComponents: [
+    instantiatedComponents: [
       Badge
-    ], 
+    ],
     slots: [
       'content-start',
       'content',

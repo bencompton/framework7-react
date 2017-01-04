@@ -80,9 +80,6 @@ export interface IListItemProps extends React.Props<any> {
     required?: boolean;
     disabled?: boolean;
 
-    onClick?: () => void;
-    onChange?: () => void;
-
     contentStartSlot?: React.ReactElement<any>;
     contentSlot?: React.ReactElement<any>;
     mediaStartSlot?: React.ReactElement<any>;
@@ -93,15 +90,41 @@ export interface IListItemProps extends React.Props<any> {
     afterSlot?: React.ReactElement<any>;
     rootSlot?: React.ReactElement<any>;
     rootStartSlot?: React.ReactElement<any>;
+
+    onClick?: () => void;
+    onSwipeoutDeleted?: (event: any) => void;
+    onSwipeoutDelete?: () => void;
+    onSwipeoutClose?: () => void;
+    onSwipeoutClosed?: () => void;
+    onSwipeoutOpen?: () => void;
+    onSwipeoutOpened?: () => void;
+    onSwipeout?: () => void;
+    onAccordionClose?: () => void;
+    onAccordionClosed?: () => void;
+    onAccordionOpen?: () => void;
+    onAccordionOpened?: () => void;
+    onChange?: () => void;
 }
 
 export const ListItem = reactifyF7Vue<IListItemProps>({
     component: VueListItem,
     tag: 'f7-list-item',
     events: [
-        'click'
+        'click',
+        'swipeout:deleted',
+        'swipeout:delete',
+        'swipeout:close',
+        'swipeout:closed',
+        'swipeout:open',
+        'swipeout:opened',
+        'swipeout',
+        'accordion:close',
+        'accordion:closed',
+        'accordion:open',
+        'accordion:opened',
+        'change'
     ],
-    dependencyComponents: [
+    instantiatedComponents: [
         ListItemContent
     ],
     slots: [

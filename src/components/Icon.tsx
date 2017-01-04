@@ -1,7 +1,6 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
 
-import {IFramework7AppContext} from './Framework7App';
 import {ColorsEnum} from '../utils/Colors';
 import {reactifyF7Vue} from '../utils/ReactifyF7Vue';
 import {VueIcon} from '../../framework7-vue/framework7-vue';

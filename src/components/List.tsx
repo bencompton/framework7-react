@@ -7,35 +7,41 @@ import {ListItem} from './ListItem';
 import '../less/lists.less';
 
 export interface IListProps {
-      inset?: boolean;
-      mediaList?: boolean;
-      grouped?: boolean;
-      sortable?: boolean;
-      form?: boolean;
-      label?: string;
-      accordion?: boolean;
-      contacts?: boolean;
+    id?: string;
+    inset?: boolean;
+    mediaList?: boolean;
+    grouped?: boolean;
+    sortable?: boolean;
+    form?: boolean;
+    label?: string;
+    accordion?: boolean;
+    contacts?: boolean;
 
-      noHairlines?: boolean;
-      noHairlinesBetween?: boolean;
+    noHairlines?: boolean;
+    noHairlinesBetween?: boolean;
 
-      // Tab
-      tab?: boolean;
-      active?: boolean;
+    // Tab
+    tab?: boolean;
+    active?: boolean;
 
-      // Virtual List
-      virtual?: boolean,
-      virtualInit?: boolean,
-      virtualItems?: any[] | Object;
-      virtualHeight?: number | Function;
-      virtualRowsBefore?: number;
-      virtualRowsAfter?: number;
-      virtualCols?: number;
-      virtualCache?: boolean;
-      virtualFilteredOnly?: boolean;
-      virtualSearchByItem?: Function;
-      virtualSearchAll?: Function;
-      virtualRenderItem?: Function;
+    // Virtual List
+    virtual?: boolean,
+    virtualInit?: boolean,
+    virtualItems?: any[] | Object;
+    virtualHeight?: number | Function;
+    virtualRowsBefore?: number;
+    virtualRowsAfter?: number;
+    virtualCols?: number;
+    virtualCache?: boolean;
+    virtualFilteredOnly?: boolean;
+    virtualSearchByItem?: Function;
+    virtualSearchAll?: Function;
+    virtualRenderItem?: Function;
+
+    onSortableOpen?: () => void;
+    onSortableClose?: () => void;
+    onTabShow?: () => void;
+    onTabHide?: () => void;
 }
 
 export const List = reactifyF7Vue<IListProps>({
@@ -47,8 +53,12 @@ export const List = reactifyF7Vue<IListProps>({
         'sortable:sort',
         'tab:show',
         'tab:hide',
+        'virtualItemBeforeInsert',
+        'virtualBeforeClear',
+        'virtualItemsBeforeInsert',
+        'virtualItemsAfterInsert'
     ],
-    dependencyComponents: [
+    instantiatedComponents: [
         ListItem
     ]
 });

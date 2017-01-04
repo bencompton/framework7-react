@@ -13,7 +13,7 @@ export interface INavLeftProps extends React.Props<any> {
 export const NavLeft = reactifyF7Vue<INavLeftProps>({
     component: VueNavLeft,
     tag: 'f7-nav-left',
-    dependencyComponents: [
+    instantiatedComponents: [
         Link
     ]
 });

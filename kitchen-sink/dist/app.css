@@ -2193,6 +2193,30 @@ html.pixel-ratio-3 .list-block li:last-child li .item-inner:after {
 .list-block.no-hairlines-between .list-group-title:after {
   display: none;
 }
+/* === Contacts === */
+.contacts-content {
+  background: #fff;
+}
+.contacts-block {
+  margin: 0;
+}
+.contacts-block .list-group-title {
+  padding: 0 15px;
+  background: #f7f7f7;
+  color: #000;
+  font-weight: 500;
+  line-height: 22px;
+  height: 22px;
+}
+html.ios-gt-8 .contacts-block .list-group-title {
+  font-weight: 600;
+}
+.contacts-block .list-group:first-child ul:before {
+  display: none;
+}
+.contacts-block .list-group:last-child ul:after {
+  display: none;
+}
 /* === Content Block === */
 .content-block {
   margin: 35px 0;

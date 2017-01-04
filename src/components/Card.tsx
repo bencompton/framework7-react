@@ -18,7 +18,7 @@ export interface ICardProps extends React.Props<any> {
 export const Card = reactifyF7Vue<ICardProps>({
     component: VueCard,
     tag: 'f7-card',
-    dependencyComponents: [
+    instantiatedComponents: [
         CardHeader,
         CardFooter,
         CardContent

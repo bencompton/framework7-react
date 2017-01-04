@@ -1,4 +1,4 @@
-﻿export type iosColors =     
+﻿export type iosColors =
     'blue' |
     'red' |
     'white' |

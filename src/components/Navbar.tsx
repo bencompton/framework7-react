@@ -19,7 +19,7 @@ export interface INavbarProps extends React.Props<any> {
 export const Navbar = reactifyF7Vue<INavbarProps>({
     component: VueNavbar,
     tag: 'f7-navbar',
-    dependencyComponents: [
+    instantiatedComponents: [
         NavLeft,
         NavCenter
     ]

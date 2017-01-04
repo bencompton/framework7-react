@@ -30,24 +30,30 @@ export interface IReactifyVueArgs {
     component: IVueComponent;
     tag: string;
     events?: IVueEventToPropsMap;
-    dependencyComponents?: (React.ComponentClass<any> | React.StatelessComponent<any>)[];
+    instantiatedComponents?: (React.ComponentClass<any> | React.StatelessComponent<any>)[];
     slots?: IVueSlotToReactPropNameMap;
-    args?: any; 
+    args?: any;
     mixin?: any;
 }
 
 const getClassName = (classObject, staticClass) => {
+    if (typeof classObject === 'string') {
+        classObject = {
+            [classObject]: true
+        };
+    }
+
     classObject = classObject || {};
     if (staticClass) classObject[staticClass] = true;
     return classNames(classObject);
 };
 
-const resolveDependencyComponent = (dependencyComponents: (React.ComponentClass<any> | React.StatelessComponent<any>)[], componentToResolve: string) => {
-    if (dependencyComponents) {
-        const results = dependencyComponents
-            .filter(dependencyComponent => {
-                if ((dependencyComponent as any).tag) {
-                    return (dependencyComponent as any).tag === componentToResolve;
+const resolveDependencyComponent = (instantiatedComponents: (React.ComponentClass<any> | React.StatelessComponent<any>)[], componentToResolve: string) => {
+    if (instantiatedComponents) {
+        const results = instantiatedComponents
+            .filter(instantiatedComponent => {
+                if ((instantiatedComponent as any).tag) {
+                    return (instantiatedComponent as any).tag === componentToResolve;
                 } else {
                     return false;
                 }
@@ -73,15 +79,39 @@ const removeOuterArrayFromChildren = (children) => {
     }
 };
 
-const createReactElement = (componentName: string, args, children, dependencyComponents, vueComponent: IVueComponent) => {
+const handleRefs = (element: HTMLElement, vueComponent: IVueComponent, events: {[eventName: string]: Function}) => {
+    vueComponent.element = element;
+
+    if (events) {
+        Object.keys(events).forEach(eventName => {
+            if (element && element.addEventListener && !((element as any).vueListeners && (element as any).vueListeners[eventName])) {
+                element.addEventListener(eventName, (...args: any[]) => {
+                    const eventHandler = events[eventName];
+                    eventHandler.apply(vueComponent, args);
+                }, true);
+
+                (element as any).vueListeners = (element as any).vueListeners || {};
+                (element as any).vueListeners[eventName] = true;
+            }
+        });
+    }
+};
+
+const createReactElement = (
+    componentOrComponentName: string | React.ComponentClass<any> | React.StatelessComponent<any>,
+    args,
+    children,
+    instantiatedComponents,
+    vueComponent: IVueComponent
+) => {
     let resolvedComponent;
     let props: any = {};
 
-    resolvedComponent = resolveDependencyComponent(dependencyComponents, componentName);
+    resolvedComponent = resolveDependencyComponent(instantiatedComponents, componentOrComponentName as string);
 
     children = removeOuterArrayFromChildren(children);
 
-    if (!resolvedComponent) resolvedComponent = componentName;
+    if (!resolvedComponent) resolvedComponent = componentOrComponentName as React.ComponentClass<any> | React.StatelessComponent<any>;
     if (children && !(args.domProps && args.domProps.innerHTML)) props.children = children;
     if (args.class || args.staticClass) props.className = getClassName(args.class, args.staticClass);
     if (args.attrs) Object.keys(args.attrs).forEach(attr => {
@@ -89,7 +119,7 @@ const createReactElement = (componentName: string, args, children, dependencyCom
         const attrValue = args.attrs[attr];
         const camelCasedAttrName = camelCase(attr);
 
-        if (resolvedVueComponent && resolvedVueComponent.props && resolvedVueComponent.props[camelCasedAttrName) {
+        if (resolvedVueComponent && resolvedVueComponent.props && resolvedVueComponent.props[camelCasedAttrName]) {
              if (resolvedVueComponent.props[camelCasedAttrName] === Boolean && attrValue  !== false) {
                 props[camelCasedAttrName] = true;
              } else {
@@ -102,13 +132,18 @@ const createReactElement = (componentName: string, args, children, dependencyCom
     if (args.props) Object.keys(args.props).forEach(prop => props[camelCase(prop)] = args.props[prop]);
     if (args.domProps && args.domProps.innerHTML) props.dangerouslySetInnerHTML = {__html: args.domProps.innerHTML};
 
+    props.ref = (element: HTMLElement) => {
+        const events = args.on;
+        handleRefs(element, (resolvedComponent.vueComponent || vueComponent), events);
+    };
+
     if (children && Array.isArray(children) && children.length) {
         children.forEach(child => {
             if (child && child.props && child.type && typeof child.type !== 'string') {
                 try {
                     child.props = {...child.props, parentVueComponent: vueComponent};
                 } catch (err) {
-                    console.error(err);
+                    console.warn(err);
                 }
             }
         });
@@ -129,7 +164,11 @@ const copyMethodsToVueComponent = (vueComponent: IVueComponent) => {
 const copyPropsToVueComponent = (vueComponent: IVueComponent, props: any) => {
     if (props) {
         Object.keys(props)
-            .forEach(propName => vueComponent[propName] = props[propName]);
+            .forEach(propName => {
+                if (!vueComponent[propName]) {
+                    vueComponent[propName] = props[propName];
+                }
+            });
     }
 };
 
@@ -144,8 +183,10 @@ const getComponentTag = (component: any) => {
 };
 
 const copySlotsToVueComponent = (vueComponent: IVueComponent, slotMapping, props) => {
+    const reactChildrenArray = props && props.children && React.Children.toArray(props.children) as (React.ReactElement<any>)[];
+
     const slots = {
-        default: (props && props.children) ? React.Children.toArray(props.children) as  (React.ReactElement<any>)[] : []
+        default: (reactChildrenArray && reactChildrenArray.length) ?  reactChildrenArray : null
     };
 
     if (slotMapping && props) {
@@ -179,19 +220,19 @@ const copyArgsToVueComponent = (vueComponent: IVueComponent, args: any) => {
 }
 
 const callPropOnEvent = (eventName: string, eventArgs: any[], props: any) => {
-    if (!props[eventName]) {
-        throw new Error(`Component attempted to fire event ${eventName}, but component did not have a prop for that event.`);
-    }
+    const eventNameCamelCase = camelCase('on-' + eventName.split(':').join('-'));
 
-    props[eventName](eventArgs);
+    if (props[eventNameCamelCase]) {
+        props[eventNameCamelCase](eventArgs);
+    }
 };
 
 const handleWatchedProperties = (vueComponent: IVueComponent, currentProps: any, nextProps: any) => {
-    if (this.vueComponent.watch) {
-        Object.keys(this.vueComponent.watch)
+    if (vueComponent.watch) {
+        Object.keys(vueComponent.watch)
             .forEach(watchedProperty => {
-                if (this.props[watchedProperty] !== nextProps[watchedProperty]) {
-                    this.vueComponent.watch[watchedProperty]();
+                if (currentProps[watchedProperty] !== nextProps[watchedProperty]) {
+                    vueComponent.watch[watchedProperty]();
                 }
             });
     }
@@ -235,6 +276,22 @@ const getDefaultProps = (vueComponent: IVueComponent) => {
     }
 };
 
+const addCompiledTemplateFunctionsToVueComponent = (vueComponent: any, createElement: Function) => {
+    vueComponent._self = { _c: createElement.bind(vueComponent) };
+    vueComponent._t = (slotName: string, fallback) => {
+        const slotValue = vueComponent.$slots[slotName];
+
+        if (fallback && (!slotValue || !slotValue.length)) {
+            return fallback;
+        } else {
+            return slotValue;
+        }
+    };
+    vueComponent._v = (text: string) => text;
+    vueComponent._s = (text: string) => text;
+    vueComponent._e = () => null;
+};
+
 export const reactifyVue = <TProps>(reactifyVueArgs: IReactifyVueArgs) => {
     const vueComponent = reactifyVueArgs.component;
 
@@ -253,30 +310,24 @@ export const reactifyVue = <TProps>(reactifyVueArgs: IReactifyVueArgs) => {
             this.nextTickCallbacks = [];
 
             this.createElement = (element, args, children) => {
-                return createReactElement(element, args, children, reactifyVueArgs.dependencyComponents, this.vueComponent);
+                if (typeof args !== 'object' || Array.isArray(args)) {
+                    return createReactElement(element, {}, args, reactifyVueArgs.instantiatedComponents, this.vueComponent);
+                } else {
+                    return createReactElement(element, args, children, reactifyVueArgs.instantiatedComponents, this.vueComponent);
+                }
             };
 
             copyPropsToVueComponent(this.vueComponent, this.props);
             copySlotsToVueComponent(this.vueComponent, reactifyVueArgs.slots, this.props);
 
-            this.vueComponent._self = { _c: this.createElement.bind(this) };
-            this.vueComponent._t = (slotName: string, fallback) => {
-                const slotValue = this.vueComponent.$slots[slotName];
+            addCompiledTemplateFunctionsToVueComponent(this.vueComponent, this.createElement);
 
-                if (fallback && (!slotValue || !slotValue.length)) {
-                    return fallback;
-                } else {
-                    return slotValue;
-                }
-            };
-            this.vueComponent._v = (text: string) => text;
-            this.vueComponent._s = (text: string) => text;
-            this.vueComponent._e = () => null;
             this.vueComponent.$parent = this.props.parentVueComponent;
             this.vueComponent.$options = {
                 propsData: this.props
-            }
-            this.$nextTick = (func) => this.nextTickCallbacks.push(func);
+            };
+
+            this.vueComponent.$nextTick = (func) => this.nextTickCallbacks.push(func);
 
             Object.defineProperty(vueComponent, '$el', {
                 get: () => this.element,
@@ -305,14 +356,15 @@ export const reactifyVue = <TProps>(reactifyVueArgs: IReactifyVueArgs) => {
             if (vueComponent.beforeDestroy) vueComponent.beforeDestroy();
         },
 
-        componentWillReceiveProps: (nextProps) => {
-            copyPropsToVueComponent(this.vueComponent, this.props);
-            copySlotsToVueComponent(this.vueComponent, reactifyVueArgs.slots, this.props);
+        componentWillReceiveProps: function(nextProps) {
             handleWatchedProperties(this.vueComponent, this.props, nextProps);
-            handleComputedProperties(this.vueComponent);
         },
 
         render: function() {
+            copyPropsToVueComponent(this.vueComponent, this.props);
+            copySlotsToVueComponent(this.vueComponent, reactifyVueArgs.slots, this.props);
+            handleComputedProperties(this.vueComponent);
+
             const reactElement = this.vueComponent.render(this.createElement.bind(this));
             const newReactElement = {...reactElement, tag: reactifyVueArgs.tag};
             Object.preventExtensions(newReactElement);
