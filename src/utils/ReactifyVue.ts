@@ -131,6 +131,14 @@ const createReactElement = (
     });
     if (args.props) Object.keys(args.props).forEach(prop => props[camelCase(prop)] = args.props[prop]);
     if (args.domProps && args.domProps.innerHTML) props.dangerouslySetInnerHTML = {__html: args.domProps.innerHTML};
+    if (args.style) {
+        if (typeof args.style === 'object') {
+            props.style = args.style;
+        } else {
+            throw new Error('ReactifyVue only supports style attributes that are of type object')
+        }
+        
+    }
 
     props.ref = (element: HTMLElement) => {
         const events = args.on;

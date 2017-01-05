@@ -32,6 +32,7 @@ import {CardFooter} from './components/CardFooter';
 import {AccordionItem} from './components/AccordionItem';
 import {AccordionContent} from './components/AccordionContent';
 import {AccordionToggle} from './components/AccordionToggle';
+import {Progressbar} from './components/Progressbar';
 
 import './less/intro.less';
 import './less/framework7.ios.colors.less';
@@ -49,5 +50,6 @@ export {
     Link,
     Statusbar,
     Card, CardHeader, CardFooter, CardContent,
-    AccordionItem, AccordionContent, AccordionToggle
+    AccordionItem, AccordionContent, AccordionToggle,
+    Progressbar
 }
