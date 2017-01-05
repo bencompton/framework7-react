@@ -9,7 +9,8 @@
   },
   "scripts": {
     "test": "gulp test",
-    "build": "gulp && cd kitchen-sink && rm -rf node_modules/framework7-react && npm install && gulp"
+    "build": "gulp && cd kitchen-sink && rm -rf node_modules/framework7-react && npm install && gulp",
+    "update-f7-vue": "rm -rf node_modules/framework7-vue && npm install"
   },
   "repository": {
     "type": "git",
@@ -51,7 +52,7 @@
     "camelcase": "^4.0.0",
     "classnames": "^2.2.5",
     "framework7": "^1.5.0",
-    "framework7-vue": "^0.7.0",
+    "framework7-vue": "file:../framework7-vue",
     "invariant": "2.2.1",
     "react": "^15.4.0",
     "react-portal": "^3.0.0"

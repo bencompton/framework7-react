@@ -13,6 +13,9 @@ export interface IContentBlockProps extends React.Props<any> {
     active?: boolean;
     noHairlines?: boolean;
     noHairlinesBetween?: boolean;
+
+    onTabShow?: (event?: any) => void;
+    onTabHide?: (event?: any) => void;
 }
 
 export const ContentBlock = reactifyF7Vue<IContentBlockProps>({
