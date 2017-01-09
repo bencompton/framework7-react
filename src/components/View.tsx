@@ -4,9 +4,7 @@ import * as classNames from 'classnames';
 import {Framework7, View as F7View} from '../Framework7';
 import {IFramework7AppContext, ThemeTypeEnum} from './Framework7App';
 import {Pages} from './Pages';
-import {INavbarProps} from './Navbar';
-
-import '../less/views.less';
+import {INavbarProps} from '../../framework7-react/Navbar';
 
 export interface IViewProps {
     main?: boolean;
@@ -75,12 +73,15 @@ export class View extends React.Component<IViewProps, any> {
 
     constructor(props: any, context: any) {
         super(props, context);
-        this.framework7AppContext.registerView(this);
-        this.framework7AppContext.getFramework7(f7 => this.initializeFramework7View(f7));
+        this.framework7AppContext.registerView(this);        
     }
 
     public componentWillUnmount() {
         if (this.f7View && this.f7View.destroy) this.f7View.destroy();
+    }
+
+    public componentDidMount() {
+        this.framework7AppContext.getFramework7(f7 => this.initializeFramework7View(f7));
     }
 
     render() {

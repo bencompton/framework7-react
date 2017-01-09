@@ -14,7 +14,7 @@ export const SwipeoutPage = () => (
         {
             [1, 2, 3].map(n => {
                 return (
-                    <ListItem swipeout title={`Item ${n}`} onSwipeoutDeleted={onSwipeoutDeleted}>
+                    <ListItem swipeout title={`Item ${n}`} onSwipeoutDeleted={onSwipeoutDeleted} key={n}>
                         <ListItemSwipeoutActions>
                             <ListItemSwipeoutButton delete>Delete</ListItemSwipeoutButton>
                         </ListItemSwipeoutActions>
@@ -29,7 +29,7 @@ export const SwipeoutPage = () => (
         {
             [1, 2, 3].map(n => {
                 return (
-                    <ListItem swipeout title={`Item ${n}`} onSwipeoutDeleted={onSwipeoutDeleted}>
+                    <ListItem swipeout title={`Item ${n}`} onSwipeoutDeleted={onSwipeoutDeleted} key={n}>
                         <ListItemSwipeoutActions>
                             <ListItemSwipeoutButton close color="green">Close</ListItemSwipeoutButton>
                             <ListItemSwipeoutButton delete overswipe>Delete</ListItemSwipeoutButton>
@@ -45,7 +45,7 @@ export const SwipeoutPage = () => (
         {
             [1, 2, 3].map(n => {
                 return (
-                    <ListItem swipeout title={`Item ${n}`} onSwipeoutDeleted={onSwipeoutDeleted}>
+                    <ListItem swipeout title={`Item ${n}`} onSwipeoutDeleted={onSwipeoutDeleted} key={n}>
                         <ListItemSwipeoutActions left>
                             <ListItemSwipeoutButton close color="blue">Reply</ListItemSwipeoutButton>
                             <ListItemSwipeoutButton close color="green">Close</ListItemSwipeoutButton>
@@ -62,6 +62,7 @@ export const SwipeoutPage = () => (
             [1, 2].map(n => {
                 return (
                     <ListItem
+                        key={n}
                         swipeout
                         title={`Item ${n}`}
                         subtitle={`Subtitle ${n}`}

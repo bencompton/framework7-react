@@ -1,11 +1,10 @@
 import * as React from 'react';
 import {
-    Framework7App,
-    ThemeTypeEnum,
+    Framework7App,    
     Views, View,
     Pages, Page, PageContent,
     Navbar, NavLeft, NavCenter, NavRight, Toolbar,
-    Panel, Statusbar, Link, List, ListItem, ColorsEnum, LayoutEnum
+    Panel, Statusbar, Link, List, ListItem
 } from 'framework7-react';
 
 import {routes} from '../routes';

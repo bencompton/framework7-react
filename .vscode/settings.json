@@ -6,7 +6,8 @@
         "**/typings/": true,
         "**/dist/": true,
         "**/node_modules/": true,
-        "**/framework7-vue/": true
+        "**/framework7-vue/": true,
+        "**/framework7-react/": true,        
     },
     "typescript.tsdk": "./node_modules/typescript/lib"
 }
