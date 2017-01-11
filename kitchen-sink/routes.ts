@@ -6,6 +6,7 @@ import {SortablePage} from './components/pages/SortablePage';
 import {SwipeoutPage} from './components/pages/SwipeoutPage';
 import {AccordionPage} from './components/pages/AccordionPage';
 import {ProgressbarPage} from './components/pages/ProgressbarPage';
+import {FormsPage} from './components/pages/FormsPage';
 
 export const routes = [{
     path: '/content-block/',
@@ -31,4 +32,7 @@ export const routes = [{
 }, {
     path: '/progressbar/',
     component: ProgressbarPage
+}, {
+    path: '/forms/',
+    component: FormsPage
 }];

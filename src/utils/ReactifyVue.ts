@@ -97,6 +97,43 @@ const handleRefs = (element: HTMLElement, vueComponent: IVueComponent, events: {
     }
 };
 
+const renameAttribute = (componentName, attribute) => {
+    const attributeMap = {
+        autocomplete: {
+            componentNames: ['input'],
+            renameTo: 'autoComplete'
+        },
+        autofocus: {
+            componentNames: ['input'],
+            renameTo: 'autoFocus'
+        },
+        autosave: {
+            componentNames: ['input'],
+            renameTo: 'autoSave'
+        },
+        maxlength: {
+            componentNames: ['input'],
+            renameTo: 'maxLength'
+        },
+        minlength: {
+            componentNames: ['input'],
+            renameTo: 'minLength'
+        },
+        readonly: {
+            componentNames: ['input'],
+            renameTo: 'readOnly'            
+        }    
+    }
+
+    const attributeMapForAttribute = attributeMap[attribute];
+
+    if (attributeMapForAttribute && attributeMapForAttribute.componentNames.indexOf(componentName) > -1) {
+        attribute = attributeMapForAttribute.renameTo;
+    }
+
+    return attribute;
+};
+ 
 const createReactElement = (
     componentOrComponentName: string | React.ComponentClass<any> | React.StatelessComponent<any>,
     args,
@@ -115,6 +152,8 @@ const createReactElement = (
     if (children && !(args.domProps && args.domProps.innerHTML)) props.children = children;
     if (args.class || args.staticClass) props.className = getClassName(args.class, args.staticClass);
     if (args.attrs) Object.keys(args.attrs).forEach(attr => {
+        attr = renameAttribute(componentOrComponentName, attr);
+
         const resolvedVueComponent = resolvedComponent.vueComponent;
         const attrValue = args.attrs[attr];
         const camelCasedAttrName = camelCase(attr);
