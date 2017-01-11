@@ -1,7 +1,8 @@
 import * as React from 'react';
 import {Page, Navbar, ContentBlock, ContentBlockTitle, GridRow, GridCol} from 'framework7-react';
 
-const columnStyle = {border: '1px solid #e5e5e5; padding:5px', textAlign: 'center'};
+const columnStyle = {border: '1px solid #e5e5e5', padding: '5px', textAlign: 'center'};
+const rowStyle = { margin: '1em 0' };
 
 export const GridPage = () => {
     return (
@@ -10,26 +11,23 @@ export const GridPage = () => {
 
             <ContentBlockTitle>Grid</ContentBlockTitle>
             <ContentBlock inner>                
-                <GridRow>
-                    <GridCol>50%</GridCol>
-                    <GridCol>50%</GridCol>
+                <GridRow style={rowStyle}>
+                    <GridCol style={columnStyle}>50%</GridCol>
+                    <GridCol style={columnStyle}>50%</GridCol>                    
+                </GridRow>                
+                <GridRow style={rowStyle}>
+                    <GridCol style={columnStyle}>33%</GridCol>
+                    <GridCol style={columnStyle}>33%</GridCol>
+                    <GridCol style={columnStyle}>33%</GridCol>
                 </GridRow>
-        
-                <GridRow>
-                    <GridCol>33%</GridCol>
-                    <GridCol>33%</GridCol>
-                    <GridCol>33%</GridCol>
-                </GridRow>
-
-                <GridRow>
-                    <GridCol width="50" tabletWidth="80">50%</GridCol>
-                    <GridCol width="25" tabletWidth="10">25%</GridCol>
-                    <GridCol width="25" tabletWidth="10">25%</GridCol>
-                </GridRow>
-    
-                <GridRow noGutter>
-                    <GridCol width="66">66%</GridCol>
-                    <GridCol width="33">33%</GridCol>
+                <GridRow style={rowStyle}>
+                    <GridCol width="50" tabletWidth="80" style={columnStyle}>50%</GridCol>
+                    <GridCol width="25" tabletWidth="10" style={columnStyle}>25%</GridCol>
+                    <GridCol width="25" tabletWidth="10" style={columnStyle}>25%</GridCol>
+                </GridRow>    
+                <GridRow noGutter style={rowStyle}>
+                    <GridCol width="66" style={columnStyle}>66%</GridCol>
+                    <GridCol width="33" style={columnStyle}>33%</GridCol>
                 </GridRow>                
             </ContentBlock>
         </Page>

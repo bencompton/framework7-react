@@ -69,7 +69,7 @@ const generateTypeScriptInterfaceFromProps = (props, componentName, eventList, s
 
     if (!props || !props.id) interfaceProps.push('   id?: string;');
     if (!props || !props.className)  interfaceProps.push('   className?: string;');
-    if (!props || !props.style)  interfaceProps.push('   style?: string;');
+    if (!props || !props.style)  interfaceProps.push('   style?: {[cssAttribute: string]: string};');
 
     if (interfaceProps.length) {
         if (mixin) {

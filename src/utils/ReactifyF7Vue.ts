@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as camelCase from 'camelcase';
 
 import {IFramework7AppContext} from '../components/Framework7App';
-import {reactifyVue} from './ReactifyVue';
+import {reactifyVue} from './reactify-vue/ReactifyVue';
 import {Dom7} from '../Framework7';
 
 export interface IReactifyF7VueArgs {
