@@ -4,4 +4,4 @@
 
 Keep an eye on the [kitchen sink](https://bencompton.github.io/framework7-react/reactify-vue/) over the coming weeks as new pages are added and bugs are squashed. Once the kitchen sink is complete and the components are all stable, this new version will be merged to master and published to NPM. At that point, everything currently available in Framework7 Vue should be in Framework7 React as well.
 
-Also in development is [Framework7 Redux](https://github.com/bencompton/framework7-redux).
+Also in development is in progress on [Framework7 Redux](https://github.com/bencompton/framework7-redux).
