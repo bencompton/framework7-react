@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {Page, Navbar, ContentBlockTitle, List, ListItem, ListLabel, FormLabel, FormInput} from 'framework7-react';
 
-const onChange = (event) => {
+const onChangeHandler = (event) => {
     console.log('change');
 };
 
@@ -11,7 +11,7 @@ export const FormsPage = () => {
             <Navbar backLink="Back" title="Forms" sliding />
 
             <ContentBlockTitle>Form</ContentBlockTitle>
-            <List>
+            <List form>
                 <ListItem>
                     <FormLabel>Name</FormLabel>  
                     <FormInput type="text" placeholder="Name" />   
@@ -19,9 +19,10 @@ export const FormsPage = () => {
                 <ListItem>
                     <FormLabel>Password</FormLabel>  
                     <FormInput type="password" placeholder="Password" />   
-                </ListItem>                <ListItem>
+                </ListItem>                
+                <ListItem>
                     <FormLabel>E-mail</FormLabel>  
-                    <FormInput type="email" placeholder="E-mail" />   
+                    <FormInput type="email" placeholder="E-mail" /> 
                 </ListItem>
                 <ListItem>
                     <FormLabel>URL</FormLabel>  
@@ -37,26 +38,42 @@ export const FormsPage = () => {
                 </ListItem>
                 <ListItem>
                     <FormLabel>Date time</FormLabel>  
-                    <FormInput type="datetime-local" />   
+                    <FormInput type="datetime-local" />
                 </ListItem>
-                {/*<ListItem>
+                <ListItem>
                     <FormLabel>Gender</FormLabel>
                     <FormInput type="select" placeholder="Password">
-                        <Option value="1">Male</Option>
-                        <Option value="1">Female</Option>
+                        <option value="1">Male</option>
+                        <option value="1">Female</option>
                     </FormInput>
-                </ListItem>*/}
-                {/*<ListItem>
-                    <FormLabel>Switch</FormLabel>  
-                    <FormInput type="switch" onChange={onChange} />   
-                </ListItem>*/}
+                </ListItem>
+                <ListItem>
+                    <FormLabel>Switch</FormLabel>
+                    <FormInput type="switch" onChange={onChangeHandler} />
+                </ListItem>
                 <ListItem>
                     <FormLabel>Range</FormLabel>  
-                    <FormInput type="range" min="0" max="100" step="1" value="90" />   
-                </ListItem>                
+                    <FormInput type="range" min="0" max="100" step="1" value="90" />
+                </ListItem>
                 <ListItem>
-                    <FormLabel>Textarea</FormLabel>  
-                    <FormInput type="textarea" placeholder="Textarea" />   
+                    <FormLabel>Textarea</FormLabel>
+                    <FormInput type="textarea" placeholder="Textarea" />
+                </ListItem>
+            </List>
+
+            <ContentBlockTitle>Form With Floating Labels</ContentBlockTitle>
+            <List>
+                <ListItem>
+                    <FormLabel floating>Name</FormLabel>  
+                    <FormInput type="text" placeholder="Name" />   
+                </ListItem>
+                <ListItem>
+                    <FormLabel floating>Password</FormLabel>
+                    <FormInput type="password" placeholder="Password" />
+                </ListItem>
+                <ListItem>
+                    <FormLabel floating>E-mail</FormLabel>  
+                    <FormInput type="email" placeholder="E-mail" />
                 </ListItem>
             </List>
         </Page>
