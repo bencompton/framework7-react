@@ -43,10 +43,10 @@ export const ContactsPage = () => {
                 {Object.keys(contacts).reduce((listGroups, nextGroupName) => {
                     return [
                         ...listGroups,
-                        <ListGroup>
+                        <ListGroup key={nextGroupName}>
                             <ListItem title={nextGroupName} groupTitle />
                             {contacts[nextGroupName].map(contactName => {
-                                return <ListItem title={contactName} />;
+                                return <ListItem key={contactName} title={contactName} />;
                             })}
                         </ListGroup>
                     ];

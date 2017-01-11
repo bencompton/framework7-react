@@ -190,7 +190,7 @@ const createReactElement = (
                 try {
                     child.props = {...child.props, parentVueComponent: vueComponent};
                 } catch (err) {
-                    console.warn(err);
+                    //console.warn(err);
                 }
             }
         });

@@ -7,6 +7,7 @@ import {SwipeoutPage} from './components/pages/SwipeoutPage';
 import {AccordionPage} from './components/pages/AccordionPage';
 import {ProgressbarPage} from './components/pages/ProgressbarPage';
 import {FormsPage} from './components/pages/FormsPage';
+import {GridPage} from './components/pages/GridPage';
 
 export const routes = [{
     path: '/content-block/',
@@ -35,4 +36,7 @@ export const routes = [{
 }, {
     path: '/forms/',
     component: FormsPage
+}, {
+    path: '/grid/',
+    component: GridPage
 }];

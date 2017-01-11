@@ -38,6 +38,7 @@ export const AccordionPage = () => {
                     [1 ,2, 3].map(n => {
                         return (
                             <ListItem
+                                key={n}
                                 accordionItem
                                 title={`Item ${n}`}
                                 onAccordionOpen={onOpen}
@@ -62,7 +63,7 @@ export const AccordionPage = () => {
                 {
                     [1, 2, 3].map(n => {
                         return (
-                            <AccordionItem>
+                            <AccordionItem key={n}>
                                 <AccordionToggle><b>{`Item ${n}`}</b></AccordionToggle>
                                 <AccordionContent>{`Content ${n}`}</AccordionContent>
                             </AccordionItem>

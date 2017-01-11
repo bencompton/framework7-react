@@ -67,7 +67,7 @@ function getAllFw7ModulesAndDependenciesBeingUsed() {
 function getFw7CustomDependencies() {
     var fw7CustomDependencies = [];
 
-    for (i = 0; i < fw7ModulesBeingUsed.length; i++) {
+    for (let i = 0; i < fw7ModulesBeingUsed.length; i++) {
         var module = fw7ModulesConfig[fw7ModulesBeingUsed[i]];
 
         fw7CustomDependencies.push.apply(fw7CustomDependencies, module.dependencies);

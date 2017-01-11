@@ -11,6 +11,7 @@ export const ListsPage = () => {
                 {
                     [1, 2, 3, 4, 5].map(n => {
                         return <ListItem
+                            key={n}
                             title={n === 3 ? 'Divider' : `Item ${n}`}
                             badge="3"
                             badgeColor="red"
@@ -26,10 +27,11 @@ export const ListsPage = () => {
                 {
                     [1, 2].map(n => {
                         return (
-                            <ListGroup>
+                            <ListGroup key={n}>
                                 {
                                     [1, 2, 3].map(m => {
                                         return <ListItem
+                                            key={m}
                                             title={m === 1 ? 'Group Title' : `Group Item ${m - 1}`}
                                             groupTitle={m === 1}
                                         />
@@ -47,6 +49,7 @@ export const ListsPage = () => {
                 {
                     [1, 2].map(n => {
                         return <ListItem
+                            key={n}
                             title={`Item ${n}`}
                             subtitle = {`Subtitle ${n}`}
                             media={`<img src="http://lorempixel.com/160/160/people/${n}" width="80">`}
@@ -62,7 +65,7 @@ export const ListsPage = () => {
             <List inset>
                 {
                     [1, 2, 3].map(n => {
-                        return <ListButton title={`List Button ${n}`} link="http://google.com" />
+                        return <ListButton key={n} title={`List Button ${n}`} link="http://google.com" />
                     })
                 }
             </List>

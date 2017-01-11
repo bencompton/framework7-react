@@ -10,5 +10,5 @@
         "jsx": "react",
         "allowJs": true      
     },
-    "exclude": ["kitchen-sink"]    
+    "exclude": ["kitchen-sink", "node_modules", "dist"]    
 }
