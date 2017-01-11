@@ -21,7 +21,8 @@ export interface IFramework7AppContext {
 export interface IFramework7AppProps extends React.Props<any> {
     applyOverscrollFix?: boolean;
     themeType: ThemeTypeEnum;
-    routes: IFramework7Route[];    
+    routes: IFramework7Route[];
+    onFramework7Init?: (framework7: Framework7) => void;
 }
 
 export class Framework7App extends React.Component<IFramework7AppProps, Framework7> {
@@ -69,6 +70,10 @@ export class Framework7App extends React.Component<IFramework7AppProps, Framewor
         this.framework7 = new Framework7({
             preroute: this.router.preroute.bind(this.router)
         });
+
+        if (this.props.onFramework7Init) {
+            this.props.onFramework7Init(this.framework7);
+        }
 
         this.framework7InitCallbacks.forEach(callback => {
             callback(this.framework7);
