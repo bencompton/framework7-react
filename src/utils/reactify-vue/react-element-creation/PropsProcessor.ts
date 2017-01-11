@@ -24,27 +24,27 @@ const handleRefs = (element: HTMLElement, vueComponent: IVueComponent, events: {
 const renameAttribute = (componentName, attribute) => {
     const attributeMap = {
         autocomplete: {
-            componentNames: ['input'],
+            componentNames: ['input', 'textarea', 'select'],
             renameTo: 'autoComplete'
         },
         autofocus: {
-            componentNames: ['input'],
+            componentNames: ['input', 'textarea', 'select'],
             renameTo: 'autoFocus'
         },
         autosave: {
-            componentNames: ['input'],
+            componentNames: ['input', 'textarea', 'select'],
             renameTo: 'autoSave'
         },
         maxlength: {
-            componentNames: ['input'],
+            componentNames: ['input', 'textarea', 'select'],
             renameTo: 'maxLength'
         },
         minlength: {
-            componentNames: ['input'],
+            componentNames: ['input', 'textarea', 'select'],
             renameTo: 'minLength'
         },
         readonly: {
-            componentNames: ['input'],
+            componentNames: ['input', 'textarea', 'select'],
             renameTo: 'readOnly'            
         }    
     }
