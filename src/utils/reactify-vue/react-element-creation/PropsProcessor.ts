@@ -155,16 +155,19 @@ export class PropsProcessor {
 
             const resolvedVueComponent = resolvedComponent.vueComponent;
             const attrValue = args.attrs[attr];
-            const camelCasedAttrName = camelCase(attr);
+            
+            if (attrValue !== undefined || attrValue !== false) {
+                const camelCasedAttrName = camelCase(attr);
 
-            if (resolvedVueComponent && resolvedVueComponent.props && resolvedVueComponent.props[camelCasedAttrName]) {
-                if (resolvedVueComponent.props[camelCasedAttrName] === Boolean && attrValue  !== false) {
-                    props[camelCasedAttrName] = true;
+                if (resolvedVueComponent && resolvedVueComponent.props && resolvedVueComponent.props[camelCasedAttrName]) {
+                    if (resolvedVueComponent.props[camelCasedAttrName] === Boolean && attrValue  !== false) {
+                        props[camelCasedAttrName] = true;
+                    } else {
+                        props[camelCasedAttrName] = attrValue;
+                    }
                 } else {
-                    props[camelCasedAttrName] = attrValue;
+                    props[attr] = attrValue;
                 }
-            } else {
-                props[attr] = attrValue;
             }
         });
 

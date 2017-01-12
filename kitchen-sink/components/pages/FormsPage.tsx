@@ -5,6 +5,8 @@ const onChangeHandler = (event) => {
     console.log('change');
 };
 
+const pStyle = {margin: '1em 0'};
+
 export const FormsPage = () => {
     return (
         <Page>
@@ -127,36 +129,28 @@ export const FormsPage = () => {
 
             <ContentBlockTitle>Buttons</ContentBlockTitle>
             <ContentBlock inner>
-                <p><Button>Button</Button></p>
-                <p><Button round>Button Round</Button></p>
-                <p><Button fill>Button Fill</Button></p>
-                <p>
-                    <ButtonsSegmented>
-                        <Button round active>Button 1</Button>
-                        <Button round>Button 2</Button>
-                        <Button round>Button 3</Button>
-                    </ButtonsSegmented>
-                </p>
-                <p>
-                    <ButtonsSegmented color="orange">
-                        <Button round big>Button 1</Button>
-                        <Button round big active>Button 2</Button>
-                        <Button round big>Button 3</Button>
-                    </ButtonsSegmented>
-                </p>
-                <p>
-                    <GridRow>
-                        <GridCol><Button big fill color="green">Send</Button></GridCol>
-                        <GridCol><Button big fill color="red">Delete</Button></GridCol>
-                    </GridRow>
-                </p>
-                <p>
-                    <GridRow>
-                        <GridCol><Button fill raised color="green">Raised</Button></GridCol>
-                        <GridCol><Button raised color="red">Raised</Button></GridCol>
-                        <GridCol><Button fill raised color="pink">Raised</Button></GridCol>
-                    </GridRow>
-                </p>
+                <Button style={pStyle}>Button</Button>
+                <Button round style={pStyle}>Button Round</Button>
+                <Button fill style={pStyle}>Button Fill</Button>                
+                <ButtonsSegmented style={pStyle}>
+                    <Button round active>Button 1</Button>
+                    <Button round>Button 2</Button>
+                    <Button round>Button 3</Button>
+                </ButtonsSegmented>                         
+                <ButtonsSegmented color="orange" style={pStyle}>
+                    <Button round big>Button 1</Button>
+                    <Button round big active>Button 2</Button>
+                    <Button round big>Button 3</Button>
+                </ButtonsSegmented>
+                <GridRow style={pStyle}>
+                    <GridCol><Button big fill color="green">Send</Button></GridCol>
+                    <GridCol><Button big fill color="red">Delete</Button></GridCol>
+                </GridRow>                          
+                <GridRow style={pStyle}>
+                    <GridCol><Button fill raised color="green">Raised</Button></GridCol>
+                    <GridCol><Button raised color="red">Raised</Button></GridCol>
+                    <GridCol><Button fill raised color="pink">Raised</Button></GridCol>
+                </GridRow>                
             </ContentBlock>
         </Page>
     );
