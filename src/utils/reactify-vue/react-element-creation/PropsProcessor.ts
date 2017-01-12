@@ -68,8 +68,7 @@ export class PropsProcessor {
             ...this.getRef(args, resolvedComponent, vueComponent),
             ...this.getPropsFromArgs(args),
             ...this.getChildren(children, args),
-            ...this.convertAttrsToProps(args, componentOrComponentName, resolvedComponent),
-            ...this.convertAttrsToProps(args, componentOrComponentName, resolvedComponent),
+            ...this.convertAttrsToProps(args, componentOrComponentName, resolvedComponent),            
             ...this.getInnerHTML(args)
         };
     }
