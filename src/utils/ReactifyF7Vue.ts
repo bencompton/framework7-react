@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as camelCase from 'camelcase';
+import {camelCase} from 'change-case';
 
 import {IFramework7AppContext} from '../components/Framework7App';
 import {reactifyVue} from './reactify-vue/ReactifyVue';
