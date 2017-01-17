@@ -37,6 +37,10 @@ export const reactifyF7Vue = <TProps>(args: IReactifyF7VueArgs) => {
         getInitialState: function() {
             ((this.context as any).framework7AppContext as IFramework7AppContext).getFramework7((f7) => {
                 this.framework7 = f7;
+
+                if ((innerComponent as any).vueComponent.onF7Init) {
+                    (innerComponent as any).vueComponent.onF7Init(f7);
+                }
             });
 
             return null;
