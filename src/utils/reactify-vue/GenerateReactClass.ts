@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as camelCase from 'camelcase';
+import {camelCase} from 'change-case';
 
 import {createReactElement} from './react-element-creation/CreateReactElements';
 import {IVueComponent} from './ReactifyVue';
