@@ -148,11 +148,66 @@ const addCompiledTemplateFunctionsToVueComponent = (vueComponent: any, createEle
 const generateCreateElementFunctionForClass = (classVueComponentInstance, instantiatedComponents, vueComponent) => {
     return (element, args, children) => {
         if (typeof args !== 'object' || Array.isArray(args)) {
+            //Children passed in as second argument
             return createReactElement(element, {}, args, instantiatedComponents, vueComponent);
         } else {
             return createReactElement(element, args, children, instantiatedComponents, vueComponent);
         }
     };
+};
+
+const removePropsFromElementAndChildren = (element, propsToRemove) => {
+    let children = element && element.props && element.props.children;
+
+    if (children) {
+        if (Array.isArray(children)) {
+            children = children.map(child => removePropsFromElementAndChildren(child, propsToRemove));
+        } else {
+            children = removePropsFromElementAndChildren(children, propsToRemove);
+        }
+    }
+
+    if (element && element.props && Object.keys(element.props).filter(propName => propsToRemove.indexOf(propName) !== -1).length) {
+        return {...element, props: Object.keys(element.props).reduce((newProps, nextPropName) => {
+            if (nextPropName === 'children') {
+                return {
+                    ...newProps,
+                    children: children
+                };
+            } else if (propsToRemove.indexOf(nextPropName) === -1) {
+                return {
+                    ...newProps,
+                    [nextPropName]: element.props[nextPropName]
+                };
+            } else {
+                return newProps;
+            }
+        }, {})};
+    } else {
+        return element;
+    }
+};
+
+const applyAdditionalClassesAndStyles = (element) => {
+    if (element.props.additionalClassName) {
+        const existingClassName = element.props.className || '';
+        element.props.className = existingClassName + ' ' + element.props.additionalClassName;        
+    }
+
+    if (element.props.additionalStyles) {
+        const existingStyles = element.props.style || {};
+        
+        element.props.style = {
+            ...existingStyles,
+            ...element.props.additionalStyles
+        };        
+    }
+
+    if (element.props.additionalClassName || element.props.additionalStyles) {
+        return removePropsFromElementAndChildren(element, ['additionalClassName', 'additionalStyles']);
+    } else {
+        return element;
+    }    
 };
 
 const generateVueComponentWithInstanceProperties = (vueComponent, props, self) => {
@@ -224,10 +279,11 @@ export const generateReactClass = <TProps>(instantiatedComponents, vueComponent,
             handleComputedProperties(this.vueComponent);
 
             const reactElement = this.vueComponent.render(this.createElement.bind(this));
-            const newReactElement = {...reactElement, tag: tag};
-            Object.preventExtensions(newReactElement);
+            const reactElementWithTag = {...reactElement, props: { ...reactElement.props}, tag: tag};
+            const reactElementWithAdditionalClasesAndStyles = applyAdditionalClassesAndStyles(reactElementWithTag);
+            Object.preventExtensions(reactElementWithAdditionalClasesAndStyles);
 
-            return newReactElement;
+            return reactElementWithAdditionalClasesAndStyles;
         },
 
         callVueMethod: function(methodName: string, ...args: any[]) {

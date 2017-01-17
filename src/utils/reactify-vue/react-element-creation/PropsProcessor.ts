@@ -65,6 +65,8 @@ export class PropsProcessor {
         return {
             ...this.getClasses(args, vueComponent),
             ...this.getStyle(args, vueComponent),
+            ...this.getAdditionalClassName(vueComponent),
+            ...this.getAdditionalStyles(vueComponent),
             ...this.getRef(args, resolvedComponent, vueComponent),
             ...this.getPropsFromArgs(args),
             ...this.getChildren(children, args),
@@ -86,10 +88,6 @@ export class PropsProcessor {
             classObject[args.staticClass] = true; 
         }
 
-        if (vueComponent.className) {
-            classObject[vueComponent.className] = true;
-        }
-
         if (Object.keys(classObject).length) {
             return { className: classNames(classObject) };
         } else {
@@ -98,7 +96,7 @@ export class PropsProcessor {
     }
 
     private getStyle(args, vueComponent) {
-        let style;
+        let style;        
 
         if (args.style) {
             if (typeof args.style === 'object') {
@@ -108,16 +106,29 @@ export class PropsProcessor {
             }            
         }
 
-        //Style can be passed into any framework7-react component. 
-        //If it is passed in, add it to any styles specified in the Vue component.
-        if ((vueComponent as any).style) style = { 
-            ...style,
-            ...(vueComponent as any).style
-        };
-
         if (style) {
             return { style };
         } else {
+            return {};
+        }
+    }
+
+    private getAdditionalClassName(vueComponent) {
+        //ClassName can be passed into any framework7-react component.
+        //If it is passed in, add it as a prop.
+        if (vueComponent.className) {
+            return { additionalClassName: vueComponent.className }
+        } else {
+            return {};
+        }
+    }
+
+    private getAdditionalStyles(vueComponent, ) {
+        //Style can be passed into any framework7-react component. 
+        //If it is passed in, add it to any styles specified in the Vue component.
+        if ((vueComponent as any).style) {
+            return {additionalStyles: (vueComponent as any).style };
+        } else { 
             return {};
         }
     }
