@@ -7,6 +7,8 @@ export interface IInfinitePageState {
 }
 
 export class InfinitePage extends React.Component<any, IInfinitePageState> {
+    private timeout: any;
+
     constructor() {
         super();
         let itemsArr: number[] = [];
@@ -47,7 +49,11 @@ export class InfinitePage extends React.Component<any, IInfinitePageState> {
         let newItems = this.state.items.slice();
         let newCounter = this.state.counter;
 
-        setTimeout(function () {
+        if (this.timeout) {
+            clearTimeout(this.timeout);
+        } 
+        
+        this.timeout = setTimeout(function () {
             for (let i = newCounter; i < newCounter + 25; i++) {
                 newItems.push(i + 1);
             }
@@ -56,6 +62,6 @@ export class InfinitePage extends React.Component<any, IInfinitePageState> {
                 counter: newCounter + 25,
                 items: newItems
             });
-        }, 500);        
-    }
+        }, 500); 
+    }       
 };

@@ -17,7 +17,7 @@ export class PullRefreshPage extends React.Component<any, IPullRefreshPageState>
 
     render() {
         return (
-            <Page pullToRefresh ptrLayer pullToRefreshLayer onPtrRefresh={this.onRefresh.bind(this)}>
+            <Page pullToRefresh onPtrRefresh={this.onRefresh.bind(this)}>
                 <Navbar backLink="Back" title="Pull To Refresh" sliding></Navbar>
 
                 <ContentBlockTitle>Pull To Refresh</ContentBlockTitle>

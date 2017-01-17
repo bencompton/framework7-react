@@ -111,11 +111,11 @@ const getDefaultProps = (vueComponent: IVueComponent) => {
     if (vueComponent.props) {
         const defaultProps = Object.keys(vueComponent.props).reduce((defaultProps, propName) => {
             const propDef = vueComponent.props[propName];
-
+            
             if (propDef.default) {
                 return {
                     ...defaultProps,
-                    [propName]: propDef.default
+                    [camelCase(propName)]: propDef.default
                 };
             } else {
                 return defaultProps;
