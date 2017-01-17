@@ -39,6 +39,8 @@ const getPropType = (propValue) => {
                 return 'number';
             case String:
                 return 'string';
+            case Object:
+                return 'Object';
             default:
                 return 'string';
         }
