@@ -25,18 +25,14 @@ export const SwiperPage = () => {
             <ContentBlockTitle>Default</ContentBlockTitle>
             <Swiper style={swiperHeight}>
                 {
-                    swiperItems.map(item => {
-                        return <SwiperSlide key={item} className="bg-white color-black">{`Slide ${item}`}</SwiperSlide>;
-                    })
+                    swiperItems.map(swiperMap)
                 }
             </Swiper>
 
             <ContentBlockTitle>Navigation</ContentBlockTitle>
             <Swiper pagination next-button prev-button scrollbar style={swiperHeight}>
                 {
-                    swiperItems.map(item => {
-                        return <SwiperSlide key={item} className="bg-white color-black">{`Slide ${item}`}</SwiperSlide>;
-                    })
+                    swiperItems.map(swiperMap)
                 }
             </Swiper>
 
