@@ -9,6 +9,11 @@ import {ProgressbarPage} from './components/pages/ProgressbarPage';
 import {FormsPage} from './components/pages/FormsPage';
 import {GridPage} from './components/pages/GridPage';
 import {SmartSelectPage} from './components/pages/SmartSelectPage';
+import {ChipsPage} from './components/pages/ChipsPage';
+import {PreloaderPage} from './components/pages/PreloaderPage';
+import {PullRefreshPage} from './components/pages/PullRefreshPage';
+import {InfinitePage} from './components/pages/InfinitePage';
+import {SwiperPage} from './components/pages/SwiperPage';
 
 export const routes = [{
     path: '/content-block/',
@@ -40,4 +45,22 @@ export const routes = [{
 }, {
     path: '/smart-select/',
     component: SmartSelectPage
+}, {
+    path: '/chips/',
+    component: ChipsPage
+}, {
+    path: '/grid/',
+    component: GridPage
+}, {
+    path: '/preloader/',
+    component: PreloaderPage
+}, {
+    path: '/pull-to-refresh/',
+    component: PullRefreshPage
+}, {
+    path: '/infinite/',
+    component: InfinitePage
+}, {
+    path: '/swiper/',
+    component: SwiperPage
 }];
