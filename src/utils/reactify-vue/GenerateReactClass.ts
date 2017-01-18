@@ -244,11 +244,15 @@ export const generateReactClass = <TProps>(instantiatedComponents, vueComponent,
 
             addCompiledTemplateFunctionsToVueComponent(this.vueComponent, this.createElement);
 
-            Object.defineProperty(vueComponent, '$el', {
+            Object.defineProperty(this.vueComponent, '$el', {
                 get: () => this.element,
                 enumerable: true,
                 configurable: true
-            });            
+            });
+
+            if (this.props.__onInit) {
+                this.props.__onInit(this);
+            }
 
             return null;
         },
@@ -263,6 +267,8 @@ export const generateReactClass = <TProps>(instantiatedComponents, vueComponent,
 
         componentDidMount: function() {
             if (this.vueComponent.mounted) this.vueComponent.mounted();
+
+            if (this.props.__onMount) this.props.__onMount(this);
         },
 
         componentWillUnmount: function() {
@@ -279,7 +285,9 @@ export const generateReactClass = <TProps>(instantiatedComponents, vueComponent,
             handleComputedProperties(this.vueComponent);
 
             const reactElement = this.vueComponent.render(this.createElement.bind(this));
-            const reactElementWithTag = {...reactElement, props: { ...reactElement.props}, tag: tag};
+            const reactElementWithTag = {...reactElement, props: { ...reactElement.props}, tag: tag, ref: (e) => {                 
+                this.element = e;
+            }};
             const reactElementWithAdditionalClasesAndStyles = applyAdditionalClassesAndStyles(reactElementWithTag);
             Object.preventExtensions(reactElementWithAdditionalClasesAndStyles);
 
@@ -293,6 +301,7 @@ export const generateReactClass = <TProps>(instantiatedComponents, vueComponent,
 
     (reactClass as any).tag = tag;
     (reactClass as any).vueComponent = vueComponent;
+    (reactClass as any).getVueComponentInstance = () => this.vueComponent;    
 
     const defaultProps = getDefaultProps(vueComponent);
 

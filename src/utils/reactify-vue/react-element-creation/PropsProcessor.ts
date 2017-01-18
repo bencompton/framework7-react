@@ -4,8 +4,6 @@ import * as classNames from 'classnames';
 import {IVueComponent} from '../ReactifyVue';
 
 const handleRefs = (element: HTMLElement, vueComponent: IVueComponent, events: {[eventName: string]: Function}) => {
-    vueComponent.element = element;
-
     if (events) {
         Object.keys(events).forEach(eventName => {
             if (element && element.addEventListener && !((element as any).vueListeners && (element as any).vueListeners[eventName])) {
@@ -67,7 +65,7 @@ export class PropsProcessor {
             ...this.getStyle(args, vueComponent),
             ...this.getAdditionalClassName(vueComponent),
             ...this.getAdditionalStyles(vueComponent),
-            ...this.getRef(args, resolvedComponent, vueComponent),
+            ...this.getRef(args, vueComponent),
             ...this.getPropsFromArgs(args),
             ...this.getChildren(children, args),
             ...this.convertAttrsToProps(args, componentOrComponentName, resolvedComponent),            
@@ -133,11 +131,11 @@ export class PropsProcessor {
         }
     }
 
-    private getRef(args, resolvedComponent, vueComponent) {
+    private getRef(args, vueComponent) {
         return {
             ref: (element: HTMLElement) => {
                 const events = args.on;
-                handleRefs(element, (resolvedComponent.vueComponent || vueComponent), events);
+                handleRefs(element, vueComponent, events);
             }
         };
     }

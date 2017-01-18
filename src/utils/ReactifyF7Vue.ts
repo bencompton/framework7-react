@@ -34,14 +34,16 @@ export const reactifyF7Vue = <TProps>(args: IReactifyF7VueArgs) => {
     });
 
     const reactClass = React.createClass<TProps, any>({
-        getInitialState: function() {
-            ((this.context as any).framework7AppContext as IFramework7AppContext).getFramework7((f7) => {
+        getInitialState: function () {
+            ((this.context as any).framework7AppContext as IFramework7AppContext).getFramework7(f7 => {
                 this.framework7 = f7;
-
-                if ((innerComponent as any).vueComponent.onF7Init) {
-                    (innerComponent as any).vueComponent.onF7Init(f7);
-                }
             });
+
+            Object.defineProperty(args.component, '$f7', {
+                get: () => this.framework7,
+                enumerable: true,
+                configurable: true
+            });            
 
             return null;
         },
@@ -49,16 +51,19 @@ export const reactifyF7Vue = <TProps>(args: IReactifyF7VueArgs) => {
         render: function() {
             const props = this.props;
 
-            Object.defineProperty(args.component, '$f7', {
-                get: () => this.framework7,
-                enumerable: true,
-                configurable: true
+            const innerEl = React.createElement(innerComponent, {
+                ...props,
+                $theme: { material: false, ios: true },
+                __onMount: (self) => {
+                    ((this.context as any).framework7AppContext as IFramework7AppContext).getFramework7(f7 => {
+                        if (self.vueComponent.onF7Init) {
+                            self.vueComponent.onF7Init(f7);
+                        }
+                    });
+                }
             });
 
-            return React.createElement(innerComponent, {
-                ...props,
-                $theme: { material: false, ios: true }
-            });
+            return innerEl;
         }
     });
 
