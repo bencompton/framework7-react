@@ -14,6 +14,9 @@ import {PreloaderPage} from './components/pages/PreloaderPage';
 import {PullRefreshPage} from './components/pages/PullRefreshPage';
 import {InfinitePage} from './components/pages/InfinitePage';
 import {SwiperPage} from './components/pages/SwiperPage';
+import {SearchbarPage} from './components/pages/SearchbarPage';
+import {TabsPage} from './components/pages/TabsPage';
+import {TabsSwipeablePage} from './components/pages/TabsSwipeablePage';
 
 export const routes = [{
     path: '/content-block/',
@@ -63,4 +66,13 @@ export const routes = [{
 }, {
     path: '/swiper/',
     component: SwiperPage
+}, {
+    path: '/searchbar/',
+    component: SearchbarPage
+}, {
+    path: '/tabs/',
+    component: TabsPage
+}, {
+    path: '/tabs-swipeable/',
+    component: TabsSwipeablePage
 }];
