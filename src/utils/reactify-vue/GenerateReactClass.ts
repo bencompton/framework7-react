@@ -188,26 +188,34 @@ const removePropsFromElementAndChildren = (element, propsToRemove) => {
     }
 };
 
-const applyAdditionalClassesAndStyles = (element) => {
-    if (element.props.additionalClassName) {
-        const existingClassName = element.props.className || '';
-        element.props.className = existingClassName + ' ' + element.props.additionalClassName;        
+const applyPropOverrides = (reactElement: React.ReactElement<any>, tag: string, self) => {
+    const refFunc = (e: HTMLElement) => {                 
+        reactElement.props.refTemp(e);
+        self.element = e;
+    };
+
+    const elementWithPropOverrides = {...reactElement, props: { ...reactElement.props}, tag: tag, ref: refFunc };
+
+    if (elementWithPropOverrides.props.additionalClassName) {
+        const existingClassName = elementWithPropOverrides.props.className || '';
+
+        elementWithPropOverrides.props.className = existingClassName + ' ' 
+            + elementWithPropOverrides.props.additionalClassName;        
     }
 
-    if (element.props.additionalStyles) {
-        const existingStyles = element.props.style || {};
+    if (elementWithPropOverrides.props.additionalStyles) {
+        const existingStyles = elementWithPropOverrides.props.style || {};
         
-        element.props.style = {
+        elementWithPropOverrides.props.style = {
             ...existingStyles,
-            ...element.props.additionalStyles
+            ...elementWithPropOverrides.props.additionalStyles
         };        
     }
 
-    if (element.props.additionalClassName || element.props.additionalStyles) {
-        return removePropsFromElementAndChildren(element, ['additionalClassName', 'additionalStyles']);
-    } else {
-        return element;
-    }    
+    return removePropsFromElementAndChildren(
+        elementWithPropOverrides, 
+        ['additionalClassName', 'additionalStyles', 'refTemp']
+    );    
 };
 
 const generateVueComponentWithInstanceProperties = (vueComponent, props, self) => {
@@ -237,7 +245,11 @@ export const generateReactClass = <TProps>(instantiatedComponents, vueComponent,
     const reactClass = React.createClass<TProps, any>({
         getInitialState: function() {
             this.vueComponent = generateVueComponentWithInstanceProperties(vueComponent, this.props, this);
-            this.createElement = generateCreateElementFunctionForClass(this.vueComponent, instantiatedComponents, this.vueComponent);
+            this.createElement = generateCreateElementFunctionForClass(
+                this.vueComponent,
+                instantiatedComponents,
+                this.vueComponent
+            );
 
             copyPropsToVueComponent(this.vueComponent, this.props);
             copySlotsToVueComponent(this.vueComponent, slots, this.props);
@@ -285,13 +297,8 @@ export const generateReactClass = <TProps>(instantiatedComponents, vueComponent,
             handleComputedProperties(this.vueComponent);
 
             const reactElement = this.vueComponent.render(this.createElement.bind(this));
-            const reactElementWithTag = {...reactElement, props: { ...reactElement.props}, tag: tag, ref: (e) => {                 
-                this.element = e;
-            }};
-            const reactElementWithAdditionalClasesAndStyles = applyAdditionalClassesAndStyles(reactElementWithTag);
-            Object.preventExtensions(reactElementWithAdditionalClasesAndStyles);
 
-            return reactElementWithAdditionalClasesAndStyles;
+            return applyPropOverrides(reactElement, tag, this);
         },
 
         callVueMethod: function(methodName: string, ...args: any[]) {
