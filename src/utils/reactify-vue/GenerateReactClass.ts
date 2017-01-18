@@ -212,6 +212,10 @@ const applyPropOverrides = (reactElement: React.ReactElement<any>, tag: string, 
         };        
     }
 
+    if (self.vueComponent.id) {
+        elementWithPropOverrides.props.id = self.vueComponent.id;
+    }
+
     return removePropsFromElementAndChildren(
         elementWithPropOverrides, 
         ['additionalClassName', 'additionalStyles', 'refTemp']
