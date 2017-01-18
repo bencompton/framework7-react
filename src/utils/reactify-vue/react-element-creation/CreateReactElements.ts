@@ -32,19 +32,11 @@ const flattenNestedArrayOfChildren = (children: any[], finalArray: any[] = []) =
             }
         }
 
-        let uniqueArray = finalArray.filter((item, pos) => {
-            return finalArray.indexOf(item) === pos;
-        });
-
-        return uniqueArray;
+        return finalArray;
     } else {
         return children;
     }
 };
-
-const removeDuplicatesFromArray = (arr: any[]) => {
-
-}
 
 export const createReactElement = (
     componentOrComponentName: string | React.ComponentClass<any> | React.StatelessComponent<any>,
