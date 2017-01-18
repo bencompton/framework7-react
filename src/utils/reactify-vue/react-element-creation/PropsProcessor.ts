@@ -132,11 +132,16 @@ export class PropsProcessor {
     }
 
     private getRef(args, vueComponent) {
-        return {
-            ref: (element: HTMLElement) => {
+        const refFunc = ((events, vueComponent) => {
+            return (element: HTMLElement) => {
                 const events = args.on;
-                handleRefs(element, vueComponent, events);
-            }
+                handleRefs(element, vueComponent, events);                
+            };
+        })(args.on, vueComponent);
+
+        return {
+            ref: refFunc,
+            refTemp: refFunc
         };
     }
 
