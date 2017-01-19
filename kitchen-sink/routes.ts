@@ -25,6 +25,7 @@ import {BarsHidePage} from './components/pages/BarsHidePage';
 import {BarsSubnavbarPage} from './components/pages/BarsSubnavbarPage';
 import {FabPage} from './components/pages/FabPage';
 import {FabDialPage} from './components/pages/FabDialPage';
+import {LoginScreenPage} from './components/pages/LoginScreenPage';
 
 export const routes = [{
     path: '/content-block/',
@@ -107,4 +108,7 @@ export const routes = [{
 }, {
     path: '/fab-dial/',
     component: FabDialPage
+}, {
+    path: '/login-screen/',
+    component: LoginScreenPage
 }];
