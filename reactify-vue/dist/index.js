@@ -61,7 +61,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 348);
+/******/ 	return __webpack_require__(__webpack_require__.s = 349);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -30397,7 +30397,7 @@ module.exports = __webpack_require__(235);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_framework7_react__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_framework7_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_framework7_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__routes__ = __webpack_require__(347);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__routes__ = __webpack_require__(348);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return App; });
 
 
@@ -47763,6 +47763,47 @@ var ContentBlockPage = function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_framework7_react__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_framework7_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_framework7_react__);
+/* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return FabPage; });
+
+
+var FabPage = function () {
+    return (__WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["Page"], null,
+        __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["Navbar"], { backLink: "Back", title: "Floating Action Button", sliding: true }),
+        __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["Fab"], { color: "pink" },
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["Icon"], { icon: "icon-plus" })),
+        __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["ContentBlock"], null,
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"]("p", null, "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis autem necessitatibus, commodi nostrum ad, quod laudantium magnam facilis sed explicabo maiores aliquam, iure ipsam totam. Cum rerum facilis, eveniet temporibus."),
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"]("p", null, "Blanditiis mollitia recusandae eius, repellat, vero nihil totam, asperiores voluptas vitae omnis sapiente. Optio recusandae impedit quae pariatur rem sed officia fugiat ipsum, ut esse ex delectus, provident. Error, fuga."),
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"]("p", null, "Labore harum dignissimos obcaecati quae? In cum pariatur culpa delectus provident alias sed libero optio assumenda recusandae doloribus praesentium, natus, quaerat itaque consequuntur velit ipsam minus illo reiciendis rem quisquam."),
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"]("p", null, "Necessitatibus aut optio consectetur quia illum praesentium culpa, alias aliquam accusantium, molestiae sapiente tenetur porro ipsum eligendi doloribus qui laudantium corporis ullam dolore. Illum, nostrum, eveniet? Explicabo quibusdam assumenda unde."),
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"]("p", null, "Mollitia libero explicabo nemo id nesciunt blanditiis repellat sed alias ipsum saepe repellendus dolorum laborum molestias commodi quia temporibus error provident, vitae nihil eum corporis, voluptatum. Nobis quasi error porro?"),
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"]("p", null, "Perspiciatis illo veniam dolorem, dignissimos provident odio maiores sit voluptatem, commodi nostrum non quidem molestias rem dolores, magni odit omnis officiis? Quia impedit atque ut optio officiis, pariatur necessitatibus voluptatum."),
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"]("p", null, "Eveniet officiis iure voluptatum, deserunt explicabo recusandae nemo aperiam dolorem quaerat sapiente. Quo facilis aspernatur fuga, fugit animi provident voluptas excepturi. Nihil deleniti, quisquam, ipsa eaque recusandae deserunt placeat iste!"),
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"]("p", null, "Rem, corporis doloremque porro neque incidunt sequi molestiae consectetur, mollitia repellendus, ipsa laborum omnis commodi similique. Nulla assumenda cumque distinctio saepe at voluptatem laudantium soluta, enim, perspiciatis, accusamus, non officia."),
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"]("p", null, "Obcaecati odit libero dolor, quasi corporis, illum. Modi voluptatum, alias ea quia dolorem sapiente dolor qui nihil expedita fugiat provident omnis quidem explicabo vitae, non pariatur. Laudantium, explicabo, dolorem. Sunt."),
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"]("p", null, "Expedita architecto, consectetur quo veniam, labore, optio aut illo quibusdam minus doloremque mollitia voluptate corrupti dolorum maxime repellendus a qui sunt omnis? Voluptas esse officia porro dicta officiis incidunt facilis!"),
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"]("p", null, "Nam aperiam pariatur quo repellat maiores voluptatibus, excepturi mollitia, dolores eveniet suscipit in a ex voluptas dignissimos soluta aspernatur eius quasi. Illum quis iusto dignissimos commodi sequi dolores non, laboriosam?"),
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"]("p", null, "Minima quas illum consectetur, id cumque odit dolor dolores tempora suscipit sapiente rem repudiandae, a veniam, non officiis facere, enim earum est. Rerum ullam consectetur, voluptatibus, dolor amet eligendi voluptatem?"),
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"]("p", null, "Eius ad earum, vero eos. Odit blanditiis explicabo maiores, sint facere qui adipisci temporibus officia rerum voluptatibus debitis. Veritatis tempore rem porro illum quasi aut eveniet molestiae modi, aliquam impedit!"),
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"]("p", null, "Aliquam suscipit sunt dolorum sapiente deleniti natus a beatae labore libero excepturi laudantium molestiae magni hic itaque officiis unde doloribus enim placeat nisi dolore, voluptas ipsum quaerat! Magnam, culpa, natus."),
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"]("p", null, "Est quidem doloremque, tempore quam earum ipsa accusantium, suscipit quaerat vitae pariatur velit sit expedita atque. Doloribus magnam magni ab, autem aliquam veritatis! Perspiciatis, laboriosam provident, impedit saepe maxime aspernatur."),
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"]("p", null, "Autem nihil voluptatem beatae deserunt distinctio ex ad maiores adipisci omnis et, sint quia eveniet expedita quis provident dolores? Sit ipsam saepe, consequuntur! Eos non amet mollitia nesciunt labore error."),
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"]("p", null, "Esse voluptatum animi tempora voluptatem, quibusdam nobis tenetur, odio optio placeat, nesciunt praesentium consequuntur consequatur repellat alias porro! Enim veritatis nobis a aspernatur maiores nostrum praesentium, consequatur laudantium quos ratione."),
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"]("p", null, "Adipisci amet, tempore, distinctio laboriosam nisi numquam earum, reprehenderit nesciunt esse quam illum, illo similique provident in a commodi dignissimos consectetur neque enim porro. Sint maiores pariatur ab iusto quo!"),
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"]("p", null, "Consectetur non, reprehenderit fuga, vitae pariatur est numquam mollitia eius ut at enim cumque. Sunt consequuntur aut, amet fuga! Omnis architecto autem necessitatibus voluptatem sunt minus quod quam laborum inventore."),
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"]("p", null, "Error excepturi libero commodi, consequuntur molestiae facilis ea! Quod molestiae a voluptates ex maiores harum, aut reprehenderit repudiandae temporibus officiis, esse ratione est asperiores architecto nesciunt veritatis laudantium recusandae. Harum!"))));
+};
+
+
+/***/ },
+/* 333 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_framework7_react__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_framework7_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_framework7_react__);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return FormsPage; });
 
 
@@ -47868,7 +47909,7 @@ var FormsPage = function () {
 
 
 /***/ },
-/* 333 */
+/* 334 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -47904,7 +47945,7 @@ var GridPage = function () {
 
 
 /***/ },
-/* 334 */
+/* 335 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -47967,7 +48008,7 @@ var InfinitePage = (function (_super) {
 
 
 /***/ },
-/* 335 */
+/* 336 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -48007,7 +48048,7 @@ var ListsPage = function () {
 
 
 /***/ },
-/* 336 */
+/* 337 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -48102,7 +48143,7 @@ var MessagesPage = (function (_super) {
 
 
 /***/ },
-/* 337 */
+/* 338 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -48142,7 +48183,7 @@ var PreloaderPage = function () {
 
 
 /***/ },
-/* 338 */
+/* 339 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -48172,7 +48213,7 @@ var ProgressbarPage = function () {
 
 
 /***/ },
-/* 339 */
+/* 340 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -48229,7 +48270,7 @@ var PullRefreshPage = (function (_super) {
 
 
 /***/ },
-/* 340 */
+/* 341 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -48265,7 +48306,7 @@ var SearchbarPage = function () {
 
 
 /***/ },
-/* 341 */
+/* 342 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -48320,7 +48361,7 @@ var SmartSelectPage = function () {
 
 
 /***/ },
-/* 342 */
+/* 343 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -48377,7 +48418,7 @@ var SortablePage = (function (_super) {
 
 
 /***/ },
-/* 343 */
+/* 344 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -48426,7 +48467,7 @@ var SwipeoutPage = function () { return (__WEBPACK_IMPORTED_MODULE_0_react__["cr
 
 
 /***/ },
-/* 344 */
+/* 345 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -48461,7 +48502,7 @@ var SwiperPage = function () {
 
 
 /***/ },
-/* 345 */
+/* 346 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -48518,7 +48559,7 @@ var TabsPage = function () {
 
 
 /***/ },
-/* 346 */
+/* 347 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -48575,36 +48616,38 @@ var TabsSwipeablePage = function () {
 
 
 /***/ },
-/* 347 */
+/* 348 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_pages_ContentBlockPage__ = __webpack_require__(331);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_pages_CardsPage__ = __webpack_require__(328);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_pages_ListsPage__ = __webpack_require__(335);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_pages_ListsPage__ = __webpack_require__(336);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_pages_ContactsPage__ = __webpack_require__(330);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_pages_SortablePage__ = __webpack_require__(342);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_pages_SwipeoutPage__ = __webpack_require__(343);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_pages_SortablePage__ = __webpack_require__(343);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_pages_SwipeoutPage__ = __webpack_require__(344);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_pages_AccordionPage__ = __webpack_require__(322);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_pages_ProgressbarPage__ = __webpack_require__(338);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_pages_FormsPage__ = __webpack_require__(332);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_pages_GridPage__ = __webpack_require__(333);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_pages_SmartSelectPage__ = __webpack_require__(341);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_pages_ProgressbarPage__ = __webpack_require__(339);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_pages_FormsPage__ = __webpack_require__(333);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_pages_GridPage__ = __webpack_require__(334);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_pages_SmartSelectPage__ = __webpack_require__(342);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_pages_ChipsPage__ = __webpack_require__(329);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_pages_PreloaderPage__ = __webpack_require__(337);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__components_pages_PullRefreshPage__ = __webpack_require__(339);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__components_pages_InfinitePage__ = __webpack_require__(334);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__components_pages_SwiperPage__ = __webpack_require__(344);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__components_pages_SearchbarPage__ = __webpack_require__(340);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__components_pages_TabsPage__ = __webpack_require__(345);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__components_pages_TabsSwipeablePage__ = __webpack_require__(346);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__components_pages_MessagesPage__ = __webpack_require__(336);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_pages_PreloaderPage__ = __webpack_require__(338);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__components_pages_PullRefreshPage__ = __webpack_require__(340);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__components_pages_InfinitePage__ = __webpack_require__(335);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__components_pages_SwiperPage__ = __webpack_require__(345);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__components_pages_SearchbarPage__ = __webpack_require__(341);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__components_pages_TabsPage__ = __webpack_require__(346);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__components_pages_TabsSwipeablePage__ = __webpack_require__(347);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__components_pages_MessagesPage__ = __webpack_require__(337);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__components_pages_BarsPage__ = __webpack_require__(324);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__components_pages_BarsTabbarPage__ = __webpack_require__(327);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__components_pages_BarsTabbarLabelsPage__ = __webpack_require__(326);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__components_pages_BarsHidePage__ = __webpack_require__(323);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__components_pages_BarsSubnavbarPage__ = __webpack_require__(325);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__components_pages_FabPage__ = __webpack_require__(332);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return routes; });
+
 
 
 
@@ -48705,11 +48748,14 @@ var routes = [{
     }, {
         path: '/bars-subnavbar/',
         component: __WEBPACK_IMPORTED_MODULE_24__components_pages_BarsSubnavbarPage__["a" /* BarsSubnavbarPage */]
+    }, {
+        path: '/fab/',
+        component: __WEBPACK_IMPORTED_MODULE_25__components_pages_FabPage__["a" /* FabPage */]
     }];
 
 
 /***/ },
-/* 348 */
+/* 349 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
