@@ -23,6 +23,7 @@ import {BarsTabbarPage} from './components/pages/BarsTabbarPage';
 import {BarsTabbarLabelsPage} from './components/pages/BarsTabbarLabelsPage';
 import {BarsHidePage} from './components/pages/BarsHidePage';
 import {BarsSubnavbarPage} from './components/pages/BarsSubnavbarPage';
+import {FabPage} from './components/pages/FabPage';
 
 export const routes = [{
     path: '/content-block/',
@@ -99,4 +100,7 @@ export const routes = [{
 }, {
     path: '/bars-subnavbar/',
     component: BarsSubnavbarPage
+}, {
+    path: '/fab/',
+    component: FabPage
 }];
