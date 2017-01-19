@@ -24,6 +24,7 @@ import {BarsTabbarLabelsPage} from './components/pages/BarsTabbarLabelsPage';
 import {BarsHidePage} from './components/pages/BarsHidePage';
 import {BarsSubnavbarPage} from './components/pages/BarsSubnavbarPage';
 import {FabPage} from './components/pages/FabPage';
+import {FabDialPage} from './components/pages/FabDialPage';
 
 export const routes = [{
     path: '/content-block/',
@@ -103,4 +104,7 @@ export const routes = [{
 }, {
     path: '/fab/',
     component: FabPage
+}, {
+    path: '/fab-dial/',
+    component: FabDialPage
 }];
