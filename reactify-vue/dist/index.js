@@ -48697,7 +48697,9 @@ var TabsSwipeablePage = function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__components_pages_BarsSubnavbarPage__ = __webpack_require__(325);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__components_pages_FabPage__ = __webpack_require__(333);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__components_pages_FabDialPage__ = __webpack_require__(332);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__components_pages_LoginScreenPage__ = __webpack_require__(351);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return routes; });
+
 
 
 
@@ -48806,6 +48808,9 @@ var routes = [{
     }, {
         path: '/fab-dial/',
         component: __WEBPACK_IMPORTED_MODULE_26__components_pages_FabDialPage__["a" /* FabDialPage */]
+    }, {
+        path: '/login-screen/',
+        component: __WEBPACK_IMPORTED_MODULE_27__components_pages_LoginScreenPage__["a" /* LoginScreenPage */]
     }];
 
 
@@ -48823,6 +48828,35 @@ var routes = [{
 
 
 __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_react_dom__["render"])(__WEBPACK_IMPORTED_MODULE_1_react__["createElement"](__WEBPACK_IMPORTED_MODULE_2__components_App__["a" /* App */]), document.getElementById('react-root'));
+
+
+/***/ },
+/* 351 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_framework7_react__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_framework7_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_framework7_react__);
+/* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return LoginScreenPage; });
+
+
+var LoginScreenPage = function () {
+    return (__WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["Page"], { loginScreen: true, noNavbar: true },
+        __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["LoginScreenTitle"], null, "My App"),
+        __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["List"], { form: true },
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["ListItem"], null,
+                __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["FormLabel"], null, "Username"),
+                __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["FormInput"], { name: "username", type: "text", placeholder: "Username" })),
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["ListItem"], null,
+                __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["FormLabel"], null, "Password"),
+                __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["FormInput"], { name: "password", type: "password", placeholder: "Password" }))),
+        __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["List"], null,
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["ListButton"], { title: "Sign In", back: true }),
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["ListLabel"], null,
+                __WEBPACK_IMPORTED_MODULE_0_react__["createElement"]("p", null, "Click Sign In to close Login Screen")))));
+};
 
 
 /***/ }
