@@ -14,6 +14,7 @@ var fw7ModulesBeingUsed = [
     'pull-to-refresh',
     'push-state',
     'searchbar',
+    'scroll-toolbars',
     'smart-select',
     'sortable',
     'swipeout',

@@ -18,6 +18,11 @@ import {SearchbarPage} from './components/pages/SearchbarPage';
 import {TabsPage} from './components/pages/TabsPage';
 import {TabsSwipeablePage} from './components/pages/TabsSwipeablePage';
 import {MessagesPage} from './components/pages/MessagesPage';
+import {BarsPage} from './components/pages/BarsPage';
+import {BarsTabbarPage} from './components/pages/BarsTabbarPage';
+import {BarsTabbarLabelsPage} from './components/pages/BarsTabbarLabelsPage';
+import {BarsHidePage} from './components/pages/BarsHidePage';
+import {BarsSubnavbarPage} from './components/pages/BarsSubnavbarPage';
 
 export const routes = [{
     path: '/content-block/',
@@ -79,4 +84,19 @@ export const routes = [{
 }, {
     path: '/messages/',
     component: MessagesPage
+}, {
+    path: '/bars/',
+    component: BarsPage
+}, {
+    path: '/bars-tabbar/',
+    component: BarsTabbarPage
+}, {
+    path: '/bars-tabbar-labels/',
+    component: BarsTabbarLabelsPage
+}, {
+    path: '/bars-hide/',
+    component: BarsHidePage
+}, {
+    path: '/bars-subnavbar/',
+    component: BarsSubnavbarPage
 }];
