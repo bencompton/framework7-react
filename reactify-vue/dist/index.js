@@ -32400,9 +32400,17 @@ var handleRefs = function (element, vueComponent, events) {
 };
 var renameAttribute = function (componentName, attribute) {
     var attributeMap = {
+        autocapitalize: {
+            componentNames: ['input', 'tetarea', 'select'],
+            renameTo: 'autoCapitalize'
+        },
         autocomplete: {
             componentNames: ['input', 'textarea', 'select'],
             renameTo: 'autoComplete'
+        },
+        autocorrect: {
+            componentNames: ['input', 'tetarea', 'select'],
+            renameTo: 'autoCorrect'
         },
         autofocus: {
             componentNames: ['input', 'textarea', 'select'],
@@ -32423,6 +32431,10 @@ var renameAttribute = function (componentName, attribute) {
         readonly: {
             componentNames: ['input', 'textarea', 'select'],
             renameTo: 'readOnly'
+        },
+        spellcheck: {
+            componentNames: ['input', 'textarea', 'select'],
+            renameTo: 'spellCheck'
         }
     };
     var attributeMapForAttribute = attributeMap[attribute];
@@ -47764,21 +47776,21 @@ var MessagesPage = (function (_super) {
         };
         return _this;
     }
-    MessagesPage.prototype.getMessage = function (props) {
+    MessagesPage.prototype.getMessage = function (props, index) {
         var messageProps = {};
         if (props) {
             messageProps = props;
         }
-        return (__WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["Message"], __assign({}, messageProps, { onClick: this.onClick.bind(this), onClickText: this.onTextClick.bind(this), onClickName: this.onNameClick.bind(this), onClickAvatar: this.onAvatarClick.bind(this) })));
+        return (__WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["Message"], __assign({}, messageProps, { key: index, onClick: this.onClick.bind(this), onClickText: this.onTextClick.bind(this), onClickName: this.onNameClick.bind(this), onClickAvatar: this.onAvatarClick.bind(this) })));
     };
     MessagesPage.prototype.render = function () {
         var _this = this;
         return (__WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["Page"], { "toolbar-fixed": true },
             __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["Navbar"], { backLink: "Back", title: "Messages", sliding: true }),
             __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["Subnavbar"], null,
-                __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["FormInput"], { type: "text", placeholder: "Your name", value: "name" })),
-            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["Messages"], null, this.state.messages.map(function (message) {
-                return _this.getMessage(message);
+                __WEBPACK_IMPORTED_MODULE_0_react__["createElement"]("input", { type: "text", placeholder: "Your name", defaultValue: this.state.name })),
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["Messages"], null, this.state.messages.map(function (message, index) {
+                return _this.getMessage(message, index);
             })),
             __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["Messagebar"], { placeholder: "Message", sendLink: "Send", onChange: function () { console.log('changing text'); }, onSubmit: function () { console.log('submit'); } })));
     };
