@@ -21,9 +21,17 @@ const handleRefs = (element: HTMLElement, vueComponent: IVueComponent, events: {
 
 const renameAttribute = (componentName, attribute) => {
     const attributeMap = {
+        autocapitalize: {
+            componentNames: ['input', 'tetarea', 'select'],
+            renameTo: 'autoCapitalize'
+        },
         autocomplete: {
             componentNames: ['input', 'textarea', 'select'],
             renameTo: 'autoComplete'
+        },
+        autocorrect: {
+            componentNames: ['input', 'tetarea', 'select'],
+            renameTo: 'autoCorrect'
         },
         autofocus: {
             componentNames: ['input', 'textarea', 'select'],
@@ -44,7 +52,11 @@ const renameAttribute = (componentName, attribute) => {
         readonly: {
             componentNames: ['input', 'textarea', 'select'],
             renameTo: 'readOnly'            
-        }    
+        },
+        spellcheck: {
+            componentNames: ['input', 'textarea', 'select'],
+            renameTo: 'spellCheck'            
+        }     
     }
 
     const attributeMapForAttribute = attributeMap[attribute];

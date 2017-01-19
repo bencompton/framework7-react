@@ -36,7 +36,7 @@ export class MessagesPage extends React.Component<any, IMessagesPageState> {
         };
     }
 
-    private getMessage(props) {
+    private getMessage(props, index) {
         let messageProps = {}
 
         if (props) {
@@ -46,6 +46,7 @@ export class MessagesPage extends React.Component<any, IMessagesPageState> {
         return (
             <Message
                 {...messageProps}
+                key={index}
                 onClick={this.onClick.bind(this)}
                 onClickText={this.onTextClick.bind(this)}
                 onClickName={this.onNameClick.bind(this)}
@@ -59,12 +60,12 @@ export class MessagesPage extends React.Component<any, IMessagesPageState> {
             <Page toolbar-fixed>
                 <Navbar backLink="Back" title="Messages" sliding></Navbar>
                 <Subnavbar>
-                    <FormInput type="text" placeholder="Your name" value="name" />
+                    <input type="text" placeholder="Your name" defaultValue={this.state.name}/>
                 </Subnavbar>
                 <Messages>
                 {
-                    this.state.messages.map(message => {
-                        return this.getMessage(message);
+                    this.state.messages.map((message, index) => {
+                        return this.getMessage(message, index);
                     })
                 }
                 </Messages>
