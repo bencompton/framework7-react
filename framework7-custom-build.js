@@ -9,6 +9,7 @@ var fw7ModulesBeingUsed = [
     'fast-clicks',
     'forms',
     'infinite-scroll',
+    'messages',
     'modals',
     'pull-to-refresh',
     'push-state',

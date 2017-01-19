@@ -140,8 +140,8 @@ const addCompiledTemplateFunctionsToVueComponent = (vueComponent: any, createEle
         }
     };
 
-    vueComponent._v = (text: string) => text;
-    vueComponent._s = (text: string) => text;
+    vueComponent._v = (text: string) => text || '';
+    vueComponent._s = (text: string) => text || '';
     vueComponent._e = () => null;
 };
 

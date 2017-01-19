@@ -17,6 +17,7 @@ import {SwiperPage} from './components/pages/SwiperPage';
 import {SearchbarPage} from './components/pages/SearchbarPage';
 import {TabsPage} from './components/pages/TabsPage';
 import {TabsSwipeablePage} from './components/pages/TabsSwipeablePage';
+import {MessagesPage} from './components/pages/MessagesPage';
 
 export const routes = [{
     path: '/content-block/',
@@ -75,4 +76,7 @@ export const routes = [{
 }, {
     path: '/tabs-swipeable/',
     component: TabsSwipeablePage
+}, {
+    path: '/messages/',
+    component: MessagesPage
 }];

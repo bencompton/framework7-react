@@ -30,18 +30,16 @@ export const SwiperPage = () => {
             </Swiper>
 
             <ContentBlockTitle>Navigation</ContentBlockTitle>
-            <Swiper pagination next-button prev-button scrollbar style={swiperHeight}>
+            <Swiper pagination nextButton prevButton scrollbar style={swiperHeight}>
                 {
                     swiperItems.map(swiperMap)
                 }
             </Swiper>
 
             <ContentBlockTitle>Slides Per View</ContentBlockTitle>
-            <Swiper params={swiperParams} pagination next-button prev-button scrollbar style={swiperHeight}>
+            <Swiper params={swiperParams} pagination nextButton prevButton scrollbar style={swiperHeight}>
                 {
-                    swiperItems.map((item) => {
-                        swiperMap(item);
-                    })
+                    swiperItems.map(swiperMap)
                 }
             </Swiper>
         </Page>
