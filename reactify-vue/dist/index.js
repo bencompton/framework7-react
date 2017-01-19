@@ -61,7 +61,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 343);
+/******/ 	return __webpack_require__(__webpack_require__.s = 348);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -16273,6 +16273,123 @@ app.initSearchbar = function (container) {
         container.once('navbarBeforeRemove', onBeforeRemove);
     }
 };
+/*=============================================================
+************   Hide/show Toolbar/Navbar on scroll   ************
+=============================================================*/
+app.initPageScrollToolbars = function (pageContainer) {
+    pageContainer = $(pageContainer);
+    var scrollContent = pageContainer.find('.page-content');
+    if (scrollContent.length === 0) return;
+    var hideNavbar = (app.params.hideNavbarOnPageScroll || scrollContent.hasClass('hide-navbar-on-scroll') || scrollContent.hasClass('hide-bars-on-scroll')) && !(scrollContent.hasClass('keep-navbar-on-scroll') || scrollContent.hasClass('keep-bars-on-scroll'));
+    var hideToolbar = (app.params.hideToolbarOnPageScroll || scrollContent.hasClass('hide-toolbar-on-scroll') || scrollContent.hasClass('hide-bars-on-scroll')) && !(scrollContent.hasClass('keep-toolbar-on-scroll') || scrollContent.hasClass('keep-bars-on-scroll'));
+    var hideTabbar = (app.params.hideTabbarOnPageScroll || scrollContent.hasClass('hide-tabbar-on-scroll')) && !(scrollContent.hasClass('keep-tabbar-on-scroll'));
+
+    if (!(hideNavbar || hideToolbar || hideTabbar)) return;
+    
+    var viewContainer = scrollContent.parents('.' + app.params.viewClass);
+    if (viewContainer.length === 0) return;
+
+    var navbar = viewContainer.find('.navbar'), 
+        toolbar = viewContainer.find('.toolbar'), 
+        tabbar;
+    if (hideTabbar) {
+        tabbar = viewContainer.find('.tabbar');
+        if (tabbar.length === 0) tabbar = viewContainer.parents('.' + app.params.viewsClass).find('.tabbar');
+    }
+
+    var hasNavbar = navbar.length > 0,
+        hasToolbar = toolbar.length > 0,
+        hasTabbar = tabbar && tabbar.length > 0;
+
+    var previousScroll, currentScroll;
+        previousScroll = currentScroll = scrollContent[0].scrollTop;
+
+    var scrollHeight, offsetHeight, reachEnd, action, navbarHidden, toolbarHidden, tabbarHidden;
+
+    var toolbarHeight = (hasToolbar && hideToolbar) ? toolbar[0].offsetHeight : 0;
+    var tabbarHeight = (hasTabbar && hideTabbar) ? tabbar[0].offsetHeight : 0;
+    var bottomBarHeight = tabbarHeight || toolbarHeight;
+
+    function handleScroll(e) {
+        if (pageContainer.hasClass('page-on-left')) return;
+        currentScroll = scrollContent[0].scrollTop;
+        scrollHeight = scrollContent[0].scrollHeight;
+        offsetHeight = scrollContent[0].offsetHeight;
+        reachEnd =  currentScroll + offsetHeight >= scrollHeight - bottomBarHeight;
+        navbarHidden = navbar.hasClass('navbar-hidden');
+        toolbarHidden = toolbar.hasClass('toolbar-hidden');
+        tabbarHidden = tabbar && tabbar.hasClass('toolbar-hidden');
+
+        if (reachEnd) {
+            if (app.params.showBarsOnPageScrollEnd) {
+                action = 'show';
+            }
+        }
+        else if (previousScroll > currentScroll) {
+            if (app.params.showBarsOnPageScrollTop || currentScroll <= 44) {
+                action = 'show';
+            }
+            else {
+                action = 'hide';
+            }
+        }
+        else {
+            if (currentScroll > 44) {
+                action = 'hide';
+            }
+            else {
+                action = 'show';
+            }
+        }
+
+        if (action === 'show') {
+            if (hasNavbar && hideNavbar && navbarHidden) {
+                app.showNavbar(navbar);
+                pageContainer.removeClass('no-navbar-by-scroll'); 
+                navbarHidden = false;
+            }
+            if (hasToolbar && hideToolbar && toolbarHidden) {
+                app.showToolbar(toolbar);
+                pageContainer.removeClass('no-toolbar-by-scroll'); 
+                toolbarHidden = false;
+            }
+            if (hasTabbar && hideTabbar && tabbarHidden) {
+                app.showToolbar(tabbar);
+                pageContainer.removeClass('no-tabbar-by-scroll'); 
+                tabbarHidden = false;
+            }
+        }
+        else {
+            if (hasNavbar && hideNavbar && !navbarHidden) {
+                app.hideNavbar(navbar);
+                pageContainer.addClass('no-navbar-by-scroll'); 
+                navbarHidden = true;
+            }
+            if (hasToolbar && hideToolbar && !toolbarHidden) {
+                app.hideToolbar(toolbar);
+                pageContainer.addClass('no-toolbar-by-scroll'); 
+                toolbarHidden = true;
+            }
+            if (hasTabbar && hideTabbar && !tabbarHidden) {
+                app.hideToolbar(tabbar);
+                pageContainer.addClass('no-tabbar-by-scroll'); 
+                tabbarHidden = true;
+            }
+        }
+            
+        previousScroll = currentScroll;
+    }
+    scrollContent.on('scroll', handleScroll);
+    scrollContent[0].f7ScrollToolbarsHandler = handleScroll;
+};
+app.destroyScrollToolbars = function (pageContainer) {
+    pageContainer = $(pageContainer);
+    var scrollContent = pageContainer.find('.page-content');
+    if (scrollContent.length === 0) return;
+    var handler = scrollContent[0].f7ScrollToolbarsHandler;
+    if (!handler) return;
+    scrollContent.off('scroll', scrollContent[0].f7ScrollToolbarsHandler);
+};
 /*===============================================================================
 ************   Smart Select   ************
 ===============================================================================*/
@@ -30280,7 +30397,7 @@ module.exports = __webpack_require__(235);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_framework7_react__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_framework7_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_framework7_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__routes__ = __webpack_require__(342);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__routes__ = __webpack_require__(347);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return App; });
 
 
@@ -32401,7 +32518,7 @@ var handleRefs = function (element, vueComponent, events) {
 var renameAttribute = function (componentName, attribute) {
     var attributeMap = {
         autocapitalize: {
-            componentNames: ['input', 'tetarea', 'select'],
+            componentNames: ['input', 'textarea', 'select'],
             renameTo: 'autoCapitalize'
         },
         autocomplete: {
@@ -32409,7 +32526,7 @@ var renameAttribute = function (componentName, attribute) {
             renameTo: 'autoComplete'
         },
         autocorrect: {
-            componentNames: ['input', 'tetarea', 'select'],
+            componentNames: ['input', 'textarea', 'select'],
             renameTo: 'autoCorrect'
         },
         autofocus: {
@@ -47338,6 +47455,175 @@ var AccordionPage = function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_framework7_react__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_framework7_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_framework7_react__);
+/* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return BarsHidePage; });
+
+
+var BarsHidePage = function () {
+    return (__WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["Page"], { hideBarsOnScroll: true },
+        __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["Navbar"], { backLink: "Back", title: "Hide On Scroll", sliding: true }),
+        __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["Toolbar"], null,
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["Link"], null, "Link1"),
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["Link"], null, "Link2")),
+        __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["ContentBlock"], null,
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"]("p", null, "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos voluptatibus, sunt quam reprehenderit assumenda hic aut illo, optio fuga reiciendis. Sapiente suscipit sint ratione tenetur voluptate repellendus quaerat perspiciatis repudiandae."),
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"]("p", null, "Delectus fuga tempora dignissimos eveniet maxime labore animi, magnam error quas quasi adipisci sed architecto atque maiores facilis natus tempore excepturi libero? Perferendis odio veritatis, aliquam consectetur? Sunt, qui, architecto."),
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"]("p", null, "Officiis soluta mollitia, asperiores consequatur itaque optio dolorem laudantium facere eveniet distinctio, cumque. Dolore similique ut, quas ullam ipsam, accusantium unde repellendus voluptatem sint odio id magnam quia sunt harum?"),
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"]("p", null, "Itaque consequuntur excepturi unde pariatur maiores impedit aliquam necessitatibus perferendis, dolorem tempore nostrum hic iure obcaecati officiis vero cum numquam a dolores atque et! Blanditiis quibusdam, saepe excepturi animi aperiam."),
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"]("p", null, "Id facilis magnam nostrum similique repudiandae earum doloremque iusto tempore dolorum amet blanditiis assumenda aliquam deserunt consequuntur, sequi hic odit corrupti? Dolore illo, nihil aut rem dignissimos impedit ex necessitatibus?"),
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"]("p", null, "Aliquid fugit molestias enim, facere consequatur vitae doloremque modi, dolore perspiciatis nam sequi. Corrupti repellendus blanditiis quo neque vel possimus, ipsum at sed adipisci voluptatibus aliquid quidem, placeat dolor eaque?"),
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"]("p", null, "Voluptatum, eum, asperiores! Sunt ab maiores ratione iure obcaecati cum reiciendis reprehenderit, quibusdam, blanditiis in facere. Blanditiis maiores laudantium, autem harum ipsam labore eum adipisci inventore eligendi iure dicta ratione!"),
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"]("p", null, "Ipsum expedita, similique excepturi blanditiis neque aut. Provident labore ea nihil ducimus, distinctio voluptate, tempore facere possimus ipsam, voluptates aliquid cupiditate maiores veniam eos nesciunt. Dolorem eius consectetur voluptates recusandae!"),
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"]("p", null, "Eius, iusto maxime tempora officia impedit cumque, delectus fugiat enim fugit, ex repudiandae modi autem quasi repellat ea saepe sequi similique animi ipsam doloremque placeat natus minima voluptatibus cum nulla."),
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"]("p", null, "Id iste, quod, deserunt maiores consectetur optio placeat quas obcaecati animi, assumenda hic. Temporibus obcaecati fugit omnis modi velit esse dolor nam illo laboriosam ut voluptates voluptatibus vitae, voluptatum officiis!"),
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"]("p", null, "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos voluptatibus, sunt quam reprehenderit assumenda hic aut illo, optio fuga reiciendis. Sapiente suscipit sint ratione tenetur voluptate repellendus quaerat perspiciatis repudiandae."),
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"]("p", null, "Delectus fuga tempora dignissimos eveniet maxime labore animi, magnam error quas quasi adipisci sed architecto atque maiores facilis natus tempore excepturi libero? Perferendis odio veritatis, aliquam consectetur? Sunt, qui, architecto."),
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"]("p", null, "Officiis soluta mollitia, asperiores consequatur itaque optio dolorem laudantium facere eveniet distinctio, cumque. Dolore similique ut, quas ullam ipsam, accusantium unde repellendus voluptatem sint odio id magnam quia sunt harum?"),
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"]("p", null, "Itaque consequuntur excepturi unde pariatur maiores impedit aliquam necessitatibus perferendis, dolorem tempore nostrum hic iure obcaecati officiis vero cum numquam a dolores atque et! Blanditiis quibusdam, saepe excepturi animi aperiam."),
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"]("p", null, "Id facilis magnam nostrum similique repudiandae earum doloremque iusto tempore dolorum amet blanditiis assumenda aliquam deserunt consequuntur, sequi hic odit corrupti? Dolore illo, nihil aut rem dignissimos impedit ex necessitatibus?"),
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"]("p", null, "Aliquid fugit molestias enim, facere consequatur vitae doloremque modi, dolore perspiciatis nam sequi. Corrupti repellendus blanditiis quo neque vel possimus, ipsum at sed adipisci voluptatibus aliquid quidem, placeat dolor eaque?"),
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"]("p", null, "Voluptatum, eum, asperiores! Sunt ab maiores ratione iure obcaecati cum reiciendis reprehenderit, quibusdam, blanditiis in facere. Blanditiis maiores laudantium, autem harum ipsam labore eum adipisci inventore eligendi iure dicta ratione!"),
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"]("p", null, "Ipsum expedita, similique excepturi blanditiis neque aut. Provident labore ea nihil ducimus, distinctio voluptate, tempore facere possimus ipsam, voluptates aliquid cupiditate maiores veniam eos nesciunt. Dolorem eius consectetur voluptates recusandae!"),
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"]("p", null, "Eius, iusto maxime tempora officia impedit cumque, delectus fugiat enim fugit, ex repudiandae modi autem quasi repellat ea saepe sequi similique animi ipsam doloremque placeat natus minima voluptatibus cum nulla."),
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"]("p", null, "Id iste, quod, deserunt maiores consectetur optio placeat quas obcaecati animi, assumenda hic. Temporibus obcaecati fugit omnis modi velit esse dolor nam illo laboriosam ut voluptates voluptatibus vitae, voluptatum officiis!"))));
+};
+
+
+/***/ },
+/* 324 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_framework7_react__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_framework7_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_framework7_react__);
+/* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return BarsPage; });
+
+
+var BarsPage = function () {
+    return (__WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["Page"], null,
+        __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["Navbar"], { backLink: "Back", title: "Navbars And Toolbars", sliding: true }),
+        __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["List"], null,
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["ListItem"], { title: "Tab Bar", link: "/bars-tabbar/" }),
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["ListItem"], { title: "Tab Bar With Labels", link: "/bars-tabbar-labels/" }),
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["ListItem"], { title: "Hide On Scroll", link: "/bars-hide/" }),
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["ListItem"], { title: "Sub Navbar", link: "/bars-subnavbar/" }))));
+};
+
+
+/***/ },
+/* 325 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_framework7_react__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_framework7_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_framework7_react__);
+/* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return BarsSubnavbarPage; });
+
+
+var BarsSubnavbarPage = function () {
+    return (__WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["Page"], null,
+        __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["Navbar"], { backLink: "Back", title: "Sub Navbar", sliding: true },
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["Subnavbar"], { sliding: true },
+                __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["ButtonsSegmented"], null,
+                    __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["Button"], null, "Button 1"),
+                    __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["Button"], null, "Button 2")))),
+        __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["Toolbar"], null,
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["Link"], null, "Link1"),
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["Link"], null, "Link2")),
+        __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["ContentBlock"], null,
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"]("p", null, "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos voluptatibus, sunt quam reprehenderit assumenda hic aut illo, optio fuga reiciendis. Sapiente suscipit sint ratione tenetur voluptate repellendus quaerat perspiciatis repudiandae."),
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"]("p", null, "Delectus fuga tempora dignissimos eveniet maxime labore animi, magnam error quas quasi adipisci sed architecto atque maiores facilis natus tempore excepturi libero? Perferendis odio veritatis, aliquam consectetur? Sunt, qui, architecto."),
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"]("p", null, "Officiis soluta mollitia, asperiores consequatur itaque optio dolorem laudantium facere eveniet distinctio, cumque. Dolore similique ut, quas ullam ipsam, accusantium unde repellendus voluptatem sint odio id magnam quia sunt harum?"),
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"]("p", null, "Itaque consequuntur excepturi unde pariatur maiores impedit aliquam necessitatibus perferendis, dolorem tempore nostrum hic iure obcaecati officiis vero cum numquam a dolores atque et! Blanditiis quibusdam, saepe excepturi animi aperiam."),
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"]("p", null, "Id facilis magnam nostrum similique repudiandae earum doloremque iusto tempore dolorum amet blanditiis assumenda aliquam deserunt consequuntur, sequi hic odit corrupti? Dolore illo, nihil aut rem dignissimos impedit ex necessitatibus?"),
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"]("p", null, "Aliquid fugit molestias enim, facere consequatur vitae doloremque modi, dolore perspiciatis nam sequi. Corrupti repellendus blanditiis quo neque vel possimus, ipsum at sed adipisci voluptatibus aliquid quidem, placeat dolor eaque?"),
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"]("p", null, "Voluptatum, eum, asperiores! Sunt ab maiores ratione iure obcaecati cum reiciendis reprehenderit, quibusdam, blanditiis in facere. Blanditiis maiores laudantium, autem harum ipsam labore eum adipisci inventore eligendi iure dicta ratione!"),
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"]("p", null, "Ipsum expedita, similique excepturi blanditiis neque aut. Provident labore ea nihil ducimus, distinctio voluptate, tempore facere possimus ipsam, voluptates aliquid cupiditate maiores veniam eos nesciunt. Dolorem eius consectetur voluptates recusandae!"),
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"]("p", null, "Eius, iusto maxime tempora officia impedit cumque, delectus fugiat enim fugit, ex repudiandae modi autem quasi repellat ea saepe sequi similique animi ipsam doloremque placeat natus minima voluptatibus cum nulla."),
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"]("p", null, "Id iste, quod, deserunt maiores consectetur optio placeat quas obcaecati animi, assumenda hic. Temporibus obcaecati fugit omnis modi velit esse dolor nam illo laboriosam ut voluptates voluptatibus vitae, voluptatum officiis!"),
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"]("p", null, "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos voluptatibus, sunt quam reprehenderit assumenda hic aut illo, optio fuga reiciendis. Sapiente suscipit sint ratione tenetur voluptate repellendus quaerat perspiciatis repudiandae."),
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"]("p", null, "Delectus fuga tempora dignissimos eveniet maxime labore animi, magnam error quas quasi adipisci sed architecto atque maiores facilis natus tempore excepturi libero? Perferendis odio veritatis, aliquam consectetur? Sunt, qui, architecto."),
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"]("p", null, "Officiis soluta mollitia, asperiores consequatur itaque optio dolorem laudantium facere eveniet distinctio, cumque. Dolore similique ut, quas ullam ipsam, accusantium unde repellendus voluptatem sint odio id magnam quia sunt harum?"),
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"]("p", null, "Itaque consequuntur excepturi unde pariatur maiores impedit aliquam necessitatibus perferendis, dolorem tempore nostrum hic iure obcaecati officiis vero cum numquam a dolores atque et! Blanditiis quibusdam, saepe excepturi animi aperiam."),
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"]("p", null, "Id facilis magnam nostrum similique repudiandae earum doloremque iusto tempore dolorum amet blanditiis assumenda aliquam deserunt consequuntur, sequi hic odit corrupti? Dolore illo, nihil aut rem dignissimos impedit ex necessitatibus?"),
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"]("p", null, "Aliquid fugit molestias enim, facere consequatur vitae doloremque modi, dolore perspiciatis nam sequi. Corrupti repellendus blanditiis quo neque vel possimus, ipsum at sed adipisci voluptatibus aliquid quidem, placeat dolor eaque?"),
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"]("p", null, "Voluptatum, eum, asperiores! Sunt ab maiores ratione iure obcaecati cum reiciendis reprehenderit, quibusdam, blanditiis in facere. Blanditiis maiores laudantium, autem harum ipsam labore eum adipisci inventore eligendi iure dicta ratione!"),
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"]("p", null, "Ipsum expedita, similique excepturi blanditiis neque aut. Provident labore ea nihil ducimus, distinctio voluptate, tempore facere possimus ipsam, voluptates aliquid cupiditate maiores veniam eos nesciunt. Dolorem eius consectetur voluptates recusandae!"),
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"]("p", null, "Eius, iusto maxime tempora officia impedit cumque, delectus fugiat enim fugit, ex repudiandae modi autem quasi repellat ea saepe sequi similique animi ipsam doloremque placeat natus minima voluptatibus cum nulla."),
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"]("p", null, "Id iste, quod, deserunt maiores consectetur optio placeat quas obcaecati animi, assumenda hic. Temporibus obcaecati fugit omnis modi velit esse dolor nam illo laboriosam ut voluptates voluptatibus vitae, voluptatum officiis!"))));
+};
+
+
+/***/ },
+/* 326 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_framework7_react__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_framework7_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_framework7_react__);
+/* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return BarsTabbarLabelsPage; });
+
+
+var BarsTabbarLabelsPage = function () {
+    return (__WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["Page"], { tabbarFixed: true },
+        __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["Navbar"], { backLink: "Back", title: "Tab Bar With Labels", sliding: true }),
+        __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["ContentBlock"], { tabs: true },
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["Tab"], { id: "tab1", active: true },
+                __WEBPACK_IMPORTED_MODULE_0_react__["createElement"]("p", null, "Tab 1")),
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["Tab"], { id: "tab2" },
+                __WEBPACK_IMPORTED_MODULE_0_react__["createElement"]("p", null, "Tab 2")),
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["Tab"], { id: "tab3" },
+                __WEBPACK_IMPORTED_MODULE_0_react__["createElement"]("p", null, "Tab 3"))),
+        __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["Toolbar"], { tabbar: true, labels: true },
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["Link"], { href: "#tab1", tabLink: true, active: true, text: "Tab 1" }),
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["Link"], { href: "#tab2", tabLink: true, text: "Tab 2" }),
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["Link"], { href: "#tab3", tabLink: true, text: "Tab 3" }))));
+};
+
+
+/***/ },
+/* 327 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_framework7_react__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_framework7_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_framework7_react__);
+/* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return BarsTabbarPage; });
+
+
+var BarsTabbarPage = function () {
+    return (__WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["Page"], { tabbarFixed: true },
+        __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["Navbar"], { backLink: "Back", title: "Tab Bar", sliding: true }),
+        __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["ContentBlock"], { tabs: true },
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["Tab"], { id: "tab1", active: true },
+                __WEBPACK_IMPORTED_MODULE_0_react__["createElement"]("p", null, "Tab 1")),
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["Tab"], { id: "tab2" },
+                __WEBPACK_IMPORTED_MODULE_0_react__["createElement"]("p", null, "Tab 2")),
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["Tab"], { id: "tab3" },
+                __WEBPACK_IMPORTED_MODULE_0_react__["createElement"]("p", null, "Tab 3"))),
+        __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["Toolbar"], { tabbar: true },
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["Link"], { href: "#tab1", tabLink: true, active: true, text: "Tab 1" }),
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["Link"], { href: "#tab2", tabLink: true, text: "Tab 2" }),
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["Link"], { href: "#tab3", tabLink: true, text: "Tab 3" }))));
+};
+
+
+/***/ },
+/* 328 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_framework7_react__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_framework7_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_framework7_react__);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return CardsPage; });
 
 
@@ -47353,7 +47639,7 @@ var CardsPage = function () {
 
 
 /***/ },
-/* 324 */
+/* 329 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -47386,7 +47672,7 @@ var ChipsPage = function () {
 
 
 /***/ },
-/* 325 */
+/* 330 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -47445,7 +47731,7 @@ var ContactsPage = function () {
 
 
 /***/ },
-/* 326 */
+/* 331 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -47469,7 +47755,7 @@ var ContentBlockPage = function () {
 
 
 /***/ },
-/* 327 */
+/* 332 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -47582,7 +47868,7 @@ var FormsPage = function () {
 
 
 /***/ },
-/* 328 */
+/* 333 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -47618,7 +47904,7 @@ var GridPage = function () {
 
 
 /***/ },
-/* 329 */
+/* 334 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -47681,7 +47967,7 @@ var InfinitePage = (function (_super) {
 
 
 /***/ },
-/* 330 */
+/* 335 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -47721,7 +48007,7 @@ var ListsPage = function () {
 
 
 /***/ },
-/* 331 */
+/* 336 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -47816,7 +48102,7 @@ var MessagesPage = (function (_super) {
 
 
 /***/ },
-/* 332 */
+/* 337 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -47856,7 +48142,7 @@ var PreloaderPage = function () {
 
 
 /***/ },
-/* 333 */
+/* 338 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -47886,7 +48172,7 @@ var ProgressbarPage = function () {
 
 
 /***/ },
-/* 334 */
+/* 339 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -47943,7 +48229,7 @@ var PullRefreshPage = (function (_super) {
 
 
 /***/ },
-/* 335 */
+/* 340 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -47979,7 +48265,7 @@ var SearchbarPage = function () {
 
 
 /***/ },
-/* 336 */
+/* 341 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -48034,7 +48320,7 @@ var SmartSelectPage = function () {
 
 
 /***/ },
-/* 337 */
+/* 342 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -48091,7 +48377,7 @@ var SortablePage = (function (_super) {
 
 
 /***/ },
-/* 338 */
+/* 343 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -48140,7 +48426,7 @@ var SwipeoutPage = function () { return (__WEBPACK_IMPORTED_MODULE_0_react__["cr
 
 
 /***/ },
-/* 339 */
+/* 344 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -48175,7 +48461,7 @@ var SwiperPage = function () {
 
 
 /***/ },
-/* 340 */
+/* 345 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -48232,7 +48518,7 @@ var TabsPage = function () {
 
 
 /***/ },
-/* 341 */
+/* 346 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -48289,31 +48575,41 @@ var TabsSwipeablePage = function () {
 
 
 /***/ },
-/* 342 */
+/* 347 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_pages_ContentBlockPage__ = __webpack_require__(326);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_pages_CardsPage__ = __webpack_require__(323);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_pages_ListsPage__ = __webpack_require__(330);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_pages_ContactsPage__ = __webpack_require__(325);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_pages_SortablePage__ = __webpack_require__(337);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_pages_SwipeoutPage__ = __webpack_require__(338);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_pages_ContentBlockPage__ = __webpack_require__(331);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_pages_CardsPage__ = __webpack_require__(328);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_pages_ListsPage__ = __webpack_require__(335);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_pages_ContactsPage__ = __webpack_require__(330);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_pages_SortablePage__ = __webpack_require__(342);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_pages_SwipeoutPage__ = __webpack_require__(343);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_pages_AccordionPage__ = __webpack_require__(322);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_pages_ProgressbarPage__ = __webpack_require__(333);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_pages_FormsPage__ = __webpack_require__(327);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_pages_GridPage__ = __webpack_require__(328);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_pages_SmartSelectPage__ = __webpack_require__(336);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_pages_ChipsPage__ = __webpack_require__(324);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_pages_PreloaderPage__ = __webpack_require__(332);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__components_pages_PullRefreshPage__ = __webpack_require__(334);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__components_pages_InfinitePage__ = __webpack_require__(329);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__components_pages_SwiperPage__ = __webpack_require__(339);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__components_pages_SearchbarPage__ = __webpack_require__(335);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__components_pages_TabsPage__ = __webpack_require__(340);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__components_pages_TabsSwipeablePage__ = __webpack_require__(341);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__components_pages_MessagesPage__ = __webpack_require__(331);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_pages_ProgressbarPage__ = __webpack_require__(338);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_pages_FormsPage__ = __webpack_require__(332);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_pages_GridPage__ = __webpack_require__(333);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_pages_SmartSelectPage__ = __webpack_require__(341);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_pages_ChipsPage__ = __webpack_require__(329);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_pages_PreloaderPage__ = __webpack_require__(337);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__components_pages_PullRefreshPage__ = __webpack_require__(339);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__components_pages_InfinitePage__ = __webpack_require__(334);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__components_pages_SwiperPage__ = __webpack_require__(344);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__components_pages_SearchbarPage__ = __webpack_require__(340);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__components_pages_TabsPage__ = __webpack_require__(345);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__components_pages_TabsSwipeablePage__ = __webpack_require__(346);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__components_pages_MessagesPage__ = __webpack_require__(336);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__components_pages_BarsPage__ = __webpack_require__(324);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__components_pages_BarsTabbarPage__ = __webpack_require__(327);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__components_pages_BarsTabbarLabelsPage__ = __webpack_require__(326);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__components_pages_BarsHidePage__ = __webpack_require__(323);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__components_pages_BarsSubnavbarPage__ = __webpack_require__(325);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return routes; });
+
+
+
+
+
 
 
 
@@ -48394,11 +48690,26 @@ var routes = [{
     }, {
         path: '/messages/',
         component: __WEBPACK_IMPORTED_MODULE_19__components_pages_MessagesPage__["a" /* MessagesPage */]
+    }, {
+        path: '/bars/',
+        component: __WEBPACK_IMPORTED_MODULE_20__components_pages_BarsPage__["a" /* BarsPage */]
+    }, {
+        path: '/bars-tabbar/',
+        component: __WEBPACK_IMPORTED_MODULE_21__components_pages_BarsTabbarPage__["a" /* BarsTabbarPage */]
+    }, {
+        path: '/bars-tabbar-labels/',
+        component: __WEBPACK_IMPORTED_MODULE_22__components_pages_BarsTabbarLabelsPage__["a" /* BarsTabbarLabelsPage */]
+    }, {
+        path: '/bars-hide/',
+        component: __WEBPACK_IMPORTED_MODULE_23__components_pages_BarsHidePage__["a" /* BarsHidePage */]
+    }, {
+        path: '/bars-subnavbar/',
+        component: __WEBPACK_IMPORTED_MODULE_24__components_pages_BarsSubnavbarPage__["a" /* BarsSubnavbarPage */]
     }];
 
 
 /***/ },
-/* 343 */
+/* 348 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
