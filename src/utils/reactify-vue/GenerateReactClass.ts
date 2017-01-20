@@ -301,8 +301,12 @@ export const generateReactClass = <TProps>(instantiatedComponents, vueComponent,
             handleComputedProperties(this.vueComponent);
 
             const reactElement = this.vueComponent.render(this.createElement.bind(this));
-
-            return applyPropOverrides(reactElement, tag, this);
+            
+            if (reactElement) {
+                return applyPropOverrides(reactElement, tag, this);
+            } else {
+                return null;
+            }            
         },
 
         callVueMethod: function(methodName: string, ...args: any[]) {

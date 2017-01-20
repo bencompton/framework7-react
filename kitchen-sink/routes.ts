@@ -26,6 +26,8 @@ import {BarsSubnavbarPage} from './components/pages/BarsSubnavbarPage';
 import {FabPage} from './components/pages/FabPage';
 import {FabDialPage} from './components/pages/FabDialPage';
 import {LoginScreenPage} from './components/pages/LoginScreenPage';
+import {VirtualListPage} from './components/pages/VirtualListPage';
+import {PhotoBrowserPage} from './components/pages/PhotoBrowserPage';
 
 export const routes = [{
     path: '/content-block/',
@@ -111,4 +113,10 @@ export const routes = [{
 }, {
     path: '/login-screen/',
     component: LoginScreenPage
+}, {
+    path: '/virtual-list/',
+    component: VirtualListPage
+}, {
+    path: '/photo-browser/',
+    component: PhotoBrowserPage
 }];

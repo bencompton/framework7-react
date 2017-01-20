@@ -15,9 +15,15 @@ export interface IKitchenSinkPage {
     component: React.ComponentClass<any> | React.StatelessComponent<any>;
 }
 
+let framework7: any;
+
+export const getFramework7 = () => {
+    return framework7;
+}
+
 export const App = (props: React.Props<any>) => {
     return (
-        <Framework7App themeType="ios" routes={routes}>
+        <Framework7App onFramework7Init={(f7) => {framework7 = f7}} themeType="ios" routes={routes}>
             <Statusbar></Statusbar>
             <Panel left reveal layout="dark" theme="pink">
                 <View navbarFixed>
