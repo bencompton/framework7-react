@@ -13,16 +13,16 @@ export interface IPhotoBrowserPageState {
 
 export const PhotoBrowserPageDefaultState = [{
         url: 'http://lorempixel.com/400/400/nature/1/',
-        caption: 'Amazing beach in Goa, India'
+        caption: 'Ants on grass'
     },
         'http://placekitten.com/600/600',
         'http://lorempixel.com/400/400/nature/2/',
     {
         url: 'http://lorempixel.com/400/400/nature/3/',
-        caption: 'I met this monkey in Chinese mountains'
+        caption: 'Beautiful mountains in Zhangjiajie, China'
     }, {
         url: 'http://lorempixel.com/400/400/nature/4/',
-        caption: 'Beautiful mountains in Zhangjiajie, China'
+        caption: 'Trees in the Fall'
     }
 ];
 
