@@ -17,7 +17,7 @@ const copyPropsToVueComponent = (vueComponent: IVueComponent, props: any) => {
     if (props) {
         Object.keys(props)
             .forEach(propName => {
-                if (!vueComponent[propName]) {
+                if (typeof vueComponent[propName] !== 'function' || typeof vueComponent[propName] === 'function' && !vueComponent[propName]) {
                     vueComponent[propName] = props[propName];
                 }
             });
@@ -81,10 +81,13 @@ const callPropOnEvent = (eventName: string, eventArgs: any[], props: any) => {
 
 const handleWatchedProperties = (vueComponent: IVueComponent, currentProps: any, nextProps: any) => {
     if (vueComponent.watch) {
+        copyPropsToVueComponent(vueComponent,nextProps);
+        handleComputedProperties(vueComponent);
+
         Object.keys(vueComponent.watch)
             .forEach(watchedProperty => {
                 if (currentProps[watchedProperty] !== nextProps[watchedProperty]) {
-                    vueComponent.watch[watchedProperty]();
+                    vueComponent.watch[watchedProperty].apply(vueComponent, []);
                 }
             });
     }
@@ -140,8 +143,8 @@ const addCompiledTemplateFunctionsToVueComponent = (vueComponent: any, createEle
         }
     };
 
-    vueComponent._v = (text: string) => text;
-    vueComponent._s = (text: string) => text;
+    vueComponent._v = (text: string) => text || '';
+    vueComponent._s = (text: string) => text || '';
     vueComponent._e = () => null;
 };
 
@@ -345,8 +348,12 @@ export const generateReactClass = <TProps>(instantiatedComponents, vueComponent,
             handleComputedProperties(this.vueComponent);
 
             const reactElement = this.vueComponent.render(this.createElement.bind(this));
-
-            return applyPropOverrides(reactElement, tag, this);
+            
+            if (reactElement) {
+                return applyPropOverrides(reactElement, tag, this);
+            } else {
+                return null;
+            }            
         },
 
         callVueMethod: function(methodName: string, ...args: any[]) {

@@ -20,19 +20,21 @@ const resolveDependencyComponent = (instantiatedComponents: (React.ComponentClas
     }
 };
 
-const removeOuterArrayFromChildren = (children) => {
+const flattenNestedArrayOfChildren = (children: any[], finalArray: any[] = []) => {
     if (children && Array.isArray(children)) {
-        return children.reduce((outputArray, nextChildArray) => {
-            nextChildArray = nextChildArray || [];
-
-            if (!Array.isArray(nextChildArray)) {
-                nextChildArray = [nextChildArray];
+        for (let i = 0; i < children.length; i++) {
+            if (children[i] && children[i].constructor === Array) {
+                flattenNestedArrayOfChildren(children[i], finalArray);
+            } else {
+                if (finalArray.indexOf(children[i]) === -1) {
+                    finalArray.push(children[i]);  
+                }
             }
+        }
 
-            return [...outputArray, ...nextChildArray];
-        }, []);
+        return finalArray;
     } else {
-       return children;
+        return children;
     }
 };
 
@@ -49,7 +51,7 @@ export const createReactElement = (
         let resolvedComponent;    
 
         resolvedComponent = resolveDependencyComponent(instantiatedComponents, componentOrComponentName as string);
-        children = removeOuterArrayFromChildren(children);
+        children = flattenNestedArrayOfChildren(children);
 
         if (!resolvedComponent) resolvedComponent = componentOrComponentName as React.ComponentClass<any> | React.StatelessComponent<any>;
 

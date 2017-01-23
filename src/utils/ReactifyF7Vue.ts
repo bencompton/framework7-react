@@ -4,6 +4,7 @@ import {camelCase} from 'change-case';
 import {IFramework7AppContext} from '../components/Framework7App';
 import {reactifyVue} from './reactify-vue/ReactifyVue';
 import {Dom7} from '../Framework7';
+import {Template7} from '../Framework7';
 
 export interface IReactifyF7VueArgs {
     component: any;
@@ -28,7 +29,8 @@ export const reactifyF7Vue = <TProps>(args: IReactifyF7VueArgs) => {
         instantiatedComponents: args.instantiatedComponents,
         args: {
             ...args.args,
-            $$: Dom7
+            $$: Dom7,
+            $t7: Template7
         },
         mixin: args.mixin
     });

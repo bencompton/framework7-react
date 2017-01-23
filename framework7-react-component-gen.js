@@ -41,6 +41,10 @@ const getPropType = (propValue) => {
                 return 'string';
             case Object:
                 return 'Object';
+            case Function:
+                return 'Function';
+            case Array:
+                return 'any[]';
             default:
                 return 'string';
         }

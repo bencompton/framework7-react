@@ -9,15 +9,19 @@ var fw7ModulesBeingUsed = [
     'fast-clicks',
     'forms',
     'infinite-scroll',
+    'messages',
     'modals',
+    'photo-browser',
     'pull-to-refresh',
     'push-state',
     'searchbar',
+    'scroll-toolbars',
     'smart-select',
     'sortable',
     'swipeout',
     'swiper',
-    'tabs'
+    'tabs',
+    'virtual-list'
 ];
 
 //Prefix framework7 file paths with base path because their files are listed as paths relative to the node module.

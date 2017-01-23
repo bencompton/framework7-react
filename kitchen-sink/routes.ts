@@ -17,6 +17,17 @@ import {SwiperPage} from './components/pages/SwiperPage';
 import {SearchbarPage} from './components/pages/SearchbarPage';
 import {TabsPage} from './components/pages/TabsPage';
 import {TabsSwipeablePage} from './components/pages/TabsSwipeablePage';
+import {MessagesPage} from './components/pages/MessagesPage';
+import {BarsPage} from './components/pages/BarsPage';
+import {BarsTabbarPage} from './components/pages/BarsTabbarPage';
+import {BarsTabbarLabelsPage} from './components/pages/BarsTabbarLabelsPage';
+import {BarsHidePage} from './components/pages/BarsHidePage';
+import {BarsSubnavbarPage} from './components/pages/BarsSubnavbarPage';
+import {FabPage} from './components/pages/FabPage';
+import {FabDialPage} from './components/pages/FabDialPage';
+import {LoginScreenPage} from './components/pages/LoginScreenPage';
+import {VirtualListPage} from './components/pages/VirtualListPage';
+import {PhotoBrowserPage} from './components/pages/PhotoBrowserPage';
 
 export const routes = [{
     path: '/content-block/',
@@ -75,4 +86,37 @@ export const routes = [{
 }, {
     path: '/tabs-swipeable/',
     component: TabsSwipeablePage
+}, {
+    path: '/messages/',
+    component: MessagesPage
+}, {
+    path: '/bars/',
+    component: BarsPage
+}, {
+    path: '/bars-tabbar/',
+    component: BarsTabbarPage
+}, {
+    path: '/bars-tabbar-labels/',
+    component: BarsTabbarLabelsPage
+}, {
+    path: '/bars-hide/',
+    component: BarsHidePage
+}, {
+    path: '/bars-subnavbar/',
+    component: BarsSubnavbarPage
+}, {
+    path: '/fab/',
+    component: FabPage
+}, {
+    path: '/fab-dial/',
+    component: FabDialPage
+}, {
+    path: '/login-screen/',
+    component: LoginScreenPage
+}, {
+    path: '/virtual-list/',
+    component: VirtualListPage
+}, {
+    path: '/photo-browser/',
+    component: PhotoBrowserPage
 }];
