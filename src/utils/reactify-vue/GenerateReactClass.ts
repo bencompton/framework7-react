@@ -17,7 +17,7 @@ const copyPropsToVueComponent = (vueComponent: IVueComponent, props: any) => {
     if (props) {
         Object.keys(props)
             .forEach(propName => {
-                if (!vueComponent[propName]) {
+                if (typeof vueComponent[propName] !== 'function' || typeof vueComponent[propName] === 'function' && !vueComponent[propName]) {
                     vueComponent[propName] = props[propName];
                 }
             });
@@ -81,10 +81,13 @@ const callPropOnEvent = (eventName: string, eventArgs: any[], props: any) => {
 
 const handleWatchedProperties = (vueComponent: IVueComponent, currentProps: any, nextProps: any) => {
     if (vueComponent.watch) {
+        copyPropsToVueComponent(vueComponent,nextProps);
+        handleComputedProperties(vueComponent);
+
         Object.keys(vueComponent.watch)
             .forEach(watchedProperty => {
                 if (currentProps[watchedProperty] !== nextProps[watchedProperty]) {
-                    vueComponent.watch[watchedProperty]();
+                    vueComponent.watch[watchedProperty].apply(vueComponent, []);
                 }
             });
     }

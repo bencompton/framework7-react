@@ -22,6 +22,7 @@ gulp.task('build-framework7-core', ['clean'], () => {
             .pipe(concat('Framework7.js'))
             .pipe(replace('window.Framework7 = ', 'window.Framework7 = module.exports.Framework7 = '))
             .pipe(replace('window.Dom7 = ', 'window.Dom7 = module.exports.Dom7 = '))
+            .pipe(replace('window.Template7 = ', 'window.Template7 = module.exports.Template7 = '))
             .pipe(gulp.dest('dist/src/')),
         gulp.src('./src/Framework7.d.ts')
             .pipe(gulp.dest('./dist/src/'))

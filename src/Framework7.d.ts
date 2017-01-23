@@ -164,3 +164,14 @@ export declare type Dom7ReturnObject = {
 
 export declare function Dom7(selector: string): Dom7ReturnObject;
 export declare function Dom7(selector: string, context: string): Dom7ReturnObject;
+
+export declare type Template7ReturnObject = {
+    compile: (template: string) => void;
+    registerHelper(name: string, helper: () => void);
+    unregisterHelper(name: string);
+    registerPartial(name: string, helper: string);
+    unregisterPartial(name: string);
+    global: Object;
+}
+
+export declare function Template7(): Template7ReturnObject
