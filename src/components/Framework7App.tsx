@@ -14,13 +14,13 @@ export interface ITabChildRoute {
 export interface ITabRoute {
     tabId: string;
     component?: React.ComponentClass<any> | React.StatelessComponent<any>;
-    routes?: ITabRoute;
+    routes?: ITabChildRoute[];
 }
 
 export interface IFramework7Route {
     path: string;
     component: React.ComponentClass<any> | React.StatelessComponent<any>;
-    tabs?: ITabRoute;
+    tabs?: ITabRoute[];
 }
 
 export interface IFramework7AppContext {
@@ -92,10 +92,11 @@ export class Framework7App extends React.Component<IFramework7AppProps, Framewor
         router.setRouteChangeHandler(route => {
             this.currentRoute = route;            
             
-            Object.keys(this.routeChangeCallbacks).forEach(componentInstance => {
-                this.routeChangeCallbacks[componentInstance].forEach(callback => {
-                    callback(route);
-                });
+            Object.keys(this.routeChangeCallbacks).forEach(componentId => {
+                //Need this if statement in case a component gets unregistered during this forEach
+                if (this.routeChangeCallbacks[componentId]) {
+                    this.routeChangeCallbacks[componentId](route);
+                }                
             });
         });            
 
@@ -116,14 +117,11 @@ export class Framework7App extends React.Component<IFramework7AppProps, Framewor
         }
     }
 
-    private onRouteChange(componentInstance, callback: (route) => void) {
-        this.routeChangeCallbacks[componentInstance] = [
-            ...(this.routeChangeCallbacks[componentInstance] || []),
-            callback
-        ]        
+    private onRouteChange(componentId, callback: (route) => void) {
+        this.routeChangeCallbacks[componentId] = callback;
     }
 
-    private unregisterRouteChange(componentInstance) {
-        delete this.routeChangeCallbacks[componentInstance];
+    private unregisterRouteChange(componentId) {
+        delete this.routeChangeCallbacks[componentId];
     }
 };

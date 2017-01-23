@@ -6,6 +6,8 @@ import {reactifyVue} from './reactify-vue/ReactifyVue';
 import {Dom7} from '../Framework7';
 import {Template7} from '../Framework7';
 
+let nextComponentId = 0;
+
 export interface IReactifyF7VueArgs {
     component: any;
     tag: string;
@@ -55,12 +57,14 @@ export const reactifyF7Vue = <TProps>(args: IReactifyF7VueArgs) => {
                 configurable: true
             });
 
+            this.componentId = nextComponentId++;
+
             return null;
         },
 
         componentWillUnmount: function () {
             const framework7AppContext = (this.context as any).framework7AppContext as IFramework7AppContext;
-            framework7AppContext.unregisterRouteChange(this)
+            framework7AppContext.unregisterRouteChange(this.componentId)
         },
 
         render: function() {
@@ -78,7 +82,7 @@ export const reactifyF7Vue = <TProps>(args: IReactifyF7VueArgs) => {
                         }
                     });
 
-                    framework7AppContext.onRouteChange(this, route => {
+                    framework7AppContext.onRouteChange(this.componentId, route => {
                         if (self.vueComponent.onRouteChange) {
                             self.vueComponent.onRouteChange(route);
                         }

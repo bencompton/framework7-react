@@ -89,6 +89,7 @@ export const App = (props: React.Props<any>) => {
                             </List>
                             <List>
                                 <ListItem title="Dynamic Route" link="/user/45/posts/28/?sort=first#opened" />
+                                <ListItem title="Nested Routes" link="/nested-routes/" />
                                 <ListItem title="Data Binding" link="/data-binding/" />
                             </List>
                         </Page>

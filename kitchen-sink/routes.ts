@@ -29,6 +29,18 @@ import {LoginScreenPage} from './components/pages/LoginScreenPage';
 import {VirtualListPage} from './components/pages/VirtualListPage';
 import {PhotoBrowserPage} from './components/pages/PhotoBrowserPage';
 
+import {NestedRoutesPage} from './components/pages/NestedRoutesPage';
+import {NestedRoutesTabsPage} from'./components/pages/NestedRoutesTabsPage';
+import {NestedRoutesTabbarPage} from'./components/pages/NestedRoutesTabbarPage';
+import {Tab1} from './components/nested-routes/tabs/Tab1';
+import {Tab2} from './components/nested-routes/tabs/Tab2';
+import {Tab3} from './components/nested-routes/tabs/Tab3';
+import {Tab3AlternateContent} from './components/nested-routes/tabs/Tab3AlternateContent';
+import {TabbarTab1} from './components/nested-routes/tabs/TabbarTab1';
+import {TabbarTab2} from './components/nested-routes/tabs/TabbarTab2';
+import {TabbarTab3} from './components/nested-routes/tabs/TabbarTab3';
+import {TabbarTab3AlternateContent} from './components/nested-routes/tabs/TabbarTab3AlternateContent';
+
 export const routes = [{
     path: '/content-block/',
     component: ContentBlockPage
@@ -119,4 +131,51 @@ export const routes = [{
 }, {
     path: '/photo-browser/',
     component: PhotoBrowserPage
+}, {
+    path: '/nested-routes/',
+    component: NestedRoutesPage
+}, {
+    path: '/nested-routes/tabs/',
+    component: NestedRoutesTabsPage,
+    tabs: [{
+        path: '/',
+        tabId: 'tab1',
+        component: Tab1
+    }, {
+        path: '/tab-2/',
+        tabId: 'tab2',
+        component: Tab2
+    }, {
+        path: '/tab-3/',
+        tabId: 'tab3',
+        routes: [{
+            path: '/',
+            component: Tab3            
+        }, {
+            path: '/alternate-content/',
+            component: Tab3AlternateContent
+        }]
+    }]
+  }, {
+    path: '/nested-routes/tabbar/',
+    component: NestedRoutesTabbarPage,
+    tabs: [{
+        path: '/',
+        tabId: 'tab1',
+        component: TabbarTab1
+    }, {
+        path: '/tab-2/',
+        tabId: 'tab2',
+        component: TabbarTab2
+    }, {
+        path: '/tab-3/',
+        tabId: 'tab3',
+        routes: [{
+            path: '/',
+            component: TabbarTab3
+        }, {
+            path: '/alternate-content/',
+            component: TabbarTab3AlternateContent
+        }]
+    }]
 }];
