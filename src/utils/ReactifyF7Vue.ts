@@ -35,7 +35,9 @@ export const reactifyF7Vue = <TProps>(args: IReactifyF7VueArgs) => {
 
     const reactClass = React.createClass<TProps, any>({
         getInitialState: function () {
-            ((this.context as any).framework7AppContext as IFramework7AppContext).getFramework7(f7 => {
+            const framework7AppContext = (this.context as any).framework7AppContext as IFramework7AppContext;
+
+            framework7AppContext.getFramework7(f7 => {
                 this.framework7 = f7;
             });
 
@@ -43,9 +45,20 @@ export const reactifyF7Vue = <TProps>(args: IReactifyF7VueArgs) => {
                 get: () => this.framework7,
                 enumerable: true,
                 configurable: true
-            });            
+            });
+
+            Object.defineProperty(args.component, '$route', {
+                get: framework7AppContext.getCurrentRoute,
+                enumerable: true,
+                configurable: true
+            });
 
             return null;
+        },
+
+        componentWillUnmount: function () {
+            const framework7AppContext = (this.context as any).framework7AppContext as IFramework7AppContext;
+            framework7AppContext.unregisterRouteChange(this)
         },
 
         render: function() {
@@ -55,9 +68,17 @@ export const reactifyF7Vue = <TProps>(args: IReactifyF7VueArgs) => {
                 ...props,
                 $theme: { material: false, ios: true },
                 __onMount: (self) => {
-                    ((this.context as any).framework7AppContext as IFramework7AppContext).getFramework7(f7 => {
+                    const framework7AppContext = (this.context as any).framework7AppContext as IFramework7AppContext;
+
+                    framework7AppContext.getFramework7(f7 => {
                         if (self.vueComponent.onF7Init) {
                             self.vueComponent.onF7Init(f7);
+                        }
+                    });
+
+                    framework7AppContext.onRouteChange(this, route => {
+                        if (self.vueComponent.onRouteChange) {
+                            self.vueComponent.onRouteChange(route);
                         }
                     });
                 }

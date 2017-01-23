@@ -21,7 +21,7 @@ gulp.task('build-framework7-core', ['clean'], () => {
         gulp.src(getF7FileList())
             .pipe(concat('Framework7.js'))
             .pipe(replace('window.Framework7 = ', 'window.Framework7 = module.exports.Framework7 = '))
-            .pipe(replace('window.Dom7 = ', 'window.Dom7 = module.exports.Dom7 = '))
+            .pipe(replace('window.Dom7 = ', 'window.Dom7 = module.exports.Dom7 = '))            
             .pipe(gulp.dest('dist/src/')),
         gulp.src('./src/Framework7.d.ts')
             .pipe(gulp.dest('./dist/src/'))
@@ -29,15 +29,16 @@ gulp.task('build-framework7-core', ['clean'], () => {
 });
 
 gulp.task('compile-framework7-vue', ['clean'], (cb) => {
-    return compileFramework7Vue(cb);
+    return compileFramework7Vue(() => {
+        gulp.src('./node_modules/framework7-vue/src/utils/router.js')
+            .pipe(gulp.dest('./framework7-vue/'))
+            .pipe(gulp.dest('./dist/framework7-vue/'))
+            .on('end', cb);
+    });
 });
 
 gulp.task('generate-react-components', ['clean', 'compile-framework7-vue'], () => {
     return generateReactComponents({
-        exclude: [
-            'View',
-            'Pages'
-        ],
         overrides: {
             FormInput: {
                 events: [

@@ -189,9 +189,13 @@ const removePropsFromElementAndChildren = (element, propsToRemove) => {
 };
 
 const applyPropOverrides = (reactElement: React.ReactElement<any>, tag: string, self) => {
-    const refFunc = (e: HTMLElement) => {                 
+    const refFunc = (e: HTMLElement) => {
         reactElement.props.refTemp(e);
         self.element = e;
+
+        self.nextTickCallbacks.forEach(callback => callback.apply(this.vueComponent, []));
+        self.nextTickCallbacks = [];
+        self.hasUnrenderedStateChanges = false;        
     };
 
     const elementWithPropOverrides = {...reactElement, props: { ...reactElement.props}, tag: tag, ref: refFunc };
@@ -222,6 +226,41 @@ const applyPropOverrides = (reactElement: React.ReactElement<any>, tag: string, 
     );    
 };
 
+const initData = (vueComponent) => {
+    let state = null;
+
+    if (vueComponent.data) {
+        state = vueComponent.data();
+
+        Object.keys(state).forEach(stateKey => {
+            vueComponent[stateKey] = state[stateKey];
+        });
+    }
+
+    return state;
+};
+
+const handleStateSet = (stateObject, key, value, vueComponent, self) => {
+    const stateKey = Object.keys(self.state).reduce((macthingStateKey, nextKey) => {
+        if (self.state[nextKey] === stateObject) {
+            return nextKey;
+        } else {
+            return macthingStateKey;
+        }
+    }, null);  
+
+    const newState = {
+        ...self.state,
+        [stateKey]: {
+            ...self.state[stateKey],
+            [key]: value
+        }
+    };
+
+    vueComponent[stateKey] = newState[stateKey];
+    self.setState(newState);
+};
+
 const generateVueComponentWithInstanceProperties = (vueComponent, props, self) => {
     self.nextTickCallbacks = [];
 
@@ -233,10 +272,18 @@ const generateVueComponentWithInstanceProperties = (vueComponent, props, self) =
         $options: {
             propsData: props
         },
-        $nextTick: (func) => self.nextTickCallbacks.push(func)       
-    }};
-
-    handleComputedProperties(instanceVueComponent);
+        $nextTick: (func) => {
+            if (self.hasUnrenderedStateChanges) {
+                self.nextTickCallbacks.push(func);
+            } else {
+                func();
+            }
+        }, 
+        $set: (stateObject, key, value) => {
+            self.hasUnrenderedStateChanges = true;
+            handleStateSet(stateObject, key, value, instanceVueComponent, self);                        
+        } 
+    }};    
 
     return instanceVueComponent;
 }
@@ -254,9 +301,11 @@ export const generateReactClass = <TProps>(instantiatedComponents, vueComponent,
                 instantiatedComponents,
                 this.vueComponent
             );
-
+            
             copyPropsToVueComponent(this.vueComponent, this.props);
             copySlotsToVueComponent(this.vueComponent, slots, this.props);
+            const state = initData(this.vueComponent);
+            handleComputedProperties(this.vueComponent);
 
             addCompiledTemplateFunctionsToVueComponent(this.vueComponent, this.createElement);
 
@@ -268,23 +317,18 @@ export const generateReactClass = <TProps>(instantiatedComponents, vueComponent,
 
             if (this.props.__onInit) {
                 this.props.__onInit(this);
-            }
+            }            
 
-            return null;
+            return state;
         },
 
         componentWillUpdate: function() {
             if (this.vueComponent.updated) this.vueComponent.updated();
         },
 
-        componentDidUpdate: function() {
-            this.nextTickCallbacks.forEach(callback => callback.apply(this.vueComponent, []));
-        },
-
         componentDidMount: function() {
             if (this.vueComponent.mounted) this.vueComponent.mounted();
-
-            if (this.props.__onMount) this.props.__onMount(this);
+            if (this.props.__onMount) this.props.__onMount(this);            
         },
 
         componentWillUnmount: function() {

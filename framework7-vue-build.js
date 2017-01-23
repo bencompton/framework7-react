@@ -25,7 +25,7 @@ const ensureDirectoryExistence = (filePath) => {
 export default function(cb) {
     const paths = [
         './node_modules/framework7-vue/src/components/',
-        './node_modules/framework7-vue/src/mixins/'
+        './node_modules/framework7-vue/src/mixins/'        
     ];
     
     const components = [];

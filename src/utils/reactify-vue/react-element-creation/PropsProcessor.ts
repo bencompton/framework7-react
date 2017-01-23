@@ -1,5 +1,6 @@
 import {camelCase} from 'change-case';
 import * as classNames from 'classnames';
+import * as React from 'react';
 
 import {IVueComponent} from '../ReactifyVue';
 

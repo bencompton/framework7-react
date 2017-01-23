@@ -43,15 +43,19 @@ export const createReactElement = (
     instantiatedComponents,
     vueComponent: IVueComponent
 ) => {
-    let resolvedComponent;    
+    if (args.tag === 'component') {
+        return React.createElement(componentOrComponentName as React.ComponentClass<any>);
+    } else {
+        let resolvedComponent;    
 
-    resolvedComponent = resolveDependencyComponent(instantiatedComponents, componentOrComponentName as string);
-    children = removeOuterArrayFromChildren(children);
+        resolvedComponent = resolveDependencyComponent(instantiatedComponents, componentOrComponentName as string);
+        children = removeOuterArrayFromChildren(children);
 
-    if (!resolvedComponent) resolvedComponent = componentOrComponentName as React.ComponentClass<any> | React.StatelessComponent<any>;
+        if (!resolvedComponent) resolvedComponent = componentOrComponentName as React.ComponentClass<any> | React.StatelessComponent<any>;
 
-    const propsProcessor = new PropsProcessor();
-    const props = propsProcessor.getProps(args, children, componentOrComponentName, resolvedComponent, vueComponent)
+        const propsProcessor = new PropsProcessor();
+        const props = propsProcessor.getProps(args, children, componentOrComponentName, resolvedComponent, vueComponent)
 
-    return React.createElement(resolvedComponent, props);
+        return React.createElement(resolvedComponent, props);
+    }
 };
