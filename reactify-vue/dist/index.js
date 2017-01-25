@@ -61,7 +61,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 431);
+/******/ 	return __webpack_require__(__webpack_require__.s = 432);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -25015,7 +25015,7 @@ module.exports = setInnerHTML;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_framework7_react__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_framework7_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_framework7_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__routes__ = __webpack_require__(429);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__routes__ = __webpack_require__(430);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return getFramework7; });
 /* harmony export (binding) */ __webpack_require__.d(exports, "b", function() { return App; });
 
@@ -25078,7 +25078,10 @@ var App = function (props) {
                             __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["ListItem"], { title: "Login Screen", link: "/login-screen/" }),
                             __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["ListItem"], { title: "Virtual List", link: "/virtual-list/" }),
                             __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["ListItem"], { title: "Photo Browser", link: "/photo-browser/" }),
-                            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["ListItem"], { title: "Modals", link: "/modals/" })),
+                            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["ListItem"], { title: "Modals", link: "/modals/" }),
+                            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["ListItem"], { title: "Timeline Vertical", link: "/timeline-vertical/" }),
+                            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["ListItem"], { title: "Timeline Horizontal", link: "/timeline-horizontal/" }),
+                            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["ListItem"], { title: "Timeline Calendar", link: "/timeline-calendar/" })),
                         __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["List"], null,
                             __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["ListItem"], { title: "Dynamic Route", link: "/user/45/posts/28/?sort=first#opened" }),
                             __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["ListItem"], { title: "Nested Routes", link: "/nested-routes/" }),
@@ -34142,7 +34145,7 @@ exports.Views = reactifyF7Vue_1.reactifyF7Vue({
 
 "use strict";
 "use strict";
-var universal_router_1 = __webpack_require__(430);
+var universal_router_1 = __webpack_require__(431);
 var query_string_1 = __webpack_require__(292);
 var getTabChildRoutes = function (originalRoute) {
     var tabs = originalRoute.tabs;
@@ -50349,6 +50352,66 @@ var TabsSwipeablePage = function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_framework7_react__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_framework7_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_framework7_react__);
+/* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return TimelineVerticalPage; });
+
+
+var TimelineVerticalPage = function () {
+    return (__WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["Page"], { withSubnavbar: true },
+        __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["Navbar"], { backLink: "Back", title: "Timeline Vertical", sliding: true }),
+        __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["ContentBlockTitle"], null, "Default"),
+        __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["Timeline"], null,
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["TimelineItem"], { day: "21", month: "DEC", inner: true, content: "Some text goes here" }),
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["TimelineItem"], { day: "22", month: "DEC", inner: true, content: "Another text goes here" }),
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["TimelineItem"], { day: "23", month: "DEC", inner: true, content: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor fugiat ipsam hic porro enim, accusamus perferendis, quas commodi alias quaerat eius nemo deleniti. Odio quasi quos quis iure, aperiam pariatur?" }),
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["TimelineItem"], { day: "24", month: "DEC", inner: true, content: "One more text here" })),
+        __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["ContentBlockTitle"], null, "Side By Side"),
+        __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["Timeline"], { sides: true },
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["TimelineItem"], { day: "21", month: "DEC", inner: true, content: "Some text goes here" }),
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["TimelineItem"], { day: "22", month: "DEC", inner: true, content: "Another text goes here" }),
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["TimelineItem"], { day: "23", month: "DEC", inner: true, content: "Just plain text" }),
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["TimelineItem"], { day: "24", month: "DEC", inner: true, content: "One more text here" })),
+        __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["ContentBlockTitle"], null, "Only Tablet Side By Side"),
+        __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["Timeline"], { tabletSides: true },
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["TimelineItem"], { day: "21", month: "DEC", inner: true, content: "Some text goes here" }),
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["TimelineItem"], { day: "22", month: "DEC", inner: true, content: "Another text goes here" }),
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["TimelineItem"], { day: "23", month: "DEC", inner: true, content: "Just plain text" }),
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["TimelineItem"], { day: "24", month: "DEC", inner: true, content: "One more text here" })),
+        __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["ContentBlockTitle"], null, "Forced Sides"),
+        __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["Timeline"], { sides: true },
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["TimelineItem"], { side: "right", day: "21", month: "DEC", inner: true, content: "Some text goes here" }),
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["TimelineItem"], { side: "right", day: "22", month: "DEC", inner: true, content: "Another text goes here" }),
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["TimelineItem"], { side: "left", day: "23", month: "DEC", inner: true, content: "Just plain text" }),
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["TimelineItem"], { side: "left", day: "24", month: "DEC", inner: true, content: "One more text here" })),
+        __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["ContentBlockTitle"], null, "Rich Content"),
+        __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["Timeline"], null,
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["TimelineItem"], { day: "21", month: "DEC", inner: true, time: "12:56", title: "Item Title", subtitle: "Item Subtitle", text: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor fugiat ipsam hic porro enim, accusamus perferendis, quas commodi alias quaerat eius nemo deleniti. Odio quasi quos quis iure, aperiam pariatur?" }),
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["TimelineItem"], { day: "22", month: "DEC", inner: true, time: "15:07", title: "Item Title", subtitle: "Item Subtitle", text: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor fugiat ipsam hic porro enim, accusamus perferendis, quas commodi alias quaerat eius nemo deleniti. Odio quasi quos quis iure, aperiam pariatur?" }),
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["TimelineItem"], { day: "23", month: "DEC" },
+                __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["List"], { inset: true },
+                    __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["ListItem"], { link: "#", title: "Item 1" }),
+                    __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["ListItem"], { link: "#", title: "Item 2" }),
+                    __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["ListItem"], { link: "#", title: "Item 3" }))),
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["TimelineItem"], { day: "24", month: "DEC" },
+                __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["Card"], { title: "Card Header", content: "Card Content", footer: "Card Footer" })),
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["TimelineItem"], { day: "25", month: "DEC" }, "Plain text")),
+        __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["ContentBlockTitle"], null, "Inside Content Block"),
+        __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["ContentBlock"], { inner: true },
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["TimelineItem"], { day: "21", month: "DEC", inner: true, content: "Some text goes here" }),
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["TimelineItem"], { day: "22", month: "DEC", inner: true, content: "Another text goes here" }),
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["TimelineItem"], { day: "23", month: "DEC", inner: true, content: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor fugiat ipsam hic porro enim, accusamus perferendis, quas commodi alias quaerat eius nemo deleniti. Odio quasi quos quis iure, aperiam pariatur?" }),
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["TimelineItem"], { day: "24", month: "DEC", inner: true, content: "One more text here" }))));
+};
+
+
+/***/ },
+/* 429 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_framework7_react__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_framework7_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_framework7_react__);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return VirtualListPage; });
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -50419,7 +50482,7 @@ var VirtualListPage = (function (_super) {
 
 
 /***/ },
-/* 429 */
+/* 430 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -50451,21 +50514,23 @@ var VirtualListPage = (function (_super) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__components_pages_FabPage__ = __webpack_require__(406);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__components_pages_FabDialPage__ = __webpack_require__(405);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__components_pages_LoginScreenPage__ = __webpack_require__(411);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__components_pages_VirtualListPage__ = __webpack_require__(428);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__components_pages_VirtualListPage__ = __webpack_require__(429);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__components_pages_PhotoBrowserPage__ = __webpack_require__(417);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__components_pages_ModalsPage__ = __webpack_require__(413);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_31__components_pages_NestedRoutesPage__ = __webpack_require__(414);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_32__components_pages_NestedRoutesTabsPage__ = __webpack_require__(416);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_33__components_pages_NestedRoutesTabbarPage__ = __webpack_require__(415);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_34__components_nested_routes_tabs_Tab1__ = __webpack_require__(387);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_35__components_nested_routes_tabs_Tab2__ = __webpack_require__(388);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_36__components_nested_routes_tabs_Tab3__ = __webpack_require__(389);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_37__components_nested_routes_tabs_Tab3AlternateContent__ = __webpack_require__(390);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_38__components_nested_routes_tabs_TabbarTab1__ = __webpack_require__(391);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_39__components_nested_routes_tabs_TabbarTab2__ = __webpack_require__(392);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_40__components_nested_routes_tabs_TabbarTab3__ = __webpack_require__(393);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_41__components_nested_routes_tabs_TabbarTab3AlternateContent__ = __webpack_require__(394);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_31__components_pages_TimelineVerticalPage__ = __webpack_require__(428);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_32__components_pages_NestedRoutesPage__ = __webpack_require__(414);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_33__components_pages_NestedRoutesTabsPage__ = __webpack_require__(416);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_34__components_pages_NestedRoutesTabbarPage__ = __webpack_require__(415);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_35__components_nested_routes_tabs_Tab1__ = __webpack_require__(387);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_36__components_nested_routes_tabs_Tab2__ = __webpack_require__(388);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_37__components_nested_routes_tabs_Tab3__ = __webpack_require__(389);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_38__components_nested_routes_tabs_Tab3AlternateContent__ = __webpack_require__(390);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_39__components_nested_routes_tabs_TabbarTab1__ = __webpack_require__(391);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_40__components_nested_routes_tabs_TabbarTab2__ = __webpack_require__(392);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_41__components_nested_routes_tabs_TabbarTab3__ = __webpack_require__(393);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_42__components_nested_routes_tabs_TabbarTab3AlternateContent__ = __webpack_require__(394);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return routes; });
+
 
 
 
@@ -50600,59 +50665,62 @@ var routes = [{
         component: __WEBPACK_IMPORTED_MODULE_29__components_pages_PhotoBrowserPage__["a" /* PhotoBrowserPage */]
     }, {
         path: '/nested-routes/',
-        component: __WEBPACK_IMPORTED_MODULE_31__components_pages_NestedRoutesPage__["a" /* NestedRoutesPage */]
+        component: __WEBPACK_IMPORTED_MODULE_32__components_pages_NestedRoutesPage__["a" /* NestedRoutesPage */]
     }, {
         path: '/nested-routes/tabs/',
-        component: __WEBPACK_IMPORTED_MODULE_32__components_pages_NestedRoutesTabsPage__["a" /* NestedRoutesTabsPage */],
+        component: __WEBPACK_IMPORTED_MODULE_33__components_pages_NestedRoutesTabsPage__["a" /* NestedRoutesTabsPage */],
         tabs: [{
                 path: '/',
                 tabId: 'tab1',
-                component: __WEBPACK_IMPORTED_MODULE_34__components_nested_routes_tabs_Tab1__["a" /* Tab1 */]
+                component: __WEBPACK_IMPORTED_MODULE_35__components_nested_routes_tabs_Tab1__["a" /* Tab1 */]
             }, {
                 path: '/tab-2/',
                 tabId: 'tab2',
-                component: __WEBPACK_IMPORTED_MODULE_35__components_nested_routes_tabs_Tab2__["a" /* Tab2 */]
+                component: __WEBPACK_IMPORTED_MODULE_36__components_nested_routes_tabs_Tab2__["a" /* Tab2 */]
             }, {
                 path: '/tab-3/',
                 tabId: 'tab3',
                 routes: [{
                         path: '/',
-                        component: __WEBPACK_IMPORTED_MODULE_36__components_nested_routes_tabs_Tab3__["a" /* Tab3 */]
+                        component: __WEBPACK_IMPORTED_MODULE_37__components_nested_routes_tabs_Tab3__["a" /* Tab3 */]
                     }, {
                         path: '/alternate-content/',
-                        component: __WEBPACK_IMPORTED_MODULE_37__components_nested_routes_tabs_Tab3AlternateContent__["a" /* Tab3AlternateContent */]
+                        component: __WEBPACK_IMPORTED_MODULE_38__components_nested_routes_tabs_Tab3AlternateContent__["a" /* Tab3AlternateContent */]
                     }]
             }]
     }, {
         path: '/nested-routes/tabbar/',
-        component: __WEBPACK_IMPORTED_MODULE_33__components_pages_NestedRoutesTabbarPage__["a" /* NestedRoutesTabbarPage */],
+        component: __WEBPACK_IMPORTED_MODULE_34__components_pages_NestedRoutesTabbarPage__["a" /* NestedRoutesTabbarPage */],
         tabs: [{
                 path: '/',
                 tabId: 'tab1',
-                component: __WEBPACK_IMPORTED_MODULE_38__components_nested_routes_tabs_TabbarTab1__["a" /* TabbarTab1 */]
+                component: __WEBPACK_IMPORTED_MODULE_39__components_nested_routes_tabs_TabbarTab1__["a" /* TabbarTab1 */]
             }, {
                 path: '/tab-2/',
                 tabId: 'tab2',
-                component: __WEBPACK_IMPORTED_MODULE_39__components_nested_routes_tabs_TabbarTab2__["a" /* TabbarTab2 */]
+                component: __WEBPACK_IMPORTED_MODULE_40__components_nested_routes_tabs_TabbarTab2__["a" /* TabbarTab2 */]
             }, {
                 path: '/tab-3/',
                 tabId: 'tab3',
                 routes: [{
                         path: '/',
-                        component: __WEBPACK_IMPORTED_MODULE_40__components_nested_routes_tabs_TabbarTab3__["a" /* TabbarTab3 */]
+                        component: __WEBPACK_IMPORTED_MODULE_41__components_nested_routes_tabs_TabbarTab3__["a" /* TabbarTab3 */]
                     }, {
                         path: '/alternate-content/',
-                        component: __WEBPACK_IMPORTED_MODULE_41__components_nested_routes_tabs_TabbarTab3AlternateContent__["a" /* TabbarTab3AlternateContent */]
+                        component: __WEBPACK_IMPORTED_MODULE_42__components_nested_routes_tabs_TabbarTab3AlternateContent__["a" /* TabbarTab3AlternateContent */]
                     }]
             }]
     }, {
         path: '/modals/',
         component: __WEBPACK_IMPORTED_MODULE_30__components_pages_ModalsPage__["a" /* ModalsPage */]
+    }, {
+        path: '/timeline-vertical/',
+        component: __WEBPACK_IMPORTED_MODULE_31__components_pages_TimelineVerticalPage__["a" /* TimelineVerticalPage */]
     }];
 
 
 /***/ },
-/* 430 */
+/* 431 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -50936,7 +51004,7 @@ exports['default'] = main;
 
 
 /***/ },
-/* 431 */
+/* 432 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
