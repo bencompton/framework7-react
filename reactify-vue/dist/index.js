@@ -61,7 +61,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 432);
+/******/ 	return __webpack_require__(__webpack_require__.s = 434);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -25015,7 +25015,7 @@ module.exports = setInnerHTML;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_framework7_react__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_framework7_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_framework7_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__routes__ = __webpack_require__(430);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__routes__ = __webpack_require__(432);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return getFramework7; });
 /* harmony export (binding) */ __webpack_require__.d(exports, "b", function() { return App; });
 
@@ -34145,7 +34145,7 @@ exports.Views = reactifyF7Vue_1.reactifyF7Vue({
 
 "use strict";
 "use strict";
-var universal_router_1 = __webpack_require__(431);
+var universal_router_1 = __webpack_require__(433);
 var query_string_1 = __webpack_require__(292);
 var getTabChildRoutes = function (originalRoute) {
     var tabs = originalRoute.tabs;
@@ -50352,11 +50352,82 @@ var TabsSwipeablePage = function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_framework7_react__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_framework7_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_framework7_react__);
+/* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return TimelineCalendarPage; });
+
+
+var generateRandomDailyTasks = function (maxNumberOfTasksPerDay) {
+    return (Array.apply(null, Array(Math.round(Math.random() * maxNumberOfTasksPerDay))).map(function (item, index) {
+        return (__WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["TimelineItemChild"], { key: index, inner: true, time: Math.round(Math.random() * 23) + " :00", text: "Task " + (index + 1) }));
+    }));
+};
+var TimelineCalendarPage = function () {
+    return (__WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["Page"], null,
+        __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["Navbar"], { backLink: "Back", title: "Timeline Calendar", sliding: true }),
+        __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["Timeline"], { horizontal: true, col: "33", "tablet-col": "15" },
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["TimelineYear"], { title: "2016" },
+                __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["TimelineMonth"], { title: "December" }, Array.apply(null, Array(11)).map(function (item, index) {
+                    return (__WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["TimelineItem"], { key: index, date: index + 21 }, generateRandomDailyTasks(3)));
+                }))),
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["TimelineYear"], { title: "2017" },
+                __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["TimelineMonth"], { title: "January" }, Array.apply(null, Array(31)).map(function (item, index) {
+                    return (__WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["TimelineItem"], { key: index, date: index + 1 }, generateRandomDailyTasks(4)));
+                })),
+                __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["TimelineMonth"], { title: "February" }, Array.apply(null, Array(28)).map(function (item, index) {
+                    return (__WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["TimelineItem"], { key: index, date: index + 1 }, generateRandomDailyTasks(5)));
+                }))))));
+};
+
+
+/***/ },
+/* 429 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_framework7_react__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_framework7_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_framework7_react__);
+/* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return TimelineHorizontalPage; });
+
+
+var TimelineHorizontalPage = function () {
+    return (__WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["Page"], null,
+        __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["Navbar"], { backLink: "Back", title: "Timeline Horizontal", sliding: true }),
+        __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["Timeline"], { horizontal: true, col: "33", tabletCol: "20" },
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["TimelineItem"], { day: "21", month: "DEC" },
+                __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["TimelineItemChild"], { inner: true, time: "12:56", title: "Title 1", subtitle: "Subtitle 1", text: "Lorem ipsum dolor sit amet, consectetur adipisicing elit" }),
+                __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["TimelineItemChild"], { inner: true, time: "13:15", title: "Title 2", subtitle: "Subtitle 2", text: "Lorem ipsum dolor sit amet, consectetur adipisicing elit" }),
+                __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["TimelineItemChild"], { inner: true, time: "16:22", text: "Do something" })),
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["TimelineItem"], { day: "22", month: "DEC" }, "Plain text goes here"),
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["TimelineItem"], { day: "23", month: "DEC" },
+                __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["Card"], { title: "Card Header", content: "Card Content", footer: "Card Footer" }),
+                __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["Card"], { content: "Another Card Content" })),
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["TimelineItem"], { day: "24", month: "DEC" },
+                __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["List"], { inset: true },
+                    __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["ListItem"], { link: "#", title: "Item 1" }),
+                    __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["ListItem"], { link: "#", title: "Item 2" }),
+                    __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["ListItem"], { link: "#", title: "Item 3" }))),
+            __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["TimelineItem"], { day: "25", month: "DEC" },
+                __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["TimelineItemChild"], { inner: true, time: "12:56", text: "Task 1" }),
+                __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["TimelineItemChild"], { inner: true, time: "13:15", text: "Task 2" }),
+                __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["TimelineItemChild"], { inner: true, time: "16:22", text: "Task 3" })))));
+};
+
+
+/***/ },
+/* 430 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_framework7_react__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_framework7_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_framework7_react__);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return TimelineVerticalPage; });
 
 
 var TimelineVerticalPage = function () {
-    return (__WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["Page"], { withSubnavbar: true },
+    return (__WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["Page"], null,
         __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["Navbar"], { backLink: "Back", title: "Timeline Vertical", sliding: true }),
         __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["ContentBlockTitle"], null, "Default"),
         __WEBPACK_IMPORTED_MODULE_0_react__["createElement"](__WEBPACK_IMPORTED_MODULE_1_framework7_react__["Timeline"], null,
@@ -50404,7 +50475,7 @@ var TimelineVerticalPage = function () {
 
 
 /***/ },
-/* 429 */
+/* 431 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -50482,7 +50553,7 @@ var VirtualListPage = (function (_super) {
 
 
 /***/ },
-/* 430 */
+/* 432 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -50514,22 +50585,26 @@ var VirtualListPage = (function (_super) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__components_pages_FabPage__ = __webpack_require__(406);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__components_pages_FabDialPage__ = __webpack_require__(405);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__components_pages_LoginScreenPage__ = __webpack_require__(411);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__components_pages_VirtualListPage__ = __webpack_require__(429);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__components_pages_VirtualListPage__ = __webpack_require__(431);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__components_pages_PhotoBrowserPage__ = __webpack_require__(417);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__components_pages_ModalsPage__ = __webpack_require__(413);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_31__components_pages_TimelineVerticalPage__ = __webpack_require__(428);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_32__components_pages_NestedRoutesPage__ = __webpack_require__(414);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_33__components_pages_NestedRoutesTabsPage__ = __webpack_require__(416);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_34__components_pages_NestedRoutesTabbarPage__ = __webpack_require__(415);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_35__components_nested_routes_tabs_Tab1__ = __webpack_require__(387);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_36__components_nested_routes_tabs_Tab2__ = __webpack_require__(388);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_37__components_nested_routes_tabs_Tab3__ = __webpack_require__(389);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_38__components_nested_routes_tabs_Tab3AlternateContent__ = __webpack_require__(390);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_39__components_nested_routes_tabs_TabbarTab1__ = __webpack_require__(391);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_40__components_nested_routes_tabs_TabbarTab2__ = __webpack_require__(392);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_41__components_nested_routes_tabs_TabbarTab3__ = __webpack_require__(393);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_42__components_nested_routes_tabs_TabbarTab3AlternateContent__ = __webpack_require__(394);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_31__components_pages_TimelineVerticalPage__ = __webpack_require__(430);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_32__components_pages_TimelineHorizontalPage__ = __webpack_require__(429);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_33__components_pages_TimelineCalendarPage__ = __webpack_require__(428);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_34__components_pages_NestedRoutesPage__ = __webpack_require__(414);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_35__components_pages_NestedRoutesTabsPage__ = __webpack_require__(416);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_36__components_pages_NestedRoutesTabbarPage__ = __webpack_require__(415);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_37__components_nested_routes_tabs_Tab1__ = __webpack_require__(387);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_38__components_nested_routes_tabs_Tab2__ = __webpack_require__(388);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_39__components_nested_routes_tabs_Tab3__ = __webpack_require__(389);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_40__components_nested_routes_tabs_Tab3AlternateContent__ = __webpack_require__(390);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_41__components_nested_routes_tabs_TabbarTab1__ = __webpack_require__(391);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_42__components_nested_routes_tabs_TabbarTab2__ = __webpack_require__(392);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_43__components_nested_routes_tabs_TabbarTab3__ = __webpack_require__(393);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_44__components_nested_routes_tabs_TabbarTab3AlternateContent__ = __webpack_require__(394);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return routes; });
+
+
 
 
 
@@ -50665,49 +50740,49 @@ var routes = [{
         component: __WEBPACK_IMPORTED_MODULE_29__components_pages_PhotoBrowserPage__["a" /* PhotoBrowserPage */]
     }, {
         path: '/nested-routes/',
-        component: __WEBPACK_IMPORTED_MODULE_32__components_pages_NestedRoutesPage__["a" /* NestedRoutesPage */]
+        component: __WEBPACK_IMPORTED_MODULE_34__components_pages_NestedRoutesPage__["a" /* NestedRoutesPage */]
     }, {
         path: '/nested-routes/tabs/',
-        component: __WEBPACK_IMPORTED_MODULE_33__components_pages_NestedRoutesTabsPage__["a" /* NestedRoutesTabsPage */],
+        component: __WEBPACK_IMPORTED_MODULE_35__components_pages_NestedRoutesTabsPage__["a" /* NestedRoutesTabsPage */],
         tabs: [{
                 path: '/',
                 tabId: 'tab1',
-                component: __WEBPACK_IMPORTED_MODULE_35__components_nested_routes_tabs_Tab1__["a" /* Tab1 */]
+                component: __WEBPACK_IMPORTED_MODULE_37__components_nested_routes_tabs_Tab1__["a" /* Tab1 */]
             }, {
                 path: '/tab-2/',
                 tabId: 'tab2',
-                component: __WEBPACK_IMPORTED_MODULE_36__components_nested_routes_tabs_Tab2__["a" /* Tab2 */]
+                component: __WEBPACK_IMPORTED_MODULE_38__components_nested_routes_tabs_Tab2__["a" /* Tab2 */]
             }, {
                 path: '/tab-3/',
                 tabId: 'tab3',
                 routes: [{
                         path: '/',
-                        component: __WEBPACK_IMPORTED_MODULE_37__components_nested_routes_tabs_Tab3__["a" /* Tab3 */]
+                        component: __WEBPACK_IMPORTED_MODULE_39__components_nested_routes_tabs_Tab3__["a" /* Tab3 */]
                     }, {
                         path: '/alternate-content/',
-                        component: __WEBPACK_IMPORTED_MODULE_38__components_nested_routes_tabs_Tab3AlternateContent__["a" /* Tab3AlternateContent */]
+                        component: __WEBPACK_IMPORTED_MODULE_40__components_nested_routes_tabs_Tab3AlternateContent__["a" /* Tab3AlternateContent */]
                     }]
             }]
     }, {
         path: '/nested-routes/tabbar/',
-        component: __WEBPACK_IMPORTED_MODULE_34__components_pages_NestedRoutesTabbarPage__["a" /* NestedRoutesTabbarPage */],
+        component: __WEBPACK_IMPORTED_MODULE_36__components_pages_NestedRoutesTabbarPage__["a" /* NestedRoutesTabbarPage */],
         tabs: [{
                 path: '/',
                 tabId: 'tab1',
-                component: __WEBPACK_IMPORTED_MODULE_39__components_nested_routes_tabs_TabbarTab1__["a" /* TabbarTab1 */]
+                component: __WEBPACK_IMPORTED_MODULE_41__components_nested_routes_tabs_TabbarTab1__["a" /* TabbarTab1 */]
             }, {
                 path: '/tab-2/',
                 tabId: 'tab2',
-                component: __WEBPACK_IMPORTED_MODULE_40__components_nested_routes_tabs_TabbarTab2__["a" /* TabbarTab2 */]
+                component: __WEBPACK_IMPORTED_MODULE_42__components_nested_routes_tabs_TabbarTab2__["a" /* TabbarTab2 */]
             }, {
                 path: '/tab-3/',
                 tabId: 'tab3',
                 routes: [{
                         path: '/',
-                        component: __WEBPACK_IMPORTED_MODULE_41__components_nested_routes_tabs_TabbarTab3__["a" /* TabbarTab3 */]
+                        component: __WEBPACK_IMPORTED_MODULE_43__components_nested_routes_tabs_TabbarTab3__["a" /* TabbarTab3 */]
                     }, {
                         path: '/alternate-content/',
-                        component: __WEBPACK_IMPORTED_MODULE_42__components_nested_routes_tabs_TabbarTab3AlternateContent__["a" /* TabbarTab3AlternateContent */]
+                        component: __WEBPACK_IMPORTED_MODULE_44__components_nested_routes_tabs_TabbarTab3AlternateContent__["a" /* TabbarTab3AlternateContent */]
                     }]
             }]
     }, {
@@ -50716,11 +50791,17 @@ var routes = [{
     }, {
         path: '/timeline-vertical/',
         component: __WEBPACK_IMPORTED_MODULE_31__components_pages_TimelineVerticalPage__["a" /* TimelineVerticalPage */]
+    }, {
+        path: '/timeline-horizontal/',
+        component: __WEBPACK_IMPORTED_MODULE_32__components_pages_TimelineHorizontalPage__["a" /* TimelineHorizontalPage */]
+    }, {
+        path: '/timeline-calendar/',
+        component: __WEBPACK_IMPORTED_MODULE_33__components_pages_TimelineCalendarPage__["a" /* TimelineCalendarPage */]
     }];
 
 
 /***/ },
-/* 431 */
+/* 433 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -51004,7 +51085,7 @@ exports['default'] = main;
 
 
 /***/ },
-/* 432 */
+/* 434 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
