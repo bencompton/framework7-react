@@ -2,11 +2,13 @@ import * as React from 'react';
 
 import {IVueComponent} from '../ReactifyVue';
 
-const camelCase = (str) => {    
+const camelCase = (str) => {
     (camelCase as any).replacement = (camelCase as any).replacement || {};
 
     if (!(camelCase as any).replacement[str]) {
-        (camelCase as any).replacement[str] = str.split('-').join('');
+        (camelCase as any).replacement[str] = str.replace(/-([a-z])/g, function (m, w) {
+            return w.toUpperCase();
+        });
     }
 
     return (camelCase as any).replacement[str];
@@ -19,7 +21,7 @@ const classNames = (...args: any[]) => {
     let length = args.length;
 
     while (length--) {
-        let  arg = args.pop();
+        let  arg = args[length];
 
         if (!arg) continue;
 
@@ -34,7 +36,7 @@ const classNames = (...args: any[]) => {
             let length = keys.length;
 
             while (length--) {
-                let key = keys.pop();
+                let key = keys[length];
 
                 if (hasOwn.call(arg, key) && arg[key]) {
                     classes.push(key);
@@ -114,20 +116,20 @@ const renameAttribute = (componentName, attribute) => {
 export class PropsProcessor {
     private cachedPropKebabCase: {[camelCasedProp: string]: string};
 
-    public getProps(args, children, componentOrComponentName, resolvedComponent, vueComponent) {
-        this.addCurrentComponentAsParentOfChildren(children, vueComponent);
-        
+    public getProps(args, children, componentOrComponentName, resolvedComponent, vueComponent) {        
+        this.addCurrentComponentAsParentOfChildren(children, vueComponent);        
+
         const props = {};
 
         this.getClasses(args, vueComponent, props);
         this.getStyle(args, vueComponent, props);
-        this.getAdditionalClassName(vueComponent, props);
+        this.getAdditionalClassName(vueComponent, props);        
         this.getAdditionalStyles(vueComponent, props);
-        this.getRef(args, vueComponent, props);
-        this.getPropsFromArgs(args, props);
+        this.getRef(args, vueComponent, props);        
+        this.getPropsFromArgs(args, props);        
         this.getChildren(children, args, props);
         this.convertAttrsToProps(args, componentOrComponentName, resolvedComponent, props);
-        this.getInnerHTML(args, props);        
+        this.getInnerHTML(args, props);
 
         return props;
     }
@@ -200,7 +202,7 @@ export class PropsProcessor {
             let length = keys.length;
             
             while (length--) {
-                let prop = keys.pop();
+                let prop = keys[length];
                 props[camelCase(prop)] = args.props[prop];
             }
         }        
@@ -218,7 +220,7 @@ export class PropsProcessor {
             let length = keys.length;
 
             while (length--) {
-                let attr = keys.pop();
+                let attr = keys[length];
 
                 attr = renameAttribute(componentOrComponentName, attr);
 
@@ -254,17 +256,14 @@ export class PropsProcessor {
     }
 
     private addCurrentComponentAsParentOfChildren(children, vueComponent) {
-        if (children && Array.isArray(children) && children.length) {
-            for (let i = 0; i < children.length; i++) {
-                let child = children[i];
+        let length = children && children.length;        
 
-                if (!child || !child.props) continue;                
-                if (!Object.getOwnPropertyDescriptor(child, 'props').writable) continue;
+        if (children && length && Array.isArray(children)) {
+            while (length--) {            
+                let child = children[length];
 
-                if (child.type && typeof child.type !== 'string') {                    
-                    if (!child.props.hasOwnProperty('ref')) {
-                        child.props = {...child.props, parentVueComponent: vueComponent};
-                    }
+                if (child && child.props && Object.getOwnPropertyDescriptor(child, 'props').writable) {                    
+                    child.props = {...child.props, parentVueComponent: vueComponent };
                 }
             }
         }

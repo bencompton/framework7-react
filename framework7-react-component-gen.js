@@ -164,7 +164,7 @@ const getComponentMixinMap = () => {
         presets: ['es2015']
     }).code;    
     
-    const framework7VueExports = new Function('exports', transpiledFramework7Vue + '; return exports;')({});
+    const framework7VueExports = new Function('exports, console', 'try {\n' + transpiledFramework7Vue + '\n} catch (err) { console.log("An error occurred: "); console.error(err);}; return exports;')({}, console);
 
     return Object.keys(framework7VueExports).reduce((componentMixinMap, nextExportName) => {
         const exportedComponent = framework7VueExports[nextExportName];

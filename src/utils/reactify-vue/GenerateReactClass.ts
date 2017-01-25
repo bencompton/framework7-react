@@ -205,9 +205,7 @@ const applyPropOverrides = (reactElement: React.ReactElement<any>, tag: string, 
 
     if (elementWithPropOverrides.props.additionalClassName) {
         const existingClassName = elementWithPropOverrides.props.className || '';
-
-        elementWithPropOverrides.props.className = existingClassName + ' ' 
-            + elementWithPropOverrides.props.additionalClassName;        
+        elementWithPropOverrides.props.className = [existingClassName, ' ', elementWithPropOverrides.props.additionalClassName].join('');
     }
 
     if (elementWithPropOverrides.props.additionalStyles) {
@@ -223,10 +221,14 @@ const applyPropOverrides = (reactElement: React.ReactElement<any>, tag: string, 
         elementWithPropOverrides.props.id = self.vueComponent.id;
     }
 
-    return removePropsFromElementAndChildren(
-        elementWithPropOverrides, 
-        ['additionalClassName', 'additionalStyles', 'refTemp']
-    );    
+    const newProps = elementWithPropOverrides;
+
+    //removePropsFromElementAndChildren(
+    //    elementWithPropOverrides, 
+    //    ['additionalClassName', 'additionalStyles', 'refTemp']
+    //);
+
+    return newProps;
 };
 
 const initData = (vueComponent) => {
@@ -272,6 +274,7 @@ const generateVueComponentWithInstanceProperties = (vueComponent, props, self) =
             callPropOnEvent(eventName, eventArgs, props);
         },
         $parent: props.parentVueComponent,
+        $children: React.Children.toArray(props.children),
         $options: {
             propsData: props
         },
@@ -340,20 +343,19 @@ export const generateReactClass = <TProps>(instantiatedComponents, vueComponent,
 
         componentWillReceiveProps: function(nextProps) {
             handleWatchedProperties(this.vueComponent, this.props, nextProps);
-        },
-
-        render: function() {
             copyPropsToVueComponent(this.vueComponent, this.props);
             copySlotsToVueComponent(this.vueComponent, slots, this.props);
             handleComputedProperties(this.vueComponent);
+        },
 
+        render: function() {
             const reactElement = this.vueComponent.render(this.createElement.bind(this));
-            
+
             if (reactElement) {
                 return applyPropOverrides(reactElement, tag, this);
             } else {
                 return null;
-            }            
+            }
         },
 
         callVueMethod: function(methodName: string, ...args: any[]) {

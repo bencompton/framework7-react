@@ -1,7 +1,7 @@
 ﻿import * as React from 'react';
 
 import Framework7Router from '../../framework7-vue/router';
-import {Framework7} from '../Framework7';
+import {Framework7, IFramework7Params} from '../Framework7';
 import {applyOverscrollFix} from '../utils/OverscrollFix';
 
 export type ThemeTypeEnum  = 'ios' | 'material';
@@ -36,7 +36,7 @@ export interface IFramework7AppContext {
     getCurrentRoute: () => any;
 }
 
-export interface IFramework7AppProps extends React.Props<any> {
+export interface IFramework7AppProps extends IFramework7Params, React.Props<any> {
     applyOverscrollFix?: boolean;
     themeType: ThemeTypeEnum;
     routes: IFramework7Route[];
@@ -85,19 +85,19 @@ export class Framework7App extends React.Component<IFramework7AppProps, Framewor
     }
 
     private initFramework7() {
-        this.framework7 = new Framework7();
+        this.framework7 = new Framework7(this.props);
 
         const router = new Framework7Router(this.props.routes, this.framework7);    
 
         router.setRouteChangeHandler(route => {
-            this.currentRoute = route;            
-            
+            this.currentRoute = route;
+
             Object.keys(this.routeChangeCallbacks).forEach(componentId => {
-                //Need this if statement in case a component gets unregistered during this forEach
-                if (this.routeChangeCallbacks[componentId]) {
-                    this.routeChangeCallbacks[componentId](route);
+                //Need this if statement in case a component gets unregistered during this forEach                
+                if (this.routeChangeCallbacks[componentId]) {                    
+                    this.routeChangeCallbacks[componentId](route);                                       
                 }                
-            });
+            });            
         });            
 
         if (this.props.onFramework7Init) {

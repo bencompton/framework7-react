@@ -1,9 +1,9 @@
 import * as React from 'react';
-import {camelCase} from 'change-case';
-import * as classNames from 'classnames';
 
 import {IVueComponent} from '../ReactifyVue';
 import {PropsProcessor} from './PropsProcessor';
+
+const propsProcessor = new PropsProcessor();
 
 const resolveDependencyComponent = (instantiatedComponents: (React.ComponentClass<any> | React.StatelessComponent<any>)[], componentToResolve: string) => {
     if (instantiatedComponents) {
@@ -45,19 +45,24 @@ export const createReactElement = (
     instantiatedComponents,
     vueComponent: IVueComponent
 ) => {
-    if (args.tag === 'component') {
-        return React.createElement(componentOrComponentName as React.ComponentClass<any>);
-    } else {
-        let resolvedComponent;    
+    let reactElement;
 
-        resolvedComponent = resolveDependencyComponent(instantiatedComponents, componentOrComponentName as string);
-        children = flattenNestedArrayOfChildren(children);
+    if (!componentOrComponentName) return null;
+
+    if (args.tag === 'component') {
+        reactElement = React.createElement(componentOrComponentName as React.ComponentClass<any>);
+    } else {
+        let resolvedComponent;
+        
+        resolvedComponent = resolveDependencyComponent(instantiatedComponents, componentOrComponentName as string);               
+        children = flattenNestedArrayOfChildren(children);        
 
         if (!resolvedComponent) resolvedComponent = componentOrComponentName as React.ComponentClass<any> | React.StatelessComponent<any>;
 
-        const propsProcessor = new PropsProcessor();
-        const props = propsProcessor.getProps(args, children, componentOrComponentName, resolvedComponent, vueComponent)
-
-        return React.createElement(resolvedComponent, props);
+        const props = propsProcessor.getProps(args, children, componentOrComponentName, resolvedComponent, vueComponent);
+        
+        reactElement = React.createElement(resolvedComponent, props);
     }
+
+    return reactElement;
 };

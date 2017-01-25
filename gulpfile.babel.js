@@ -12,9 +12,9 @@ const gulp = require('gulp'),
     sourcemaps = require('gulp-sourcemaps');    
 
 gulp.task('clean', () => {
-    return gulp.src(['./dist', './framework7-vue', './framework7-react'], { read: false })
+    return gulp.src(['./dist', './framework7-vue', './framework7-react'], { read: false })    
         .pipe(clean());
-});   
+});
 
 gulp.task('build-framework7-core', ['clean'], () => {
     return merge(
@@ -35,22 +35,11 @@ gulp.task('compile-framework7-vue', ['clean'], (cb) => {
             .pipe(gulp.dest('./framework7-vue/'))
             .pipe(gulp.dest('./dist/framework7-vue/'))
             .on('end', cb);
-    });
+    });    
 });
 
 gulp.task('generate-react-components', ['clean', 'compile-framework7-vue'], () => {
-    return generateReactComponents({
-        overrides: {
-            FormInput: {
-                events: [
-                   'focus',
-                   'blur',
-                   'change',
-                   'click'
-                ]
-            }
-        }
-    });
+    return generateReactComponents();
 });
 
 gulp.task('compile-ts', ['clean', 'compile-framework7-vue'], () => {
