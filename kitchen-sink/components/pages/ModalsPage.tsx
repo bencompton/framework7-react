@@ -1,19 +1,12 @@
 import * as React from 'react';
-import {Page, Navbar, ContentBlock, ContentBlockTitle, GridRow, GridCol, Button, 
-    PickerModal, 
-    Link, 
-    NavLeft, NavRight, 
-    Toolbar, 
-    Popup, 
-    List, ListItem, ListButton, ListLabel, 
-    Pages, 
-    View, 
-    FormInput, FormLabel,
-    LoginScreen, LoginScreenTitle} from 'framework7-react';
+import {Page, Navbar, ContentBlock, ContentBlockTitle, GridRow, GridCol, Button} from 'framework7-react';
 import {getFramework7} from '../App';
 
 import {ActionsDemo} from '../demo/ActionsDemo';
 import {PopoverDemo} from '../demo/PopoverDemo';
+import {PopupDemo} from '../demo/PopupDemo';
+import {PickerModalDemo} from '../demo/PickerModalDemo';
+import {LoginScreenDemo} from '../demo/LoginScreenDemo';
 
 declare const require: any;
 const Portal = require('react-portal');
@@ -97,70 +90,10 @@ export class ModalsPage extends React.Component<any, IModalsPageState> {
                 <Portal isOpened={true}>
                     <span>
                         <PopoverDemo id="demo-popover"/>
-
-                        <PickerModal id="demo-picker" opened={this.state.pickerOpened}>
-                            <Toolbar>
-                                <NavLeft />
-                                <NavRight>
-                                    <Link onClick={this.closePicker.bind(this)}>Done</Link>      
-                                </NavRight>
-                            </Toolbar>
-                            <ContentBlock>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis iste qui architecto recusandae veniam delectus vero libero illo aliquid, fuga ratione vel facilis iure est fugiat sunt nihil, consectetur veritatis.</p>
-                            </ContentBlock>
-                        </PickerModal>
-
-                        <Popup id="demo-popup" opened={this.state.popupOpened} onPopupClosed={this.closePopup.bind(this)}>
-                            <View>
-                                <Pages>
-                                    <Page navbarFixed>
-                                        <Navbar title="Demo Popup">
-                                            <NavRight>
-                                                <Link onClick={this.closePopup.bind(this)}>Close</Link>
-                                            </NavRight>
-                                        </Navbar>
-
-                                        <ContentBlock>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis iste qui architecto recusandae veniam delectus vero libero illo aliquid, fuga ratione vel facilis iure est fugiat sunt nihil, consectetur veritatis.</p>
-                                            <p>Itaque impedit, nam, sed reprehenderit quaerat commodi veritatis ducimus eos nisi, at aliquam dolorum alias optio natus. Sit voluptate aperiam, cupiditate repellat quod fugiat non doloribus eveniet dolorem fugit nihil.</p>
-                                            <p>Error cumque sunt dolorem aut, similique accusantium delectus. Minima, natus. Doloremque ratione veniam cupiditate modi aspernatur debitis possimus iure id delectus! Totam eveniet, impedit minus deserunt aliquid facere laboriosam dignissimos.</p>
-                                            <p>Aliquid autem saepe sit cumque odit nihil eius consectetur impedit accusantium sunt, repudiandae quaerat cum! Esse autem ipsum aliquam, distinctio laborum excepturi facilis fuga vitae atque iusto eligendi, explicabo corporis.</p>
-                                            <p>Necessitatibus minima quidem fugit corporis reprehenderit saepe facilis perspiciatis sit, consectetur nulla officia, pariatur accusantium quas voluptas. Illum placeat eligendi dolor nihil libero culpa, ex quas voluptas deleniti, unde id.</p>
-                                        </ContentBlock>
-                                    </Page>
-                                </Pages>
-                            </View>
-                        </Popup>
-
+                        <PickerModalDemo opened={this.state.pickerOpened} closePicker={this.closePicker.bind(this)} />
+                        <PopupDemo opened={this.state.popupOpened} closePopup={this.closePopup.bind(this)} />
                         <ActionsDemo opened={this.state.actionsOpened} onActionsClosed={this.closeActions.bind(this)} />
-
-                        <LoginScreen id="demo-login-screen" opened={this.state.loginScreenOpened}>
-                            <View>
-                                <Pages>
-                                    <Page loginScreen>
-                                        <LoginScreenTitle>My App</LoginScreenTitle>
-
-                                        <List form>
-                                            <ListItem>
-                                                <FormLabel>Username</FormLabel>
-                                                <FormInput name="username" type="text" placeholder="Username" />
-                                            </ListItem>
-                                            <ListItem>
-                                                <FormLabel>Password</FormLabel>
-                                                <FormInput name="password" type="password" placeholder="Password" />
-                                            </ListItem>
-                                        </List>
-
-                                        <List>
-                                            <ListButton title="Sign In" onClick={this.closeLoginScreen.bind(this)} />
-                                            <ListLabel>
-                                                <p>Click Sign In to close Login Screen</p>
-                                            </ListLabel>
-                                        </List>
-                                    </Page>
-                                </Pages>
-                            </View>
-                        </LoginScreen>
+                        <LoginScreenDemo opened={this.state.loginScreenOpened} closeLoginScreen={this.closeLoginScreen.bind(this)} />
                     </span>
                 </Portal>
             </Page>
