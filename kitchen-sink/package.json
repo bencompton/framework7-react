@@ -20,6 +20,7 @@
     "framework7-react": "file:../",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
-    "react-router": "2.8.1"
+    "react-router": "2.8.1",
+    "react-portal": "^3.0.0"
   }
 }

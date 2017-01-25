@@ -163,7 +163,7 @@ const getComponentMixinMap = () => {
     let transpiledFramework7Vue = babel.transform(framework7Vue, {
         presets: ['es2015']
     }).code;    
-    
+
     const framework7VueExports = new Function('exports, console', 'try {\n' + transpiledFramework7Vue + '\n} catch (err) { console.log("An error occurred: "); console.error(err);}; return exports;')({}, console);
 
     return Object.keys(framework7VueExports).reduce((componentMixinMap, nextExportName) => {

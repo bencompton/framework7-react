@@ -86,6 +86,9 @@ export const App = (props: React.Props<any>) => {
                                 <ListItem title="Virtual List" link="/virtual-list/" />
                                 <ListItem title="Photo Browser" link="/photo-browser/" />
                                 <ListItem title="Modals" link="/modals/" />
+                                <ListItem title="Timeline Vertical" link="/timeline-vertical/" />
+                                <ListItem title="Timeline Horizontal" link="/timeline-horizontal/" />
+                                <ListItem title="Timeline Calendar" link="/timeline-calendar/" />
                             </List>
                             <List>
                                 <ListItem title="Dynamic Route" link="/user/45/posts/28/?sort=first#opened" />

@@ -87,7 +87,7 @@ const handleWatchedProperties = (vueComponent: IVueComponent, currentProps: any,
         Object.keys(vueComponent.watch)
             .forEach(watchedProperty => {
                 if (currentProps[watchedProperty] !== nextProps[watchedProperty]) {
-                    vueComponent.watch[watchedProperty].apply(vueComponent, []);
+                    vueComponent.watch[watchedProperty].apply(vueComponent, [nextProps[watchedProperty]]);
                 }
             });
     }
