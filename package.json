@@ -60,7 +60,6 @@
     "framework7": "^1.5.0",
     "framework7-vue": "git+https://github.com/bencompton/framework7-vue.git#develop",
     "invariant": "2.2.1",
-    "react": "^15.4.0",
-    "react-portal": "^3.0.0"
+    "react": "^15.4.0"
   }
 }

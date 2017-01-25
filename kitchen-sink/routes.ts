@@ -28,6 +28,7 @@ import {FabDialPage} from './components/pages/FabDialPage';
 import {LoginScreenPage} from './components/pages/LoginScreenPage';
 import {VirtualListPage} from './components/pages/VirtualListPage';
 import {PhotoBrowserPage} from './components/pages/PhotoBrowserPage';
+import {ModalsPage} from './components/pages/ModalsPage';
 
 import {NestedRoutesPage} from './components/pages/NestedRoutesPage';
 import {NestedRoutesTabsPage} from'./components/pages/NestedRoutesTabsPage';
@@ -178,4 +179,7 @@ export const routes = [{
             component: TabbarTab3AlternateContent
         }]
     }]
+  }, {
+    path: '/modals/',
+    component: ModalsPage
 }];

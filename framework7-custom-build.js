@@ -12,6 +12,7 @@ var fw7ModulesBeingUsed = [
     'messages',
     'modals',
     'photo-browser',
+    'picker',
     'pull-to-refresh',
     'push-state',
     'searchbar',
