@@ -45,18 +45,6 @@ export const reactifyF7Vue = <TProps>(args: IReactifyF7VueArgs) => {
                 this.framework7 = f7;
             });
 
-            Object.defineProperty(args.component, '$f7', {
-                get: () => this.framework7,
-                enumerable: true,
-                configurable: true
-            });
-
-            Object.defineProperty(args.component, '$route', {
-                get: framework7AppContext.getCurrentRoute,
-                enumerable: true,
-                configurable: true
-            });
-
             this.componentId = nextComponentId++;
 
             return null;
@@ -87,6 +75,20 @@ export const reactifyF7Vue = <TProps>(args: IReactifyF7VueArgs) => {
                             self.vueComponent.onRouteChange(route);
                         }
                     });
+
+                    if (!self.vueComponent.$f7 && !self.vueComponent.$route) {
+                        Object.defineProperty(self.vueComponent, '$f7', {
+                            get: () => this.framework7,
+                            enumerable: true,
+                            configurable: true
+                        });
+
+                        Object.defineProperty(self.vueComponent, '$route', {
+                            get: framework7AppContext.getCurrentRoute,
+                            enumerable: true,
+                            configurable: true
+                        });
+                    }
                 }
             });
 
