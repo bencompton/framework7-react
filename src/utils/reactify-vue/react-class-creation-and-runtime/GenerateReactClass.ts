@@ -54,7 +54,8 @@ export const generateReactClass = <TProps>(instantiatedComponents, vueComponent,
 
         componentDidMount: function() {
             if (this.vueComponent.mounted) this.vueComponent.mounted();
-            if (this.props.__onMount) this.props.__onMount(this);            
+            if (this.props.__onMount) this.props.__onMount(this);
+            this.didMount = true;
         },
 
         componentWillUnmount: function() {
@@ -65,12 +66,17 @@ export const generateReactClass = <TProps>(instantiatedComponents, vueComponent,
             handleWatchedProperties(this.vueComponent, this.props, nextProps);               
         },
 
-        render: function() {            
-            copyPropsToVueComponent(this.vueComponent, this.props);
-            copySlotsToVueComponent(this.vueComponent, slots, this.props);
-            handleComputedProperties(this.vueComponent);            
+        render: function() {  
+            if (this.hasRendered) {
+                //Only do this after the first render, since it happens in getInitialState the first time
+                copyPropsToVueComponent(this.vueComponent, this.props);
+                copySlotsToVueComponent(this.vueComponent, slots, this.props);
+                handleComputedProperties(this.vueComponent);
+            }
 
             const reactElement = this.vueComponent.render(this.createElement.bind(this));
+
+            this.hasRendered = true;
 
             if (reactElement) {
                 return applyPropOverrides(reactElement, tag, this);
