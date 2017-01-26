@@ -16,14 +16,23 @@ export interface IKitchenSinkPage {
 }
 
 let framework7: any;
+let currentRoute: any;
 
 export const getFramework7 = () => {
     return framework7;
 }
 
+const onRouteChange = (route: any) => {
+    currentRoute = route;
+}
+
+export const getCurrentRoute = () => {
+    return currentRoute;
+}
+
 export const App = (props: React.Props<any>) => {
     return (
-        <Framework7App onFramework7Init={(f7) => {framework7 = f7}} themeType="ios" routes={routes}>
+        <Framework7App onFramework7Init={(f7) => {framework7 = f7}} themeType="ios" routes={routes} onRouteChange={onRouteChange}>
             <Statusbar></Statusbar>
             <Panel left reveal layout="dark" theme="pink">
                 <View navbarFixed>
@@ -45,11 +54,11 @@ export const App = (props: React.Props<any>) => {
                 <View main url="/" dynamicNavbar>
                     <Navbar>
                         <NavLeft>
-                            <Link icon="icon-bars" open-panel="left"></Link>
+                            <Link icon="icon-bars" openPanel="left"></Link>
                         </NavLeft>
                         <NavCenter sliding>Hello World</NavCenter>
                         <NavRight>
-                            <Link icon="icon-bars" open-panel="right"></Link>
+                            <Link icon="icon-bars" openPanel="right"></Link>
                         </NavRight>
                     </Navbar>
                     <Pages>

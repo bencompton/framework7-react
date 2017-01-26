@@ -41,6 +41,7 @@ export interface IFramework7AppProps extends IFramework7Params, React.Props<any>
     themeType: ThemeTypeEnum;
     routes: IFramework7Route[];
     onFramework7Init?: (framework7: Framework7) => void;
+    onRouteChange?: (route: IFramework7Route) => void;
 }
 
 export class Framework7App extends React.Component<IFramework7AppProps, Framework7> {        
@@ -90,7 +91,11 @@ export class Framework7App extends React.Component<IFramework7AppProps, Framewor
         const router = new Framework7Router(this.props.routes, this.framework7);    
 
         router.setRouteChangeHandler(route => {
-            this.currentRoute = route;
+            this.currentRoute = route;      
+
+            if (this.props.onRouteChange) {
+                this.props.onRouteChange(route);
+            }
 
             Object.keys(this.routeChangeCallbacks).forEach(componentId => {
                 //Need this if statement in case a component gets unregistered during this forEach                
