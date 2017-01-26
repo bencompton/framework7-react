@@ -330,6 +330,10 @@ export const generateReactClass = <TProps>(instantiatedComponents, vueComponent,
 
         componentWillUpdate: function() {
             if (this.vueComponent.updated) this.vueComponent.updated();
+
+            copyPropsToVueComponent(this.vueComponent, this.props);
+            copySlotsToVueComponent(this.vueComponent, slots, this.props);
+            handleComputedProperties(this.vueComponent);            
         },
 
         componentDidMount: function() {
@@ -343,9 +347,6 @@ export const generateReactClass = <TProps>(instantiatedComponents, vueComponent,
 
         componentWillReceiveProps: function(nextProps) {
             handleWatchedProperties(this.vueComponent, this.props, nextProps);
-            copyPropsToVueComponent(this.vueComponent, this.props);
-            copySlotsToVueComponent(this.vueComponent, slots, this.props);
-            handleComputedProperties(this.vueComponent);
         },
 
         render: function() {
