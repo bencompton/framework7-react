@@ -266,42 +266,79 @@ const handleStateSet = (stateObject, key, value, vueComponent, self) => {
     self.setState(newState);
 };
 
-const generateVueComponentWithInstanceProperties = (vueComponent, props, self) => {
-    self.nextTickCallbacks = [];
+const convertVueComponentToClass = (vueComponentObject) => {
+    const vueComponentClass = function (reactComponentProps, reactComponentInstance) {
+        this.reactComponentProps = reactComponentProps;
+        this.reactComponentInstance = reactComponentInstance;
+        this.reactComponentInstance.nextTickCallbacks = [];
+    };
 
-    const instanceVueComponent = {...vueComponent, ...{
-        $emit: (eventName: string, ...eventArgs: any[]) => {
-            callPropOnEvent(eventName, eventArgs, props);
-        },
-        $parent: props.parentVueComponent,
-        $children: React.Children.toArray(props.children),
-        $options: {
-            propsData: props
-        },
-        $nextTick: (func) => {
-            if (self.hasUnrenderedStateChanges) {
-                self.nextTickCallbacks.push(func);
-            } else {
-                func();
-            }
-        }, 
-        $set: (stateObject, key, value) => {
-            self.hasUnrenderedStateChanges = true;
-            handleStateSet(stateObject, key, value, instanceVueComponent, self);                        
-        } 
-    }};    
+    vueComponentClass.prototype = vueComponentObject;
 
-    return instanceVueComponent;
-}
+    vueComponentClass.prototype.$emit = function (eventName: string, ...eventArgs: any[]) {
+        callPropOnEvent(eventName, eventArgs, this.reactComponentProps);
+    };
+
+    Object.defineProperty(vueComponentClass.prototype, '$el', {
+        get: function ()  { return this.reactComponentInstance.element },
+        enumerable: true,
+        configurable: true
+    });
+
+    Object.defineProperty(vueComponentClass.prototype, '$parent', {
+        get: function ()  { return this.reactComponentProps.parentVueComponent },
+        enumerable: true,
+        configurable: true
+    });   
+
+    Object.defineProperty(vueComponentClass.prototype, '$parent', {
+        get: function ()  { return this.reactComponentProps.parentVueComponent },
+        enumerable: true,
+        configurable: true
+    });
+
+    Object.defineProperty(vueComponentClass.prototype, '$children', {
+        get: function ()  { return this.reactComponentProps.children },
+        enumerable: true,
+        configurable: true
+    });
+
+    Object.defineProperty(vueComponentClass.prototype, '$options', {
+        get: function ()  { 
+            return {
+                propsData: this.reactComponentProps
+            };
+        },
+        enumerable: true,
+        configurable: true
+    });
+
+    vueComponentClass.prototype.$nextTick = function (func) {
+        if (this.reactComponentInstance.hasUnrenderedStateChanges) {
+            this.reactComponentInstance.nextTickCallbacks.push(func);
+        } else {
+            func();
+        }
+    };
+
+    vueComponentClass.prototype.$set = function (stateObject, key, value) {
+        this.reactComponentInstance.hasUnrenderedStateChanges = true;
+        handleStateSet(stateObject, key, value, this, this.reactComponentInstance);                        
+    };
+
+    return vueComponentClass;
+};
 
 export const generateReactClass = <TProps>(instantiatedComponents, vueComponent, slots, tag, mixin, args) => {
+    const vueComponentClass = convertVueComponentToClass(vueComponent);
+
     applyMixinToVueComponent(vueComponent, mixin);
     copyMethodsToVueComponent(vueComponent);
     copyArgsToVueComponent(vueComponent, args);
 
     const reactClass = React.createClass<TProps, any>({
         getInitialState: function() {
-            this.vueComponent = generateVueComponentWithInstanceProperties(vueComponent, this.props, this);
+            this.vueComponent = new vueComponentClass(this.props, this);
             this.createElement = generateCreateElementFunctionForClass(
                 this.vueComponent,
                 instantiatedComponents,
@@ -315,12 +352,6 @@ export const generateReactClass = <TProps>(instantiatedComponents, vueComponent,
 
             addCompiledTemplateFunctionsToVueComponent(this.vueComponent, this.createElement);
 
-            Object.defineProperty(this.vueComponent, '$el', {
-                get: () => this.element,
-                enumerable: true,
-                configurable: true
-            });
-
             if (this.props.__onInit) {
                 this.props.__onInit(this);
             }            
@@ -329,11 +360,13 @@ export const generateReactClass = <TProps>(instantiatedComponents, vueComponent,
         },
 
         componentWillUpdate: function() {
-            if (this.vueComponent.updated) this.vueComponent.updated();
-
             copyPropsToVueComponent(this.vueComponent, this.props);
             copySlotsToVueComponent(this.vueComponent, slots, this.props);
             handleComputedProperties(this.vueComponent);            
+        },
+
+        componentDidUpdate: function () {
+            if (this.vueComponent.updated) this.vueComponent.updated();
         },
 
         componentDidMount: function() {
