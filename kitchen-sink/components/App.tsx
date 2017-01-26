@@ -47,7 +47,7 @@ export const App = (props: React.Props<any>) => {
                     </Pages>
                 </View>
             </Panel>
-            <Panel right cover>
+            <Panel right cover layout="dark">
                 <p>Panel right content</p>
             </Panel>
             <Views navbarThrough>
@@ -102,7 +102,6 @@ export const App = (props: React.Props<any>) => {
                             <List>
                                 <ListItem title="Dynamic Route" link="/user/45/posts/28/?sort=first#opened" />
                                 <ListItem title="Nested Routes" link="/nested-routes/" />
-                                <ListItem title="Data Binding" link="/data-binding/" />
                             </List>
                         </Page>
                     </Pages>
