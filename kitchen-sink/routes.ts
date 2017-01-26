@@ -32,6 +32,7 @@ import {ModalsPage} from './components/pages/ModalsPage';
 import {TimelineVerticalPage} from './components/pages/TimelineVerticalPage';
 import {TimelineHorizontalPage} from './components/pages/TimelineHorizontalPage';
 import {TimelineCalendarPage} from './components/pages/TimelineCalendarPage';
+import {DynamicRoutePage} from './components/pages/DynamicRoutePage';
 
 import {NestedRoutesPage} from './components/pages/NestedRoutesPage';
 import {NestedRoutesTabsPage} from'./components/pages/NestedRoutesTabsPage';
@@ -194,4 +195,7 @@ export const routes = [{
 }, {
     path: '/timeline-calendar/',
     component: TimelineCalendarPage    
+}, {
+    path: '/user/:id/posts/:post_id/',
+    component: DynamicRoutePage    
 }];
