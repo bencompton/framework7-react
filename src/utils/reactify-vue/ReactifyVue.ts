@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import {generateReactClass} from './GenerateReactClass';
+import {generateReactClass} from './react-class-creation-and-runtime/GenerateReactClass';
 
 export interface IVueEventToPropsMap {
     [vueEvent: string]: string;
