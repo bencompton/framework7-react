@@ -63,19 +63,7 @@ export const reactifyF7Vue = <TProps>(args: IReactifyF7VueArgs) => {
                 $theme: { material: false, ios: true },
                 __onMount: (self) => {
                     const framework7AppContext = (this.context as any).framework7AppContext as IFramework7AppContext;
-
-                    framework7AppContext.getFramework7(f7 => {
-                        if (self.vueComponent.onF7Init) {
-                            self.vueComponent.onF7Init(f7);
-                        }
-                    });
-
-                    framework7AppContext.onRouteChange(this.componentId, route => {
-                        if (self.vueComponent.onRouteChange) {
-                            self.vueComponent.onRouteChange(route);
-                        }
-                    });
-
+                    
                     if (!self.vueComponent.$f7 && !self.vueComponent.$route) {
                         Object.defineProperty(self.vueComponent, '$f7', {
                             get: () => this.framework7,
@@ -89,6 +77,20 @@ export const reactifyF7Vue = <TProps>(args: IReactifyF7VueArgs) => {
                             configurable: true
                         });
                     }
+
+                    framework7AppContext.getFramework7(f7 => {
+                        if (self.vueComponent.onF7Init) {
+                            self.vueComponent.onF7Init(f7);
+                        }
+                    });
+
+                    framework7AppContext.onRouteChange(this.componentId, route => {
+                        if (self.vueComponent.onRouteChange) {
+                            self.vueComponent.onRouteChange(route);
+                        }
+                    });
+
+
                 }
             });
 
