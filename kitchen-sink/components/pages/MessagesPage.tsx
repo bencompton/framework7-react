@@ -69,7 +69,7 @@ export class MessagesPage extends React.Component<any, IMessagesPageState> {
                     })
                 }
                 </Messages>
-                <Messagebar placeholder="Message" sendLink="Send" onChange={()=>{console.log('changing text')}} onSubmit={() => {console.log('submit')}} />
+                <Messagebar placeholder="Message" sendLink="Send" onSubmit={this.onSubmit.bind(this)} />
             </Page>
         );
     }
@@ -90,7 +90,28 @@ export class MessagesPage extends React.Component<any, IMessagesPageState> {
         console.log('avatar click');
     }
         
-    private onSubmit() {
-        console.log('submit');
-    }
+    private onSubmit(text, clear) {              
+        if (text.trim().length === 0) return;
+
+        this.setState({
+            ...this.state,
+            messages: [
+                ...this.state.messages,
+                {
+                    name: this.state.name,
+                    avatar: 'http://lorempixel.com/100/100/people/3',
+                    text: text,
+                    date: (function () {
+                        var now = new Date();
+                        var hours = now.getHours();
+                        var minutes = now.getMinutes();
+                        return hours + ':' + minutes;
+                    })()
+                }
+            ]
+        });
+
+        clear();
+      }
+    
 };

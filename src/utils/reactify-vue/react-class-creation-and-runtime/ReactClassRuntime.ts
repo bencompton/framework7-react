@@ -94,14 +94,6 @@ export const handleComputedProperties = (vueComponent: IVueComponent) => {
     }
 }
 
-export const applyMixinToVueComponent = (vueComponent: IVueComponent, mixin: any) => {
-    if (mixin) {
-        Object.keys(mixin).forEach(mixinProp => {
-            vueComponent[mixinProp] = mixin[mixinProp];
-        });
-    }
-};
-
 export const getDefaultProps = (vueComponent: IVueComponent) => {
     if (vueComponent.props) {
         const defaultProps = Object.keys(vueComponent.props).reduce((defaultProps, propName) => {

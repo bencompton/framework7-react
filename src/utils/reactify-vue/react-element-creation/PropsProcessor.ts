@@ -87,7 +87,7 @@ const attributeMap = {
     }     
 };
 
-const handleRefs = (element: HTMLElement, vueComponent: IVueComponent, events: {[eventName: string]: Function}) => {
+const handleRefs = (element: HTMLElement, vueComponent: IVueComponent, events: {[eventName: string]: Function}, props) => {
     if (events) {
         Object.keys(events).forEach(eventName => {
             if (element && element.addEventListener && !((element as any).vueListeners && (element as any).vueListeners[eventName])) {
@@ -100,6 +100,11 @@ const handleRefs = (element: HTMLElement, vueComponent: IVueComponent, events: {
                 (element as any).vueListeners[eventName] = true;
             }
         });
+    }
+
+    if (props.vueRef) {        
+        const vueRef = props.vueRef;
+        vueRef.vueComponentInstance.$refs[vueRef.refName] = element;                 
     }
 };
 
@@ -116,20 +121,22 @@ const renameAttribute = (componentName, attribute) => {
 export class PropsProcessor {
     private cachedPropKebabCase: {[camelCasedProp: string]: string};
 
-    public getProps(args, children, componentOrComponentName, resolvedComponent, vueComponent) {        
-        this.addCurrentComponentAsParentOfChildren(children, vueComponent);        
+    public getProps(args, children, componentOrComponentName, resolvedComponent, parentVueComponentInstance) {        
+        this.addCurrentComponentAsParentOfChildren(children, parentVueComponentInstance);        
 
         const props = {};
 
-        this.getClasses(args, vueComponent, props);
-        this.getStyle(args, vueComponent, props);
-        this.getAdditionalClassName(vueComponent, props);        
-        this.getAdditionalStyles(vueComponent, props);
-        this.getRef(args, vueComponent, props);        
+        this.getClasses(args, parentVueComponentInstance, props);
+        this.getStyle(args, parentVueComponentInstance, props);
+        this.getAdditionalClassName(parentVueComponentInstance, props);        
+        this.getAdditionalStyles(parentVueComponentInstance, props);
+        this.getRef(args, parentVueComponentInstance, props);        
         this.getPropsFromArgs(args, props);        
         this.getChildren(children, args, props);
         this.convertAttrsToProps(args, componentOrComponentName, resolvedComponent, props);
         this.getInnerHTML(args, props);
+        this.handleEvents(resolvedComponent, args.on, parentVueComponentInstance, props)
+        this.handleRef(args.ref, parentVueComponentInstance, props);
 
         return props;
     }
@@ -184,11 +191,26 @@ export class PropsProcessor {
         }
     }
 
+    private handleEvents = (resolvedComponent, eventHandlers, parentVueComponentInstance, props) => {
+        if (typeof resolvedComponent === 'string') {
+
+        } else {
+            if (eventHandlers) {
+                Object.keys(eventHandlers).forEach(eventName => {
+                    const camelCasedEventName = `${camelCase('on-' + eventName)}`;
+                    props[camelCasedEventName] = (...eventArgs: any[]) => {
+                        eventHandlers[eventName].apply(parentVueComponentInstance, eventArgs);
+                    };
+                });
+            }
+        }
+    }
+
     private getRef(args, vueComponent, props) {
         const refFunc = ((events, vueComponent) => {
             return (element: HTMLElement) => {
                 const events = args.on;
-                handleRefs(element, vueComponent, events);                
+                handleRefs(element, vueComponent, events, props);                
             };
         })(args.on, vueComponent);
         
@@ -266,6 +288,17 @@ export class PropsProcessor {
                     child.props = {...child.props, parentVueComponent: vueComponent };
                 }
             }
+        }
+    }
+
+    private handleRef(refName: string, vueComponentInstance, props) {
+        if (refName) {
+            if (!vueComponentInstance.$refs) vueComponentInstance.$refs = {};
+            
+            props.vueRef = {
+                refName: refName,            
+                vueComponentInstance
+            };
         }
     }
 }

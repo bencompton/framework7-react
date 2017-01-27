@@ -24,8 +24,8 @@ const handleStateSet = (stateObject, key, value, vueComponent, self) => {
 const callPropOnEvent = (eventName: string, eventArgs: any[], props: any) => {
     const eventNameCamelCase = camelCase('on-' + eventName.split(':').join('-'));
 
-    if (props[eventNameCamelCase]) {
-        props[eventNameCamelCase](eventArgs);
+    if (props[eventNameCamelCase]) {        
+        props[eventNameCamelCase](...eventArgs);
     }
 };
 
@@ -37,6 +37,14 @@ export const convertVueComponentToClass = (vueComponentObject) => {
     };
 
     vueComponentClass.prototype = vueComponentObject;
+
+    if (vueComponentObject.mixins) {
+        vueComponentObject.mixins.forEach(mixin => {
+            Object.keys(mixin).forEach(prop => {
+                vueComponentClass.prototype[prop] = mixin[prop];
+            });
+        });
+    } 
 
     vueComponentClass.prototype.$emit = function (eventName: string, ...eventArgs: any[]) {
         callPropOnEvent(eventName, eventArgs, this.reactComponentProps);

@@ -9,7 +9,6 @@ import {
     copyArgsToVueComponent,
     handleWatchedProperties,
     handleComputedProperties,
-    applyMixinToVueComponent,
     getDefaultProps,
     addCompiledTemplateFunctionsToVueComponent,
     generateCreateElementFunctionForClass,
@@ -21,7 +20,6 @@ import {
 export const generateReactClass = <TProps>(instantiatedComponents, vueComponent, slots, tag, mixin, args) => {
     const vueComponentClass = convertVueComponentToClass(vueComponent);
 
-    applyMixinToVueComponent(vueComponent, mixin);
     copyMethodsToVueComponent(vueComponent);
     copyArgsToVueComponent(vueComponent, args);
 
