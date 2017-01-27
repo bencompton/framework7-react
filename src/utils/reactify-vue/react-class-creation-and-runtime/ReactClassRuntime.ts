@@ -143,41 +143,9 @@ export const generateCreateElementFunctionForClass = (classVueComponentInstance,
     };
 };
 
-export const removePropsFromElementAndChildren = (element, propsToRemove) => {
-    let children = element && element.props && element.props.children;
-
-    if (children) {
-        if (Array.isArray(children)) {
-            children = children.map(child => removePropsFromElementAndChildren(child, propsToRemove));
-        } else {
-            children = removePropsFromElementAndChildren(children, propsToRemove);
-        }
-    }
-
-    if (element && element.props && Object.keys(element.props).filter(propName => propsToRemove.indexOf(propName) !== -1).length) {
-        return {...element, props: Object.keys(element.props).reduce((newProps, nextPropName) => {
-            if (nextPropName === 'children') {
-                return {
-                    ...newProps,
-                    children: children
-                };
-            } else if (propsToRemove.indexOf(nextPropName) === -1) {
-                return {
-                    ...newProps,
-                    [nextPropName]: element.props[nextPropName]
-                };
-            } else {
-                return newProps;
-            }
-        }, {})};
-    } else {
-        return element;
-    }
-};
-
-export const applyPropOverrides = (reactElement: React.ReactElement<any>, tag: string, self) => {
+export const applyPropOverridesToTopLevelElement = (reactElement: React.ReactElement<any>, tag: string, self) => {
     const refFunc = (e: HTMLElement) => {
-        reactElement.props.refTemp(e);
+        (reactElement as any).ref(e);
         self.element = e;
 
         self.nextTickCallbacks.forEach(callback => callback.apply(this.vueComponent, []));
@@ -187,17 +155,23 @@ export const applyPropOverrides = (reactElement: React.ReactElement<any>, tag: s
 
     const elementWithPropOverrides = {...reactElement, props: { ...reactElement.props}, tag: tag, ref: refFunc };
 
-    if (elementWithPropOverrides.props.additionalClassName) {
+    Object.defineProperty(elementWithPropOverrides, '$el', {
+        get: () => self.element,
+        configurable: true,
+        enumerable: true
+    });
+
+    if (self.vueComponent.className) {
         const existingClassName = elementWithPropOverrides.props.className || '';
-        elementWithPropOverrides.props.className = [existingClassName, ' ', elementWithPropOverrides.props.additionalClassName].join('');
+        elementWithPropOverrides.props.className = [existingClassName, ' ', self.vueComponent.className].join('');
     }
 
-    if (elementWithPropOverrides.props.additionalStyles) {
+    if (self.vueComponent.style) {
         const existingStyles = elementWithPropOverrides.props.style || {};
         
         elementWithPropOverrides.props.style = {
             ...existingStyles,
-            ...elementWithPropOverrides.props.additionalStyles
+            ...self.vueComponent.style
         };        
     }
 
@@ -205,14 +179,7 @@ export const applyPropOverrides = (reactElement: React.ReactElement<any>, tag: s
         elementWithPropOverrides.props.id = self.vueComponent.id;
     }
 
-    const newProps = elementWithPropOverrides;
-
-    //removePropsFromElementAndChildren(
-    //    elementWithPropOverrides, 
-    //    ['additionalClassName', 'additionalStyles', 'refTemp']
-    //);
-
-    return newProps;
+    return elementWithPropOverrides;
 };
 
 export const initData = (vueComponent) => {

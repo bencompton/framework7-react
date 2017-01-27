@@ -13,7 +13,7 @@ import {
     addCompiledTemplateFunctionsToVueComponent,
     generateCreateElementFunctionForClass,
     removePropsFromElementAndChildren,
-    applyPropOverrides,
+    applyPropOverridesToTopLevelElement,
     initData
 } from './ReactClassRuntime';
 
@@ -77,7 +77,7 @@ export const generateReactClass = <TProps>(instantiatedComponents, vueComponent,
             this.hasRendered = true;
 
             if (reactElement) {
-                return applyPropOverrides(reactElement, tag, this);
+                return applyPropOverridesToTopLevelElement(reactElement, tag, this);
             } else {
                 return null;
             }

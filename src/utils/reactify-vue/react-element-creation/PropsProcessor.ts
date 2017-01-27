@@ -121,22 +121,20 @@ const renameAttribute = (componentName, attribute) => {
 export class PropsProcessor {
     private cachedPropKebabCase: {[camelCasedProp: string]: string};
 
-    public getProps(args, children, componentOrComponentName, resolvedComponent, parentVueComponentInstance) {        
-        this.addCurrentComponentAsParentOfChildren(children, parentVueComponentInstance);        
+    public getProps(args, children, componentOrComponentName, resolvedComponent, vueComponentInstance) {
+        this.addCurrentComponentAsParentOfChildren(children, vueComponentInstance);
 
         const props = {};
 
-        this.getClasses(args, parentVueComponentInstance, props);
-        this.getStyle(args, parentVueComponentInstance, props);
-        this.getAdditionalClassName(parentVueComponentInstance, props);        
-        this.getAdditionalStyles(parentVueComponentInstance, props);
-        this.getRef(args, parentVueComponentInstance, props);        
+        this.getClasses(args, vueComponentInstance, props);
+        this.getStyle(args, vueComponentInstance, props);
+        this.getRef(args, vueComponentInstance, resolvedComponent, props);        
         this.getPropsFromArgs(args, props);        
         this.getChildren(children, args, props);
         this.convertAttrsToProps(args, componentOrComponentName, resolvedComponent, props);
         this.getInnerHTML(args, props);
-        this.handleEvents(resolvedComponent, args.on, parentVueComponentInstance, props)
-        this.handleRef(args.ref, parentVueComponentInstance, props);
+        this.handleEvents(resolvedComponent, args.on, vueComponentInstance, props)
+        this.handleRef(args.ref, vueComponentInstance, props);        
 
         return props;
     }
@@ -175,22 +173,6 @@ export class PropsProcessor {
         }
     }
 
-    private getAdditionalClassName(vueComponent, props) {
-        //ClassName can be passed into any framework7-react component.
-        //If it is passed in, add it as a prop.
-        if (vueComponent.className) {
-            props.additionalClassName = vueComponent.className;
-        }
-    }
-
-    private getAdditionalStyles(vueComponent, props) {
-        //Style can be passed into any framework7-react component. 
-        //If it is passed in, add it to any styles specified in the Vue component.
-        if ((vueComponent as any).style) {
-            props.additionalStyles = (vueComponent as any).style;
-        }
-    }
-
     private handleEvents = (resolvedComponent, eventHandlers, parentVueComponentInstance, props) => {
         if (typeof resolvedComponent === 'string') {
 
@@ -206,16 +188,13 @@ export class PropsProcessor {
         }
     }
 
-    private getRef(args, vueComponent, props) {
-        const refFunc = ((events, vueComponent) => {
+    private getRef(args, vueComponent, resolvedComponent, props) {
+        props.ref = ((events, vueComponent) => {
             return (element: HTMLElement) => {
                 const events = args.on;
                 handleRefs(element, vueComponent, events, props);                
             };
         })(args.on, vueComponent);
-        
-        props.ref = refFunc;
-        props.refTemp = refFunc;        
     }
 
     private getPropsFromArgs(args, props) {
@@ -284,12 +263,12 @@ export class PropsProcessor {
             while (length--) {            
                 let child = children[length];
 
-                if (child && child.props && Object.getOwnPropertyDescriptor(child, 'props').writable) {                    
+                if (child && child.tag && child.tag.indexOf('f7-') !== -1) {                    
                     child.props = {...child.props, parentVueComponent: vueComponent };
                 }
             }
         }
-    }
+    }    
 
     private handleRef(refName: string, vueComponentInstance, props) {
         if (refName) {
