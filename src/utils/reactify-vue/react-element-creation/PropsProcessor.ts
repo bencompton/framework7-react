@@ -102,8 +102,8 @@ const handleRefs = (element: HTMLElement, vueComponent: IVueComponent, events: {
         });
     }
 
-    if (props.vueRef) {        
-        const vueRef = props.vueRef;
+    if (props['data-vue-ref']) {        
+        const vueRef = props['data-vue-ref'];
         vueRef.vueComponentInstance.$refs[vueRef.refName] = element;                 
     }
 };
@@ -274,7 +274,7 @@ export class PropsProcessor {
         if (refName) {
             if (!vueComponentInstance.$refs) vueComponentInstance.$refs = {};
             
-            props.vueRef = {
+            props['data-vue-ref'] = {
                 refName: refName,            
                 vueComponentInstance
             };
