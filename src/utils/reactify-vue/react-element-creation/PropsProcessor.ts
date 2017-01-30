@@ -18,10 +18,9 @@ const hasOwn = {}.hasOwnProperty;
 
 const classNames = (...args: any[]) => {
     const classes = [];    
-    let length = args.length;
 
-    while (length--) {
-        let  arg = args[length];
+    for (let i = 0, length = args.length; i < length; i++) {
+        let arg = args[i];
 
         if (!arg) continue;
 
@@ -32,13 +31,8 @@ const classNames = (...args: any[]) => {
         } else if (Array.isArray(arg)) {
             classes.push(classNames.apply(null, arg));
         } else if (argType === 'object') {
-            const keys = Object.keys(arg);
-            let length = keys.length;
-
-            while (length--) {
-                let key = keys[length];
-
-                if (hasOwn.call(arg, key) && arg[key]) {
+            for (let key in arg) {
+                if (arg[key]) {
                     classes.push(key);
                 }
             }
@@ -89,7 +83,7 @@ const attributeMap = {
 
 const handleRefs = (element: HTMLElement, vueComponent: IVueComponent, events: {[eventName: string]: Function}, props) => {
     if (events) {
-        Object.keys(events).forEach(eventName => {
+        for (let eventName in events) {
             if (element && element.addEventListener && !((element as any).vueListeners && (element as any).vueListeners[eventName])) {
                 element.addEventListener(eventName, (...args: any[]) => {
                     const eventHandler = events[eventName];
@@ -99,7 +93,7 @@ const handleRefs = (element: HTMLElement, vueComponent: IVueComponent, events: {
                 (element as any).vueListeners = (element as any).vueListeners || {};
                 (element as any).vueListeners[eventName] = true;
             }
-        });
+        }
     }
 
     if (props['data-vue-ref']) {        
@@ -131,10 +125,15 @@ const renameStyleProperties = (stylesObject) => {
     return stylesObject;
 }
 
+let totalTime = 0;
+let timeout;
+
 export class PropsProcessor {
     private cachedPropKebabCase: {[camelCasedProp: string]: string};
 
     public getProps(args, children, componentOrComponentName, resolvedComponent, vueComponentInstance) {
+        const startTime = new Date()
+        
         this.addCurrentComponentAsParentOfChildren(children, vueComponentInstance);
 
         const props = {};
@@ -148,6 +147,14 @@ export class PropsProcessor {
         this.getInnerHTML(args, props);
         this.handleEvents(resolvedComponent, args.on, vueComponentInstance, props)
         this.handleRef(args.ref, vueComponentInstance, props);        
+        
+        totalTime += new Date().getTime() - startTime.getTime();
+        
+        clearTimeout(timeout);
+        
+        timeout = window.setTimeout(() => {
+            window.alert(totalTime);
+        }, 2000)
 
         return props;
     }
@@ -191,12 +198,12 @@ export class PropsProcessor {
 
         } else {
             if (eventHandlers) {
-                Object.keys(eventHandlers).forEach(eventName => {
+                for (let eventName in eventHandlers) {
                     const camelCasedEventName = `${camelCase('on-' + eventName)}`;
                     props[camelCasedEventName] = (...eventArgs: any[]) => {
                         eventHandlers[eventName].apply(parentVueComponentInstance, eventArgs);
                     };
-                });
+                }
             }
         }
     }
@@ -212,11 +219,7 @@ export class PropsProcessor {
 
     private getPropsFromArgs(args, props) {
         if (args.props) {
-            const keys = Object.keys(args.props);
-            let length = keys.length;
-            
-            while (length--) {
-                let prop = keys[length];
+            for (let prop in args.props) {
                 props[camelCase(prop)] = args.props[prop];
             }
         }        
@@ -230,12 +233,7 @@ export class PropsProcessor {
 
     private convertAttrsToProps(args, componentOrComponentName, resolvedComponent, props) {
         if (args.attrs) {
-            const keys = Object.keys(args.attrs);
-            let length = keys.length;
-
-            while (length--) {
-                let attr = keys[length];
-
+            for (let attr in args.attrs) {
                 attr = renameAttribute(componentOrComponentName, attr);
 
                 const resolvedVueComponent = resolvedComponent.vueComponent;
@@ -273,8 +271,8 @@ export class PropsProcessor {
         let length = children && children.length;        
 
         if (children && length && Array.isArray(children)) {
-            while (length--) {            
-                let child = children[length];
+            for (let i = 0, length = children.length; i < length; i++) {            
+                let child = children[i];
 
                 if (child && child.tag && child.tag.indexOf('f7-') !== -1) {                    
                     child.props = {...child.props, parentVueComponent: vueComponent };
