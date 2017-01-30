@@ -14,34 +14,6 @@ const camelCase = (str) => {
     return (camelCase as any).replacement[str];
 };
 
-const hasOwn = {}.hasOwnProperty;
-
-const classNames = (...args: any[]) => {
-    const classes = [];    
-
-    for (let i = 0, length = args.length; i < length; i++) {
-        let arg = args[i];
-
-        if (!arg) continue;
-
-        let argType = typeof arg;
-
-        if (argType === 'string' || argType === 'number') {
-            classes.push(arg);
-        } else if (Array.isArray(arg)) {
-            classes.push(classNames.apply(null, arg));
-        } else if (argType === 'object') {
-            for (let key in arg) {
-                if (arg[key]) {
-                    classes.push(key);
-                }
-            }
-        }
-    }
-
-    return classes.join(' ');
-};
-
 const attributeMap = {
     autocapitalize: {
         componentNames: ['input', 'textarea', 'select'],
@@ -171,10 +143,16 @@ export class PropsProcessor {
         if (args.staticClass) { 
             classObject[args.staticClass] = true; 
         }
-
-        if (Object.keys(classObject).length) {
-            props.className = classNames(classObject);
-        }        
+        
+        const classes = [];  
+        
+        for (let key in classObject) {
+            if (classObject[key]) {
+                classes.push(key);
+            }
+        }
+        
+        props.className = classes.join(' ');
     }
 
     private getStyle(args, vueComponent, props) {
