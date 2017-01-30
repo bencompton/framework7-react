@@ -104,8 +104,6 @@ export class PropsProcessor {
     private cachedPropKebabCase: {[camelCasedProp: string]: string};
 
     public getProps(args, children, componentOrComponentName, resolvedComponent, vueComponentInstance) {
-        const startTime = new Date()
-        
         this.addCurrentComponentAsParentOfChildren(children, vueComponentInstance);
 
         const props = {};
@@ -120,14 +118,6 @@ export class PropsProcessor {
         this.handleEvents(resolvedComponent, args.on, vueComponentInstance, props)
         this.handleRef(args.ref, vueComponentInstance, props);        
         
-        totalTime += new Date().getTime() - startTime.getTime();
-        
-        clearTimeout(timeout);
-        
-        timeout = window.setTimeout(() => {
-            window.alert(totalTime);
-        }, 2000)
-
         return props;
     }
 
