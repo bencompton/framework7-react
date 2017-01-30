@@ -97,9 +97,6 @@ const renameStyleProperties = (stylesObject) => {
     return stylesObject;
 }
 
-let totalTime = 0;
-let timeout;
-
 export class PropsProcessor {
     private cachedPropKebabCase: {[camelCasedProp: string]: string};
 
