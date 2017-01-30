@@ -118,6 +118,19 @@ const renameAttribute = (componentName, attribute) => {
     return attribute;
 };
 
+const renameStyleProperties = (stylesObject) => {
+    for (var property in stylesObject) {
+        if (stylesObject.hasOwnProperty(property) && property.indexOf('-') !== -1) {
+            let newPropertyName = camelCase(property);
+            
+            stylesObject[newPropertyName] = stylesObject[property];
+            delete stylesObject[property];
+        }
+    }
+
+    return stylesObject;
+}
+
 export class PropsProcessor {
     private cachedPropKebabCase: {[camelCasedProp: string]: string};
 
@@ -169,7 +182,7 @@ export class PropsProcessor {
         }
 
         if (style) {
-            props.style = style;
+            props.style = renameStyleProperties(style);
         }
     }
 

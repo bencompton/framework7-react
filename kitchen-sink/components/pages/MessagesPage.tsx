@@ -60,7 +60,7 @@ export class MessagesPage extends React.Component<any, IMessagesPageState> {
             <Page toolbar-fixed>
                 <Navbar backLink="Back" title="Messages" sliding></Navbar>
                 <Subnavbar>
-                    <input type="text" placeholder="Your name" defaultValue={this.state.name}/>
+                    <input type="text" placeholder="Your name" defaultValue={this.state.name} onChange={this.onNameChange.bind(this)}/>
                 </Subnavbar>
                 <Messages>
                 {
@@ -102,16 +102,25 @@ export class MessagesPage extends React.Component<any, IMessagesPageState> {
                     avatar: 'http://lorempixel.com/100/100/people/3',
                     text: text,
                     date: (function () {
-                        var now = new Date();
-                        var hours = now.getHours();
-                        var minutes = now.getMinutes();
-                        return hours + ':' + minutes;
+                        let now = new Date();
+                        let hours = now.getHours();
+                        let hoursString = hours < 10 ? `0${hours}` : `${hours}`; 
+                        let minutes = now.getMinutes();
+                        let minutesString = minutes < 10 ? `0${minutes}` : `${minutes}`;    
+                        return `${hours}:${minutesString}`;
                     })()
                 }
             ]
         });
 
         clear();
+      }
+
+      private onNameChange(event) {
+          this.setState({
+              ...this.state,
+              name: event.target.value
+          });
       }
     
 };

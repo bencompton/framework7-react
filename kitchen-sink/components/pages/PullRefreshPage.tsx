@@ -36,7 +36,7 @@ export class PullRefreshPage extends React.Component<any, IPullRefreshPageState>
         );
     }
 
-    private onRefresh(event) {
+    private onRefresh(event, callBack) {
         let self = this;
         let newItems = this.state.items.slice();
         let newCounter = this.state.counter + 1;
@@ -49,8 +49,7 @@ export class PullRefreshPage extends React.Component<any, IPullRefreshPageState>
                 items: newItems
             });
 
-            //Done callback passed in as second argument.
-            event[1]();
+            callBack();
         }, 2000);        
     }
 };

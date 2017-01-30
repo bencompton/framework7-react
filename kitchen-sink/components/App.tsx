@@ -49,7 +49,7 @@ export class App extends React.Component<any, IAppState> {
         return (
             <Framework7App onFramework7Init={(f7) => {framework7 = f7}} themeType="ios" routes={routes} onRouteChange={onRouteChange}>
                 <Statusbar></Statusbar>
-                <Panel opened={this.state.leftPanelOpened} left reveal layout="dark" theme="pink">
+                <Panel opened={this.state.leftPanelOpened} left reveal layout="dark" theme="pink" onPanelClosed={this.closedLeftPanel.bind(this)}>
                     <View navbarFixed>
                         <Pages>
                             <Page>
@@ -62,7 +62,7 @@ export class App extends React.Component<any, IAppState> {
                         </Pages>
                     </View>
                 </Panel>
-                <Panel opened={this.state.rightPanelOpened} right cover layout="dark">
+                <Panel opened={this.state.rightPanelOpened} right cover layout="dark" onPanelClosed={this.closedRightPanel.bind(this)}>
                     <p>Panel right content</p>
                 </Panel>
                 <Views navbarThrough>
@@ -137,6 +137,21 @@ export class App extends React.Component<any, IAppState> {
         this.setState({
             ...this.state,
             rightPanelOpened: true
+        })
+    }
+
+    
+    private closedLeftPanel() {
+        this.setState({
+            ...this.state,
+            leftPanelOpened: false
+        })
+    }
+
+    private closedRightPanel() {
+        this.setState({
+            ...this.state,
+            rightPanelOpened: false
         })
     }
 };

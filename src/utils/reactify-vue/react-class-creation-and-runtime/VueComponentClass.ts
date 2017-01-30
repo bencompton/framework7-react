@@ -63,7 +63,12 @@ export const convertVueComponentToClass = (vueComponentObject) => {
     });
 
     Object.defineProperty(vueComponentClass.prototype, '$children', {
-        get: function ()  { return this.reactComponentProps.children },
+        get: function ()  {
+            const parentElement = this.$el;
+            return this.children.map((element, index) => {
+                return {...element, $el: parentElement.children[index]};
+            });
+        },
         enumerable: true,
         configurable: true
     });

@@ -46,6 +46,10 @@ export const generateReactClass = <TProps>(instantiatedComponents, vueComponent,
             return state;
         },
 
+        componentWillUpdate: function () {
+            if (this.vueComponent.beforeUpdate) this.vueComponent.beforeUpdate();
+        },
+
         componentDidUpdate: function () {
             if (this.vueComponent.updated) this.vueComponent.updated();
         },

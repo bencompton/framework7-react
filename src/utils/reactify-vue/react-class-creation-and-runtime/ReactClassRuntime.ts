@@ -153,13 +153,7 @@ export const applyPropOverridesToTopLevelElement = (reactElement: React.ReactEle
         self.hasUnrenderedStateChanges = false;        
     };
 
-    const elementWithPropOverrides = {...reactElement, props: { ...reactElement.props}, tag: tag, ref: refFunc };
-
-    Object.defineProperty(elementWithPropOverrides, '$el', {
-        get: () => self.element,
-        configurable: true,
-        enumerable: true
-    });
+    const elementWithPropOverrides = {...reactElement, props: { ...reactElement.props}, tag: tag, ref: refFunc};
 
     if (self.vueComponent.className) {
         const existingClassName = elementWithPropOverrides.props.className || '';
