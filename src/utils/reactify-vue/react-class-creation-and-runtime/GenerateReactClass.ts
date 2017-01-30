@@ -12,7 +12,6 @@ import {
     getDefaultProps,
     addCompiledTemplateFunctionsToVueComponent,
     generateCreateElementFunctionForClass,
-    removePropsFromElementAndChildren,
     applyPropOverridesToTopLevelElement,
     initData
 } from './ReactClassRuntime';

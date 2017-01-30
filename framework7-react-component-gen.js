@@ -196,7 +196,7 @@ const generateReactifyF7VueCall = (
     
     const imports = [
         `import * as React from 'react'`,
-        generateImportString('reactifyF7Vue', '../src/utils/reactifyF7Vue'),
+        generateImportString('reactifyF7Vue', '../src/utils/ReactifyF7Vue'),
         generateImportString(vueComponentName, '../framework7-vue/framework7-vue')
     ];    
     
