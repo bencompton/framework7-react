@@ -43,7 +43,7 @@ export class FormsPage extends React.Component<any, IFormsPageState> {
                 <List form>
                     <ListItem>
                         <FormLabel>Name</FormLabel>  
-                        <FormInput type="text" placeholder="Name" value={"Test"}/>   
+                        <FormInput type="text" placeholder="Name" />   
                     </ListItem>
                     <ListItem>
                         <FormLabel>Password</FormLabel>  
