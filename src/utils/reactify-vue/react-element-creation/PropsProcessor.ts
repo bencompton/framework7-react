@@ -48,6 +48,47 @@ const classNames = (...args: any[]) => {
     return classes.join(' ');
 };
 
+const renameEvent = (eventName: string) => {
+    switch (eventName) {
+        case 'keypress': 
+            return 'keyPress';
+        case 'keyup': 
+            return 'keyUp';
+        case 'keydown':             
+            return 'keyDown';
+        case 'beforeinput': 
+            return 'beforeInput';
+        case 'compositionstart': 
+            return 'compositionStart';
+        case 'compositionupdate': 
+            return 'compositionUpdate';
+        case 'compositionend': 
+            return 'compositionEnd';
+        case 'dblclick': 
+            return 'doubleClick';
+        case 'mousedown': 
+            return 'mouseDown';
+        case 'mouseenter': 
+            return 'mouseEnter';
+        case 'mouseleave': 
+            return 'mouseLeave';
+        case 'mousemove': 
+            return 'mouseMove';
+        case 'mouseout':
+            return 'mouseOut';
+        case 'mouseover': 
+            return 'mouseOver';
+        case 'mouseup': 
+            return 'mouseUp';
+        case 'focusin': 
+            return 'focus';
+        case 'focusout': 
+            return 'blur'
+        default:
+            return eventName;
+    }
+}
+
 const attributeMap = {
     autocapitalize: {
         componentNames: ['input', 'textarea', 'select'],
@@ -84,7 +125,7 @@ const attributeMap = {
     spellcheck: {
         componentNames: ['input', 'textarea', 'select'],
         renameTo: 'spellCheck'            
-    }     
+    }
 };
 
 const handleRefs = (element: HTMLElement, vueComponent: IVueComponent, events: {[eventName: string]: Function}, props) => {
@@ -192,7 +233,7 @@ export class PropsProcessor {
         } else {
             if (eventHandlers) {
                 Object.keys(eventHandlers).forEach(eventName => {
-                    const camelCasedEventName = `${camelCase('on-' + eventName)}`;
+                    const camelCasedEventName = `${camelCase('on-' + renameEvent(eventName))}`;
                     props[camelCasedEventName] = (...eventArgs: any[]) => {
                         eventHandlers[eventName].apply(parentVueComponentInstance, eventArgs);
                     };

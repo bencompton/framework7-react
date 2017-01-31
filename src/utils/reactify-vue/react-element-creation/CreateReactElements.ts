@@ -2,11 +2,14 @@ import * as React from 'react';
 
 import {IVueComponent} from '../ReactifyVue';
 import {PropsProcessor} from './PropsProcessor';
+import {ManagedFormInput} from '../../../components/inputs/ManagedFormInput';
 
 const propsProcessor = new PropsProcessor();
+const formElements = ['input'];
 
 const resolveDependencyComponent = (instantiatedComponents: (React.ComponentClass<any> | React.StatelessComponent<any>)[], componentToResolve: string) => {
-    if (instantiatedComponents) {
+    if (instantiatedComponents && componentToResolve.indexOf('f7-') > -1) {
+        //Is a Vue component that React does not know what to do with, so search for it by tag name so that we can pass the actual React component for rendering.
         const results = instantiatedComponents
             .filter(instantiatedComponent => {
                 if ((instantiatedComponent as any).tag) {
@@ -17,6 +20,12 @@ const resolveDependencyComponent = (instantiatedComponents: (React.ComponentClas
             });
 
         if (results.length) { return results[0]; }
+    } else if (formElements.indexOf(componentToResolve) > -1) {
+        //Is an input that we need to manage to control state 
+        return ManagedFormInput;
+    } else {
+        //Is just a plain html element like div, etc. so just return it.
+        return componentToResolve;
     }
 };
 

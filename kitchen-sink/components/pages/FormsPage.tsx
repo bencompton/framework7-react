@@ -27,13 +27,6 @@ export class FormsPage extends React.Component<any, IFormsPageState> {
         this.fw7 = getFramework7();
     }
 
-    private onBirthDateChange(value) {
-        this.setState({
-           ...this.state,
-           birthDate: value 
-        });
-    }
-
     private onRadioChange(value) {
         this.setState({
            ...this.state,
@@ -50,7 +43,7 @@ export class FormsPage extends React.Component<any, IFormsPageState> {
                 <List form>
                     <ListItem>
                         <FormLabel>Name</FormLabel>  
-                        <FormInput type="text" placeholder="Name" />   
+                        <FormInput type="text" placeholder="Name" value={"Test"}/>   
                     </ListItem>
                     <ListItem>
                         <FormLabel>Password</FormLabel>  
@@ -70,7 +63,7 @@ export class FormsPage extends React.Component<any, IFormsPageState> {
                     </ListItem>                
                     <ListItem>
                         <FormLabel>Birth date</FormLabel>  
-                        <FormInput type="date" placeholder="Birth date" value={this.state.birthDate} onInput={this.onBirthDateChange.bind(this)} onChange={() => null}/>   
+                        <FormInput type="date" placeholder="Birth date" value={this.state.birthDate} />   
                     </ListItem>
                     <ListItem>
                         <FormLabel>Date time</FormLabel>  
@@ -78,7 +71,7 @@ export class FormsPage extends React.Component<any, IFormsPageState> {
                     </ListItem>
                     <ListItem>
                         <FormLabel>Gender</FormLabel>
-                        <FormInput type="select" placeholder="Password">
+                        <FormInput type="select">
                             <option value="1">Male</option>
                             <option value="1">Female</option>
                         </FormInput>
@@ -155,7 +148,7 @@ export class FormsPage extends React.Component<any, IFormsPageState> {
                                     checked={n === this.state.radioSelected}
                                     value={n}
                                     title={`Radio ${n}`}                                   
-                                    onChange={this.onRadioChange.bind(this)}
+                                    onChange={() => {this.onRadioChange(n);}}
                                 />
                             );
                         })
