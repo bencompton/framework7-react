@@ -31,8 +31,8 @@ export interface IFramework7AppContext {
     themeClass: string;
     routes: IFramework7Route[];    
     getFramework7: (callback: (f7: Framework7) => void) => void;
-    onRouteChange: (componentInstance, callback: (route) => void) => void;
-    unregisterRouteChange: (callback: (componentInstance) => void) => void;
+    onRouteChange: (componentId: number, callback: (route: IFramework7Route) => void) => void;
+    unregisterRouteChange: (callback: (componentId: number) => void) => void;
     getCurrentRoute: () => any;
 }
 

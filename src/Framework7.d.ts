@@ -167,10 +167,10 @@ export declare function Dom7(selector: string, context: string): Dom7ReturnObjec
 
 export declare type Template7ReturnObject = {
     compile: (template: string) => void;
-    registerHelper(name: string, helper: () => void);
-    unregisterHelper(name: string);
-    registerPartial(name: string, helper: string);
-    unregisterPartial(name: string);
+    registerHelper: (name: string, helper: () => void) => void;
+    unregisterHelper: (name: string) => void;
+    registerPartial: (name: string, helper: string) => void;
+    unregisterPartial: (name: string) => void;
     global: Object;
 }
 
