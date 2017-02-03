@@ -1,7 +1,7 @@
 ﻿import * as React from 'react';
 
 import Framework7Router from '../../framework7-vue/router';
-import {Framework7, IFramework7Params} from '../Framework7';
+import {Framework7, IFramework7Params, Dom7} from '../Framework7';
 import {applyOverscrollFix} from '../utils/OverscrollFix';
 
 export type ThemeTypeEnum  = 'ios' | 'material';
@@ -34,6 +34,7 @@ export interface IFramework7AppContext {
     onRouteChange: (componentId: number, callback: (route: IFramework7Route) => void) => void;
     unregisterRouteChange: (callback: (componentId: number) => void) => void;
     getCurrentRoute: () => any;
+    getRouter: () => any;
 }
 
 export interface IFramework7AppProps extends IFramework7Params, React.Props<any> {
@@ -49,6 +50,7 @@ export class Framework7App extends React.Component<IFramework7AppProps, Framewor
     private framework7InitCallbacks: ((framework7: Framework7) => void)[] = [];
     private routeChangeCallbacks: any = {};
     private currentRoute;
+    private router;
 
     public static childContextTypes = {
         framework7AppContext: React.PropTypes.object
@@ -65,7 +67,8 @@ export class Framework7App extends React.Component<IFramework7AppProps, Framewor
                 },
                 onRouteChange: this.onRouteChange.bind(this),
                 unregisterRouteChange: this.unregisterRouteChange.bind(this),
-                getCurrentRoute: () => this.currentRoute
+                getCurrentRoute: () => this.currentRoute,
+                getRouter: () => this.router
             }
         };
     }
@@ -88,7 +91,7 @@ export class Framework7App extends React.Component<IFramework7AppProps, Framewor
     private initFramework7() {
         this.framework7 = new Framework7(this.props);
 
-        const router = new Framework7Router(this.props.routes, this.framework7);    
+        const router = this.router = new Framework7Router(this.props.routes, this.framework7, Dom7);    
 
         router.setRouteChangeHandler(route => {
             this.currentRoute = route;      

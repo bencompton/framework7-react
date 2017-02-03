@@ -89,7 +89,7 @@ const generateTypeScriptInterfaceFromProps = (props, componentName, eventList, s
 };
 
 const getEventList = (vueComponentString) => {
-    const regex = new RegExp(/\$emit\(["']([A-Za-z0-9-:]+)["'],/, 'g');
+    const regex = new RegExp(/\$emit\(["']([A-Za-z0-9-:]+)["'],?/, 'g');
     let match;
     const events = [];
 

@@ -32,7 +32,7 @@ export const reactifyF7Vue = <TProps>(args: IReactifyF7VueArgs) => {
         args: {
             ...args.args,
             $$: Dom7,
-            $t7: Template7
+            $t7: Template7            
         },
         mixin: args.mixin
     });
@@ -44,6 +44,12 @@ export const reactifyF7Vue = <TProps>(args: IReactifyF7VueArgs) => {
             framework7AppContext.getFramework7(f7 => {
                 this.framework7 = f7;
             });
+
+            Object.defineProperty(args.component, '$router', {
+                get: framework7AppContext.getRouter,
+                enumerable: true,
+                configurable: true
+            });            
 
             Object.defineProperty(args.component, '$route', {
                 get: framework7AppContext.getCurrentRoute,
