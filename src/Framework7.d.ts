@@ -136,6 +136,8 @@ export declare class Framework7 {
 
     closePanel(side: string): void;
 
+    initPageScrollToolbars(pageContainer: HTMLElement | string): void;
+
     params: IFramework7Params;
 }
 
