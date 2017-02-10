@@ -12,15 +12,15 @@ Firstly, as the author of [Redux points out](https://medium.com/@dan_abramov/you
 
 ## FAQ
 
-### Why does Framework7 React have its own router instead of just using ?
+#### Why does Framework7 React have its own router instead of just using ?
 
 It turned out to be difficult to make the complex iOS page transition animation and page swipe-back functionality play nicely with [React Router](https://github.com/ReactTraining/react-router). While React’s abstracted DOM manipulation works well in most cases, it can actually get in the way when sophisticated animation and complex DOM manipulation are required. In many cases, it is often simpler to just use imperative DOM manipulation code and not even bother trying to coax React into performing such intricate DOM manipulation tasks. As a result, Framework7 React comes with a router that is custom-made to work in harmony with Framework7’s intricate page animation logic.
 
-### Can I use React Router with Framework7 React?
+#### Can I use React Router with Framework7 React?
 
 The short answer is yes, but animated page transitions will not work. It is recommended that you instead use the router that is built into Framework7 React. The goal of the built-in router is to provide everything you need and leave no reason to use React Router. The main missing feature right now is support for the HTML5 History API with the browser back button and URL changes driving route changes, but the router is still a work in progress.
 
-### Should I use React Native or Framework7 React for my project?
+#### Should I use React Native or Framework7 React for my project?
 
 [React Native](https://facebook.github.io/react-native/) is designed for building native apps with React, and often requires writing Objective C, Swift and Java in addition to JavaScript. On the other hand, Framework7 React is designed for building web apps and hybrid apps (with Apache Cordova, etc.) that are virtually indistinguishable from native apps. The main advantages of Framework7 React are:
 
@@ -30,6 +30,6 @@ The short answer is yes, but animated page transitions will not work. It is reco
 
 The main advantage of React Native is of course performance. Framework7 React is very fast, and is a great option in a lot of cases. However, there is no denying that native apps can have superior rendering performance, which is even more noticeable on older, slower devices. If your app has complex screens that must squeeze every last ounce of performance out of every device, but you still want to use React, then it is possible that React Native is a better fit for your project.
 
-### I would like to contribute an enhancement or fix to a component, but I don’t see the React component in the code. What gives?
+#### I would like to contribute an enhancement or fix to a component, but I don’t see the React component in the code. What gives?
 
 Given that [Vue](https://vuejs.org) 2.0 and React are incredibly similar, it was decided that Framework7 React would automatically generate its React components from Framework7 Vue’s components. This makes it super easy to keep the two frameworks in sync and ensure that React and Vue users both get access to the same capabilities. In a nutshell, Vue components have `render` methods just like React components do, and just like in React, Vue component render methods call a `createElement` function and return the created elements for the framework to mount in the DOM and reactively update. Therefore, it is relatively simple to leverage the rendering logic in Vue components by substituting React’s createElement function for Vue’s createElement function. That is the basic principle at least. In practice, there is a bit more to it than that. It works surprisingly well, though, and many hours of testing have shown that rendering performance in Framework7 React is more or less equivalent to Framework7 Vue.
