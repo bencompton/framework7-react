@@ -23,7 +23,7 @@ It turned out to be difficult to make the complex iOS page transition animation 
 
 #### Can I use React Router with Framework7 React?
 
-The short answer is yes, but animated page transitions will not work. It is recommended that you instead use the router that is built into Framework7 React. The goal of the built-in router is to provide everything you need and leave no reason to use React Router. The main missing feature right now is support for the HTML5 History API with the browser back button and URL changes driving route changes, but the router is still a work in progress.
+The short answer is yes, but animated page transitions will not work. It is recommended that you instead use the router that is built into Framework7 React. The router is still a work in progress, but the goal of the built-in router is to provide everything you need and leave no reason to use React Router. One important missing feature right now is support for the HTML5 History API with the browser back button and URL changes driving route changes.
 
 #### Should I use React Native or Framework7 React for my project?
 
