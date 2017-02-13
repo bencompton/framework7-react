@@ -58,20 +58,19 @@ export const createReactElement = (
 
     if (!componentOrComponentName) return null;
 
-    if (args.tag === 'component') {
-        reactElement = React.createElement(componentOrComponentName as React.ComponentClass<any>);
-    } else {
-        let resolvedComponent;
-        
-        resolvedComponent = resolveDependencyComponent(instantiatedComponents, componentOrComponentName as string);               
-        children = flattenNestedArrayOfChildren(children);        
+    let resolvedComponent;
 
-        if (!resolvedComponent) resolvedComponent = componentOrComponentName as React.ComponentClass<any> | React.StatelessComponent<any>;
+    if (args.tag !== 'component') {
+        resolvedComponent = resolveDependencyComponent(instantiatedComponents, componentOrComponentName as string);
+    } 
+    
+    children = flattenNestedArrayOfChildren(children);
 
-        const props = propsProcessor.getProps(args, children, componentOrComponentName, resolvedComponent, vueComponent);
-        
-        reactElement = React.createElement(resolvedComponent, props);
-    }
+    if (!resolvedComponent) resolvedComponent = componentOrComponentName as React.ComponentClass<any> | React.StatelessComponent<any>;
+
+    const props = propsProcessor.getProps(args, children, componentOrComponentName, resolvedComponent, vueComponent);
+    
+    reactElement = React.createElement(resolvedComponent, props);
 
     return reactElement;
 };
