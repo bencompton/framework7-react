@@ -8,6 +8,6 @@
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,        
         "noImplicitAny": false,        
-        "jsx": "react"      
+        "jsx": "react"
     }
 }

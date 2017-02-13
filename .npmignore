@@ -1,5 +1,6 @@
 .gitignore
 gulpfile.js
+tsconfig.json
 src/
 kitchen-sink/
 .vscode/
