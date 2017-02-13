@@ -38,8 +38,5 @@ jspm_packages
 
 typings/
 dist/
-framework7-vue/
-framework7-react/
-kitchen-sink/framework7/
 
 .DS_Store
