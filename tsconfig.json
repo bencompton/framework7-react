@@ -4,11 +4,13 @@
         "module": "commonjs",
         "declaration": true,        
         "sourceMap": true,
+        "moduleResolution": "node",
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,        
-        "noImplicitAny": false,        
-        "jsx": "react",
-        "allowJs": true      
+        "noImplicitAny": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "jsx": "react"
     },
-    "exclude": ["kitchen-sink", "node_modules", "dist"]    
+    "exclude": ["kitchen-sink"]    
 }

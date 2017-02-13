@@ -1,125 +1,125 @@
 export interface IFramework7Params {
-    // Auto init
-    init?: boolean;
-    preroute?: (view: View, params: any) => boolean;
-    root?: string;    
-    cache?: boolean;
-    cacheIgnore?: string[];
-    cacheIgnoreGetParameters?: boolean;
-    cacheDuration?: number;
-    preloadPreviousPage?: boolean;
-    uniqueHistory?: boolean;
-    uniqueHistoryIgnoreGetParameters?: boolean;
-    dynamicPageUrl?: string;
-    allowDuplicateUrls?: boolean;
-    router?: boolean;
-    routerRemoveTimeout?: boolean;
-    routerRemoveWithTimeout?: boolean;
+    root: string;
+    cache: boolean;
+    cacheIgnore: string[];
+    cacheIgnoreGetParameters: boolean;
+    cacheDuration: number;
+    preloadPreviousPage: boolean;
+    uniqueHistory: boolean;
+    uniqueHistoryIgnoreGetParameters: boolean;
+    dynamicPageUrl: string;
+    allowDuplicateUrls: boolean;
+    router: boolean;
+    routerRemoveTimeout: boolean;
+    routerRemoveWithTimeout: boolean;
     // Push State
-    pushState?: boolean;
-    pushStateRoot?: any;
-    pushStateNoAnimation?: boolean;
-    pushStateSeparator?: string;
-    pushStateOnLoad?: boolean;
+    pushState: boolean;
+    pushStateRoot: any;
+    pushStateNoAnimation: boolean;
+    pushStateSeparator: string;
+    pushStateOnLoad: boolean;
     // Fast clicks
-    fastClicks?: boolean;
-    fastClicksDistanceThreshold?: number;
-    fastClicksDelayBetweenClicks?: number;
-    fastClicksExclude?: string;
+    fastClicks: boolean;
+    fastClicksDistanceThreshold: number;
+    fastClicksDelayBetweenClicks: number;
+    fastClicksExclude: string;
     // Tap Hold
-    tapHold?: boolean;
-    tapHoldDelay?: number;
-    tapHoldPreventClicks?: boolean;
+    tapHold: boolean;
+    tapHoldDelay: number;
+    tapHoldPreventClicks: boolean;
     // Active State
-    activeState?: boolean;
-    activeStateElements?: string;
+    activeState: boolean;
+    activeStateElements: string;
     // Animate Nav Back Icon
-    animateNavBackIcon?: boolean;
+    animateNavBackIcon: boolean;
     // Swipe Back
-    swipeBackPage?: boolean;
-    swipeBackPageThreshold?: number;
-    swipeBackPageActiveArea?: number;
-    swipeBackPageAnimateShadow?: boolean;
-    swipeBackPageAnimateOpacity?: boolean;
+    swipeBackPage: boolean;
+    swipeBackPageThreshold: number;
+    swipeBackPageActiveArea: number;
+    swipeBackPageAnimateShadow: boolean;
+    swipeBackPageAnimateOpacity: boolean;
     // Ajax
-    ajaxLinks?: string; // or CSS selector
+    ajaxLinks: string; // or CSS selector
     // External Links
-    externalLinks?: string; // CSS selector
+    externalLinks: string; // CSS selector
     // Sortable
-    sortable?: boolean;
+    sortable: boolean;
     // Scroll toolbars
-    hideNavbarOnPageScroll?: boolean;
-    hideToolbarOnPageScroll?: boolean;
-    hideTabbarOnPageScroll?: boolean;
-    showBarsOnPageScrollEnd?: boolean;
-    showBarsOnPageScrollTop?: boolean;
+    hideNavbarOnPageScroll: boolean;
+    hideToolbarOnPageScroll: boolean;
+    hideTabbarOnPageScroll: boolean;
+    showBarsOnPageScrollEnd: boolean;
+    showBarsOnPageScrollTop: boolean;
     // Swipeout
-    swipeout?: boolean;
-    swipeoutActionsNoFold?: boolean;
-    swipeoutNoFollow?: boolean;
-    swipeoutRemoveWithTimeout?: boolean;
+    swipeout: boolean;
+    swipeoutActionsNoFold: boolean;
+    swipeoutNoFollow: boolean;
+    swipeoutRemoveWithTimeout: boolean;
     // Smart Select Back link template
-    smartSelectOpenIn?: string; // or 'popup' or 'picker'
-    smartSelectBackText?: string;
-    smartSelectPopupCloseText?: string;
-    smartSelectPickerCloseText?: string;
-    smartSelectSearchbar?: boolean;
-    smartSelectBackOnSelect?: boolean;
+    smartSelectOpenIn: string; // or 'popup' or 'picker'
+    smartSelectBackText: string;
+    smartSelectPopupCloseText: string;
+    smartSelectPickerCloseText: string;
+    smartSelectSearchbar: boolean;
+    smartSelectBackOnSelect: boolean;
     // Tap Navbar or Statusbar to scroll to top
-    scrollTopOnNavbarClick?: boolean;
-    scrollTopOnStatusbarClick?: boolean;
+    scrollTopOnNavbarClick: boolean;
+    scrollTopOnStatusbarClick: boolean;
     // Panels
-    swipePanel?: boolean; // or 'left' or 'right'
-    swipePanelActiveArea?: number;
-    swipePanelCloseOpposite?: boolean;
-    swipePanelOnlyClose?: boolean;
-    swipePanelNoFollow?: boolean;
-    swipePanelThreshold?: number;
-    panelsCloseByOutside?: boolean;
+    swipePanel: boolean; // or 'left' or 'right'
+    swipePanelActiveArea: number;
+    swipePanelCloseOpposite: boolean;
+    swipePanelOnlyClose: boolean;
+    swipePanelNoFollow: boolean;
+    swipePanelThreshold: number;
+    panelsCloseByOutside: boolean;
     // Modals
-    modalButtonOk?: string;
-    modalButtonCancel?: string;
-    modalUsernamePlaceholder?: string;
-    modalPasswordPlaceholder?: string;
-    modalTitle?: string;
-    modalCloseByOutside?: boolean;
-    actionsCloseByOutside?: boolean;
-    popupCloseByOutside?: boolean;
-    modalPreloaderTitle?: string;
-    modalStack?: boolean;
+    modalButtonOk: string;
+    modalButtonCancel: string;
+    modalUsernamePlaceholder: string;
+    modalPasswordPlaceholder: string;
+    modalTitle: string;
+    modalCloseByOutside: boolean;
+    actionsCloseByOutside: boolean;
+    popupCloseByOutside: boolean;
+    modalPreloaderTitle: string;
+    modalStack: boolean;
     // Lazy Load
-    imagesLazyLoadThreshold?: number;
-    imagesLazyLoadSequential?: boolean;
+    imagesLazyLoadThreshold: number;
+    imagesLazyLoadSequential: boolean;
     // Name space
-    viewClass?: string;
-    viewMainClass?: string;
-    viewsClass?: string;
+    viewClass: string;
+    viewMainClass: string;
+    viewsClass: string;
     // Notifications defaults
-    notificationCloseOnClick?: boolean;
-    notificationCloseIcon?: boolean;
-    notificationCloseButtonText?: string;
+    notificationCloseOnClick: boolean;
+    notificationCloseIcon: boolean;
+    notificationCloseButtonText: string;
     // Animate Pages
-    animatePages?: boolean;
+    animatePages: boolean;
     // Template7
-    templates?: Object;
-    template7Data?: Object;
-    template7Pages?: boolean;
-    precompileTemplates?: boolean;
+    templates: Object;
+    template7Data: Object;
+    template7Pages: boolean;
+    precompileTemplates: boolean;
     // Material
-    material?: boolean;
-    materialPageLoadDelay?: number;
-    materialPreloaderSvg?: string;
-    materialPreloaderHtml?: string;
-    materialRipple?: boolean;
-    materialRippleElements?: string;
+    material: boolean;
+    materialPageLoadDelay: number;
+    materialPreloaderSvg: string;
+    materialPreloaderHtml: string;
+    materialRipple: boolean;
+    materialRippleElements: string;
+    // Auto init
+    init: boolean;
+    preroute: Function;
 }
 
 export declare class Framework7 {
     constructor(params?: IFramework7Params);
 
-    addView(viewElement: HTMLElement, viewParams: any): View;
+    public addView(viewElement: HTMLElement, viewParams: any): View;
 
-    modal(parameters?: {
+    public modal(parameters?: {
         title?: string;
         text?: string;
         afterText?: string;
@@ -128,23 +128,13 @@ export declare class Framework7 {
         onClick?: (modalElement: HTMLElement, index: number) => void;
     }): HTMLElement;
 
-    closeModal(modalElement: HTMLElement | string): void;
+    public closeModal(modalElement: HTMLElement | string): void;
 
-    sizeNavbars(): void;
-
-    openPanel(side: string): void;
-
-    closePanel(side: string): void;
-
-    initPageScrollToolbars(pageContainer: HTMLElement | string): void;
-
-    params: IFramework7Params;
+    public params: IFramework7Params;
 }
 
 export declare class View {
-    public destroy: () => void;
-    public pagesContainer: HTMLElement;
-    public router: any;
+    public dynamicNavbar: boolean;
 }
 
 export interface IButton {
@@ -153,27 +143,3 @@ export interface IButton {
     close?: boolean;
     onClick?: () => void;
 }
-
-export declare class VirtualList {
-    destroy: () => void;
-}
-
-export declare type Dom7ReturnObject = {
-    length: number;
-    insertBefore: (element: HTMLElement) => void;
-    addClass: (classes: string) => void;
-}
-
-export declare function Dom7(selector: string): Dom7ReturnObject;
-export declare function Dom7(selector: string, context: string): Dom7ReturnObject;
-
-export declare type Template7ReturnObject = {
-    compile: (template: string) => void;
-    registerHelper: (name: string, helper: () => void) => void;
-    unregisterHelper: (name: string) => void;
-    registerPartial: (name: string, helper: string) => void;
-    unregisterPartial: (name: string) => void;
-    global: Object;
-}
-
-export declare function Template7(): Template7ReturnObject
