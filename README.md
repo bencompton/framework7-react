@@ -9,7 +9,7 @@ npm install framework7-react
 ```
 
 
-Official docs are coming soon. For now, check out the kitchen sink for an example of how to consume Framework7 React.
+Official docs are coming soon. For now, check out the [kitchen sink](https://github.com/bencompton/framework7-react/tree/f7-router/kitchen-sink) for an example of how to consume Framework7 React.
 
 ## Usage with Redux
 
@@ -30,7 +30,7 @@ The short answer is yes, but animated page transitions will not work. It is reco
 [React Native](https://facebook.github.io/react-native/) is designed for building native apps with React, and often requires writing Objective C, Swift and Java in addition to JavaScript. On the other hand, Framework7 React is designed for building web apps and hybrid apps (with Apache Cordova, etc.) that are virtually indistinguishable from native apps. The main advantages of Framework7 React are:
 
 1. Ability to create mobile apps with a web development skill set (HTML, CSS, JavaScript) with no need to write Objective C, Swift or Java
-2. Apps that can run in any device with a browser, not just iOS or Android devices
+2. Apps that can run on any device with a browser, not just iOS or Android devices
 3. Option to install your app from a website or use it directly in a browser instead of installing from an app store
 
 The main advantage of React Native is of course performance. Framework7 React is very fast, and is a great option in a lot of cases. However, there is no denying that native apps can have superior rendering performance, which is even more noticeable on older, slower devices. If your app has complex screens that must squeeze every last ounce of performance out of every device, but you still want to use React, then it is possible that React Native is a better fit for your project.
