@@ -9,7 +9,7 @@ npm install framework7-react
 ```
 
 
-Official docs are coming soon. For now, check out the [kitchen sink](https://github.com/bencompton/framework7-react/tree/f7-router/kitchen-sink) for an example of how to consume Framework7 React.
+Official docs are coming soon. For now, check out the [kitchen sink](https://github.com/bencompton/framework7-react/tree/master/kitchen-sink) for an example of how to consume Framework7 React.
 
 ## Usage with Redux
 
