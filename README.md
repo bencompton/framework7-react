@@ -4,7 +4,12 @@
 
 ## Getting started
 
-TODO
+```
+npm install framework7-react
+```
+
+
+Official docs are coming soon. For now, check out the kitchen sink for an example of how to consume Framework7 React.
 
 ## Usage with Redux
 
@@ -12,7 +17,7 @@ Firstly, as the author of [Redux points out](https://medium.com/@dan_abramov/you
 
 ## FAQ
 
-#### Why does Framework7 React have its own router instead of just using ?
+#### Why does Framework7 React have its own router instead of just using React Router?
 
 It turned out to be difficult to make the complex iOS page transition animation and page swipe-back functionality play nicely with [React Router](https://github.com/ReactTraining/react-router). While React’s abstracted DOM manipulation works well in most cases, it can actually get in the way when sophisticated animation and complex DOM manipulation are required. In many cases, it is often simpler to just use imperative DOM manipulation code and not even bother trying to coax React into performing such intricate DOM manipulation tasks. As a result, Framework7 React comes with a router that is custom-made to work in harmony with Framework7’s intricate page animation logic.
 
