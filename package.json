@@ -1,7 +1,7 @@
 {
   "name": "framework7-react",
-  "version": "0.8.2",
-  "description": "A library of React components that leverages Framework7 HTML + CSS",
+  "version": "0.8.2-beta-1",
+  "description": "A React version of Framework7",
   "main": "dist/framework7-react/index.js",
   "typings": "dist/framework7-react/index.d.ts",
   "directories": {
