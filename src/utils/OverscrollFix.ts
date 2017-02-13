@@ -1,10 +1,10 @@
 ﻿export const applyOverscrollFix = () => {
-    let touchTarget: HTMLElement;
-    let touchScreenX: number;
-    let touchScreenY: number;
-    let conditionParentUntilTrue: any;
-    let disableScroll: boolean;
-    let scrollMap: any;
+    let touchTarget: HTMLElement,
+        touchScreenX: number,
+        touchScreenY: number,
+        conditionParentUntilTrue: any,
+        disableScroll: boolean,
+        scrollMap: any;
 
     conditionParentUntilTrue = (element: HTMLElement, condition: any) => {
         let outcome: boolean = false;
@@ -25,7 +25,7 @@
     window.addEventListener('touchstart', (e: any) => {
         touchTarget = e.targetTouches[0].target;
         // a boolean map indicating if the element (or either of element parents, excluding the document.body) can be scrolled to the X direction.
-        scrollMap = {};
+        scrollMap = {}
 
         scrollMap.left = conditionParentUntilTrue(touchTarget, (element: HTMLElement) => {
             return element.scrollLeft > 0;
@@ -51,8 +51,8 @@
     });
 
     window.addEventListener('touchmove', (e: any) => {
-        let moveScreenX: number;
-        let moveScreenY: number;
+        let moveScreenX: number,
+            moveScreenY: number;
 
         if (disableScroll) {
             e.preventDefault();

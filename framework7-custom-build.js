@@ -3,7 +3,27 @@ var fw7ModulesConfig = require('framework7/modules.json');
 
 //Include any component you wish to use in the app from Framework7.
 //Listing of components can be found here...http://framework7.io/docs/custom-build.html.
-var fw7ModulesBeingUsed = ['fast-clicks', 'modals'];
+var fw7ModulesBeingUsed = [
+    'accordion',
+    'cards',
+    'fast-clicks',
+    'forms',
+    'infinite-scroll',
+    'messages',
+    'modals',
+    'photo-browser',
+    'picker',
+    'pull-to-refresh',
+    'push-state',
+    'searchbar',
+    'scroll-toolbars',
+    'smart-select',
+    'sortable',
+    'swipeout',
+    'swiper',
+    'tabs',
+    'virtual-list'
+];
 
 //Prefix framework7 file paths with base path because their files are listed as paths relative to the node module.
 //For example: 'src/js/f7-intro.js'...needs to be node_modules/framework7/src/js/f7-intro.js instead so our build process will know where to find the files.
@@ -67,7 +87,7 @@ function getAllFw7ModulesAndDependenciesBeingUsed() {
 function getFw7CustomDependencies() {
     var fw7CustomDependencies = [];
 
-    for (i = 0; i < fw7ModulesBeingUsed.length; i++) {
+    for (let i = 0; i < fw7ModulesBeingUsed.length; i++) {
         var module = fw7ModulesConfig[fw7ModulesBeingUsed[i]];
 
         fw7CustomDependencies.push.apply(fw7CustomDependencies, module.dependencies);

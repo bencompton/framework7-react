@@ -1,46 +1,29 @@
 import * as React from 'react';
-import {Page, Navbar, Left, Right, Center, ColorsEnum, PageBody, PageContent, ContentBlock, ListBlock, ListItem, Icon, BackButton, ProgressBar} from 'framework7-react';
+import {Page, Navbar, ContentBlockTitle, List, ListItem, Progressbar} from 'framework7-react';
 
-import {routeState} from '../../utils/RouteState';
-
-export const ProgressBarPage = () => {
+export const ProgressbarPage = () => {
     return (
-        <Page name="buttons">
-            <Navbar>
-                <Left><BackButton onClick={() => routeState.navigate('/', true)} /></Left>
-                <Center>Progress Bar</Center>
-                <Right />
-            </Navbar>
-            <PageBody>
-                <PageContent>
-                    <ContentBlock>
-                        <p>
-                            Framework7 has two different styles of progress bars...determinate
-                            (accepts a progress percentage number to update itself) and indeterminate/infinite
-                            (when no progress number can be calculated) to indicate activity:
-                        </p>
-                    </ContentBlock>
-                    <ListBlock title="Determinate progress bars:">
-                        <ListItem>
-                            <ProgressBar infinite={false} progress={25} color={ColorsEnum.Blue} />
-                        </ListItem>
-                        <ListItem>
-                            <ProgressBar infinite={false} progress={50} color={ColorsEnum.Red} />
-                        </ListItem>
-                        <ListItem>
-                            <ProgressBar infinite={false} progress={75} color={ColorsEnum.Green} />
-                        </ListItem>
-                        <ListItem>
-                            <ProgressBar infinite={false} progress={100} color={ColorsEnum.Orange} />
-                        </ListItem>
-                    </ListBlock>
-                    <ListBlock title="Infinite/Indeterminate progress bar:">
-                        <ListItem>
-                            <ProgressBar infinite={true} color={ColorsEnum.Multi} />
-                        </ListItem>
-                    </ListBlock>
-                </PageContent>
-            </PageBody>
+        <Page>
+            <Navbar backLink="Back" title="Progress Bar" sliding />
+
+            <ContentBlockTitle>Progressbar</ContentBlockTitle>
+            <List>
+                <ListItem>
+                    <Progressbar progress={20} />
+                </ListItem>
+                <ListItem>
+                    <Progressbar progress={50} color="red" />
+                </ListItem>
+                <ListItem>
+                    <Progressbar progress={70} color="green" />
+                </ListItem>
+                <ListItem>
+                    <Progressbar infinite color="blue" />
+                </ListItem>
+                <ListItem>
+                    <Progressbar infinite color="multi" />
+                </ListItem>
+            </List>
         </Page>
     );
-};
+}
