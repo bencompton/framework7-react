@@ -16,13 +16,26 @@
     "type": "git",
     "url": "git+https://github.com/bencompton/framework7-react.git"
   },
-  "keywords": [
-    "framework7",
+  "keywords": [    
     "react",
+    "reactjs",    
+    "mobile",
+    "framework",
+    "framework7",
+    "ios",
+    "iphone",
+    "ipad",
+    "apple",
+    "phonegap",
+    "touch",
+    "app",
+    "f7",
+    "material",
+    "android",
     "typescript"
   ],
   "author": "Ben Compton",
-  "license": "MIT",
+  "license": "APACHE 2.0",
   "bugs": {
     "url": "https://github.com/bencompton/framework7-react/issues"
   },
