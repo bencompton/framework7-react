@@ -13,7 +13,7 @@ Official docs are coming soon. For now, check out the [kitchen sink code](https:
 
 ## Usage with Redux
 
-Firstly, the creator of [Redux points out](https://medium.com/@dan_abramov/you-might-not-need-redux-be46360cf367#.nfg6gm6yl), Redux is not a requirement for building apps with React. In turn, Redux is not a requirement for building apps with Framework7 React—it is designed to be perfectly usable either way. However, as your app grows beyond a certain level of complexity, it is definitely recommended that you consider Redux (or some other state management library like [MobX](https://github.com/mobxjs/mobx)). For more information about using Redux with Framework7 React, have a look at [Framework7 Redux](https://github.com/bencompton/framework7-redux).
+Firstly, as the creator of [Redux points out](https://medium.com/@dan_abramov/you-might-not-need-redux-be46360cf367#.nfg6gm6yl), Redux is not a requirement for building apps with React. In turn, Redux is not a requirement for building apps with Framework7 React—it is designed to be perfectly usable either way. However, as your app grows beyond a certain level of complexity, it is definitely recommended that you consider Redux (or some other state management library like [MobX](https://github.com/mobxjs/mobx)). For more information about using Redux with Framework7 React, have a look at [Framework7 Redux](https://github.com/bencompton/framework7-redux).
 
 ## FAQ
 
