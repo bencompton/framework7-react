@@ -2,10 +2,12 @@
 
 [Framework7](http://framework7.io) is a JavaScript framework for building iOS and Material web and hybrid apps that are virtually indistinguishable from native apps. Framework7 React brings the attention to detail, ease of use, and great features of Framework7 to React. To see it in action, have a look at the [kitchen sink](https://bencompton.github.io/framework7-react/).
 
+Note that Framework7 React is still very new, so more complex examples beyond the kitchen sink aren't available yet. In the meantime, if you're new to Framework7, you should have a look at the [full iOS / Material Design kitchen sinks](http://framework7.io), [the demo apps](http://framework7.io/apps/), and [the example layouts](http://framework7.io/examples/) to get a feel for Framework7 and what is possible.
+
 ## Getting started
 
 ```
-npm install framework7-react
+npm install --save framework7-react
 ```
 
 
@@ -34,6 +36,10 @@ The short answer is yes, but animated page transitions will not work. It is reco
 3. Option to install your app from a website or use it directly in a browser instead of installing from an app store
 
 The main advantage of React Native is of course performance. Framework7 React is very fast, and is a great option in a lot of cases. However, there is no denying that native apps can have superior rendering performance, which is even more noticeable on older, slower devices. If your app has complex screens that must squeeze every last ounce of performance out of every device, but you still want to use React, then it is possible that React Native is a better fit for your project.
+
+#### Why should I use Framework7 React instead of React library XYZ?
+
+The main motivation for creating Framework7 React was the lack of React libraries that convincingly recreate the look and feel of iOS and Material in pixel-perfect detail with realistic animations, gestures, etc. If you want the benefits of a web app without having your app look like a web app, then Framework7 React might be a good choice for your project.
 
 #### I would like to contribute an enhancement or fix to a component, but I don’t see the React component in the code. What gives?
 
