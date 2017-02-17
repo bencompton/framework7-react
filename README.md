@@ -2,18 +2,49 @@
 
 [Framework7](http://framework7.io) is a JavaScript framework for building iOS and Material web and hybrid apps that are virtually indistinguishable from native apps. Framework7 React brings the attention to detail, ease of use, and great features of Framework7 to React. To see it in action, have a look at the [kitchen sink](https://bencompton.github.io/framework7-react/).
 
+Note that Framework7 React is still very new, so more complex examples beyond the kitchen sink aren't available yet. In the meantime, if you're new to Framework7, you should have a look at the [full iOS / Material Design kitchen sinks](http://framework7.io), [the demo apps](http://framework7.io/apps/), and [the example layouts](http://framework7.io/examples/) to get a feel for Framework7 and what is possible.
+
 ## Getting started
 
 ```
-npm install framework7-react
+npm install --save framework7-react
 ```
 
 
 Official docs are coming soon. For now, check out the [kitchen sink code](https://github.com/bencompton/framework7-react/tree/master/kitchen-sink) for an example of how to consume Framework7 React.
 
+## Building + running the kitchen sink
+
+Ensure that [gulp](https://www.npmjs.com/package/gulp) and [typings](https://www.npmjs.com/package/typings) are installed globally, then run the following:
+
+To build the framework itself:
+
+```javascript
+npm install
+typings install
+gulp
+```
+
+To build the kitchen sink:
+
+```javascript
+cd kitchen-sink
+npm install
+typings install
+gulp
+```
+
+Here's a shortcut for building both after the above two steps have already been completed at least once:
+
+```javascript
+npm run build
+```
+
+Once the framework and kitchen sink are built, run the kitchen sink by launching kitchen-sink/index.html in a browser.
+
 ## Usage with Redux
 
-Firstly, as the author of [Redux points out](https://medium.com/@dan_abramov/you-might-not-need-redux-be46360cf367#.nfg6gm6yl), Redux is not a requirement for building apps with React. In turn, Redux is not a requirement for building apps with Framework7 React—it is designed to be perfectly usable either way. However, as your app grows beyond a certain level of complexity, it is definitely recommended that you consider Redux (or some other state management library like [MobX](https://github.com/mobxjs/mobx)). For more information about using Redux with Framework7 React, have a look at [Framework7 Redux](https://github.com/bencompton/framework7-redux).
+Firstly, as the creator of [Redux points out](https://medium.com/@dan_abramov/you-might-not-need-redux-be46360cf367#.nfg6gm6yl), Redux is not a requirement for building apps with React. In turn, Redux is not a requirement for building apps with Framework7 React—it is designed to be perfectly usable either way. However, as your app grows beyond a certain level of complexity, it is definitely recommended that you consider Redux (or some other state management library like [MobX](https://github.com/mobxjs/mobx)). For more information about using Redux with Framework7 React, have a look at [Framework7 Redux](https://github.com/bencompton/framework7-redux).
 
 ## FAQ
 
@@ -23,7 +54,7 @@ It turned out to be difficult to make the complex iOS page transition animation 
 
 #### Can I use React Router with Framework7 React?
 
-The short answer is yes, but animated page transitions will not work. It is recommended that you instead use the router that is built into Framework7 React. The goal of the built-in router is to provide everything you need and leave no reason to use React Router. The main missing feature right now is support for the HTML5 History API with the browser back button and URL changes driving route changes, but the router is still a work in progress.
+The short answer is yes, but animated page transitions will not work. It is recommended that you instead use the router that is built into Framework7 React. The router is still a work in progress, but the goal of the built-in router is to provide everything you need and leave no reason to use React Router. One important missing feature right now is support for the HTML5 History API with the browser back button and URL changes driving route changes.
 
 #### Should I use React Native or Framework7 React for my project?
 
@@ -34,6 +65,10 @@ The short answer is yes, but animated page transitions will not work. It is reco
 3. Option to install your app from a website or use it directly in a browser instead of installing from an app store
 
 The main advantage of React Native is of course performance. Framework7 React is very fast, and is a great option in a lot of cases. However, there is no denying that native apps can have superior rendering performance, which is even more noticeable on older, slower devices. If your app has complex screens that must squeeze every last ounce of performance out of every device, but you still want to use React, then it is possible that React Native is a better fit for your project.
+
+#### Why should I use Framework7 React instead of React library XYZ?
+
+The main motivation for creating Framework7 React was the lack of React libraries that convincingly recreate the look and feel of iOS and Material in pixel-perfect detail with realistic animations, gestures, etc. If you want the benefits of a web app without having your app look like a web app, then Framework7 React might be a good choice for your project.
 
 #### I would like to contribute an enhancement or fix to a component, but I don’t see the React component in the code. What gives?
 
