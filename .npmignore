@@ -5,3 +5,6 @@ src/
 kitchen-sink/
 .vscode/
 framework7-custom-build.js
+framework7-react-component-gen.js
+framework7-vue/
+framework7-react/

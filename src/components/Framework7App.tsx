@@ -43,6 +43,7 @@ export interface IFramework7AppProps extends IFramework7Params, React.Props<any>
     routes: IFramework7Route[];
     onFramework7Init?: (framework7: Framework7) => void;
     onRouteChange?: (route: IFramework7Route) => void;
+    stateKernel?: { setFramework7: (f7: any) => void; setRouter: (router: any) => void; }
 }
 
 export class Framework7App extends React.Component<IFramework7AppProps, Framework7> {        
@@ -115,6 +116,11 @@ export class Framework7App extends React.Component<IFramework7AppProps, Framewor
         this.framework7InitCallbacks.forEach(callback => {
             callback(this.framework7);
         });
+
+        if (this.props.stateKernel) {
+            this.props.stateKernel.setFramework7(this.framework7);
+            this.props.stateKernel.setRouter(this.router);
+        }
     }
 
     private getFramework7(callback: (framework7: Framework7) => void) {
