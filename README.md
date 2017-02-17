@@ -13,6 +13,35 @@ npm install --save framework7-react
 
 Official docs are coming soon. For now, check out the [kitchen sink code](https://github.com/bencompton/framework7-react/tree/master/kitchen-sink) for an example of how to consume Framework7 React.
 
+## Building + running the kitchen sink
+
+Ensure that [gulp](https://www.npmjs.com/package/gulp) and [typings](https://www.npmjs.com/package/typings) are installed globally, then run the following:
+
+To build the framework itself:
+
+```javascript
+npm install
+typings install
+gulp
+```
+
+To build the kitchen sink:
+
+```javascript
+cd kitchen-sink
+npm install
+typings install
+gulp
+```
+
+Here's a shortcut for building both after the above two steps have already been completed at least once:
+
+```javascript
+npm run build
+```
+
+Once the framework and kitchen sink are built, run the kitchen sink by launching kitchen-sink/index.html in a browser.
+
 ## Usage with Redux
 
 Firstly, as the creator of [Redux points out](https://medium.com/@dan_abramov/you-might-not-need-redux-be46360cf367#.nfg6gm6yl), Redux is not a requirement for building apps with React. In turn, Redux is not a requirement for building apps with Framework7 React—it is designed to be perfectly usable either way. However, as your app grows beyond a certain level of complexity, it is definitely recommended that you consider Redux (or some other state management library like [MobX](https://github.com/mobxjs/mobx)). For more information about using Redux with Framework7 React, have a look at [Framework7 Redux](https://github.com/bencompton/framework7-redux).
