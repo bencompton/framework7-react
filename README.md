@@ -6,14 +6,11 @@ Note that Framework7 React is still very new, so more complex examples beyond th
 
 ## Getting started
 
-```
-npm install --save framework7-react
-```
+[Starter template](https://github.com/bencompton/framework7-react-app-template)
 
+Official docs are coming soon.
 
-Official docs are coming soon. For now, check out the [kitchen sink code](https://github.com/bencompton/framework7-react/tree/master/kitchen-sink) for an example of how to consume Framework7 React.
-
-## Building + running the kitchen sink
+## Kitchen Sink
 
 Ensure that [gulp](https://www.npmjs.com/package/gulp) and [typings](https://www.npmjs.com/package/typings) are installed globally, then run the following:
 
