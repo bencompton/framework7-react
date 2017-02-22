@@ -1,3 +1,5 @@
+import * as React from 'react';
+
 import {camelCase} from 'change-case';
 
 const handleStateSet = (stateObject, key, value, vueComponent, self) => {
@@ -65,7 +67,7 @@ export const convertVueComponentToClass = (vueComponentObject) => {
     Object.defineProperty(vueComponentClass.prototype, '$children', {
         get: function ()  {
             const parentElement = this.$el;
-            return this.children.map((element, index) => {
+            return React.Children.toArray(this.children).map((element: any, index) => {
                 return {...element, $el: parentElement.children[index]};
             });
         },
