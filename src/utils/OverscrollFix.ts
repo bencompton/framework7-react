@@ -28,21 +28,29 @@
         scrollMap = {}
 
         scrollMap.left = conditionParentUntilTrue(touchTarget, (element: HTMLElement) => {
-            return element.scrollLeft > 0;
+            return element.scrollLeft > 0 && 
+                (window.getComputedStyle(element).overflow !== "hidden") && 
+               (window.getComputedStyle(element).overflowX !== "hidden");
         });
 
         scrollMap.top = conditionParentUntilTrue(touchTarget, (element: HTMLElement) => {
-            return element.scrollTop > 0;
+            return element.scrollTop > 0 && 
+                (window.getComputedStyle(element).overflow !== "hidden") && 
+                (window.getComputedStyle(element).overflowY !== "hidden");
         });
 
         scrollMap.right = conditionParentUntilTrue(touchTarget, (element: HTMLElement) => {
             return element.scrollWidth > element.clientWidth &&
-                element.scrollWidth - element.clientWidth > element.scrollLeft;
+                element.scrollWidth - element.clientWidth > element.scrollLeft && 
+               (window.getComputedStyle(element).overflow !== "hidden") && 
+                (window.getComputedStyle(element).overflowX !== "hidden");
         });
 
         scrollMap.bottom = conditionParentUntilTrue(touchTarget, (element: HTMLElement) => {
             return element.scrollHeight > element.clientHeight &&
-                element.scrollHeight - element.clientHeight > element.scrollTop;
+                element.scrollHeight - element.clientHeight > element.scrollTop && 
+                (window.getComputedStyle(element).overflow !== "hidden") && 
+                (window.getComputedStyle(element).overflowY !== "hidden");
         });
 
         touchScreenX = e.targetTouches[0].screenX;
@@ -67,7 +75,7 @@
             moveScreenX > touchScreenX && scrollMap.left ||
             moveScreenY < touchScreenY && scrollMap.bottom ||
             moveScreenX < touchScreenX && scrollMap.right ||
-            moveScreenY > touchScreenY && scrollMap.top
+            moveScreenY > touchScreenY && scrollMap.top 
         ) {
             // You are scrolling either the element or its parent.
             // This will not affect document.body scroll.

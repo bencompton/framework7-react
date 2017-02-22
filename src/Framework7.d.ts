@@ -132,9 +132,9 @@ export declare class Framework7 {
 
     sizeNavbars(): void;
 
-    openPanel(side: string): void;
+    openPanel(animate: boolean): void;
 
-    closePanel(side: string): void;
+    closePanel(animate: boolean): void;
 
     initPageScrollToolbars(pageContainer: HTMLElement | string): void;
 
