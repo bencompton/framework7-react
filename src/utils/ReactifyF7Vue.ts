@@ -75,13 +75,12 @@ export const reactifyF7Vue = <TProps>(args: IReactifyF7VueArgs) => {
 
         render: function() {
             const props = this.props;
-
+            const framework7AppContext = (this.context as any).framework7AppContext as IFramework7AppContext;
+            
             const innerEl = React.createElement(innerComponent, {
                 ...props,
-                $theme: { material: false, ios: true },
+                $theme: framework7AppContext.theme,
                 __onMount: (self) => {
-                    const framework7AppContext = (this.context as any).framework7AppContext as IFramework7AppContext;
-
                     framework7AppContext.getFramework7(f7 => {
                         if (self.vueComponent.onF7Init) {
                             self.vueComponent.onF7Init(f7);
