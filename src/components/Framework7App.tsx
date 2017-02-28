@@ -27,8 +27,7 @@ export interface IFramework7AppContext {
     theme: {
         material: boolean;
         ios: boolean;
-    },
-    themeClass: string;
+    },    
     routes: IFramework7Route[];    
     getFramework7: (callback: (f7: Framework7) => void) => void;
     onRouteChange: (componentId: number, callback: (route: IFramework7Route) => void) => void;
@@ -60,7 +59,6 @@ export class Framework7App extends React.Component<IFramework7AppProps, Framewor
     public getChildContext() {
         return {
             framework7AppContext: {
-                themeType: this.props.themeType,
                 getFramework7: this.getFramework7.bind(this),                
                 theme: {
                     ios: this.props.themeType === 'ios',
