@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import {camelCase} from 'change-case';
 
-const handleStateSet = (stateObject, key, value, vueComponent, self) => {
+const handleStateSet = (stateObject, key, value, vueComponent, self, deleteMode) => {
     const stateKey = Object.keys(self.state).reduce((macthingStateKey, nextKey) => {
         if (self.state[nextKey] === stateObject) {
             return nextKey;
@@ -11,15 +11,30 @@ const handleStateSet = (stateObject, key, value, vueComponent, self) => {
         }
     }, null);  
 
-    const newState = {
-        ...self.state,
-        [stateKey]: {
-            ...self.state[stateKey],
-            [key]: value
-        }
-    };
+    let newState;
 
-    vueComponent[stateKey] = newState[stateKey];
+    if (deleteMode) {
+        newState = {
+            ...self.state
+        };
+
+        delete newState[stateKey][key];
+    } else {
+        newState = {
+            ...self.state,
+            [stateKey]: {
+                ...self.state[stateKey],
+                [key]: value
+            }
+        };
+    }
+
+    if (deleteMode) {
+        delete vueComponent[stateKey][key];
+    } else {
+        vueComponent[stateKey] = newState[stateKey];
+    }
+        
     self.setState(newState);
 };
 
@@ -95,7 +110,12 @@ export const convertVueComponentToClass = (vueComponentObject) => {
 
     vueComponentClass.prototype.$set = function (stateObject, key, value) {
         this.reactComponentInstance.hasUnrenderedStateChanges = true;
-        handleStateSet(stateObject, key, value, this, this.reactComponentInstance);                        
+        handleStateSet(stateObject, key, value, this, this.reactComponentInstance, false);
+    };
+
+    vueComponentClass.prototype.$delete = function (stateObject, key) {
+        this.reactComponentInstance.hasUnrenderedStateChanges = true;
+        handleStateSet(stateObject, key, null, this, this.reactComponentInstance, true);
     };
 
     return vueComponentClass;
