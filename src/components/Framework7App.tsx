@@ -107,7 +107,9 @@ export class Framework7App extends React.Component<IFramework7AppProps, Framewor
                 if (this.routeChangeCallbacks[componentId]) {                    
                     this.routeChangeCallbacks[componentId](route);                                       
                 }                
-            });            
+            });
+
+            return false;           
         });            
 
         if (this.props.onFramework7Init) {
