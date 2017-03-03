@@ -23,7 +23,7 @@ export class SelectableInput extends React.Component<ISelectableInputProps, any>
             if (this.element) {
                 this.element.checked = this.props.checked;
             }
-        }, 50);
+        });
     }
 
     public render() {
