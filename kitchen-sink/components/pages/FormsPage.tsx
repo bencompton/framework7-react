@@ -11,6 +11,7 @@ const pStyle = {margin: '1em 0'};
 export interface IFormsPageState {
     birthDate: string;
     radioSelected: number;
+    name: string;
 }
 
 export class FormsPage extends React.Component<any, IFormsPageState> {
@@ -21,7 +22,8 @@ export class FormsPage extends React.Component<any, IFormsPageState> {
 
         this.state = {
             birthDate: '2014-04-30',
-            radioSelected: 1
+            radioSelected: 1,
+            name: ''
         }
 
         this.fw7 = getFramework7();
@@ -34,6 +36,20 @@ export class FormsPage extends React.Component<any, IFormsPageState> {
         });
     }
 
+    private onBirthDateChange(event, value) {
+        this.setState({
+           ...this.state,
+           birthDate: value 
+        });
+    }
+
+    private onNameChange(event) {
+        this.setState({
+            ...this.state,
+            name: event.target.value
+        });
+    }
+
     render() {
         return (
             <Page>
@@ -43,7 +59,7 @@ export class FormsPage extends React.Component<any, IFormsPageState> {
                 <List form>
                     <ListItem>
                         <FormLabel>Name</FormLabel>  
-                        <FormInput type="text" placeholder="Name" />   
+                        <FormInput type="text" placeholder="Name" onChange={this.onNameChange.bind(this)} value={this.state.name}/>   
                     </ListItem>
                     <ListItem>
                         <FormLabel>Password</FormLabel>  
@@ -63,7 +79,7 @@ export class FormsPage extends React.Component<any, IFormsPageState> {
                     </ListItem>                
                     <ListItem>
                         <FormLabel>Birth date</FormLabel>  
-                        <FormInput type="date" placeholder="Birth date" value={this.state.birthDate} />   
+                        <FormInput type="date" placeholder="Birth date" value={this.state.birthDate} onChange={this.onBirthDateChange.bind(this)} />   
                     </ListItem>
                     <ListItem>
                         <FormLabel>Date time</FormLabel>  

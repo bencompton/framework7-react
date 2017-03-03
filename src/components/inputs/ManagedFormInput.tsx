@@ -1,31 +1,12 @@
 import * as React from 'react';
+import {SelectableInput} from './SelectableInput';
 
-export interface IManagedFormInputState {
-    currentValue?: string
-}
-
-export class ManagedFormInput extends React.Component<any, IManagedFormInputState> {
-    constructor(props: any) {
-        super(props);
-
-        this.state = {
-            currentValue: this.props.value || ""
-        }
+export const ManagedFormInput = (props: any) => {     
+    switch(props.type.toLowerCase()) {
+        case 'checkbox':
+        case 'radio':
+            return <SelectableInput type={props.type} checked={props.checked} onChange={props.onChange} />;         
+        default: 
+            return <input type={props.type} onClick={props.onClick} onChange={props.onChange} value={props.value} placeholder={props.placeholder} />;
     }
-
-    render() {
-        return (
-            <input {...this.props} onChange={this.onInput.bind(this)} value={this.state.currentValue}/>
-        );
-    }
-
-    private onInput(event) {
-        if (this.props.type === "radio" || this.props.type === "checkbox") {
-            this.props.onChange();
-        } else {
-            this.setState({
-                currentValue: event.target.value
-            });
-        }
-    }
-};
+}; 
