@@ -13,7 +13,7 @@ export const SmartSelectPage = () => {
             <ContentBlockTitle>Smart Select</ContentBlockTitle>
             <List form>
                 <ListItem smartSelect title="Fruit">
-                    <select name="fruits" value="apple">
+                    <select name="fruits">
                         <option value="apple" selected>Apple</option>
                         <option value="pineapple">Pineapple</option>
                         <option value="pear">Pear</option>

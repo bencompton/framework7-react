@@ -1,6 +1,6 @@
 {
   "name": "framework7-react",
-  "version": "0.8.5-beta.1",
+  "version": "0.8.5-beta.2",
   "description": "A React version of Framework7",
   "main": "dist/framework7-react/index.js",
   "typings": "dist/framework7-react/index.d.ts",
