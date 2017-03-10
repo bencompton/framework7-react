@@ -6,6 +6,8 @@ Note that Framework7 React is still very new, so more complex examples beyond th
 
 ## Getting started
 
+`npm install framework7-react`
+
 [Starter template](https://github.com/bencompton/framework7-react-app-template)
 
 Official docs are coming soon...
