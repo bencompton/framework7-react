@@ -8,7 +8,53 @@ const gulp = require('gulp'),
     tsc = require('gulp-typescript'),
     merge = require('merge2'),
     replace = require('gulp-replace'),
-    sourcemaps = require('gulp-sourcemaps');    
+    sourcemaps = require('gulp-sourcemaps'),
+    webpack = require('webpack-stream'),
+    getWebpackConfig = require('./webpack.config.js').getWebpackConfig,
+    header = require('gulp-header'),
+    pkg = require('./package.json');
+
+function addHeader() {
+    const banner = [
+        '/**',
+        ' * Framework7 React <%= pkg.version %>',
+        ' * <%= pkg.description %>',
+        ' * <%= pkg.homepage %>',
+        ' * ',
+        ' * Copyright <%= date.year %>',
+        ' * ',
+        ' * http://www.framework7.io/',
+        ' * ',        
+        ' * Licensed under <%= pkg.license %>',
+        ' * ',
+        ' * Released on: <%= date.month %> <%= date.day %>, <%= date.year %>',
+        ' */',
+        ''
+    ].join('\n');    
+
+    const args = {
+        pkg: pkg,
+        date: (function () {
+            return {
+                year: new Date().getFullYear(),
+                month: ('January February March April May June July August September October November December').split(' ')[new Date().getMonth()],
+                day: new Date().getDate()
+            };
+        })()
+    };
+
+    return header(banner, args);
+}
+
+function runWebpack(minify, includeKitchenSink, outputDirectory) {
+    var webpackConfig = getWebpackConfig(minify, includeKitchenSink);    
+
+    if (minify) process.NODE_ENV = 'production';
+    
+    return webpack(webpackConfig, require('webpack'))
+        .pipe(addHeader())
+        .pipe(gulp.dest(outputDirectory));
+}    
 
 gulp.task('clean', () => {
     return gulp.src(['./dist', './framework7-vue', './framework7-react'], { read: false })    
@@ -21,17 +67,16 @@ gulp.task('build-framework7-core', ['clean'], () => {
             .pipe(replace('window.Framework7 = ', 'window.Framework7 = module.exports.Framework7 = '))
             .pipe(replace('window.Dom7 = ', 'window.Dom7 = module.exports.Dom7 = '))                        
             .pipe(replace('window.Template7 = ', 'window.Template7 = module.exports.Template7 = '))
-            .pipe(gulp.dest('dist/src/')),
+            .pipe(gulp.dest('./framework7/')),
         gulp.src('./src/Framework7.d.ts')
-            .pipe(gulp.dest('./dist/src/'))
+            .pipe(gulp.dest('./framework7/'))
     ); 
 });
 
 gulp.task('compile-framework7-vue', ['clean'], (cb) => {
     return compileFramework7Vue(() => {
         gulp.src('./node_modules/framework7-vue/src/utils/router.js')
-            .pipe(gulp.dest('./framework7-vue/'))
-            .pipe(gulp.dest('./dist/framework7-vue/'))
+            .pipe(gulp.dest('./framework7-vue/'))            
             .on('end', cb);
     });    
 });
@@ -48,7 +93,7 @@ gulp.task('compile-ts', ['clean', 'compile-framework7-vue'], () => {
         .pipe(tsProject());
 
     return merge([
-        tsResult.dts.pipe(gulp.dest('dist/')),
+        tsResult.dts.pipe(gulp.dest('dist/commonjs/')),
         tsResult.js.pipe(sourcemaps.write('.', {
             includeContent: false,
             sourceRoot: function (file) {
@@ -56,22 +101,41 @@ gulp.task('compile-ts', ['clean', 'compile-framework7-vue'], () => {
                 return "../" + path.relative(path.dirname(sourceFile), __dirname);
             }
         }))
-        .pipe(gulp.dest('dist/'))        
+        .pipe(gulp.dest('dist/commonjs/'))        
     ]);
 });
 
-gulp.task('tidy-dist-dir', ['compile-ts'], () => {
-    return gulp.src(['./dist/*.js', './dist/*.map'], { read: false })
-        .pipe(clean());
+gulp.task('build-dependencies', [
+    'clean',
+    'build-framework7-core',
+    'compile-framework7-vue',
+    'generate-react-components',
+]); 
+
+gulp.task('build-for-commonjs', [
+    'build-dependencies',
+    'compile-ts'
+], () => {
+    return gulp.src('./framework7/Framework7.d.ts').pipe(gulp.dest('dist/commonjs/framework7/'));
 });
 
-gulp.task('default', 
-    [
-        'clean',
-        'build-framework7-core',
-        'compile-framework7-vue',
-        'generate-react-components',
-        'compile-ts',
-        'tidy-dist-dir'        
-    ]
-);
+gulp.task('build-for-static-js', ['build-dependencies'], () => {
+    const outputDirectory = './dist/static/js/';
+
+    return merge(
+        runWebpack(false, false, outputDirectory),
+        runWebpack(true, false, outputDirectory),
+        gulp.src('./node_modules/framework7/dist/css/*').pipe(gulp.dest('./dist/static/css/'))
+    );    
+});
+
+gulp.task('build-for-release', [
+    'build-dependencies',
+    'build-for-commonjs',
+    'build-for-static-js'
+]);
+
+gulp.task('default', [
+    'build-dependencies',
+    'build-for-commonjs'
+]); 

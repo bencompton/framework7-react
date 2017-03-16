@@ -3,8 +3,8 @@ import {camelCase} from 'change-case';
 
 import {IFramework7AppContext} from '../components/Framework7App';
 import {reactifyVue} from './reactify-vue/ReactifyVue';
-import {Dom7} from '../Framework7';
-import {Template7} from '../Framework7';
+import {Dom7} from '../../framework7/Framework7';
+import {Template7} from '../../framework7/Framework7';
 
 let nextComponentId = 0;
 

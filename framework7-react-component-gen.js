@@ -269,7 +269,7 @@ const generateIndexTsFile = (vueComponents, excludes) => {
 
     importedFiles.push(generateImportString('Framework7App', '../src/components/Framework7App'));
     exportedModules.push('Framework7App');
-    importedFiles.push(generateImportString('Framework7', '../src/Framework7'));
+    importedFiles.push(generateImportString('Framework7', '../framework7/Framework7'));
     exportedModules.push('Framework7');
 
     Object.keys(vueComponents).forEach(vueComponentName => {

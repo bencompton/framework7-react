@@ -1,7 +1,7 @@
 ﻿import * as React from 'react';
 
 import Framework7Router from '../../framework7-vue/router';
-import {Framework7, IFramework7Params, Dom7} from '../Framework7';
+import {Framework7, IFramework7Params, Dom7} from '../../framework7/Framework7';
 import {applyOverscrollFix} from '../utils/OverscrollFix';
 
 export type ThemeTypeEnum  = 'ios' | 'material';

@@ -59,9 +59,5 @@ export default function(cb) {
     .pipe(sourcemaps.init({loadMaps: true}))
     .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest('./framework7-vue/'))
-    .on('end', function() {
-        gulp.src('./framework7-vue/framework7-vue.js')
-            .pipe(gulp.dest('./dist/framework7-vue/'))
-            .on('end', cb);
-    });    
+    .on('end', cb);    
 };

@@ -10,5 +10,13 @@
         "jsx": "react",
         "allowJs": true      
     },
-    "exclude": ["kitchen-sink", "node_modules", "dist"]    
+    "exclude": [
+        "kitchen-sink",
+        "node_modules",
+        "dist",
+        "webpack.config.js",
+        "framework7-react-component-gen.js",
+        "framework7-vue-build.js",
+        "gulpfile.babel.js"
+    ]
 }
