@@ -14,7 +14,7 @@ Official docs are coming soon...
 
 ## Kitchen Sink
 
-Ensure that [gulp](https://www.npmjs.com/package/gulp) and [typings](https://www.npmjs.com/package/typings) are installed globally, then run the following:
+Ensure that [gulp](https://www.npmjs.com/package/gulp) is installed globally, then run the following:
 
 To build the framework itself:
 
