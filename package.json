@@ -42,6 +42,7 @@
   "homepage": "https://github.com/bencompton/framework7-react#readme",
   "devDependencies": {
     "@types/node": "^6.0.54",
+    "@types/react": "^15.0.16",    
     "awesome-typescript-loader": "^3.1.2",
     "babel-core": "^6.21.0",
     "babel-loader": "^6.4.0",

@@ -9,5 +9,8 @@
         "experimentalDecorators": true,        
         "noImplicitAny": false,        
         "jsx": "react"
-    }
+    },
+    "exclude": [
+        "node_modules"        
+    ]
 }

@@ -20,7 +20,6 @@ To build the framework itself:
 
 ```javascript
 npm install
-typings install
 gulp
 ```
 
@@ -29,7 +28,6 @@ To build the kitchen sink:
 ```javascript
 cd kitchen-sink
 npm install
-typings install
 gulp
 ```
 
