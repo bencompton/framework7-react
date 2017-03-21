@@ -9,10 +9,19 @@
  * 
  * Licensed under APACHE 2.0
  * 
- * Released on: March 20, 2017
+ * Released on: March 21, 2017
  */
-var Framework7React =
-/******/ (function(modules) { // webpackBootstrap
+(function webpackUniversalModuleDefinition(root, factory) {
+	if(typeof exports === 'object' && typeof module === 'object')
+		module.exports = factory(require("React"));
+	else if(typeof define === 'function' && define.amd)
+		define(["React"], factory);
+	else if(typeof exports === 'object')
+		exports["framework7-react"] = factory(require("React"));
+	else
+		root["framework7-react"] = factory(root["React"]);
+})(this, function(__WEBPACK_EXTERNAL_MODULE_4__) {
+return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
 /******/
@@ -4871,7 +4880,7 @@ module.exports = function (str, locale) {
 /* 4 */
 /***/ (function(module, exports) {
 
-module.exports = React;
+module.exports = __WEBPACK_EXTERNAL_MODULE_4__;
 
 /***/ }),
 /* 5 */
@@ -9274,4 +9283,5 @@ exports.Views = Views_1.Views;
 
 /***/ })
 /******/ ]);
+});
 //# sourceMappingURL=framework7-react.js.map

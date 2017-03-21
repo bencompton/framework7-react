@@ -10,8 +10,8 @@ module.exports.getWebpackConfig = (minify) => {
         },
         output: {
             filename: 'framework7-react.js',
-            library: 'Framework7React',
-            libraryTarget: 'var'
+            library: 'framework7-react',
+            libraryTarget: 'umd'
         },    
         module: {
             rules: [

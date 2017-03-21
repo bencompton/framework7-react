@@ -119,20 +119,20 @@ gulp.task('build-for-commonjs', [
     return gulp.src('./framework7/Framework7.d.ts').pipe(gulp.dest('dist/commonjs/framework7/'));
 });
 
-gulp.task('build-for-static-js', ['build-dependencies'], () => {
-    const outputDirectory = './dist/static/js/';
+gulp.task('build-for-umd', ['build-dependencies'], () => {
+    const outputDirectory = './dist/umd/js/';
 
     return merge(
         runWebpack(false, false, outputDirectory),
         runWebpack(true, false, outputDirectory),
-        gulp.src('./node_modules/framework7/dist/css/*').pipe(gulp.dest('./dist/static/css/'))
+        gulp.src('./node_modules/framework7/dist/css/*').pipe(gulp.dest('./dist/umd/css/'))
     );    
 });
 
 gulp.task('build-for-release', [
     'build-dependencies',
     'build-for-commonjs',
-    'build-for-static-js'
+    'build-for-umd'
 ]);
 
 gulp.task('default', [
