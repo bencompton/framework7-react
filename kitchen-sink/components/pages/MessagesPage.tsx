@@ -57,7 +57,7 @@ export class MessagesPage extends React.Component<any, IMessagesPageState> {
 
     render() {
         return (
-            <Page toolbar-fixed>
+            <Page toolbarFixed>
                 <Navbar backLink="Back" title="Messages" sliding></Navbar>
                 <Subnavbar>
                     <input type="text" placeholder="Your name" defaultValue={this.state.name} onChange={this.onNameChange.bind(this)}/>
