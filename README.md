@@ -6,11 +6,15 @@ Note that Framework7 React is still very new, so more complex examples beyond th
 
 ## Getting started
 
-`npm install framework7-react`
+  * [Installation Guide](http://framework7.io/react/installation.html)
+  * [Starter App Templates](http://framework7.io/react/templates.html)
+  * [App Layout](http://framework7.io/react/app-layout.html)
+  * [Initialize App](http://framework7.io/react/init-app.html)
+  * [Navigation Router](http://framework7.io/react/navigation-router.html)
 
-[Starter template](https://github.com/bencompton/framework7-react-app-template)
+## Docs
 
-Official docs are coming soon...
+Documentation available at http://framework7.io/react/
 
 ## Kitchen Sink
 
