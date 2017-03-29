@@ -59,7 +59,7 @@ export interface IFramework7Params {
     swipeoutNoFollow?: boolean;
     swipeoutRemoveWithTimeout?: boolean;
     // Smart Select Back link template
-    smartSelectOpenIn?: string; // or 'popup' or 'picker'
+    smartSelectOpenIn?: 'page' | 'popup' | 'picker';
     smartSelectBackText?: string;
     smartSelectPopupCloseText?: string;
     smartSelectPickerCloseText?: string;
@@ -69,7 +69,7 @@ export interface IFramework7Params {
     scrollTopOnNavbarClick?: boolean;
     scrollTopOnStatusbarClick?: boolean;
     // Panels
-    swipePanel?: boolean; // or 'left' or 'right'
+    swipePanel?: 'left' | 'right' | 'both' | boolean;
     swipePanelActiveArea?: number;
     swipePanelCloseOpposite?: boolean;
     swipePanelOnlyClose?: boolean;
