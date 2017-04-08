@@ -28,6 +28,7 @@ export interface IVueComponent {
 
 export interface IReactifyVueArgs {
     component: IVueComponent;
+    name: string;
     tag: string;
     events?: IVueEventToPropsMap;
     instantiatedComponents?: (React.ComponentClass<any> | React.StatelessComponent<any>)[];
@@ -41,6 +42,7 @@ export const reactifyVue = <TProps>(reactifyVueArgs: IReactifyVueArgs) => {
         reactifyVueArgs.instantiatedComponents,
         reactifyVueArgs.component,
         reactifyVueArgs.slots,
+        reactifyVueArgs.name,
         reactifyVueArgs.tag,
         reactifyVueArgs.mixin,
         reactifyVueArgs.args

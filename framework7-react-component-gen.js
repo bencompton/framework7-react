@@ -201,6 +201,7 @@ const generateReactifyF7VueCall = (
     ];    
     
     reactifyF7VueArgs.push(`component: ${vueComponentName}`);
+    reactifyF7VueArgs.push(`name: '${reactComponentName}'`);
     reactifyF7VueArgs.push(`tag: '${componentToTagMappings.componentToTagMap[reactComponentName]}'`);
 
     const componentOverrides = overrides && overrides[reactComponentName];

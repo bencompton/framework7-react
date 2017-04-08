@@ -10,6 +10,7 @@ let nextComponentId = 0;
 
 export interface IReactifyF7VueArgs {
     component: any;
+    name: string;
     tag: string;
     slots?: string[];
     args?: any;
@@ -21,6 +22,7 @@ export interface IReactifyF7VueArgs {
 export const reactifyF7Vue = <TProps>(args: IReactifyF7VueArgs) => {
     const innerComponent = reactifyVue<TProps>({
         component: args.component,
+        name: `F7${args.name}`,
         tag: args.tag,
         slots: !args.slots ? null : args.slots.reduce((slotMap, currentSlotName) => {
             return { ...slotMap, [currentSlotName]: camelCase(currentSlotName) + 'Slot' };
@@ -38,6 +40,7 @@ export const reactifyF7Vue = <TProps>(args: IReactifyF7VueArgs) => {
     });
 
     const reactClass = React.createClass<TProps, any>({
+        displayName: args.name,
         getInitialState: function () {
             const framework7AppContext = (this.context as any).framework7AppContext as IFramework7AppContext;
 

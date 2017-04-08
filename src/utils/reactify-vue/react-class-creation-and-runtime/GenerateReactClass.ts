@@ -16,13 +16,14 @@ import {
     initData
 } from './ReactClassRuntime';
 
-export const generateReactClass = <TProps>(instantiatedComponents, vueComponent, slots, tag, mixin, args) => {
+export const generateReactClass = <TProps>(instantiatedComponents, vueComponent, slots, name, tag, mixin, args) => {
     const vueComponentClass = convertVueComponentToClass(vueComponent);
 
     copyMethodsToVueComponent(vueComponent);
     copyArgsToVueComponent(vueComponent, args);
 
     const reactClass = React.createClass<TProps, any>({
+        displayName: name,
         getInitialState: function() {
             this.vueComponent = new vueComponentClass(this.props, this);
             this.createElement = generateCreateElementFunctionForClass(
