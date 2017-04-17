@@ -120,7 +120,8 @@ export class Framework7App extends React.Component<IFramework7AppProps, Framewor
             callback(this.framework7);
         });
 
-        if (this.props.stateKernel) {
+        if (this.props.stateKernel) {            
+            Dom7(document).on('click', 'a', e => e.preventDefault());
             this.props.stateKernel.setFramework7(this.framework7);
             this.props.stateKernel.setRouter(this.router);
         }

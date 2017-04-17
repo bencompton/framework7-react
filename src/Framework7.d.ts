@@ -162,17 +162,19 @@ export declare type Dom7ReturnObject = {
     length: number;
     insertBefore: (element: HTMLElement) => void;
     addClass: (classes: string) => void;
+    on(eventName: string, handler: any, useCapture?: boolean);
+    on(eventName: string, delegatedTarget: string, handler: any, useCapture?: boolean);
 }
 
-export declare function Dom7(selector: string): Dom7ReturnObject;
-export declare function Dom7(selector: string, context: string): Dom7ReturnObject;
+export declare function Dom7(selector: string | Object): Dom7ReturnObject;
+export declare function Dom7(selector: string | Object, context: string): Dom7ReturnObject;
 
 export declare type Template7ReturnObject = {
-    compile: (template: string) => void;
-    registerHelper: (name: string, helper: () => void) => void;
-    unregisterHelper: (name: string) => void;
-    registerPartial: (name: string, helper: string) => void;
-    unregisterPartial: (name: string) => void;
+    compile(template: string): void;
+    registerHelper(name: string, helper: () => void): void;
+    unregisterHelper(name: string): void;
+    registerPartial(name: string, helper: string): void;
+    unregisterPartial(name: string): void;
     global: Object;
 }
 
