@@ -16,15 +16,21 @@ import {
     initData
 } from './ReactClassRuntime';
 
-export const generateReactClass = <TProps>(instantiatedComponents, vueComponent, slots, name, tag, mixin, args) => {
+export const generateReactClass = <TProps>(instantiatedComponents, vueComponent, slots, name, tag, mixin, args): any => {
     const vueComponentClass = convertVueComponentToClass(vueComponent);
 
     copyMethodsToVueComponent(vueComponent);
     copyArgsToVueComponent(vueComponent, args);
 
-    const reactClass = React.createClass<TProps, any>({
-        displayName: name,
-        getInitialState: function() {
+    class reactClass extends React.Component<TProps, any> {
+        private vueComponent: any;
+        private hasRendered: boolean;
+        private didMount: boolean;
+        private createElement: any;
+
+        constructor(props, context) {
+            super(props, context);
+
             this.vueComponent = new vueComponentClass(this.props, this);
             this.createElement = generateCreateElementFunctionForClass(
                 this.vueComponent,
@@ -39,36 +45,36 @@ export const generateReactClass = <TProps>(instantiatedComponents, vueComponent,
 
             addCompiledTemplateFunctionsToVueComponent(this.vueComponent, this.createElement);
 
-            if (this.props.__onInit) {
-                this.props.__onInit(this);
+            if ((this.props as any).__onInit) {
+                (this.props as any).__onInit(this);
             }            
 
-            return state;
-        },
+            this.state = state;            
+        }        
 
-        componentWillUpdate: function () {
+        componentWillUpdate() {
             if (this.vueComponent.beforeUpdate) this.vueComponent.beforeUpdate();
-        },
+        }
 
-        componentDidUpdate: function () {
+        componentDidUpdate() {
             if (this.vueComponent.updated) this.vueComponent.updated();
-        },
+        }
 
-        componentDidMount: function() {
+        componentDidMount() {
             if (this.vueComponent.mounted) this.vueComponent.mounted();
-            if (this.props.__onMount) this.props.__onMount(this);
+            if ((this.props as any).__onMount) (this.props as any).__onMount(this);
             this.didMount = true;
-        },
+        }
 
-        componentWillUnmount: function() {
+        componentWillUnmount() {
             if (vueComponent.beforeDestroy) vueComponent.beforeDestroy();
-        },
+        }
 
-        componentWillReceiveProps: function(nextProps) {
+        componentWillReceiveProps(nextProps) {
             handleWatchedProperties(this.vueComponent, this.props, nextProps);               
-        },
+        }
 
-        render: function() {  
+        render() {  
             if (this.hasRendered) {
                 //Only do this after the first render, since it happens in getInitialState the first time
                 copyPropsToVueComponent(this.vueComponent, this.props);
@@ -85,16 +91,17 @@ export const generateReactClass = <TProps>(instantiatedComponents, vueComponent,
             } else {
                 return null;
             }
-        },
+        }
 
-        callVueMethod: function(methodName: string, ...args: any[]) {
+        callVueMethod(methodName: string, ...args: any[]) {
             return this.vueComponent[methodName](args);
         }
-    });
+    }
 
     (reactClass as any).tag = tag;
     (reactClass as any).vueComponent = vueComponent;
-    (reactClass as any).getVueComponentInstance = () => this.vueComponent;    
+    (reactClass as any).getVueComponentInstance = () => this.vueComponent;  
+    (reactClass as any).displayName = name;
 
     const defaultProps = getDefaultProps(vueComponent);
 
