@@ -160,10 +160,10 @@ export declare class VirtualList {
 
 export declare type Dom7ReturnObject = {
     length: number;
-    insertBefore: (element: HTMLElement) => void;
-    addClass: (classes: string) => void;
-    on(eventName: string, handler: any, useCapture?: boolean);
-    on(eventName: string, delegatedTarget: string, handler: any, useCapture?: boolean);
+    insertBefore(element: HTMLElement): void;
+    addClass(classes: string): void;
+    on(eventName: string, handler: any, useCapture?: boolean): void;
+    on(eventName: string, delegatedTarget: string, handler: any, useCapture?: boolean): void;
 }
 
 export declare function Dom7(selector: string | Object): Dom7ReturnObject;
