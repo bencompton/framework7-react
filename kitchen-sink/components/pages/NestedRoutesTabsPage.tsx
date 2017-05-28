@@ -15,9 +15,9 @@ export const NestedRoutesTabsPage = () => {
             </Navbar>
 
             <Tabs>
-                <Tab routeTabId="tab1" />
-                <Tab routeTabId="tab2" />
-                <Tab routeTabId="tab3" />      
+                <Tab id="tab1" />
+                <Tab id="tab2" />
+                <Tab id="tab3" />      
             </Tabs>
         </Page>
     );

@@ -90,6 +90,7 @@ export class App extends React.Component<any, IAppState> {
                                     <ListItem title="Sortable" link="/sortable/" />
                                     <ListItem title="Swipeout" link="/swipeout/" />
                                     <ListItem title="Accordion" link="/accordion/" />
+                                    <ListItem title="Calendar" link="/calendar/" />
                                     <ListItem title="Forms" link="/forms/" />
                                     <ListItem title="Smart Select" link="/smart-select/" />
                                     <ListItem title="Chips" link="/chips/" />

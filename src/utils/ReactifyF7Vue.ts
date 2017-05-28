@@ -48,7 +48,7 @@ export const reactifyF7Vue = <TProps>(args: IReactifyF7VueArgs) => {
                 this.framework7 = f7;
             });
 
-            Object.defineProperty(args.component, '$router', {
+            Object.defineProperty(args.component, '$f7Router', {
                 get: framework7AppContext.getRouter,
                 enumerable: true,
                 configurable: true
@@ -84,6 +84,8 @@ export const reactifyF7Vue = <TProps>(args: IReactifyF7VueArgs) => {
                 ...props,
                 $theme: framework7AppContext.theme,
                 __onMount: (self) => {
+                    const tag = args.tag;
+
                     framework7AppContext.getFramework7(f7 => {
                         if (self.vueComponent.onF7Init) {
                             self.vueComponent.onF7Init(f7);

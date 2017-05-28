@@ -51,7 +51,7 @@
     "babel-preset-stage-2": "^6.18.0",
     "css-loader": "^0.25.0",
     "framework7": "1.6.0",
-    "framework7-vue": "0.8.5",
+    "framework7-vue": "../framework7-vue/",
     "gulp": "3.9.1",
     "gulp-clean": "^0.3.2",
     "gulp-concat": "^2.6.1",

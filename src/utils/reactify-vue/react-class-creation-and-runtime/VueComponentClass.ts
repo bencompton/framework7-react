@@ -58,7 +58,16 @@ export const convertVueComponentToClass = (vueComponentObject) => {
     if (vueComponentObject.mixins) {
         vueComponentObject.mixins.forEach(mixin => {
             Object.keys(mixin).forEach(prop => {
-                vueComponentClass.prototype[prop] = mixin[prop];
+                if (vueComponentClass.prototype[prop]) {
+                    const existingPropertyValue = vueComponentClass.prototype[prop];
+                    const mixinPropertyValue = mixin[prop];
+
+                    Object.keys(mixinPropertyValue).forEach(mixinProp => {
+                        existingPropertyValue[mixinProp] = mixinPropertyValue[mixinProp];
+                    });
+                } else {
+                    vueComponentClass.prototype[prop] = mixin[prop];
+                }
             });
         });
     } 
@@ -93,7 +102,7 @@ export const convertVueComponentToClass = (vueComponentObject) => {
     Object.defineProperty(vueComponentClass.prototype, '$options', {
         get: function ()  { 
             return {
-                propsData: this.reactComponentProps
+                propsData: {...this.reactComponentProps}
             };
         },
         enumerable: true,

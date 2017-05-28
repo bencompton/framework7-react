@@ -7,9 +7,9 @@ export const NestedRoutesTabbarPage = () => {
             <Navbar backLink="Back" title="Nested Routes with a Tab Bar" sliding />
 
             <ContentBlock tabs>
-                <Tab routeTabId="tab1" />
-                <Tab routeTabId="tab2" />
-                <Tab routeTabId="tab3" />
+                <Tab id="tab1" />
+                <Tab id="tab2" />
+                <Tab id="tab3" />
             </ContentBlock>
 
             <Toolbar tabbar labels>
@@ -20,4 +20,3 @@ export const NestedRoutesTabbarPage = () => {
         </Page>
     );
 };
-
