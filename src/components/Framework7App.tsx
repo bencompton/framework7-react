@@ -1,4 +1,5 @@
 ﻿import * as React from 'react';
+import {object, Requireable} from 'prop-types';
 
 import Framework7Router from '../../framework7-vue/router';
 import {Framework7, IFramework7Params, Dom7} from '../../framework7/Framework7';
@@ -31,7 +32,7 @@ export interface IFramework7AppContext {
     routes: IFramework7Route[];    
     getFramework7: (callback: (f7: Framework7) => void) => void;
     onRouteChange: (componentId: number, callback: (route: IFramework7Route) => void) => void;
-    unregisterRouteChange: (callback: (componentId: number) => void) => void;
+    unregisterRouteChange: (componentId: number) => void;
     getCurrentRoute: () => any;
     getRouter: () => any;
 }
@@ -53,7 +54,7 @@ export class Framework7App extends React.Component<IFramework7AppProps, Framewor
     private router;
 
     public static childContextTypes = {
-        framework7AppContext: React.PropTypes.object
+        framework7AppContext: object
     }
 
     public getChildContext() {

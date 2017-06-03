@@ -109,6 +109,16 @@ export const convertVueComponentToClass = (vueComponentObject) => {
         configurable: true
     });
 
+    Object.defineProperty(vueComponentClass.prototype, '$root', {
+        get: function ()  { 
+            return {
+                $el: document.querySelector('.framework7-root')
+            };
+        },
+        enumerable: true,
+        configurable: true
+    });    
+
     vueComponentClass.prototype.$nextTick = function (func) {
         if (this.reactComponentInstance.hasUnrenderedStateChanges) {
             this.reactComponentInstance.nextTickCallbacks.push(func);

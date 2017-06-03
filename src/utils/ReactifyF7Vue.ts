@@ -1,10 +1,11 @@
 import * as React from 'react';
+import {object} from 'prop-types';
 import {camelCase} from 'change-case';
 
 import {IFramework7AppContext} from '../components/Framework7App';
 import {reactifyVue} from './reactify-vue/ReactifyVue';
 import {Dom7} from '../../framework7/Framework7';
-import {Template7} from '../../framework7/Framework7';
+import {Template7, Framework7} from '../../framework7/Framework7';
 
 let nextComponentId = 0;
 
@@ -19,7 +20,7 @@ export interface IReactifyF7VueArgs {
     mixin?: any;
 }
 
-export const reactifyF7Vue = <TProps>(args: IReactifyF7VueArgs) => {
+export const reactifyF7Vue = <TProps>(args: IReactifyF7VueArgs): any => {
     const innerComponent = reactifyVue<TProps>({
         component: args.component,
         name: `F7${args.name}`,
@@ -39,9 +40,13 @@ export const reactifyF7Vue = <TProps>(args: IReactifyF7VueArgs) => {
         mixin: args.mixin
     });
 
-    const reactClass = React.createClass<TProps, any>({
-        displayName: args.name,
-        getInitialState: function () {
+    class reactClass extends React.Component<TProps, any> {
+        private framework7: Framework7;
+        private componentId: number;
+
+        constructor(props: TProps, context: any) {
+            super(props, context);
+
             const framework7AppContext = (this.context as any).framework7AppContext as IFramework7AppContext;
 
             framework7AppContext.getFramework7(f7 => {
@@ -67,17 +72,15 @@ export const reactifyF7Vue = <TProps>(args: IReactifyF7VueArgs) => {
             });            
 
             this.componentId = nextComponentId++;
+        }
 
-            return null;
-        },
-
-        componentWillUnmount: function () {
+        componentWillUnmount() {
             const framework7AppContext = (this.context as any).framework7AppContext as IFramework7AppContext;
             framework7AppContext.unregisterRouteChange(this.componentId)
-        },
+        }
 
-        render: function() {
-            const props = this.props;
+        render() {
+            const props = this.props as any;
             const framework7AppContext = (this.context as any).framework7AppContext as IFramework7AppContext;
             
             const innerEl = React.createElement(innerComponent, {
@@ -102,12 +105,12 @@ export const reactifyF7Vue = <TProps>(args: IReactifyF7VueArgs) => {
 
             return innerEl;
         }
-    });
+    }
 
     (reactClass as any).tag = args.tag;
     (reactClass as any).vueComponent = args.component;
     (reactClass as any).contextTypes = {
-        framework7AppContext: React.PropTypes.object
+        framework7AppContext: object
     };
 
     return reactClass;

@@ -1,6 +1,6 @@
 {
   "name": "framework7-react",
-  "version": "0.8.5-beta.10",
+  "version": "0.9.1",
   "description": "A React version of Framework7",
   "main": "dist/commonjs/framework7-react/index.js",
   "typings": "dist/commonjs/framework7-react/index.d.ts",
@@ -51,7 +51,7 @@
     "babel-preset-stage-2": "^6.18.0",
     "css-loader": "^0.25.0",
     "framework7": "1.6.0",
-    "framework7-vue": "../framework7-vue/",
+    "framework7-vue": "^0.9.1",
     "gulp": "3.9.1",
     "gulp-clean": "^0.3.2",
     "gulp-concat": "^2.6.1",
@@ -74,7 +74,9 @@
     "webpack-stream": "^3.2.0"
   },
   "dependencies": {
+    "@types/prop-types": "^15.5.1",
     "change-case": "^3.0.0",
+    "prop-types": "^15.5.10",
     "query-string": "^4.3.1"
   },
   "peerDependencies": {

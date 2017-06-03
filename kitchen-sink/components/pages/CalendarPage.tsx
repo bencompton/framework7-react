@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {object} from 'prop-types';
 import {Page, Navbar, ContentBlockTitle, ContentBlock, Calendar} from 'framework7-react';
 
 export const CalendarPage = (props: any, context: any) => {
@@ -27,5 +28,5 @@ export const CalendarPage = (props: any, context: any) => {
 };
 
 Calendar.contextTypes = {
-    framework7AppContext: React.PropTypes.object
+    framework7AppContext: object
 }
