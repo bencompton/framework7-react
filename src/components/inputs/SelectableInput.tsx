@@ -1,12 +1,6 @@
 import * as React from 'react';
 
-export interface ISelectableInputProps {
-    checked?: boolean
-    onChange?: () => void
-    type: string
-}
-
-export class SelectableInput extends React.Component<ISelectableInputProps, any> {
+export class SelectableInput extends React.Component<any, any> {
     private element: HTMLInputElement;
 
     private saveRef(element: HTMLInputElement) {
@@ -27,6 +21,6 @@ export class SelectableInput extends React.Component<ISelectableInputProps, any>
     }
 
     public render() {
-        return <input type={this.props.type} ref={this.saveRef.bind(this)} />;
+        return <input type={this.props.type} ref={this.saveRef.bind(this)} {...this.props} />;
     }
 }
