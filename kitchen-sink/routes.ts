@@ -28,6 +28,7 @@ import {FabPage} from './components/pages/FabPage';
 import {FabDialPage} from './components/pages/FabDialPage';
 import {LoginScreenPage} from './components/pages/LoginScreenPage';
 import {VirtualListPage} from './components/pages/VirtualListPage';
+import {VirtualListReactPage} from './components/pages/VirtualListReactPage';
 import {PhotoBrowserPage} from './components/pages/PhotoBrowserPage';
 import {ModalsPage} from './components/pages/ModalsPage';
 import {TimelineVerticalPage} from './components/pages/TimelineVerticalPage';
@@ -137,6 +138,9 @@ export const routes = [{
 }, {
     path: '/virtual-list/',
     component: VirtualListPage
+}, {
+    path: '/virtual-list-react/',
+    component: VirtualListReactPage
 }, {
     path: '/photo-browser/',
     component: PhotoBrowserPage

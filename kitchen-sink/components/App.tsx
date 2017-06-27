@@ -109,6 +109,7 @@ export class App extends React.Component<any, IAppState> {
                                     <ListItem title="FAB Speed Dial" link="/fab-dial/" />
                                     <ListItem title="Login Screen" link="/login-screen/" />
                                     <ListItem title="Virtual List" link="/virtual-list/" />
+                                    <ListItem title="Virtual List React" link="/virtual-list-react/" />
                                     <ListItem title="Photo Browser" link="/photo-browser/" />
                                     <ListItem title="Modals" link="/modals/" />
                                     <ListItem title="Timeline Vertical" link="/timeline-vertical/" />

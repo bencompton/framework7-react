@@ -7,7 +7,7 @@ export const ManagedFormInput = (props: any) => {
         type: props.type,
         placeholder: props.placeholder,
         id: props.id,
-        value: props.valueComputed,
+        value: props.value,
         size: props.size,
         accept: props.accept,
         autoComplete: props.autocomplete,
@@ -16,7 +16,7 @@ export const ManagedFormInput = (props: any) => {
         spellCheck: props.spellcheck,
         autoFocus: props.autofocus,
         autoSave: props.autosave,
-        checked: props.checkedComputed,
+        checked: props.checked,
         disabled: props.disabled,
         max: props.max,
         maxLength: props.maxlength,
@@ -49,7 +49,7 @@ export const ManagedFormInput = (props: any) => {
         onMouseOver: props.onMouseover,
         onMouseUp: props.onMouseup,
         onWheel: props.onWheel,
-        onSelect: props.onSelect
+        onSelect: props.onSelect        
     };    
 
     switch(props.type.toLowerCase()) {

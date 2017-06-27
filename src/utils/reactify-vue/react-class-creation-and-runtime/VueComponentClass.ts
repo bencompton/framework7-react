@@ -83,7 +83,7 @@ export const convertVueComponentToClass = (vueComponentObject) => {
     }); 
 
     Object.defineProperty(vueComponentClass.prototype, '$parent', {
-        get: function ()  { return this.reactComponentProps.parentVueComponent },
+        get: function ()  { return this.reactComponentProps.parentVueComponent || {} },
         enumerable: true,
         configurable: true
     });
