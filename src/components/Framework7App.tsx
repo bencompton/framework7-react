@@ -91,7 +91,7 @@ export class Framework7App extends React.Component<IFramework7AppProps, Framewor
     private initFramework7() {
         this.framework7 = new Framework7({
             material: this.props.themeType === 'material',
-            ...this.props
+            ...(this.props as any)
         });
 
         const router = this.router = new Framework7Router(this.props.routes, this.framework7, Dom7);    
