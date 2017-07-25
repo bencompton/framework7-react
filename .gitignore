@@ -42,5 +42,6 @@ framework7-vue/
 framework7-react/
 framework7/
 kitchen-sink/framework7/
+dist/commonjs
 
 .DS_Store
