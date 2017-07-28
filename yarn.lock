@@ -2018,8 +2018,9 @@ fragment-cache@^0.2.0, fragment-cache@^0.2.1:
   dependencies:
     map-cache "^0.2.2"
 
-"framework7-vue@file:../framework7-vue/":
-  version "0.9.0"
+"framework7-vue@github:bencompton/framework7-vue":
+  version "0.9.2"
+  resolved "https://codeload.github.com/bencompton/framework7-vue/tar.gz/10e1640b9557ba95a65a5c02ed7cb7aea16e5fe4"
 
 framework7@^1.6.4:
   version "1.6.4"

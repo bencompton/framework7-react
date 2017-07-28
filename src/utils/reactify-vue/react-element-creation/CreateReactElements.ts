@@ -5,7 +5,7 @@ import {PropsProcessor} from './PropsProcessor';
 import {ManagedFormInput} from '../../../components/inputs/ManagedFormInput';
 
 const propsProcessor = new PropsProcessor();
-const formElements = ['input'];
+const formElements = ['input', 'textarea'];
 
 const resolveDependencyComponent = (instantiatedComponents: (React.ComponentClass<any> | React.StatelessComponent<any>)[], componentToResolve: string) => {
     if (instantiatedComponents && componentToResolve.indexOf('f7-') > -1) {

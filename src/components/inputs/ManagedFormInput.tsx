@@ -7,7 +7,7 @@ export const ManagedFormInput = (props: any) => {
         type: props.type,
         placeholder: props.placeholder,
         id: props.id,
-        value: props.value,
+        value: props.value || '',
         size: props.size,
         accept: props.accept,
         autoComplete: props.autocomplete,
@@ -55,7 +55,9 @@ export const ManagedFormInput = (props: any) => {
     switch(props.type.toLowerCase()) {
         case 'checkbox':
         case 'radio':
-            return <SelectableInput {...renamedProps} />;         
+            return <SelectableInput {...renamedProps} />;
+        case 'textarea':
+            return <textarea {...renamedProps} />;      
         default: 
             return <input {...renamedProps} />;
     }

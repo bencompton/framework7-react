@@ -186,7 +186,7 @@ export class PropsProcessor {
         this.getPropsFromArgs(args, props);        
         this.getChildren(children, args, props);
         this.convertAttrsToProps(args, componentOrComponentName, resolvedComponent, props);
-        this.getInnerHTML(args, props);
+        this.convertVueDomProps(args, props);
         this.handleEvents(resolvedComponent, args.on, vueComponentInstance, props)
         this.handleRef(args.ref, vueComponentInstance, props);        
         
@@ -266,7 +266,7 @@ export class PropsProcessor {
     }
 
     private getChildren(children, args, props) {
-        if (children && !(args.domProps && args.domProps.innerHTML)) {
+        if (children && !((args.domProps && args.domProps.innerHTML) || (args.domProps && args.domProps.value))) {
             props.children = children;
         }
     }
@@ -297,13 +297,17 @@ export class PropsProcessor {
         }        
     }
 
-    private getInnerHTML(args, props) {
+    private convertVueDomProps(args, props) {
         let dangerouslySetInnerHTML;
 
-        if (args.domProps && args.domProps.innerHTML) dangerouslySetInnerHTML = {__html: args.domProps.innerHTML};
+        if (args.domProps) {
+            if (args.domProps.value) {
+                props.value = args.domProps.value;
+            }
 
-        if (dangerouslySetInnerHTML) {
-            props.dangerouslySetInnerHTML = dangerouslySetInnerHTML;
+            if (args.domProps.innerHTML) {                
+                props.dangerouslySetInnerHTML = {__html: args.domProps.innerHTML};
+            }
         }
     }
 
