@@ -1,5 +1,5 @@
 /**
- * Framework7 React 0.9.2-1-beta
+ * Framework7 React 0.9.2-2-beta
  * A React version of Framework7
  * https://github.com/bencompton/framework7-react#readme
  * 
@@ -9,7 +9,7 @@
  * 
  * Licensed under APACHE 2.0
  * 
- * Released on: August 4, 2017
+ * Released on: August 14, 2017
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
