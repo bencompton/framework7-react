@@ -16,7 +16,7 @@ import {
     initData
 } from './ReactClassRuntime';
 
-export const generateReactClass = <TProps>(instantiatedComponents, vueComponent, slots, name, tag, mixin, args): any => {
+export const generateReactClass = <TProps>(instantiatedComponents, vueComponent, slots, name, tag, mixin, args): React.ComponentClass<TProps> => {
     const vueComponentClass = convertVueComponentToClass(vueComponent);
 
     copyMethodsToVueComponent(vueComponent);

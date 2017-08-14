@@ -20,7 +20,7 @@ export interface IReactifyF7VueArgs {
     mixin?: any;
 }
 
-export const reactifyF7Vue = <TProps>(args: IReactifyF7VueArgs): any => {
+export const reactifyF7Vue = <TProps>(args: IReactifyF7VueArgs): React.ComponentClass<TProps> => {
     const innerComponent = reactifyVue<TProps>({
         component: args.component,
         name: `F7${args.name}`,
