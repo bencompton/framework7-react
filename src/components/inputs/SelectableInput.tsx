@@ -21,6 +21,6 @@ export class SelectableInput extends React.Component<any, any> {
     }
 
     public render() {
-        return <input type={this.props.type} ref={this.saveRef.bind(this)} {...this.props} />;
+        return <input type={this.props.type} ref={this.saveRef.bind(this)} {...this.props} onChange={null} />;
     }
 }

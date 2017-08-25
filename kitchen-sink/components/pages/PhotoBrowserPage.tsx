@@ -8,23 +8,22 @@ export interface IPhoto {
 }
 
 export interface IPhotoBrowserPageState {
-    photos: IPhoto[]
+    photos: (string | IPhoto)[]
 }
 
-export const PhotoBrowserPageDefaultState = [{
-        url: 'http://lorempixel.com/400/400/nature/1/',
-        caption: 'Ants on grass'
-    },
-        'http://placekitten.com/600/600',
-        'http://lorempixel.com/400/400/nature/2/',
-    {
-        url: 'http://lorempixel.com/400/400/nature/3/',
-        caption: 'Beautiful mountains in Zhangjiajie, China'
-    }, {
-        url: 'http://lorempixel.com/400/400/nature/4/',
-        caption: 'Trees in the Fall'
-    }
-];
+export const PhotoBrowserPageDefaultState: (string | IPhoto)[] = [{
+    url: 'http://lorempixel.com/400/400/nature/1/',
+    caption: 'Ants on grass'
+}, 
+    'http://placekitten.com/600/600',
+    'http://lorempixel.com/400/400/nature/2/',
+{
+    url: 'http://lorempixel.com/400/400/nature/3/',
+    caption: 'Beautiful mountains in Zhangjiajie, China'
+}, {
+    url: 'http://lorempixel.com/400/400/nature/4/',
+    caption: 'Trees in the Fall'
+}];
 
 const photoStyle = {
     height: "20vw",
@@ -34,8 +33,9 @@ const photoStyle = {
 export class PhotoBrowserPage extends React.Component<any, IPhotoBrowserPageState> {
     private fw7: any;
 
-    constructor() {
-        super();
+    constructor(props: any, context: any) {
+        super(props, context);
+
         this.state = {
             photos: PhotoBrowserPageDefaultState
         };

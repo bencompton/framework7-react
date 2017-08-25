@@ -47,7 +47,7 @@ export class VirtualListReactPage extends React.Component<any, IVirtualListReact
             <Page>
                 <Navbar backLink="Back" title="Virtual List" sliding>
                     <NavRight>
-                        <Link onClick="addNewItem">New Item</Link>
+                        <Link onClick={this.addNewItem.bind(this)}>New Item</Link>
                     </NavRight>
                 </Navbar>
                 <Searchbar cancelLink="Cancel" searchList="#search-list" />
@@ -72,12 +72,12 @@ export class VirtualListReactPage extends React.Component<any, IVirtualListReact
                     {this.state.vlData.items.map(item => {
                         return (
                             <ListItem  
-                                key={item.title}                          
+                                key={item.title}
                                 mediaItem
                                 link="#"
                                 title={item.title}
                                 subtitle={item.subtitle}
-                                style={{top: this.state.vlData.topPosition}}
+                                style={{top: this.state.vlData.topPosition.toString()}}
                             />
                         );
                     })}
