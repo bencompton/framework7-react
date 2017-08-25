@@ -1,5 +1,5 @@
 /**
- * Framework7 React 0.9.2-2-beta
+ * Framework7 React 0.9.2-3-beta
  * A React version of Framework7
  * https://github.com/bencompton/framework7-react#readme
  * 
@@ -9,7 +9,7 @@
  * 
  * Licensed under APACHE 2.0
  * 
- * Released on: August 14, 2017
+ * Released on: August 25, 2017
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -875,7 +875,7 @@ var chip = {
         c['color-' + this.mediaColor] = true;
       }
       if (this.mediaBg) {
-        c['color-' + this.mediaBg] = true;
+        c['bg-' + this.mediaBg] = true;
       }
       return c;
     },
@@ -2806,7 +2806,8 @@ var list = {
     'virtual-search-by-item': Function,
     'virtual-search-all': Function,
     'virtual-render-item': Function,
-    'virtual-empty-template': String
+    'virtual-empty-template': String,
+    'virtual-render-external': Function
   },
   methods: {
     onSortableOpen: function onSortableOpen(event) {
@@ -2838,7 +2839,7 @@ var list = {
         template = templateScript[0].outerHTML;
         template = /\<script type="text\/template7"\>(.*)<\/script>/.exec(template)[1];
       }
-      if (!template && !self.virtualRenderItem) {
+      if (!template && !self.virtualRenderItem && !self.virtualRenderExternal) {
         return;
       }
       if (template) {
@@ -2856,6 +2857,7 @@ var list = {
         searchByItem: self.virtualSearchByItem,
         searchAll: self.virtualSearchAll,
         renderItem: self.virtualRenderItem,
+        renderExternal: self.virtualRenderExternal,
         emptyTemplate: self.virtualEmptyTemplate,
         onItemBeforeInsert: function onItemBeforeInsert(list, item) {
           self.$emit('virtual:itembeforeinsert', list, item);
@@ -9482,7 +9484,7 @@ var SelectableInput = (function (_super) {
         });
     };
     SelectableInput.prototype.render = function () {
-        return React.createElement("input", __assign({ type: this.props.type, ref: this.saveRef.bind(this) }, this.props));
+        return React.createElement("input", __assign({ type: this.props.type, ref: this.saveRef.bind(this) }, this.props, { onChange: null }));
     };
     return SelectableInput;
 }(React.Component));
@@ -10521,10 +10523,9 @@ var Framework7Router = function () {
     framework7.params.preroute = function (view, options) {
       var passToVueRouter = true;
 
-      if (initialPreroute) {
+      if (initialPreroute && !options.pageElement) {
         passToVueRouter = initialPreroute(view, options);
       }
-
       if (passToVueRouter) {
         return handleRouteChangeFromFramework7(view, options, _this.changeRoute.bind(_this));
       } else {
