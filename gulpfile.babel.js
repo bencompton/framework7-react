@@ -63,7 +63,7 @@ gulp.task('clean', () => {
 
 gulp.task('build-framework7-core', ['clean'], () => {
     return merge(
-        gulp.src('./node_modules/framework7/dist/js/Framework7.js')
+        gulp.src('./node_modules/framework7-bencompton-fork/dist/js/Framework7.js')
             .pipe(replace('window.Framework7 = ', 'window.Framework7 = module.exports.Framework7 = '))
             .pipe(replace('window.Dom7 = ', 'window.Dom7 = module.exports.Dom7 = '))                        
             .pipe(replace('window.Template7 = ', 'window.Template7 = module.exports.Template7 = '))
@@ -125,7 +125,7 @@ gulp.task('build-for-umd', ['build-dependencies'], () => {
     return merge(
         runWebpack(false, false, outputDirectory),
         runWebpack(true, false, outputDirectory),
-        gulp.src('./node_modules/framework7/dist/css/*').pipe(gulp.dest('./dist/umd/css/'))
+        gulp.src('./node_modules/framework7-bencompton-fork/dist/css/*').pipe(gulp.dest('./dist/umd/css/'))
     );    
 });
 
