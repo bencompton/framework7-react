@@ -9,7 +9,7 @@
  * 
  * Licensed under APACHE 2.0
  * 
- * Released on: August 28, 2017
+ * Released on: August 29, 2017
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -10365,6 +10365,9 @@ var PropsProcessor = (function () {
         if (args.domProps) {
             if (args.domProps.value) {
                 props.value = args.domProps.value;
+            }
+            if (args.domProps.checked) {
+                props.checked = args.domProps.checked;
             }
             if (args.domProps.innerHTML) {
                 props.dangerouslySetInnerHTML = { __html: args.domProps.innerHTML };
