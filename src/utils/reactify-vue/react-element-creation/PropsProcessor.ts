@@ -305,6 +305,10 @@ export class PropsProcessor {
                 props.value = args.domProps.value;
             }
 
+            if (args.domProps.checked) {
+                props.checked = args.domProps.checked;
+            }
+
             if (args.domProps.innerHTML) {                
                 props.dangerouslySetInnerHTML = {__html: args.domProps.innerHTML};
             }
