@@ -8,9 +8,6 @@ import {PopupDemo} from '../demo/PopupDemo';
 import {PickerModalDemo} from '../demo/PickerModalDemo';
 import {LoginScreenDemo} from '../demo/LoginScreenDemo';
 
-declare const require: any;
-const Portal = require('react-portal');
-
 export interface IModalsPageState {
     pickerOpened: boolean;
     popupOpened: boolean;
@@ -84,18 +81,13 @@ export class ModalsPage extends React.Component<any, IModalsPageState> {
                             <Button onClick={this.openPreloader.bind(this)}>Preloader</Button>
                         </GridCol>
                     </GridRow>
-                </ContentBlock>
+                </ContentBlock>                
 
-                {/* Anything you want rendered in the body like modals, etc. can be done using react-portal */}
-                <Portal isOpened={true}>
-                    <span>
-                        <PopoverDemo id="demo-popover"/>
-                        <PickerModalDemo opened={this.state.pickerOpened} closePicker={this.closePicker.bind(this)} />
-                        <PopupDemo opened={this.state.popupOpened} closePopup={this.closePopup.bind(this)} />
-                        <ActionsDemo opened={this.state.actionsOpened} onActionsClosed={this.closeActions.bind(this)} />
-                        <LoginScreenDemo opened={this.state.loginScreenOpened} closeLoginScreen={this.closeLoginScreen.bind(this)} />
-                    </span>
-                </Portal>
+                <PopoverDemo id="demo-popover"/>
+                <PickerModalDemo opened={this.state.pickerOpened} closePicker={this.closePicker.bind(this)} />
+                <PopupDemo opened={this.state.popupOpened} closePopup={this.closePopup.bind(this)} />
+                <ActionsDemo opened={this.state.actionsOpened} onActionsClosed={this.closeActions.bind(this)} />
+                <LoginScreenDemo opened={this.state.loginScreenOpened} closeLoginScreen={this.closeLoginScreen.bind(this)} />
             </Page>
         );
     }

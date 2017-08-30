@@ -21,7 +21,6 @@
   "dependencies": {
     "framework7-react": "file:../",
     "react": "^15.3.2",
-    "react-dom": "^15.3.2",
-    "react-portal": "^3.0.0"
+    "react-dom": "^15.3.2"
   }
 }

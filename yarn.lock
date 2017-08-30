@@ -2032,7 +2032,7 @@ framework7-bencompton-fork@1.6.5:
 
 "framework7-vue@github:bencompton/framework7-vue":
   version "0.9.2"
-  resolved "https://codeload.github.com/bencompton/framework7-vue/tar.gz/10e1640b9557ba95a65a5c02ed7cb7aea16e5fe4"
+  resolved "https://codeload.github.com/bencompton/framework7-vue/tar.gz/0ec9d1df4da31f572946383e78a1d43bdc50ed8b"
 
 fs-exists-sync@^0.1.0:
   version "0.1.0"
