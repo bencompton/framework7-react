@@ -1,5 +1,5 @@
 /**
- * Framework7 React 0.9.2-4-beta
+ * Framework7 React 0.9.2-6-beta
  * A React version of Framework7
  * https://github.com/bencompton/framework7-react#readme
  * 
@@ -9,7 +9,7 @@
  * 
  * Licensed under APACHE 2.0
  * 
- * Released on: August 29, 2017
+ * Released on: August 30, 2017
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -1351,7 +1351,8 @@ var formInput = {
       readonly: self.readonly,
       required: self.required,
       color: self.color,
-      pattern: self.pattern
+      pattern: self.pattern,
+      tabindex: self.tabindex
     };
     var on = {
       focus: self.onFocus,
@@ -1467,6 +1468,7 @@ var formInput = {
     required: Boolean,
     inputStyle: String,
     pattern: String,
+    tabindex: [String, Number],
     resizable: Boolean,
 
     // Components
@@ -1932,6 +1934,7 @@ var listButton = {
     'title': [String, Number],
     'link': [Boolean, String],
     'href': [Boolean, String],
+    'tabindex': [Number, String],
     'external': Boolean,
     'link-external': Boolean,
     'back': Boolean,
@@ -2007,6 +2010,9 @@ var listButton = {
       }
       if (self.view) {
         ao['data-view'] = self.view;
+      }
+      if (self.tabindex) {
+        ao['tabindex'] = self.tabindex;
       }
 
       function trustyString(s) {
@@ -2336,10 +2342,11 @@ var listItemSwipeoutActions = {
 
 var listItemSwipeoutButton = {
   render: function render() {
-    var _vm = this;var _h = _vm.$createElement;var _c = _vm._self._c || _h;return _c('a', { class: _vm.classObject, attrs: { "href": "#" }, on: { "click": _vm.onClick } }, [_vm._t("default")], 2);
+    var _vm = this;var _h = _vm.$createElement;var _c = _vm._self._c || _h;return _c('a', { class: _vm.classObject, attrs: { "href": "#" }, on: { "click": _vm.onClick } }, [_vm._t("default", [_vm._v(_vm._s(_vm.text))])], 2);
   },
   staticRenderFns: [],
   props: {
+    'text': String,
     'overswipe': Boolean,
     'close': Boolean,
     'delete': Boolean,
@@ -3133,7 +3140,7 @@ var messages = {
     if (this.f7Messages && this.f7Messages.layout && this.autoLayout) {
       this.f7Messages.layout();
     }
-    if (this.f7Messages && this.f7Messages.layout && this.autoLayout) {
+    if (this.f7Messages && this.f7Messages.scrollMessages && this.scrollMessages) {
       this.f7Messages.scrollMessages();
     }
   },
@@ -4176,7 +4183,7 @@ var popover = {
 
 var popup = {
   render: function render() {
-    var _vm = this;var _h = _vm.$createElement;var _c = _vm._self._c || _h;return _c('div', { staticClass: "popup", class: _vm.classesObject, on: { "popup:open": _vm.onOpen, "popup:opened": _vm.onOpened, "popup:close": _vm.onClose, "popup:closed": _vm.onClosed } }, [_vm._t("default")], 2);
+    var _vm = this;var _h = _vm.$createElement;var _c = _vm._self._c || _h;return _c('div', { staticClass: "popup", class: _vm.classesObject, on: { "popup:open": _vm.onOpen, "popup:opened": _vm.onOpened, "popup:close": _vm.onClose, "popup:closed": _vm.onClosed } }, [_vm.opened ? _vm._t("default") : _vm._e()], 2);
   },
   staticRenderFns: [],
   mounted: function mounted() {
@@ -10579,6 +10586,7 @@ var Framework7Router = function () {
     value: function findMatchingRoute(url) {
       var matchingRoute;
       if (!url) return matchingRoute;
+      url = "" + url; //Insures that the url is of type string so url.split does not crash app in weird situations.
 
       var routes = this.routes;
       var query = this.dom7.parseUrlQuery(url);
