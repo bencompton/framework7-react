@@ -1,6 +1,6 @@
 {
   "name": "framework7-react",
-  "version": "0.9.2-6-beta",
+  "version": "0.9.3",
   "description": "A React version of Framework7",
   "main": "dist/commonjs/framework7-react/index.js",
   "typings": "dist/commonjs/framework7-react/index.d.ts",
@@ -51,7 +51,7 @@
     "babel-preset-stage-2": "^6.18.0",
     "css-loader": "^0.25.0",
     "framework7-bencompton-fork": "1.6.5",
-    "framework7-vue": "github:bencompton/framework7-vue",
+    "framework7-vue": "0.9.3",
     "gulp": "3.9.1",
     "gulp-clean": "^0.3.2",
     "gulp-concat": "^2.6.1",

@@ -2030,9 +2030,9 @@ framework7-bencompton-fork@1.6.5:
   version "1.6.5"
   resolved "https://registry.yarnpkg.com/framework7-bencompton-fork/-/framework7-bencompton-fork-1.6.5.tgz#daf3d1b03a37bce642a919dc3ecbe53f675013e4"
 
-"framework7-vue@github:bencompton/framework7-vue":
-  version "0.9.2"
-  resolved "https://codeload.github.com/bencompton/framework7-vue/tar.gz/0ec9d1df4da31f572946383e78a1d43bdc50ed8b"
+framework7-vue@^0.9.3:
+  version "0.9.3"
+  resolved "https://registry.yarnpkg.com/framework7-vue/-/framework7-vue-0.9.3.tgz#420c54aeaa925bed714ec189a3cce7fcee8e0879"
 
 fs-exists-sync@^0.1.0:
   version "0.1.0"
