@@ -1,8 +1,6 @@
 # Framework7 React
 
-[Framework7](http://framework7.io) is a JavaScript framework for building iOS and Material web and hybrid apps that are virtually indistinguishable from native apps. Framework7 React brings the attention to detail, ease of use, and great features of Framework7 to React. To see it in action, have a look at the [kitchen sink](https://bencompton.github.io/framework7-react/).
-
-Note that Framework7 React is still very new, so more complex examples beyond the kitchen sink aren't available yet. In the meantime, if you're new to Framework7, you should have a look at the [full iOS / Material Design kitchen sinks](http://framework7.io), [the demo apps](http://framework7.io/apps/), and [the example layouts](http://framework7.io/examples/) to get a feel for Framework7 and what is possible.
+[Framework7](http://framework7.io) is a JavaScript framework for building iOS and Material web and hybrid apps that accurately recreate the look and feel of native apps. Framework7 React brings the attention to detail, ease of use, and great features of Framework7 to React. To see it in action, have a look at the [kitchen sink](https://bencompton.github.io/framework7-react/).
 
 ## Getting started
 
