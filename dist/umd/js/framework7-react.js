@@ -1,5 +1,5 @@
 /**
- * Framework7 React 0.9.2-6-beta
+ * Framework7 React 0.9.3-2
  * A React version of Framework7
  * https://github.com/bencompton/framework7-react#readme
  * 
@@ -9,7 +9,7 @@
  * 
  * Licensed under APACHE 2.0
  * 
- * Released on: September 16, 2017
+ * Released on: November 8, 2017
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -10346,11 +10346,11 @@ var PropsProcessor = (function () {
     PropsProcessor.prototype.convertAttrsToProps = function (args, componentOrComponentName, resolvedComponent, props) {
         if (args.attrs) {
             for (var attr in args.attrs) {
-                attr = renameAttribute(componentOrComponentName, attr);
+                var renamedAttr = renameAttribute(componentOrComponentName, attr);
                 var resolvedVueComponent = resolvedComponent.vueComponent;
                 var attrValue = args.attrs[attr];
                 if (attrValue !== undefined || attrValue !== false) {
-                    var camelCasedAttrName = camelCase(attr);
+                    var camelCasedAttrName = camelCase(renamedAttr);
                     var vueComponentProp = resolvedVueComponent && resolvedVueComponent.props && resolvedVueComponent.props[camelCasedAttrName];
                     if (vueComponentProp) {
                         if (vueComponentProp === Boolean && attrValue !== false) {
