@@ -274,13 +274,13 @@ export class PropsProcessor {
     private convertAttrsToProps(args, componentOrComponentName, resolvedComponent, props) {
         if (args.attrs) {
             for (let attr in args.attrs) {
-                attr = renameAttribute(componentOrComponentName, attr);
+                const renamedAttr = renameAttribute(componentOrComponentName, attr);
 
                 const resolvedVueComponent = resolvedComponent.vueComponent;
                 const attrValue = args.attrs[attr];
 
                 if (attrValue !== undefined || attrValue !== false) {
-                    const camelCasedAttrName = camelCase(attr);
+                    const camelCasedAttrName = camelCase(renamedAttr);
                     const vueComponentProp = resolvedVueComponent && resolvedVueComponent.props && resolvedVueComponent.props[camelCasedAttrName];
 
                     if (vueComponentProp) {
