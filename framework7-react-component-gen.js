@@ -5,6 +5,8 @@ import * as fs from 'fs';
 import * as to from 'to-case';
 import * as babel from 'babel-core';
 
+import * as VueComponents from './framework7-vue.esm';
+
 const ensureDirectoryExistence = (filePath) => {
     var dirname = path.dirname(filePath);
     
@@ -294,33 +296,32 @@ const generateIndexTsFile = (vueComponents, excludes) => {
 }
 
 export const generateReactComponents = (args) => {
-    const componentFile = [];
-
-    const componentMixinMap = getComponentMixinMap();  
-
-    const vueComponents = require('./framework7-vue/framework7-vue');   
+    ///const componentFile = [];
+    //const componentMixinMap = getComponentMixinMap();    
 
     Object.keys(vueComponents).forEach(vueComponentName => {
-        const reactComponentName = vueComponentName.replace('Vue', '');        
-        const vueComponent = vueComponents[vueComponentName]
-        const vueComponentString = stringify(vueComponent).split(`\\"`).join('"');        
-        const componentToTagMappings = getComponentToTagMappings();
-
-        if (!args || !args.exclude || args.exclude.indexOf(reactComponentName) === -1) {
-            const reactifyF7VueCall = generateReactifyF7VueCall(
-                vueComponent,
-                vueComponentName,
-                vueComponentString, 
-                reactComponentName,             
-                componentToTagMappings,
-                componentMixinMap,
-                args && args.overrides
-            );            
-
-            const outPath = `./framework7-react/${reactComponentName}.ts`;
-
-            ensureDirectoryExistence(outPath);
-            writeFileSync(outPath, reactifyF7VueCall);
+        if (vueComponentName.indexOf('f7') !== -1) {
+            const reactComponentName = vueComponentName.replace('f7', '');        
+            const vueComponent = VueComponents[vueComponentName]
+            const vueComponentString = stringify(vueComponent).split(`\\"`).join('"');        
+            const componentToTagMappings = getComponentToTagMappings();
+    
+            // if (!args || !args.exclude || args.exclude.indexOf(reactComponentName) === -1) {
+            //     const reactifyF7VueCall = generateReactifyF7VueCall(
+            //         vueComponent,
+            //         vueComponentName,
+            //         vueComponentString, 
+            //         reactComponentName,             
+            //         componentToTagMappings,
+            //         componentMixinMap,
+            //         args && args.overrides
+            //     );            
+    
+            //     const outPath = `./framework7-react/${reactComponentName}.ts`;
+    
+            //     ensureDirectoryExistence(outPath);
+            //     writeFileSync(outPath, reactifyF7VueCall);
+            // }    
         }
     });
 
