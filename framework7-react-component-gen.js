@@ -102,34 +102,13 @@ const getEventList = (vueComponentString) => {
     return events;
 };
 
-const getComponentToTagMappings = () => {
-    const framework7Vue = readFileSync('./node_modules/framework7-vue/src/framework7-vue.js', 'utf8');
-    const framework7VueString = stringify(framework7Vue);
-    const regex = new RegExp(/["'](f7-[A-Za-z0-9-]+)["']\s*\:\s*([A-Za-z0-9]+),/, 'g');
-    let match;
-    const tagToComponentMap = {};
-    const componentToTagMap = {};
-    
-    while (match = regex.exec(framework7VueString)) {
-        const tagName = match[1];
-        const componentName = match[2];
-
-        tagToComponentMap[tagName] = componentName;
-        componentToTagMap[componentName] = tagName;
-    }
-
-    return {
-        componentToTagMap,
-        tagToComponentMap
-    };
-};
-
-const getInstantiatedComponentList = (vueComponentString, tagToComponentMap) => {
+const getInstantiatedComponentList = (vueComponentString, vueComponent, tagToComponentMap) => {
     return Object.keys(tagToComponentMap).reduce((componentList, nextTag) => {        
         const regex = new RegExp(`["']${nextTag}["']`, 'g');
+        const componentName = tagToComponentMap[nextTag];
 
-        if (regex.test(vueComponentString) && componentList.indexOf(tagToComponentMap[nextTag]) === -1) {
-            return componentList.concat([tagToComponentMap[nextTag]]);
+        if (nextTag !== vueComponent.name && regex.test(vueComponentString) && componentList.indexOf(componentName === -1)) {
+            return componentList.concat([componentName]);
         } else {
             return componentList;
         }
@@ -153,103 +132,69 @@ const getSlotList = (vueComponentString) => {
     return slots;
 };
 
-const getComponentMixinMap = () => {
-    let framework7Vue = readFileSync('./framework7-vue/framework7-vue.js', 'utf8');
-    const regex = new RegExp(/mixins:\s*\[([A-Za-z0-9]+)/, 'g');    
-    let match;
+const getComponentToTagMappings = vueComponents => {
+    const tagToComponentMap = {};
+    const componentToTagMap = {};
 
-    framework7Vue = framework7Vue.replace(regex, (mixinStatement, mixinName) => {
-        return mixinStatement.replace(mixinName, `'${mixinName}'`);
+    Object.keys(vueComponents).forEach(vueComponentName => {
+        if (vueComponentName.indexOf('f7') !== -1) {
+            const vueComponent = vueComponents[vueComponentName];
+            const tagName = vueComponent.name;
+            const componentName = vueComponentName.replace('f7', '');
+
+            tagToComponentMap[tagName] = componentName;
+            componentToTagMap[componentName] = tagName;
+        }
     });
 
-    let transpiledFramework7Vue = babel.transform(framework7Vue, {
-        presets: ['es2015']
-    }).code;    
-
-    const framework7VueExports = new Function('exports, console', 'try {\n' + transpiledFramework7Vue + '\n} catch (err) { console.log("An error occurred: "); console.error(err);}; return exports;')({}, console);
-
-    return Object.keys(framework7VueExports).reduce((componentMixinMap, nextExportName) => {
-        const exportedComponent = framework7VueExports[nextExportName];
-
-        if (exportedComponent.mixins) {
-            return {
-                ...componentMixinMap,
-                [nextExportName]: exportedComponent.mixins[0]
-            };
-        } else {
-            return componentMixinMap;
-        }
-    }, {});    
+    return {
+        componentToTagMap,
+        tagToComponentMap
+    };
 };
 
 const generateReactifyF7VueCall = (
     vueComponent,
     vueComponentName,
     vueComponentString, 
-    reactComponentName,     
-    componentToTagMappings,
-    componentMixinMap,
-    overrides
+    reactComponentName,
+    componentToTagMappings
 ) => {
     const reactifyF7VueArgs = [];
     let eventList;
     let instantiatedComponentList;
     let slotList;
     
-    const imports = [
-        `import * as React from 'react'`,
+    const imports = [        
         generateImportString('reactifyF7Vue', '../src/utils/ReactifyF7Vue'),
-        generateImportString(vueComponentName, '../framework7-vue/framework7-vue')
+        generateImportString(vueComponentName, 'framework7-vue/dist/framework7-vue.esm')
     ];    
     
     reactifyF7VueArgs.push(`component: ${vueComponentName}`);
     reactifyF7VueArgs.push(`name: '${reactComponentName}'`);
-    reactifyF7VueArgs.push(`tag: '${componentToTagMappings.componentToTagMap[reactComponentName]}'`);
-
-    const componentOverrides = overrides && overrides[reactComponentName];
-    
-    if (componentOverrides && componentOverrides.events) { 
-        eventList = componentOverrides.events;
-    } else {
-        eventList = getEventList(vueComponentString);        
-    }
+    reactifyF7VueArgs.push(`tag: '${vueComponent.name}'`);
+   
+    eventList = getEventList(vueComponentString);
 
     if (eventList.length) reactifyF7VueArgs.push(`events: [\n\t\t'${eventList.join('\',\n\t\t\'')}'\n\t]`);
 
-    if (componentOverrides && componentOverrides.instantiatedComponents) { 
-        instantiatedComponentList = componentOverrides.instantiatedComponents.instantiatedComponents;
-    } else {
-        instantiatedComponentList = getInstantiatedComponentList(vueComponentString, componentToTagMappings.tagToComponentMap);        
-    }
+    instantiatedComponentList = getInstantiatedComponentList(vueComponentString, vueComponent, componentToTagMappings.tagToComponentMap);    
 
     if (instantiatedComponentList.length) reactifyF7VueArgs.push(`instantiatedComponents: [\n\t\t${instantiatedComponentList.join(',\n\t\t')}\n\t]`);
 
-    if (componentOverrides && componentOverrides.slots) {   
-        slotList = componentOverrides.slots;
-    } else {
-        slotList = getSlotList(vueComponentString);        
-    }
+    slotList = getSlotList(vueComponentString);
 
     if (slotList.length) reactifyF7VueArgs.push(`slots: [\n\t\t'${slotList.join('\',\n\t\t\'')}'\n\t]`);
     
     imports.push(...instantiatedComponentList.map(componentName => {
         return generateImportString(componentName, `./${componentName}`)
-    }));  
-    
-    const mixin = componentMixinMap[vueComponentName];
-    
-    if (mixin) {        
-        imports.push(generateImportString(`Vue${mixin}`, '../framework7-vue/framework7-vue'));
-        imports.push(generateImportString(`I${mixin}Props`, `./${mixin}`));
-        reactifyF7VueArgs.push(`mixin: Vue${mixin}`);
-    }
+    }));
 
     const typeScriptInterface = generateTypeScriptInterfaceFromProps(
         vueComponent.props,
         reactComponentName,
         eventList,
-        slotList,
-        mixin
+        slotList
     );
 
     const propInterfaceName = (typeScriptInterface) ? `I${reactComponentName}Props` : 'void';
@@ -266,7 +211,7 @@ const generateReactifyF7VueCall = (
     return componentCode.join('\n');
 };
 
-const generateIndexTsFile = (vueComponents, excludes) => {
+const generateIndexTsFile = (vueComponents) => {
     const importedFiles = [];
     const exportedModules = [];
 
@@ -275,18 +220,11 @@ const generateIndexTsFile = (vueComponents, excludes) => {
     importedFiles.push(generateImportString('Framework7', '../framework7/Framework7'));
     exportedModules.push('Framework7');
 
-    Object.keys(vueComponents).forEach(vueComponentName => {
-        if (vueComponentName.indexOf('Mixin') === -1) {
-            const reactComponentName = vueComponentName.replace('Vue', '');  
-
-            if (excludes && excludes.indexOf(reactComponentName) !== -1) {
-                importedFiles.push(generateImportString(reactComponentName, `../src/components/${reactComponentName}`));
-            } else {
-                importedFiles.push(generateImportString(reactComponentName, `./${reactComponentName}`));
-            }
-            
-            exportedModules.push(reactComponentName);
-        }
+    Object.keys(vueComponents).forEach(vueComponentName => {        
+        const reactComponentName = vueComponentName.replace('Vue', '');  
+        
+        importedFiles.push(generateImportString(reactComponentName, `../src/components/${reactComponentName}`));
+        exportedModules.push(reactComponentName);
     });
 
     const indexTsFile = `${importedFiles.join('\n')}\n\nexport {\n\t${exportedModules.join(',\n\t')}\n}`;
@@ -295,35 +233,29 @@ const generateIndexTsFile = (vueComponents, excludes) => {
     writeFileSync(outPath, indexTsFile);
 }
 
-export const generateReactComponents = (args) => {
-    ///const componentFile = [];
-    //const componentMixinMap = getComponentMixinMap();    
+export const generateReactComponents = () => {
+    const componentToTagMaps = getComponentToTagMappings(VueComponents);
 
-    Object.keys(vueComponents).forEach(vueComponentName => {
+    Object.keys(VueComponents).forEach(vueComponentName => {
         if (vueComponentName.indexOf('f7') !== -1) {
             const reactComponentName = vueComponentName.replace('f7', '');        
             const vueComponent = VueComponents[vueComponentName]
-            const vueComponentString = stringify(vueComponent).split(`\\"`).join('"');        
-            const componentToTagMappings = getComponentToTagMappings();
-    
-            // if (!args || !args.exclude || args.exclude.indexOf(reactComponentName) === -1) {
-            //     const reactifyF7VueCall = generateReactifyF7VueCall(
-            //         vueComponent,
-            //         vueComponentName,
-            //         vueComponentString, 
-            //         reactComponentName,             
-            //         componentToTagMappings,
-            //         componentMixinMap,
-            //         args && args.overrides
-            //     );            
-    
-            //     const outPath = `./framework7-react/${reactComponentName}.ts`;
-    
-            //     ensureDirectoryExistence(outPath);
-            //     writeFileSync(outPath, reactifyF7VueCall);
-            // }    
+            const vueComponentString = stringify(vueComponent).split(`\\"`).join('"');
+            
+            const reactifyF7VueCall = generateReactifyF7VueCall(
+                vueComponent,
+                vueComponentName,
+                vueComponentString, 
+                reactComponentName,
+                componentToTagMaps
+            );            
+
+            const outPath = `./framework7-react/${reactComponentName}.ts`;
+
+            ensureDirectoryExistence(outPath);
+            writeFileSync(outPath, reactifyF7VueCall);
         }
     });
 
-    generateIndexTsFile(vueComponents, args && args.exclude);
+    generateIndexTsFile(VueComponents);
 };
