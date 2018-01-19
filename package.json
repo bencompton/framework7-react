@@ -9,7 +9,7 @@
   },
   "scripts": {
     "test": "gulp test",
-    "build": "gulp && cd kitchen-sink && rm -rf node_modules/framework7-react && npm install && gulp",
+    "build": "gulp && cd kitchen-sink && rm -rf node_modules/framework7-react && yarn install --check-files && gulp",
     "update-f7-vue": "rm -rf node_modules/framework7-vue && npm install"
   },
   "repository": {
@@ -77,10 +77,9 @@
     "change-case": "^3.0.0",
     "framework7-vue": "^2.0.0",
     "prop-types": "^15.5.10",
-    "query-string": "^4.3.1"    
+    "query-string": "^4.3.1"
   },
   "peerDependencies": {
-    "react": "15.x",
-    "framework7": "2.x"    
+    "react": "15.x"
   }
 }

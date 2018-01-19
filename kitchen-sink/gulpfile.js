@@ -15,12 +15,4 @@ gulp.task('webpack', ['clean'], function () {
         .pipe(gulp.dest('dist/'));
 });
 
-gulp.task('copyFw7', function() {
-    return gulp.src([
-        './node_modules/framework7-vue/kitchen-sink/framework7/*'])
-        .pipe(gulp.dest('./framework7/'));
-});
-
-
-
-gulp.task('default', ['webpack', 'copyFw7']);
+gulp.task('default', ['webpack']);
