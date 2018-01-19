@@ -217,14 +217,14 @@ const generateIndexTsFile = (vueComponents) => {
 
     importedFiles.push(generateImportString('Framework7App', '../src/components/Framework7App'));
     exportedModules.push('Framework7App');
-    importedFiles.push(generateImportString('Framework7', '../framework7/Framework7'));
-    exportedModules.push('Framework7');
 
-    Object.keys(vueComponents).forEach(vueComponentName => {        
-        const reactComponentName = vueComponentName.replace('Vue', '');  
-        
-        importedFiles.push(generateImportString(reactComponentName, `../src/components/${reactComponentName}`));
-        exportedModules.push(reactComponentName);
+    Object.keys(vueComponents).forEach(vueComponentName => {
+        if (vueComponentName.indexOf('f7') !== -1) {
+            const reactComponentName = vueComponentName.replace('f7', '');
+            
+            importedFiles.push(generateImportString(reactComponentName, `./${reactComponentName}`));
+            exportedModules.push(reactComponentName);    
+        }
     });
 
     const indexTsFile = `${importedFiles.join('\n')}\n\nexport {\n\t${exportedModules.join(',\n\t')}\n}`;
@@ -258,4 +258,6 @@ export const generateReactComponents = () => {
     });
 
     generateIndexTsFile(VueComponents);
+
+    return Promise.resolve();
 };

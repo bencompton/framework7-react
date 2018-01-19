@@ -1,17 +1,18 @@
+import { task, series, dest, src } from 'gulp';
+
 import {generateReactComponents} from './framework7-react-component-gen';
 
-// const gulp = require('gulp'),
-//     path = require('path'),
-//     clean = require('gulp-clean'),
-//     concat = require('gulp-concat'),
-//     tsc = require('gulp-typescript'),
-//     merge = require('merge2'),
-//     replace = require('gulp-replace'),
-//     sourcemaps = require('gulp-sourcemaps'),
-//     webpack = require('webpack-stream'),
-//     getWebpackConfig = require('./webpack.config.js').getWebpackConfig,
-//     header = require('gulp-header'),
-//     pkg = require('./package.json');
+const path = require('path'),
+    clean = require('gulp-clean'),
+    concat = require('gulp-concat'),
+    tsc = require('gulp-typescript'),
+    merge = require('merge2'),
+    replace = require('gulp-replace'),
+    sourcemaps = require('gulp-sourcemaps'),
+    webpack = require('webpack-stream'),
+    getWebpackConfig = require('./webpack.config.js').getWebpackConfig,
+    header = require('gulp-header'),
+    pkg = require('./package.json');
 
 // function addHeader() {
 //     const banner = [
@@ -55,34 +56,34 @@ import {generateReactComponents} from './framework7-react-component-gen';
 //         .pipe(gulp.dest(outputDirectory));
 // }    
 
-// gulp.task('clean', () => {
-//     return gulp.src(['./dist', './framework7-vue', './framework7-react'], { read: false })    
-//         .pipe(clean());
-// });
-
 // gulp.task('generate-react-components', ['clean'], () => {
 //     return generateReactComponents();
 // });
 
-// gulp.task('compile-ts', ['clean'], () => {
-//     var tsProject = tsc.createProject('tsconfig.json');
+export const cleanBuild = () => {
+    return src(['./dist', './framework7-react'], { read: false })    
+        .pipe(clean());
+};
 
-//     var tsResult = tsProject.src()
-//         .pipe(sourcemaps.init())
-//         .pipe(tsProject());
+export const compileTs = () => {
+    var tsProject = tsc.createProject('tsconfig.json');
 
-//     return merge([
-//         tsResult.dts.pipe(gulp.dest('dist/commonjs/')),
-//         tsResult.js.pipe(sourcemaps.write('.', {
-//             includeContent: false,
-//             sourceRoot: function (file) {
-//                 var sourceFile = path.join(file.cwd, file.sourceMap.file);
-//                 return "../" + path.relative(path.dirname(sourceFile), __dirname);
-//             }
-//         }))
-//         .pipe(gulp.dest('dist/commonjs/'))        
-//     ]);
-// });
+    var tsResult = tsProject.src()
+        .pipe(sourcemaps.init())
+        .pipe(tsProject());
+
+    return merge([
+        tsResult.dts.pipe(dest('dist/commonjs/')),
+        tsResult.js.pipe(sourcemaps.write('.', {
+            includeContent: false,
+            sourceRoot: function (file) {
+                var sourceFile = path.join(file.cwd, file.sourceMap.file);
+                return "../" + path.relative(path.dirname(sourceFile), __dirname);
+            }
+        }))
+        .pipe(dest('dist/commonjs/'))        
+    ]);
+};
 
 // gulp.task('build-dependencies', [
 //     'clean',
@@ -117,6 +118,4 @@ import {generateReactComponents} from './framework7-react-component-gen';
 //     'build-for-commonjs'
 // ]); 
 
-export const build = () => generateReactComponents();
-
-export default build;
+export default series(cleanBuild, generateReactComponents, compileTs);
