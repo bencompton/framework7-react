@@ -55,23 +55,6 @@ export const convertVueComponentToClass = (vueComponentObject) => {
 
     vueComponentClass.prototype = vueComponentObject;
 
-    if (vueComponentObject.mixins) {
-        vueComponentObject.mixins.forEach(mixin => {
-            Object.keys(mixin).forEach(prop => {
-                if (vueComponentClass.prototype[prop]) {
-                    const existingPropertyValue = vueComponentClass.prototype[prop];
-                    const mixinPropertyValue = mixin[prop];
-
-                    Object.keys(mixinPropertyValue).forEach(mixinProp => {
-                        existingPropertyValue[mixinProp] = mixinPropertyValue[mixinProp];
-                    });
-                } else {
-                    vueComponentClass.prototype[prop] = mixin[prop];
-                }
-            });
-        });
-    } 
-
     vueComponentClass.prototype.$emit = function (eventName: string, ...eventArgs: any[]) {
         callPropOnEvent(eventName, eventArgs, this.reactComponentProps);
     };

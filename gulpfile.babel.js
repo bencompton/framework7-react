@@ -61,7 +61,7 @@ const path = require('path'),
 // });
 
 export const cleanBuild = () => {
-    return src(['./dist', './framework7-react'], { read: false })    
+    return src(['./dist', './framework7-react'], { read: false, allowEmpty: true })    
         .pipe(clean());
 };
 

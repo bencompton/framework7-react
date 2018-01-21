@@ -9,14 +9,13 @@ import {
     copyArgsToVueComponent,
     handleWatchedProperties,
     handleComputedProperties,
-    getDefaultProps,
     addCompiledTemplateFunctionsToVueComponent,
     generateCreateElementFunctionForClass,
     applyPropOverridesToTopLevelElement,
     initData
 } from './ReactClassRuntime';
 
-export const generateReactClass = <TProps>(instantiatedComponents, vueComponent, slots, name, tag, mixin, args): React.ComponentClass<TProps> => {
+export const generateReactClass = <TProps>(instantiatedComponents, vueComponent, slots, name, tag, args, defaultProps): React.ComponentClass<TProps> => {
     const vueComponentClass = convertVueComponentToClass(vueComponent);
 
     copyMethodsToVueComponent(vueComponent);
@@ -38,7 +37,7 @@ export const generateReactClass = <TProps>(instantiatedComponents, vueComponent,
                 this.vueComponent
             );
             
-            copyPropsToVueComponent(this.vueComponent, this.props);
+            copyPropsToVueComponent(this.vueComponent, this.props, defaultProps);
             copySlotsToVueComponent(this.vueComponent, slots, this.props);                        
             const state = initData(this.vueComponent, this);
             handleComputedProperties(this.vueComponent);
@@ -71,13 +70,13 @@ export const generateReactClass = <TProps>(instantiatedComponents, vueComponent,
         }
 
         componentWillReceiveProps(nextProps) {
-            handleWatchedProperties(this.vueComponent, this.props, nextProps);               
+            handleWatchedProperties(this.vueComponent, this.props, nextProps, defaultProps);               
         }
 
         render() {  
             if (this.hasRendered) {
                 //Only do this after the first render, since it happens in getInitialState the first time
-                copyPropsToVueComponent(this.vueComponent, this.props);
+                copyPropsToVueComponent(this.vueComponent, this.props, defaultProps);
                 copySlotsToVueComponent(this.vueComponent, slots, this.props);
                 handleComputedProperties(this.vueComponent);
             }
@@ -102,10 +101,7 @@ export const generateReactClass = <TProps>(instantiatedComponents, vueComponent,
     (reactClass as any).vueComponent = vueComponent;
     (reactClass as any).getVueComponentInstance = () => this.vueComponent;  
     (reactClass as any).displayName = name;
-
-    const defaultProps = getDefaultProps(vueComponent);
-
-    if (defaultProps) (reactClass as any).defaultProps = defaultProps;
+    (reactClass as any).defaultProps = defaultProps;
 
     return reactClass;
 };

@@ -13,15 +13,15 @@ export const copyMethodsToVueComponent = (vueComponent: IVueComponent) => {
     }
 };
 
-export const copyPropsToVueComponent = (vueComponent: IVueComponent, props: any) => {
-    if (props) {
-        Object.keys(props)
-            .forEach(propName => {
-                if (typeof vueComponent[propName] !== 'function' || typeof vueComponent[propName] === 'function' && !vueComponent[propName]) {
-                    vueComponent[propName] = props[propName];
-                }
-            });
-    }
+export const copyPropsToVueComponent = (vueComponent: IVueComponent, props: any, defaultProps: any) => {
+    const allProps = { ...defaultProps, ...props }
+
+    Object.keys(props)
+        .forEach(propName => {
+            if (typeof vueComponent[propName] !== 'function' || typeof vueComponent[propName] === 'function' && !vueComponent[propName]) {
+                vueComponent[propName] = props[propName];
+            }
+        });    
 };
 
 export const getComponentTag = (component: any) => {
@@ -71,9 +71,9 @@ export const copyArgsToVueComponent = (vueComponent: IVueComponent, args: any) =
     }
 }
 
-export const handleWatchedProperties = (vueComponent: IVueComponent, currentProps: any, nextProps: any) => {
+export const handleWatchedProperties = (vueComponent: IVueComponent, currentProps: any, nextProps: any, defaultProps: any) => {
     if (vueComponent.watch) {
-        copyPropsToVueComponent(vueComponent,nextProps);
+        copyPropsToVueComponent(vueComponent, nextProps, defaultProps);
         handleComputedProperties(vueComponent);
 
         Object.keys(vueComponent.watch)
@@ -93,27 +93,6 @@ export const handleComputedProperties = (vueComponent: IVueComponent) => {
             });
     }
 }
-
-export const getDefaultProps = (vueComponent: IVueComponent) => {
-    if (vueComponent.props) {
-        const defaultProps = Object.keys(vueComponent.props).reduce((defaultProps, propName) => {
-            const propDef = vueComponent.props[propName];
-            
-            if (propDef.default) {
-                return {
-                    ...defaultProps,
-                    [camelCase(propName)]: propDef.default
-                };
-            } else {
-                return defaultProps;
-            }
-        }, {});
-
-        return Object.keys(defaultProps).length ? defaultProps : null;
-    } else {
-        return null;
-    }
-};
 
 export const addCompiledTemplateFunctionsToVueComponent = (vueComponent: any, createElement: Function) => {
     vueComponent._self = { _c: createElement.bind(vueComponent) };

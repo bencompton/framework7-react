@@ -17,7 +17,7 @@ export interface IReactifyF7VueArgs {
     args?: any;
     instantiatedComponents?: (React.ComponentClass<any> | React.StatelessComponent<any>)[];
     events?: string[];
-    mixin?: any;
+    defaultProps: any;
 }
 
 export const reactifyF7Vue = <TProps>(args: IReactifyF7VueArgs): React.ComponentClass<TProps> => {
@@ -35,9 +35,9 @@ export const reactifyF7Vue = <TProps>(args: IReactifyF7VueArgs): React.Component
         args: {
             ...args.args,
             $$: Dom7,
-            $t7: Template7            
+            $t7: Template7
         },
-        mixin: args.mixin
+        defaultProps: args.defaultProps
     });
 
     class reactClass extends React.Component<TProps, any> {

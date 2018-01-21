@@ -24,6 +24,7 @@ export interface IVueComponent {
     computed?: {[computedProp: string]: () => any};
     element?: HTMLElement;
     props: any;
+    defaultProps: any;
 }
 
 export interface IReactifyVueArgs {
@@ -34,7 +35,7 @@ export interface IReactifyVueArgs {
     instantiatedComponents?: (React.ComponentClass<any> | React.StatelessComponent<any>)[];
     slots?: IVueSlotToReactPropNameMap;
     args?: any;
-    mixin?: any;
+    defaultProps: any;
 }
 
 export const reactifyVue = <TProps>(reactifyVueArgs: IReactifyVueArgs) => {
@@ -44,7 +45,7 @@ export const reactifyVue = <TProps>(reactifyVueArgs: IReactifyVueArgs) => {
         reactifyVueArgs.slots,
         reactifyVueArgs.name,
         reactifyVueArgs.tag,
-        reactifyVueArgs.mixin,
-        reactifyVueArgs.args
+        reactifyVueArgs.args,
+        reactifyVueArgs.defaultProps
     );
 };

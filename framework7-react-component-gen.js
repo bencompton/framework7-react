@@ -132,6 +132,35 @@ const getSlotList = (vueComponentString) => {
     return slots;
 };
 
+const getDefaultProps = propDefinitions => {
+    const defaultProps = {};
+
+    if (propDefinitions) {
+        Object.keys(propDefinitions).forEach(propName => {
+            let propDefinition = propDefinitions[propName];
+            let defaultValue = null;
+
+            if (Array.isArray(propDefinition)) {
+                propDefinition = propDefinition[0];
+            }
+
+            if (propDefinition === String) {
+                defaultValue = '';
+            } else if (propDefinition.default) {
+                defaultValue = propDefinition.default;
+            } else if (propDefinition === Boolean) {
+                defaultValue = false;
+            } else if (propDefinition === Number) {
+                defaultValue = 0;
+            }
+
+            defaultProps[propName] = defaultValue;
+        });
+    }
+
+    return defaultProps;
+};
+
 const getComponentToTagMappings = vueComponents => {
     const tagToComponentMap = {};
     const componentToTagMap = {};
@@ -164,6 +193,7 @@ const generateReactifyF7VueCall = (
     let eventList;
     let instantiatedComponentList;
     let slotList;
+    let defaultProps;
     
     const imports = [        
         generateImportString('reactifyF7Vue', '../src/utils/ReactifyF7Vue'),
@@ -189,6 +219,10 @@ const generateReactifyF7VueCall = (
     imports.push(...instantiatedComponentList.map(componentName => {
         return generateImportString(componentName, `./${componentName}`)
     }));
+
+    defaultProps = getDefaultProps(vueComponent.props);
+
+    reactifyF7VueArgs.push(`defaultProps: ${stringify(defaultProps)}`);
 
     const typeScriptInterface = generateTypeScriptInterfaceFromProps(
         vueComponent.props,
