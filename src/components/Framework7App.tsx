@@ -44,7 +44,8 @@ export interface IFramework7AppProps extends React.Props<any> {
     themeType: ThemeTypeEnum;
     routes: IFramework7Route[];
     onFramework7Init?: (framework7: Framework7) => void;
-    onRouteChange?: (route: IFramework7Route) => void;
+    onRouteChange?: (from, to, router) => void;
+    onRouteChanged?: (from, to, router) => void;
     stateKernel?: { setFramework7: (f7: any) => void; setRouter: (router: any) => void; }
 }
 
@@ -117,31 +118,33 @@ export class Framework7App extends React.Component<IFramework7AppProps, Framewor
     }
 
     private initRouter() {
+        const self = this;
+
         Framework7.Router
         .use(VueRouter)
         .use({
             on: {
                 routeChange(to, from, router) {
-                    if (this.props.onRouteChange) {
-                        this.props.onRouteChange(to, from, router);
+                    if (self.props.onRouteChange) {
+                        self.props.onRouteChange(to, from, router);
                     }
         
-                    Object.keys(this.routeChangeCallbacks).forEach(componentId => {
+                    Object.keys(self.routeChangeCallbacks).forEach(componentId => {
                         //Need this if statement in case a component gets unregistered during this forEach                
-                        if (this.routeChangeCallbacks[componentId]) {                    
-                            this.routeChangeCallbacks[componentId](to, from, router);                                       
+                        if (self.routeChangeCallbacks[componentId]) {                    
+                            self.routeChangeCallbacks[componentId](to, from, router);                                       
                         }                
                     });
                 },
                 routeChanged(to, from, router) {
-                    if (this.props.onRouteChanged) {
-                        this.props.onRouteChanged(to, from, router);
+                    if (self.props.onRouteChanged) {
+                        self.props.onRouteChanged(to, from, router);
                     }
         
-                    Object.keys(this.routeChangedCallbacks).forEach(componentId => {
+                    Object.keys(self.routeChangedCallbacks).forEach(componentId => {
                         //Need this if statement in case a component gets unregistered during this forEach                
-                        if (this.routeChangedCallbacks[componentId]) {                    
-                            this.routeChangedCallbacks[componentId](to, from, router); 
+                        if (self.routeChangedCallbacks[componentId]) {                    
+                            self.routeChangedCallbacks[componentId](to, from, router); 
                         }                
                     });
                 },
