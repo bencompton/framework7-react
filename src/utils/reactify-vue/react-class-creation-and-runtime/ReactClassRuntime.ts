@@ -150,7 +150,11 @@ export const applyPropOverridesToTopLevelElement = (reactElement: React.ReactEle
 
         self.nextTickCallbacks.forEach(callback => callback.apply(this.vueComponent, []));
         self.nextTickCallbacks = [];
-        self.hasUnrenderedStateChanges = false;        
+        self.hasUnrenderedStateChanges = false;
+
+        if (self.element) {
+            self.element.__vue__ = self.vueComponent;
+        }
     };
 
     const elementWithPropOverrides = {...reactElement, props: { ...reactElement.props}, tag: tag, ref: refFunc};
@@ -176,7 +180,7 @@ export const applyPropOverridesToTopLevelElement = (reactElement: React.ReactEle
     return elementWithPropOverrides;
 };
 
-export const initData = (vueComponent) => {
+export const initData = (vueComponent, reactComponent) => {
     let state = null;
 
     if (vueComponent.data) {
@@ -184,6 +188,17 @@ export const initData = (vueComponent) => {
 
         Object.keys(state).forEach(stateKey => {
             vueComponent[stateKey] = state[stateKey];
+
+            if (state[stateKey].push) {
+                const oldPush = state[stateKey].push;
+
+                state[stateKey].push = (value) => {
+                    Array.prototype.push.apply(state[stateKey], [value]);
+                    reactComponent.setState({
+                        state
+                    });
+                };
+            }
         });
     }
 

@@ -90,16 +90,22 @@ export const reactifyF7Vue = <TProps>(args: IReactifyF7VueArgs): React.Component
                     const tag = args.tag;
 
                     framework7AppContext.getFramework7(f7 => {
-                        if (self.vueComponent.onF7Init) {
-                            self.vueComponent.onF7Init(f7);
+                        if (self.vueComponent.onF7Ready) {
+                            self.vueComponent.onF7Ready(f7);
                         }
                     });
 
-                    framework7AppContext.onRouteChange(this.componentId, route => {
+                    framework7AppContext.onRouteChange(this.componentId, (to, from, router) => {
                         if (self.vueComponent.onRouteChange) {
-                            self.vueComponent.onRouteChange(route);
+                            self.vueComponent.onRouteChange(to, from, router);
                         }
                     });
+
+                    framework7AppContext.onRouteChanged(this.componentId, (to, from, router) => {
+                        if (self.vueComponent.onRouteChange) {
+                            self.vueComponent.onRouteChange(to, from, router);
+                        }
+                    });                    
                 }
             });
 

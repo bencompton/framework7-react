@@ -1,14 +1,15 @@
 {
     "compilerOptions": {
         "target": "es5",
-        "module": "es2015",
+        "module": "commonjs",
         "declaration": false,        
         "sourceMap": true,
         "moduleResolution": "node",
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,        
         "noImplicitAny": false,        
-        "jsx": "react"
+        "jsx": "react",
+        "allowJs": true
     },
     "exclude": [
         "node_modules"        

@@ -40,7 +40,7 @@ export const generateReactClass = <TProps>(instantiatedComponents, vueComponent,
             
             copyPropsToVueComponent(this.vueComponent, this.props);
             copySlotsToVueComponent(this.vueComponent, slots, this.props);                        
-            const state = initData(this.vueComponent);            
+            const state = initData(this.vueComponent, this);
             handleComputedProperties(this.vueComponent);
 
             addCompiledTemplateFunctionsToVueComponent(this.vueComponent, this.createElement);
