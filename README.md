@@ -21,7 +21,7 @@ Ensure that [gulp](https://www.npmjs.com/package/gulp) is installed globally, th
 To build the framework itself:
 
 ```javascript
-yarn install
+npm install
 gulp
 ```
 
@@ -29,7 +29,7 @@ To build the kitchen sink:
 
 ```javascript
 cd kitchen-sink
-yarn install
+npm install
 gulp
 ```
 
