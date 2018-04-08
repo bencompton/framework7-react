@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {Page, Navbar, ContentBlock, Tab, Toolbar, Link} from 'framework7-react';
 
-
 export const BarsTabbarPage = () => {
     return (
         <Page tabbarFixed>

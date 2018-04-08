@@ -11,8 +11,9 @@ export interface IVirtualListItem {
 }
 
 export class VirtualListPage extends React.Component<any, IVirtualListPageState> {
-    constructor() {
-        super();
+    constructor(props: any, context: any) {
+        super(props, context);
+
         let defaultItems = this.getVirtualListPageDefaultState();
 
         this.state = {

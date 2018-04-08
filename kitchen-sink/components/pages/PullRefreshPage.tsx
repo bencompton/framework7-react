@@ -7,8 +7,9 @@ export interface IPullRefreshPageState {
 }
 
 export class PullRefreshPage extends React.Component<any, IPullRefreshPageState> {
-    constructor() {
-        super();
+    constructor(props: any, context: any) {
+        super(props, context);
+
         this.state = {
             items: [1, 2, 3, 4, 5],
             counter: 5

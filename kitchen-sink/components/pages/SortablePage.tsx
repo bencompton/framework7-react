@@ -7,8 +7,9 @@ export interface ISortablePageState {
 }
 
 export class SortablePage extends React.Component<any, ISortablePageState> {
-    constructor() {
-        super();
+    constructor(props: any, context: any) {
+        super(props, context);
+
         this.state = {
             sorting: false,
             items: [1, 2, 3, 4, 5]

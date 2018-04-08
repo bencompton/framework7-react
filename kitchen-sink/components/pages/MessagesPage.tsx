@@ -28,8 +28,9 @@ export const MessagesPageDefaultState = {
 }
 
 export class MessagesPage extends React.Component<any, IMessagesPageState> {
-    constructor() {
-        super();
+    constructor(props: any, context: any) {
+        super(props, context);
+
         this.state = {
             name: MessagesPageDefaultState.name,
             messages: MessagesPageDefaultState.messages

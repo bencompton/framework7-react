@@ -36,8 +36,8 @@ export interface IAppState {
 }
 
 export class App extends React.Component<any, IAppState> {
-    constructor() {
-        super();
+    constructor(props: any, context: any) {
+        super(props, context);
 
         this.state = {
             leftPanelOpened: false,

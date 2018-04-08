@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {Page, Navbar, ContentBlock, Toolbar, Link, ButtonsSegmented, Button, Subnavbar} from 'framework7-react';
 
-
 export const BarsSubnavbarPage = () => {
     return (
         <Page>

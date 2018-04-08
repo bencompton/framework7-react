@@ -9,8 +9,9 @@ export interface IInfinitePageState {
 export class InfinitePage extends React.Component<any, IInfinitePageState> {
     private timeout: any;
 
-    constructor() {
-        super();
+    constructor(props: any, context: any) {
+        super(props, context);
+
         let itemsArr: number[] = [];
 
         for (let i = 0; i < 25; i++) {

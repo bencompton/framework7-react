@@ -18,8 +18,8 @@ export interface IModalsPageState {
 export class ModalsPage extends React.Component<any, IModalsPageState> {
     private fw7: any;
 
-    constructor() {
-        super();
+    constructor(props: any, context: any) {
+        super(props, context);
 
         this.fw7 = getFramework7();
         

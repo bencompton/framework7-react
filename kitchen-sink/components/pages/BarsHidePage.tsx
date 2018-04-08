@@ -32,8 +32,6 @@ export const BarsHidePage = () => {
                 <p>Eius, iusto maxime tempora officia impedit cumque, delectus fugiat enim fugit, ex repudiandae modi autem quasi repellat ea saepe sequi similique animi ipsam doloremque placeat natus minima voluptatibus cum nulla.</p>
                 <p>Id iste, quod, deserunt maiores consectetur optio placeat quas obcaecati animi, assumenda hic. Temporibus obcaecati fugit omnis modi velit esse dolor nam illo laboriosam ut voluptates voluptatibus vitae, voluptatum officiis!</p>
             </ContentBlock>
-
-
         </Page>
     );
 }

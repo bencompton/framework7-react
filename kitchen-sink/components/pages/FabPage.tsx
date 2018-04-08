@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {Page, Navbar, ContentBlock, Fab, Icon} from 'framework7-react';
 
-
 export const FabPage = () => {
     return (
         <Page>

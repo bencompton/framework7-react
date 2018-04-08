@@ -25,8 +25,8 @@ export interface IFormsPageState {
 export class FormsPage extends React.Component<any, IFormsPageState> {
     private fw7: any;
 
-    constructor() {
-        super();
+    constructor(props: any, context: any) {
+        super(props, context);
 
         this.state = {
             birthDate: '2014-04-30',
