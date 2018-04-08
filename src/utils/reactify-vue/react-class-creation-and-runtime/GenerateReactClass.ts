@@ -13,7 +13,8 @@ import {
     addCompiledTemplateFunctionsToVueComponent,
     generateCreateElementFunctionForClass,
     applyPropOverridesToTopLevelElement,
-    initData
+    initData,
+    emulateVueNextTick
 } from './ReactClassRuntime';
 
 export const generateReactClass = <TProps>(instantiatedComponents, vueComponent, slots, name, tag, mixin, args): React.ComponentClass<TProps> => {
@@ -58,12 +59,16 @@ export const generateReactClass = <TProps>(instantiatedComponents, vueComponent,
 
         componentDidUpdate() {
             if (this.vueComponent.updated) this.vueComponent.updated();
+
+            emulateVueNextTick(this, this.vueComponent)        
         }
 
         componentDidMount() {
             if (this.vueComponent.mounted) this.vueComponent.mounted();
             if ((this.props as any).__onMount) (this.props as any).__onMount(this);
             this.didMount = true;
+
+            emulateVueNextTick(this, this.vueComponent);
         }
 
         componentWillUnmount() {

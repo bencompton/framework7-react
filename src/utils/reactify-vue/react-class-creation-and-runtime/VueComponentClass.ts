@@ -77,7 +77,21 @@ export const convertVueComponentToClass = (vueComponentObject) => {
     };
 
     Object.defineProperty(vueComponentClass.prototype, '$el', {
-        get: function ()  { return this.reactComponentInstance.element },
+        get: function ()  {
+            const self = this.reactComponentInstance;
+            let el;
+            let child = self._reactInternalFiber.child;
+          
+            while (!el && child) {
+              if (child.stateNode && child.stateNode instanceof (window as any).HTMLElement) {
+                el = child.stateNode;
+              } else {
+                child = child.child;
+              }
+            }
+          
+            return el;
+        },
         enumerable: true,
         configurable: true
     }); 

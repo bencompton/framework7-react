@@ -143,17 +143,27 @@ export const generateCreateElementFunctionForClass = (classVueComponentInstance,
     };
 };
 
+export const emulateVueNextTick = (reactComponentInstance, vueComponent) => {
+    reactComponentInstance.nextTickCallbacks.forEach(callback => callback.apply(vueComponent, []));
+    reactComponentInstance.nextTickCallbacks = [];
+    reactComponentInstance.hasUnrenderedStateChanges = false;    
+}
+
 export const applyPropOverridesToTopLevelElement = (reactElement: React.ReactElement<any>, tag: string, self) => {
     const refFunc = (e: HTMLElement) => {
         (reactElement as any).ref(e);
-        self.element = e;
-
-        self.nextTickCallbacks.forEach(callback => callback.apply(this.vueComponent, []));
-        self.nextTickCallbacks = [];
-        self.hasUnrenderedStateChanges = false;        
+        self.element = e;    
     };
 
-    const elementWithPropOverrides = {...reactElement, props: { ...reactElement.props}, tag: tag, ref: refFunc};
+    let propOverrides: any = {
+        tag: tag
+    };
+
+    if ((reactElement as any).ref) {
+        propOverrides = { ...propOverrides, ref: refFunc }
+    }
+
+    const elementWithPropOverrides = {...reactElement, props: { ...reactElement.props}, ...propOverrides};
 
     if (self.vueComponent.className) {
         const existingClassName = elementWithPropOverrides.props.className || '';
