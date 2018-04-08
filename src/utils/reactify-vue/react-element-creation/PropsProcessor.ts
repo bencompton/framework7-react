@@ -188,7 +188,7 @@ export class PropsProcessor {
         this.convertAttrsToProps(args, componentOrComponentName, resolvedComponent, props);
         this.convertVueDomProps(args, props);
         this.handleEvents(resolvedComponent, args.on, vueComponentInstance, props)
-        this.handleRef(args.ref, vueComponentInstance, props);        
+        this.handleRef(args.ref, vueComponentInstance, props);
         
         return props;
     }
@@ -267,6 +267,18 @@ export class PropsProcessor {
 
     private getChildren(children, args, props) {
         if (children && !((args.domProps && args.domProps.innerHTML) || (args.domProps && args.domProps.value))) {
+            children = React.Children.toArray(children);
+
+            if (children && length) {
+                for (let i = 0, length = children.length; i < length; i++) {            
+                    let child = children[i];
+    
+                    if (child && !child.key) {
+                        children.splice(i, 0, React.cloneElement(child, { ...child.props, key: `..${i}` }, child.props.children))
+                    }
+                }
+            }
+
             props.children = children;
         }
     }
