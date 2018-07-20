@@ -4,7 +4,7 @@
 
 ## Update
 
-The Framework7 community is pleased to announce that this repository has been deprecated in favor of Framework7 v3, which now directly supports React by taking a [cross-framework compilation](https://github.com/framework7io/framework7/tree/master/src/phenome) approach to compile a common set of components to both React and Vue. All future React versions of Framework7 will continue to be published to the `framework7-react` NPM package, but the source code will now live in the Framework7 repository instead of this repository.
+The Framework7 community is pleased to announce that this repository has been **deprecated** in favor of Framework7 v3, which now directly supports React by taking a [cross-framework compilation](https://github.com/framework7io/framework7/tree/master/src/phenome) approach to compile a common set of components to both React and Vue. All future React versions of Framework7 will continue to be published to the `framework7-react` NPM package, but the source code will now live in the Framework7 repository instead of this repository.
 
 To get started with v3, check out the [docs](https://framework7.io/react/) and also check out the new [React starter template](https://github.com/framework7io/framework7-template-react).
 
